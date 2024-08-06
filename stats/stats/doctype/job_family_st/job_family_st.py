@@ -6,5 +6,4 @@ from frappe.utils.nestedset import NestedSet
 
 
 class JobFamilyST(NestedSet):
-	nsm_parent_field = "parent_job_family"
-	#pass
+	pass
