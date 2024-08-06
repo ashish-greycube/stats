@@ -1,0 +1,110 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-06 10:26:00.206253",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "creation_date",
+  "from_date",
+  "to_date",
+  "column_break_pjxo",
+  "company_name",
+  "contact_name",
+  "phone_no",
+  "main_department",
+  "section_break_zsts",
+  "job_details",
+  "section_break_rgiz",
+  "budget_details"
+ ],
+ "fields": [
+  {
+   "fieldname": "creation_date",
+   "fieldtype": "Date",
+   "label": "Creation Date"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Link",
+   "label": "Company Name",
+   "options": "Company"
+  },
+  {
+   "fieldname": "contact_name",
+   "fieldtype": "Link",
+   "label": "Contact Name",
+   "options": "Contact"
+  },
+  {
+   "fieldname": "phone_no",
+   "fieldtype": "Data",
+   "label": "Phone No",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "column_break_pjxo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_zsts",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "job_details",
+   "fieldtype": "Table",
+   "label": "Job Details",
+   "options": "MP Jobs Details ST"
+  },
+  {
+   "fieldname": "section_break_rgiz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "budget_details",
+   "fieldtype": "Table",
+   "label": "Budget Details",
+   "options": "Budget Details ST"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-06 13:29:43.700002",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Man Power Planning ST",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

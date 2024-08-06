@@ -1,0 +1,190 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-06 10:45:17.555032",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "job_no",
+  "no_of_position",
+  "employee_no",
+  "designation",
+  "sub_department",
+  "position_status",
+  "grade",
+  "year_of_experience",
+  "position_location",
+  "column_break_htec",
+  "direct_manager",
+  "job_category",
+  "job_group",
+  "job_family",
+  "sub_job_family",
+  "sub_job_department",
+  "section",
+  "main_job_department",
+  "employee_unit",
+  "column_break_tilr",
+  "demand",
+  "demand_category",
+  "supply_name",
+  "vacancies",
+  "job_description",
+  "salary"
+ ],
+ "fields": [
+  {
+   "fieldname": "job_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Job No"
+  },
+  {
+   "fieldname": "no_of_position",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "No of Position"
+  },
+  {
+   "fieldname": "employee_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee No",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "sub_department",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Sub Department"
+  },
+  {
+   "fieldname": "position_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Position Status",
+   "options": "\nFilled\nVacant\nUnplanned"
+  },
+  {
+   "fieldname": "position_location",
+   "fieldtype": "Link",
+   "label": "Position Location",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "grade",
+   "fieldtype": "Link",
+   "label": "Grade",
+   "options": "Employee Grade"
+  },
+  {
+   "fieldname": "year_of_experience",
+   "fieldtype": "Int",
+   "label": "Year Of Experience"
+  },
+  {
+   "fieldname": "direct_manager",
+   "fieldtype": "Data",
+   "label": "Direct Manager"
+  },
+  {
+   "fieldname": "job_category",
+   "fieldtype": "Data",
+   "label": "Job Category"
+  },
+  {
+   "fieldname": "job_group",
+   "fieldtype": "Data",
+   "label": "Job Group"
+  },
+  {
+   "fieldname": "job_family",
+   "fieldtype": "Data",
+   "label": "Job Family"
+  },
+  {
+   "fieldname": "sub_job_family",
+   "fieldtype": "Data",
+   "label": "Sub Job family"
+  },
+  {
+   "fieldname": "sub_job_department",
+   "fieldtype": "Data",
+   "label": "Sub Job Department "
+  },
+  {
+   "fieldname": "section",
+   "fieldtype": "Data",
+   "label": "Section"
+  },
+  {
+   "fieldname": "main_job_department",
+   "fieldtype": "Data",
+   "label": "Main Job Department"
+  },
+  {
+   "fieldname": "employee_unit",
+   "fieldtype": "Data",
+   "label": "Employee Unit"
+  },
+  {
+   "fieldname": "demand",
+   "fieldtype": "Select",
+   "label": "Demand",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "demand_category",
+   "fieldtype": "Data",
+   "label": "Demand Category"
+  },
+  {
+   "fieldname": "supply_name",
+   "fieldtype": "Data",
+   "label": "Supply Name"
+  },
+  {
+   "default": "0",
+   "fieldname": "vacancies",
+   "fieldtype": "Check",
+   "label": "Vacancies"
+  },
+  {
+   "fieldname": "job_description",
+   "fieldtype": "Long Text",
+   "label": "Job Description"
+  },
+  {
+   "fieldname": "salary",
+   "fieldtype": "Currency",
+   "label": "Salary"
+  },
+  {
+   "fieldname": "column_break_htec",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_tilr",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-08-06 11:38:57.336224",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "MP Jobs Details ST",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

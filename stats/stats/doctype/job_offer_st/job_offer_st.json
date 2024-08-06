@@ -1,0 +1,210 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-05 15:12:53.279527",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "offer_information_section",
+  "job_application_reference",
+  "offer_date",
+  "main_department",
+  "sub_department",
+  "grade",
+  "designation",
+  "column_break_iflz",
+  "status",
+  "employment_type",
+  "contract_type",
+  "branch",
+  "country",
+  "candidate_information_section",
+  "candidate_name",
+  "candidate_namein_english",
+  "email",
+  "phone_no",
+  "column_break_uncl",
+  "id_igama_no",
+  "date_of_birth",
+  "id_expiration_date",
+  "offer_details_section",
+  "table_fpuj",
+  "section_break_jhvw",
+  "terms_and_condition"
+ ],
+ "fields": [
+  {
+   "fieldname": "job_application_reference",
+   "fieldtype": "Link",
+   "label": "Job Application Reference",
+   "options": "Job Application ST"
+  },
+  {
+   "default": "Today",
+   "fieldname": "offer_date",
+   "fieldtype": "Date",
+   "label": "Offer Date"
+  },
+  {
+   "fetch_from": "job_application_reference.main_department",
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fetch_from": "job_application_reference.sub_department",
+   "fieldname": "sub_department",
+   "fieldtype": "Data",
+   "label": "Sub Department"
+  },
+  {
+   "fieldname": "grade",
+   "fieldtype": "Link",
+   "label": "Grade",
+   "options": "Employee Grade"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "offer_information_section",
+   "fieldtype": "Section Break",
+   "label": "Offer Information"
+  },
+  {
+   "fieldname": "column_break_iflz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nOpen\nAccepted\nRejected"
+  },
+  {
+   "fetch_from": "job_application_reference.employment_type",
+   "fieldname": "employment_type",
+   "fieldtype": "Link",
+   "label": "Employment Type",
+   "options": "Employment Type"
+  },
+  {
+   "fetch_from": "job_application_reference.contract_type",
+   "fieldname": "contract_type",
+   "fieldtype": "Link",
+   "label": "Contract Type",
+   "options": "Contract Type ST"
+  },
+  {
+   "fetch_from": "job_application_reference.branch",
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch"
+  },
+  {
+   "fetch_from": "job_application_reference.country",
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "candidate_information_section",
+   "fieldtype": "Section Break",
+   "label": "Candidate Information"
+  },
+  {
+   "fetch_from": "job_application_reference.candidate_name",
+   "fieldname": "candidate_name",
+   "fieldtype": "Data",
+   "label": "Candidate Name"
+  },
+  {
+   "fetch_from": "job_application_reference.candidate_namein_english",
+   "fieldname": "candidate_namein_english",
+   "fieldtype": "Data",
+   "label": "Candidate Name(In English)"
+  },
+  {
+   "fetch_from": "job_application_reference.email",
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fetch_from": "job_application_reference.phone_no",
+   "fieldname": "phone_no",
+   "fieldtype": "Data",
+   "label": "Phone No",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "id_igama_no",
+   "fieldtype": "Data",
+   "label": "ID/ Igama No "
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "column_break_uncl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "id_expiration_date",
+   "fieldtype": "Date",
+   "label": "ID Expiration Date"
+  },
+  {
+   "fieldname": "offer_details_section",
+   "fieldtype": "Section Break",
+   "label": "Offer Details"
+  },
+  {
+   "fieldname": "table_fpuj",
+   "fieldtype": "Table",
+   "options": "Job Offer Details ST"
+  },
+  {
+   "fieldname": "section_break_jhvw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "terms_and_condition",
+   "fieldtype": "Text Editor",
+   "label": "Terms And Condition"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-06 10:23:56.275959",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Job Offer ST",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

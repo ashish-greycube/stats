@@ -1,0 +1,172 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-06 13:32:28.505939",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "request_date",
+  "main_department",
+  "department_manager",
+  "column_break_ewqa",
+  "request_type",
+  "sub_department",
+  "previous_job_details_section",
+  "job_no",
+  "pre_main_department",
+  "column_break_qyqj",
+  "salary",
+  "designation",
+  "column_break_momr",
+  "grade",
+  "pre_sub_department",
+  "finance_impact_section",
+  "budget",
+  "column_break_opie",
+  "available",
+  "column_break_ixgc",
+  "difference",
+  "column_break_cgiv",
+  "finance_impact"
+ ],
+ "fields": [
+  {
+   "fieldname": "request_date",
+   "fieldtype": "Date",
+   "label": "Request Date"
+  },
+  {
+   "fieldname": "request_type",
+   "fieldtype": "Link",
+   "label": "Request Type",
+   "options": "Request Type ST"
+  },
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "department_manager",
+   "fieldtype": "Data",
+   "label": "Department Manager"
+  },
+  {
+   "fieldname": "column_break_ewqa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sub_department",
+   "fieldtype": "Data",
+   "label": "Sub Department"
+  },
+  {
+   "fieldname": "previous_job_details_section",
+   "fieldtype": "Section Break",
+   "label": "Previous Job Details"
+  },
+  {
+   "fieldname": "job_no",
+   "fieldtype": "Data",
+   "label": "Job No"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "grade",
+   "fieldtype": "Link",
+   "label": "Grade",
+   "options": "Employee Grade"
+  },
+  {
+   "fieldname": "pre_main_department",
+   "fieldtype": "Link",
+   "label": "Pre Main Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "pre_sub_department",
+   "fieldtype": "Data",
+   "label": "Pre Sub Department"
+  },
+  {
+   "fieldname": "salary",
+   "fieldtype": "Int",
+   "label": "Salary"
+  },
+  {
+   "fieldname": "column_break_qyqj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_momr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "finance_impact_section",
+   "fieldtype": "Section Break",
+   "label": "Finance Impact"
+  },
+  {
+   "fieldname": "budget",
+   "fieldtype": "Float",
+   "label": "Budget"
+  },
+  {
+   "fieldname": "available",
+   "fieldtype": "Float",
+   "label": "Available"
+  },
+  {
+   "fieldname": "difference",
+   "fieldtype": "Float",
+   "label": "Difference"
+  },
+  {
+   "fieldname": "finance_impact",
+   "fieldtype": "Float",
+   "label": "Finance Impact"
+  },
+  {
+   "fieldname": "column_break_opie",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ixgc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_cgiv",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-06 13:44:47.047894",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Man Power Plan Change Request ST",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
