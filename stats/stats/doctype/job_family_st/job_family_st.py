@@ -10,17 +10,12 @@ class JobFamilyST(NestedSet):
 	nsm_parent_field = "parent_job_family_st"
 
 	def autoname(self):
-		root = get_root_of("Job Family ST")
-		if root and self.job_family_st_name != root:
-			self.name =self.job_family_st_name
-		else:
-			self.name = self.job_family_st_name
+		self.name =self.job_family_st_name
 
 	def validate(self):
-		if not self.parent_job_family_st:
-			root = get_root_of("Job Family ST")
-			if root:
-				self.parent_job_family_st = root
+		if not self.parent_job_family_st and not frappe.flags.in_test:
+			if frappe.db.exists("Job Family ST", _("All Job Families")):
+				self.parent_job_family_st = _("All Job Families")				
 
 	def on_update(self):
 		if not (frappe.local.flags.ignore_update_nsm or frappe.flags.in_setup_wizard):
@@ -50,7 +45,7 @@ def get_children(doctype, parent=None, job_family_st=None, is_root=False):
 		where
 			ifnull(parent_job_family_st, "")={frappe.db.escape(parent)}
 		""",
-		as_dict=1,
+		as_dict=1,debug=0
 	)
 
 
@@ -61,6 +56,6 @@ def add_tree_node():
 	args = frappe.form_dict
 	args = make_tree_args(**args)
 
-	if args.parent_job_family_st == "All Job Families" or not frappe.db.exists("Job Family ST", args.parent_job_family_st):
+	if args.parent_job_family_st == "All Job Families":
 		args.parent_job_family_st = None
 	frappe.get_doc(args).insert()
