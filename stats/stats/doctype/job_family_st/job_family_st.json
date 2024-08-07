@@ -6,17 +6,18 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "job_family_st_name",
+  "parent_job_family_st",
   "section_break_til6",
   "lft",
   "rgt",
   "is_group",
-  "old_parent",
-  "parent_job_family_st"
+  "old_parent"
  ],
  "fields": [
   {
    "fieldname": "section_break_til6",
-   "fieldtype": "Section Break"
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "lft",
@@ -53,12 +54,19 @@
    "label": "Parent Job Family ST",
    "options": "Job Family ST",
    "unique": 1
+  },
+  {
+   "fieldname": "job_family_st_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Job Family",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-08-06 15:06:44.874482",
+ "modified": "2024-08-07 07:51:28.127693",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Family ST",
