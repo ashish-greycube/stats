@@ -1,7 +1,6 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:parent_job_family_st",
  "creation": "2024-08-06 13:45:25.868847",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -52,8 +51,7 @@
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
    "label": "Parent Job Family ST",
-   "options": "Job Family ST",
-   "unique": 1
+   "options": "Job Family ST"
   },
   {
    "fieldname": "job_family_st_name",
@@ -66,11 +64,10 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-08-07 07:51:28.127693",
+ "modified": "2024-08-07 09:14:56.080173",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Family ST",
- "naming_rule": "By fieldname",
  "nsm_parent_field": "parent_job_family_st",
  "owner": "Administrator",
  "permissions": [
