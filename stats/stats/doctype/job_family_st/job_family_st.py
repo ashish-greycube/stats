@@ -24,7 +24,6 @@ class JobFamilyST(NestedSet):
 
 	def on_update(self):
 		if not (frappe.local.flags.ignore_update_nsm or frappe.flags.in_setup_wizard):
-			print(self, '--self')
 			super().on_update()
 
 	def on_trash(self):
@@ -37,7 +36,7 @@ def on_doctype_update():
 
 
 @frappe.whitelist()
-def get_children(doctype, parent=None, job_family_st_name=None, is_root=False):
+def get_children(doctype, parent=None, job_family_st=None, is_root=False):
 	if parent is None or parent == "All Job Families":
 		parent = ""
 
@@ -64,5 +63,4 @@ def add_tree_node():
 
 	if args.parent_job_family_st == "All Job Families" or not frappe.db.exists("Job Family ST", args.parent_job_family_st):
 		args.parent_job_family_st = None
-	print(args,'args')
 	frappe.get_doc(args).insert()

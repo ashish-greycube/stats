@@ -2,19 +2,6 @@ frappe.treeview_settings["Job Family ST"] = {
 	ignore_fields: ["parent_job_family_st"],
 	get_tree_nodes: "stats.stats.doctype.job_family_st.job_family_st.get_children",
 	add_tree_node: "stats.stats.doctype.job_family_st.job_family_st.add_tree_node",
-	// filters: [
-	// 	{
-	// 		fieldname: "parent_job_family_st",
-	// 		fieldtype: "Link",
-	// 		options: "Job Family ST",
-	// 		label: __("Job Family ST"),
-	// 		get_query: function () {
-	// 			return {
-	// 				filters: [["Job Family ST", "is_group", "=", 1]],
-	// 			};
-	// 		},
-	// 	},
-	// ],
 	breadcrumb: "Stats",
 	disable_add_node: true,
 	root_label: "All Job Families",
