@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "MPP-.######",
  "creation": "2024-08-06 10:26:00.206253",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -85,10 +86,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-06 13:29:43.700002",
+ "modified": "2024-08-08 15:33:26.127110",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Man Power Planning ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

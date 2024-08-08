@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "OJ-.######",
  "creation": "2024-08-05 15:11:45.882101",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -102,17 +103,19 @@
   },
   {
    "fieldname": "sub_department",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "label": "Sub Department",
+   "options": "Department",
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-06 08:09:25.768211",
+ "modified": "2024-08-08 15:31:49.218477",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Opening Job ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

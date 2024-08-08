@@ -1,8 +1,22 @@
 // Copyright (c) 2024, GreyCube Technologies and contributors
 // For license information, please see license.txt
 
-// frappe.ui.form.on("Man Power Planning ST", {
-// 	refresh(frm) {
-
-// 	},
-// });
+frappe.ui.form.on("Man Power Planning ST", {
+	setup(frm) {
+        frm.set_query("main_department", function (doc) {
+			return {
+				query: "stats.api.get_main_department",
+			};
+		});
+		frm.set_query("sub_department","job_details", function (doc,cdt,cdn){
+            if (frm.doc.main_department) {
+                return {
+                    filters: {
+                        parent_department: frm.doc.main_department,
+                        is_group: 0
+                    }
+                };       
+            }
+		})
+    },
+});

@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "JO-.######",
  "creation": "2024-08-05 15:12:53.279527",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -55,8 +56,9 @@
   {
    "fetch_from": "job_application_reference.sub_department",
    "fieldname": "sub_department",
-   "fieldtype": "Data",
-   "label": "Sub Department"
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
   },
   {
    "fieldname": "grade",
@@ -185,10 +187,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-06 10:23:56.275959",
+ "modified": "2024-08-08 15:32:31.922376",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Offer ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

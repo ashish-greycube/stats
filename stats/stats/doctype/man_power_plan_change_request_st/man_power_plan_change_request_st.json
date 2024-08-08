@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "MPCR-.######",
  "creation": "2024-08-06 13:32:28.505939",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -58,8 +59,9 @@
   },
   {
    "fieldname": "sub_department",
-   "fieldtype": "Data",
-   "label": "Sub Department"
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
   },
   {
    "fieldname": "previous_job_details_section",
@@ -147,10 +149,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-06 13:44:47.047894",
+ "modified": "2024-08-08 15:33:13.845056",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Man Power Plan Change Request ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

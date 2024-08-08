@@ -61,9 +61,10 @@
   },
   {
    "fieldname": "sub_department",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Sub Department"
+   "label": "Sub Department",
+   "options": "Department"
   },
   {
    "fieldname": "position_status",
@@ -178,7 +179,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-06 11:38:57.336224",
+ "modified": "2024-08-08 14:59:00.209401",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "MP Jobs Details ST",

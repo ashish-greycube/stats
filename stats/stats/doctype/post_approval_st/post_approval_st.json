@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "PA-.######",
  "creation": "2024-08-05 14:42:22.415822",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -51,12 +52,6 @@
    "options": "Post Request ST"
   },
   {
-   "fetch_from": "post_request_reference.request_date",
-   "fieldname": "request_date",
-   "fieldtype": "Date",
-   "label": "Request Date"
-  },
-  {
    "fetch_from": "post_request_reference.employee",
    "fieldname": "employee",
    "fieldtype": "Link",
@@ -79,8 +74,9 @@
   {
    "fetch_from": "post_request_reference.sub_department",
    "fieldname": "sub_department",
-   "fieldtype": "Data",
-   "label": "Sub Department"
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
   },
   {
    "fetch_from": "post_request_reference.email",
@@ -126,15 +122,22 @@
    "fieldname": "post_details",
    "fieldtype": "Long Text",
    "label": "Post Details"
+  },
+  {
+   "fetch_from": "post_request_reference.request_date",
+   "fieldname": "request_date",
+   "fieldtype": "Date",
+   "label": "Request Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-05 15:04:51.676287",
+ "modified": "2024-08-08 15:32:05.902524",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Post Approval ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "JA-.######",
  "creation": "2024-08-05 15:12:24.793523",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -112,16 +113,18 @@
   },
   {
    "fieldname": "sub_department",
-   "fieldtype": "Data",
-   "label": "Sub Department"
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-06 08:26:29.959000",
+ "modified": "2024-08-08 15:32:16.761777",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Application ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

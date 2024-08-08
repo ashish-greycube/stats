@@ -20,7 +20,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-05 14:19:39.249978",
+ "modified": "2024-08-08 15:13:06.608802",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Required Service ST",
@@ -40,6 +40,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

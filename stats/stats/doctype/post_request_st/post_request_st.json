@@ -68,6 +68,7 @@
    "options": "Email"
   },
   {
+   "fetch_from": "employee.current_address",
    "fieldname": "address",
    "fieldtype": "Small Text",
    "label": "Address"
@@ -104,8 +105,9 @@
   },
   {
    "fieldname": "sub_department",
-   "fieldtype": "Data",
-   "label": "Sub Department"
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
   },
   {
    "fieldname": "post_type",
@@ -130,6 +132,7 @@
    "label": "Request Time"
   },
   {
+   "fetch_from": "employee.cell_number",
    "fieldname": "phone",
    "fieldtype": "Data",
    "label": "Phone",
@@ -138,8 +141,13 @@
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2024-08-05 14:51:31.722000",
+ "links": [
+  {
+   "link_doctype": "Post Approval ST",
+   "link_fieldname": "post_request_reference"
+  }
+ ],
+ "modified": "2024-08-08 15:21:53.367920",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Post Request ST",
