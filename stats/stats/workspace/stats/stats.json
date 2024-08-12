@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"xwHSxK0dGa\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Stats</span>\",\"col\":12}},{\"id\":\"MmXAYshRzY\",\"type\":\"card\",\"data\":{\"card_name\":\"DOCTYPE\",\"col\":4}}]",
+ "content": "[{\"id\":\"xwHSxK0dGa\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Stats</span>\",\"col\":12}},{\"id\":\"0GIT10xVKD\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>WorkSpace</b></span>\",\"col\":12}},{\"id\":\"S3mYy9D1LH\",\"type\":\"card\",\"data\":{\"card_name\":\"Transactions\",\"col\":4}},{\"id\":\"MmXAYshRzY\",\"type\":\"card\",\"data\":{\"card_name\":\"DOCTYPE\",\"col\":4}}]",
  "creation": "2024-08-06 15:54:16.748573",
  "custom_blocks": [],
  "docstatus": 0,
@@ -41,10 +41,39 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transactions",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Post Request",
+   "link_count": 0,
+   "link_to": "Post Request ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Post Approval ",
+   "link_count": 0,
+   "link_to": "Post Approval ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-08-08 10:21:31.959119",
- "modified_by": "communicationuser@gmail.com",
+ "modified": "2024-08-09 10:42:40.225780",
+ "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats",
  "number_cards": [],

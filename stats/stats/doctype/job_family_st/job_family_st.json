@@ -2,6 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "creation": "2024-08-06 13:45:25.868847",
+ "default_view": "Tree",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -75,7 +76,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-08-07 12:26:18.437133",
+ "modified": "2024-08-12 07:12:55.595830",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Family ST",
