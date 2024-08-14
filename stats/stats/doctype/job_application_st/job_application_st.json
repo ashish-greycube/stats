@@ -31,6 +31,7 @@
    "options": "Opening Job ST"
   },
   {
+   "fetch_from": "opening_job_reference.designation",
    "fieldname": "designation",
    "fieldtype": "Link",
    "label": "Designation",
@@ -70,6 +71,7 @@
    "label": "Resume"
   },
   {
+   "fetch_from": "opening_job_reference.status",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -94,24 +96,28 @@
    "options": "Contract Type ST"
   },
   {
+   "fetch_from": "opening_job_reference.section",
    "fieldname": "section",
    "fieldtype": "Link",
    "label": "Section",
    "options": "Section ST"
   },
   {
+   "fetch_from": "opening_job_reference.branch",
    "fieldname": "branch",
    "fieldtype": "Link",
    "label": "Branch",
    "options": "Branch"
   },
   {
+   "fetch_from": "opening_job_reference.main_department",
    "fieldname": "main_department",
    "fieldtype": "Link",
    "label": "Main Department",
    "options": "Department"
   },
   {
+   "fetch_from": "opening_job_reference.sub_department",
    "fieldname": "sub_department",
    "fieldtype": "Link",
    "label": "Sub Department",
@@ -119,8 +125,13 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-08-08 15:32:16.761777",
+ "links": [
+  {
+   "link_doctype": "Job Offer ST",
+   "link_fieldname": "job_application_reference"
+  }
+ ],
+ "modified": "2024-08-13 15:21:20.418581",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Application ST",

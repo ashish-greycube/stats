@@ -29,7 +29,11 @@
   "date_of_birth",
   "id_expiration_date",
   "offer_details_section",
-  "table_fpuj",
+  "offer_details",
+  "salary_details_section",
+  "earning",
+  "column_break_yybj",
+  "deduction",
   "section_break_jhvw",
   "terms_and_condition"
  ],
@@ -67,6 +71,7 @@
    "options": "Employee Grade"
   },
   {
+   "fetch_from": "job_application_reference.designation",
    "fieldname": "designation",
    "fieldtype": "Link",
    "label": "Designation",
@@ -82,6 +87,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "fetch_from": "job_application_reference.status",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -171,11 +177,6 @@
    "label": "Offer Details"
   },
   {
-   "fieldname": "table_fpuj",
-   "fieldtype": "Table",
-   "options": "Job Offer Details ST"
-  },
-  {
    "fieldname": "section_break_jhvw",
    "fieldtype": "Section Break"
   },
@@ -183,11 +184,38 @@
    "fieldname": "terms_and_condition",
    "fieldtype": "Text Editor",
    "label": "Terms And Condition"
+  },
+  {
+   "fieldname": "offer_details",
+   "fieldtype": "Table",
+   "label": "Offer Details",
+   "options": "Job Offer Details ST"
+  },
+  {
+   "fieldname": "salary_details_section",
+   "fieldtype": "Section Break",
+   "label": "Salary Details"
+  },
+  {
+   "fieldname": "earning",
+   "fieldtype": "Table",
+   "label": "Earning",
+   "options": "Earning ST"
+  },
+  {
+   "fieldname": "deduction",
+   "fieldtype": "Table",
+   "label": "Deduction",
+   "options": "Deduction ST"
+  },
+  {
+   "fieldname": "column_break_yybj",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-08 15:32:31.922376",
+ "modified": "2024-08-13 15:23:19.839754",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Offer ST",

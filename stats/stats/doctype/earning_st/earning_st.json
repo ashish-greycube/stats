@@ -1,41 +1,41 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-08-06 10:17:38.133297",
+ "creation": "2024-08-13 14:57:13.138802",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "offer_term",
-  "column_break_sjbx",
-  "valuedescription"
+  "earning",
+  "column_break_kgoi",
+  "value"
  ],
  "fields": [
   {
-   "fieldname": "column_break_sjbx",
+   "fieldname": "earning",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Earning",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "column_break_kgoi",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "offer_term",
-   "fieldtype": "Link",
+   "fieldname": "value",
+   "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Offer Term",
-   "options": "Offer Term"
-  },
-  {
-   "fieldname": "valuedescription",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Value/Description"
+   "label": "Value"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-13 14:52:48.370001",
+ "modified": "2024-08-13 15:03:16.492252",
  "modified_by": "Administrator",
  "module": "Stats",
- "name": "Job Offer Details ST",
+ "name": "Earning ST",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",
