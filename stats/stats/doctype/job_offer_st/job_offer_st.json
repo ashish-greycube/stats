@@ -65,6 +65,7 @@
    "options": "Department"
   },
   {
+   "fetch_from": "job_application_reference.grade",
    "fieldname": "grade",
    "fieldtype": "Link",
    "label": "Grade",
@@ -215,7 +216,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-13 15:23:19.839754",
+ "modified": "2024-08-14 12:29:23.596092",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Offer ST",
