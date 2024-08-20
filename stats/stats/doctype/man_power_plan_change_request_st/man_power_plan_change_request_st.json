@@ -70,8 +70,9 @@
   },
   {
    "fieldname": "job_no",
-   "fieldtype": "Data",
-   "label": "Job No"
+   "fieldtype": "Link",
+   "label": "Job No",
+   "options": "MP Jobs Details ST"
   },
   {
    "fieldname": "designation",
@@ -149,7 +150,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-08 15:33:13.845056",
+ "modified": "2024-08-20 15:32:15.389444",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Man Power Plan Change Request ST",
