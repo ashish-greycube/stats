@@ -12,6 +12,15 @@ def get_main_department(doctype, txt, searchfield, start, page_len, filters):
 
 
 @frappe.whitelist()
+@frappe.validate_and_sanitize_search_inputs
+def get_main_job_family(doctype, txt, searchfield, start, page_len, filters):
+		
+		job_family_list = frappe.get_all("Job Family ST", filters={"is_group":0}, fields=["parent_job_family_st"], as_list=1)
+		unique = tuple(set(job_family_list))
+
+		return unique
+
+@frappe.whitelist()
 def get_supplier_contact(supplier):
 	supplier_contact = frappe.db.sql(
 		"""

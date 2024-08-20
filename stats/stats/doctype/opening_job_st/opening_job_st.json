@@ -31,12 +31,14 @@
    "reqd": 1
   },
   {
+   "fetch_from": "job_title.designation",
    "fieldname": "designation",
    "fieldtype": "Link",
    "label": "Designation",
    "options": "Designation"
   },
   {
+   "fetch_from": "job_title.main_job_department",
    "fieldname": "main_department",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -45,6 +47,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "job_title.grade",
    "fieldname": "grade",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -53,6 +56,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "job_title.section",
    "fieldname": "section",
    "fieldtype": "Link",
    "label": "Section",
@@ -98,11 +102,13 @@
    "options": "Contract Type ST"
   },
   {
+   "fetch_from": "job_title.job_no",
    "fieldname": "job_no",
    "fieldtype": "Data",
    "label": "Job No."
   },
   {
+   "fetch_from": "job_title.sub_job_department",
    "fieldname": "sub_department",
    "fieldtype": "Link",
    "label": "Sub Department",
@@ -117,7 +123,7 @@
    "link_fieldname": "opening_job_reference"
   }
  ],
- "modified": "2024-08-20 07:00:56.242649",
+ "modified": "2024-08-20 08:04:18.865402",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Opening Job ST",

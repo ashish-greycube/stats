@@ -11,6 +11,7 @@
   "to_date",
   "column_break_pjxo",
   "company_name",
+  "supplier",
   "contact_name",
   "phone_no",
   "main_department",
@@ -45,7 +46,8 @@
    "fieldname": "contact_name",
    "fieldtype": "Link",
    "label": "Contact Name",
-   "options": "Contact"
+   "options": "Contact",
+   "read_only": 1
   },
   {
    "fieldname": "phone_no",
@@ -82,11 +84,17 @@
    "fieldtype": "Table",
    "label": "Budget Details",
    "options": "Budget Details ST"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-08 15:33:26.127110",
+ "modified": "2024-08-20 07:33:58.743681",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Man Power Planning ST",
