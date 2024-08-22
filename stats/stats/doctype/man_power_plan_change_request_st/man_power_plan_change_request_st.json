@@ -43,7 +43,8 @@
   "column_break_ixgc",
   "difference",
   "column_break_cgiv",
-  "finance_impact"
+  "finance_impact",
+  "amended_from"
  ],
  "fields": [
   {
@@ -66,9 +67,11 @@
    "options": "Department"
   },
   {
+   "fetch_from": "sub_department.custom_direct_manager",
    "fieldname": "department_manager",
-   "fieldtype": "Data",
-   "label": "Department Manager"
+   "fieldtype": "Link",
+   "label": "Department Manager",
+   "options": "Employee"
   },
   {
    "fieldname": "column_break_ewqa",
@@ -97,29 +100,34 @@
    "fieldname": "designation",
    "fieldtype": "Link",
    "label": "Designation",
-   "options": "Designation"
+   "options": "Designation",
+   "read_only": 1
   },
   {
    "fieldname": "grade",
    "fieldtype": "Link",
    "label": "Grade",
-   "options": "Employee Grade"
+   "options": "Employee Grade",
+   "read_only": 1
   },
   {
    "fieldname": "pre_main_department",
    "fieldtype": "Link",
    "label": "Pre Main Department",
-   "options": "Department"
+   "options": "Department",
+   "read_only": 1
   },
   {
    "fieldname": "pre_sub_department",
    "fieldtype": "Data",
-   "label": "Pre Sub Department"
+   "label": "Pre Sub Department",
+   "read_only": 1
   },
   {
    "fieldname": "salary",
    "fieldtype": "Int",
-   "label": "Salary"
+   "label": "Salary",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_momr",
@@ -254,11 +262,22 @@
    "label": "Man Power Planning Reference",
    "options": "Man Power Planning ST",
    "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Man Power Plan Change Request ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-08-22 07:33:25.499651",
+ "modified": "2024-08-22 10:59:56.402950",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Man Power Plan Change Request ST",

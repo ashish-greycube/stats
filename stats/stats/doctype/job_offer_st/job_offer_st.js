@@ -19,4 +19,16 @@ frappe.ui.form.on("Job Offer ST", {
             }
 		})
     },
+    refresh: function (frm) {
+        if (frm.doc.status == 'Accepted') {
+			frm.add_custom_button(
+				__("Create Employee"),
+				function () {
+					frappe.model.open_mapped_doc({
+						method: "stats.stats.doctype.job_offer_st.job_offer_st.make_employee",
+						frm: frm,
+					});
+				});
+		}
+    }
 });

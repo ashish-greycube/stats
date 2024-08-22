@@ -7,7 +7,7 @@ from frappe import _
 
 
 class ManPowerPlanChangeRequestST(Document):
-	def validate(self):
+	def on_submit(self):
 		self.change_pervious_job_details()
 		self.create_new_job_details()
 
@@ -18,6 +18,8 @@ class ManPowerPlanChangeRequestST(Document):
 			frappe.db.set_value('MP Jobs Details ST',self.job_no, 'sub_job_department', self.sub_department_cp)
 			frappe.db.set_value('MP Jobs Details ST',self.job_no, 'grade', self.grade_cp)
 			frappe.db.set_value('MP Jobs Details ST',self.job_no, 'salary', self.salary_cp)
+
+			frappe.msgprint(_("Update Job No. {0} Details in Man Power Planning {1}").format(self.job_no, self.man_power_planning_reference), alert=1)
 			
 
 	def create_new_job_details(self):
@@ -36,6 +38,8 @@ class ManPowerPlanChangeRequestST(Document):
 			row.salary = self.salary_nj
 
 			man_power.save(ignore_permissions=True)
+
+			frappe.msgprint(_("Add New Job No. {0} in Man Power Planning {1}").format(self.job_no, self.man_power_planning_reference), alert=1)
 
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs

@@ -122,6 +122,15 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
+doc_events = {
+    "ToDo": {
+		"validate":"stats.api.set_todo_status_in_onboarding_procedures"
+	},
+    "Employee": {
+        "validate":"stats.api.calculate_years_of_experience"
+	}
+}
+
 # doc_events = {
 # 	"*": {
 # 		"on_update": "method",

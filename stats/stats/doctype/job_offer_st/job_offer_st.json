@@ -88,10 +88,9 @@
    "fieldtype": "Column Break"
   },
   {
-   "fetch_from": "job_application_reference.status",
    "fieldname": "status",
    "fieldtype": "Select",
-   "label": "Status",
+   "label": "Candidate Status",
    "options": "\nOpen\nAccepted\nRejected"
   },
   {
@@ -161,7 +160,9 @@
   {
    "fieldname": "date_of_birth",
    "fieldtype": "Date",
-   "label": "Date of Birth"
+   "in_list_view": 1,
+   "label": "Date of Birth",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_uncl",
@@ -225,7 +226,7 @@
    "link_fieldname": "job_offer_reference"
   }
  ],
- "modified": "2024-08-21 14:16:43.164704",
+ "modified": "2024-08-22 13:31:56.589114",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Offer ST",

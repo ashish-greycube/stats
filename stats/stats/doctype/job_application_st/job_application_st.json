@@ -72,7 +72,6 @@
    "label": "Resume"
   },
   {
-   "fetch_from": "opening_job_reference.status",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -139,7 +138,7 @@
    "link_fieldname": "job_application_reference"
   }
  ],
- "modified": "2024-08-14 12:29:56.049770",
+ "modified": "2024-08-22 13:03:25.555692",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Application ST",

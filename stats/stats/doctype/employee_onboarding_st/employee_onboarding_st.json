@@ -18,7 +18,8 @@
   "branch",
   "section_break_iuwt",
   "employee_onboarding_template",
-  "onboarding_procedures"
+  "onboarding_procedures",
+  "amended_from"
  ],
  "fields": [
   {
@@ -99,11 +100,22 @@
    "fieldtype": "Table",
    "label": "Onboarding Procedures",
    "options": "Onboarding Procedures ST"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Employee Onboarding ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-08-22 07:54:35.211315",
+ "modified": "2024-08-22 08:54:50.553903",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Onboarding ST",
