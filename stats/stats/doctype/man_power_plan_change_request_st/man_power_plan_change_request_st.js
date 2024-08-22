@@ -17,6 +17,62 @@ frappe.ui.form.on("Man Power Plan Change Request ST", {
                     }
                 };       
             }
+		});
+
+        frm.set_query("job_no", function (doc){
+            if (frm.doc.man_power_planning_reference) {
+                return {
+                        query: "stats.stats.doctype.man_power_plan_change_request_st.man_power_plan_change_request_st.get_job_no",
+                        filters: {
+                            parent : frm.doc.man_power_planning_reference
+                        } 
+                };       
+            }
+		});
+
+        frm.set_query("new_job_no", function (doc){
+            if (frm.doc.man_power_planning_reference) {
+                return {
+                        query: "stats.stats.doctype.man_power_plan_change_request_st.man_power_plan_change_request_st.get_job_no",
+                        filters: {
+                            parent : frm.doc.man_power_planning_reference
+                        } 
+                };       
+            }
+		});
+
+        // update previous
+        frm.set_query("main_department_cp", function (doc) {
+			return {
+				query: "stats.api.get_main_department",
+			};
+		});
+		frm.set_query("sub_department_cp", function (doc){
+            if (frm.doc.main_department_cp) {
+                return {
+                    filters: {
+                        parent_department: frm.doc.main_department_cp,
+                        is_group: 0
+                    }
+                };       
+            }
+		});
+
+        // create new job 
+        frm.set_query("main_department_nj", function (doc) {
+			return {
+				query: "stats.api.get_main_department",
+			};
+		});
+		frm.set_query("sub_department_nj", function (doc){
+            if (frm.doc.main_department_nj) {
+                return {
+                    filters: {
+                        parent_department: frm.doc.main_department_nj,
+                        is_group: 0
+                    }
+                };       
+            }
 		})
     },
     job_no(frm){

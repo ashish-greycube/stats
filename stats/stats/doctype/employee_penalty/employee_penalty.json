@@ -1,0 +1,143 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-21 12:21:07.389261",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_zdrn",
+  "employee",
+  "job_no",
+  "main_department",
+  "column_break_agai",
+  "employee_name",
+  "section",
+  "sub_department",
+  "section_break_dzfh",
+  "violation_type",
+  "number_of_times",
+  "column_break_qnod",
+  "deduction_method",
+  "penalty_amount",
+  "section_break_ivde",
+  "description_of_the_violation",
+  "column_break_osmi",
+  "legal_committee_recommendation"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fieldname": "job_no",
+   "fieldtype": "Link",
+   "label": "Job No",
+   "options": "Job No ST"
+  },
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "section",
+   "fieldtype": "Link",
+   "label": "Section",
+   "options": "Section ST"
+  },
+  {
+   "fieldname": "violation_type",
+   "fieldtype": "Data",
+   "label": "Violation Type"
+  },
+  {
+   "fieldname": "number_of_times",
+   "fieldtype": "Int",
+   "label": "Number of times"
+  },
+  {
+   "fieldname": "deduction_method",
+   "fieldtype": "Percent",
+   "label": "Deduction Method"
+  },
+  {
+   "fieldname": "penalty_amount",
+   "fieldtype": "Data",
+   "label": "Penalty Amount"
+  },
+  {
+   "fieldname": "column_break_agai",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_zdrn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_dzfh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_qnod",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ivde",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description_of_the_violation",
+   "fieldtype": "Small Text",
+   "label": "Description of the violation"
+  },
+  {
+   "fieldname": "column_break_osmi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "legal_committee_recommendation",
+   "fieldtype": "Small Text",
+   "label": "Legal Committee Recommendation"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-21 12:38:58.307084",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Employee Penalty",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

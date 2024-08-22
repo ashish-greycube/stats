@@ -31,7 +31,21 @@ frappe.ui.form.on("Man Power Planning ST", {
                         is_group: 0
                     }
                 };
-		})
+		});
+        frm.set_query("main_job_department","job_details", function (doc,cdt,cdn){
+            return {
+                query: "stats.api.get_main_department",
+            }
+        });
+        frm.set_query("sub_job_department","job_details", function (doc,cdt,cdn){
+                let row = locals[cdt][cdn]
+                return {
+                    filters: {
+                        parent_department: row.main_job_department,
+                        is_group: 0
+                    }
+                };
+        })
     },
 
     supplier(frm) {

@@ -1,0 +1,173 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "EC-.######",
+ "creation": "2024-08-21 06:48:24.946647",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "job_offer_reference",
+  "candidate_name",
+  "candidate_namein_english",
+  "main_department",
+  "sub_department",
+  "section",
+  "contract_start_date",
+  "contract_end_date",
+  "trial_period_end_date",
+  "column_break_npff",
+  "status",
+  "employment_type",
+  "contract_type",
+  "grade",
+  "test_period_renewed",
+  "end_of_new_test_period",
+  "salary_details_section",
+  "earning",
+  "column_break_eegg",
+  "deduction"
+ ],
+ "fields": [
+  {
+   "fieldname": "job_offer_reference",
+   "fieldtype": "Link",
+   "label": "Job Offer Reference",
+   "options": "Job Offer ST"
+  },
+  {
+   "fetch_from": "job_offer_reference.candidate_name",
+   "fieldname": "candidate_name",
+   "fieldtype": "Data",
+   "label": "Candidate Name"
+  },
+  {
+   "fetch_from": "job_offer_reference.candidate_namein_english",
+   "fieldname": "candidate_namein_english",
+   "fieldtype": "Data",
+   "label": "Candidate Name(In English)"
+  },
+  {
+   "fetch_from": "job_offer_reference.main_department",
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fetch_from": "job_offer_reference.sub_department",
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "section",
+   "fieldtype": "Link",
+   "label": "Section",
+   "options": "Section ST"
+  },
+  {
+   "fieldname": "contract_start_date",
+   "fieldtype": "Date",
+   "label": "Contract Start Date"
+  },
+  {
+   "fieldname": "contract_end_date",
+   "fieldtype": "Date",
+   "label": "Contract End Date"
+  },
+  {
+   "fieldname": "trial_period_end_date",
+   "fieldtype": "Duration",
+   "label": "Trial Period End Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nActive\nRenewed\nResigned\nSeparated"
+  },
+  {
+   "fieldname": "employment_type",
+   "fieldtype": "Link",
+   "label": "Employment Type",
+   "options": "Employment Type"
+  },
+  {
+   "fetch_from": "job_offer_reference.contract_type",
+   "fieldname": "contract_type",
+   "fieldtype": "Link",
+   "label": "Contract type",
+   "options": "Contract Type ST"
+  },
+  {
+   "fetch_from": "job_offer_reference.grade",
+   "fieldname": "grade",
+   "fieldtype": "Link",
+   "label": "Grade",
+   "options": "Employee Grade"
+  },
+  {
+   "default": "No",
+   "fieldname": "test_period_renewed",
+   "fieldtype": "Select",
+   "label": "Test Period Renewed",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "end_of_new_test_period",
+   "fieldtype": "Date",
+   "label": "End of New Test Period"
+  },
+  {
+   "fieldname": "column_break_npff",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "salary_details_section",
+   "fieldtype": "Section Break",
+   "label": "Salary Details"
+  },
+  {
+   "fieldname": "earning",
+   "fieldtype": "Table",
+   "label": "Earning",
+   "options": "Earning ST"
+  },
+  {
+   "fieldname": "column_break_eegg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "deduction",
+   "fieldtype": "Table",
+   "label": "Deduction",
+   "options": "Deduction ST"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-21 14:44:02.878217",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Employee Contract ST",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

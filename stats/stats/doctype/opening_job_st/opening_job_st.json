@@ -26,7 +26,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Job No.",
-   "options": "MP Jobs Details ST",
+   "options": "Job No ST",
    "reqd": 1
   },
   {
@@ -111,7 +111,7 @@
    "link_fieldname": "opening_job_reference"
   }
  ],
- "modified": "2024-08-20 13:07:41.422560",
+ "modified": "2024-08-21 12:31:38.223288",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Opening Job ST",

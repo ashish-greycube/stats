@@ -215,8 +215,17 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-08-14 12:29:23.596092",
+ "links": [
+  {
+   "link_doctype": "Employee Onboarding ST",
+   "link_fieldname": "job_offer_reference"
+  },
+  {
+   "link_doctype": "Employee Contract ST",
+   "link_fieldname": "job_offer_reference"
+  }
+ ],
+ "modified": "2024-08-21 14:16:43.164704",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Offer ST",
