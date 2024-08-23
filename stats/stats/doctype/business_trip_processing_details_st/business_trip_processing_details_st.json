@@ -1,0 +1,118 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-22 08:26:03.488818",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "business_trip_reference",
+  "employee_no",
+  "employee_name",
+  "sub_department",
+  "business_trip_type",
+  "column_break_lfol",
+  "business_trip_start_date",
+  "business_trip_end_date",
+  "no_of_days",
+  "trip_remaining_balance",
+  "action"
+ ],
+ "fields": [
+  {
+   "fetch_from": "business_trip_reference.employee_no",
+   "fieldname": "employee_no",
+   "fieldtype": "Link",
+   "label": "Employee No",
+   "options": "Employee",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "business_trip_reference.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "business_trip_reference.sub_department",
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Sub Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "business_trip_reference.business_trip_type",
+   "fieldname": "business_trip_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Business Trip Type",
+   "options": "Business Trip Type ST",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "business_trip_reference.business_trip_start_date",
+   "fieldname": "business_trip_start_date",
+   "fieldtype": "Date",
+   "label": "Business Trip Start Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "business_trip_reference.business_trip_end_date",
+   "fieldname": "business_trip_end_date",
+   "fieldtype": "Date",
+   "label": "Business Trip End Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "business_trip_reference.no_of_days",
+   "fieldname": "no_of_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "No of Days",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "business_trip_reference.trip_remaining_balance",
+   "fieldname": "trip_remaining_balance",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Trip Remaining Balance",
+   "read_only": 1
+  },
+  {
+   "default": "Pending",
+   "fieldname": "action",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Action",
+   "options": "\nPending\nApproved\nRejected"
+  },
+  {
+   "fieldname": "business_trip_reference",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Business Trip reference",
+   "options": "Business Trip Request ST"
+  },
+  {
+   "fieldname": "column_break_lfol",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-08-23 07:41:41.022122",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Business Trip Processing Details ST",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

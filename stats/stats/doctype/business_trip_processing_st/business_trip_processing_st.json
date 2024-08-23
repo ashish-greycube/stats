@@ -1,0 +1,110 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "BTP-.#####",
+ "creation": "2024-08-22 08:16:00.323749",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "status",
+  "created_by",
+  "column_break_upfm",
+  "main_department",
+  "sub_department",
+  "from_date",
+  "to_date",
+  "section_break_yku7",
+  "business_trip_detail",
+  "business_trip_multi_direction_detail"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nPending\nProcessed"
+  },
+  {
+   "default": "__user",
+   "fieldname": "created_by",
+   "fieldtype": "Link",
+   "label": "Created By",
+   "options": "User"
+  },
+  {
+   "fieldname": "column_break_upfm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "section_break_yku7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "business_trip_detail",
+   "fieldtype": "Table",
+   "label": "Business Trip Detail",
+   "options": "Business Trip Processing Details ST"
+  },
+  {
+   "fieldname": "business_trip_multi_direction_detail",
+   "fieldtype": "Table",
+   "label": "Business Trip Multi Direction Detail",
+   "options": "Business Trip Processing Multi Direction Details ST"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-22 12:29:22.715796",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Business Trip Processing ST",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

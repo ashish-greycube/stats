@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-22 13:52:01.807143",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "business_trip_reference",
+  "business_trip_start_date",
+  "business_trip_end_date",
+  "employee_no",
+  "employee_name",
+  "column_break_fbsn",
+  "sub_department",
+  "no_of_days",
+  "approved_days",
+  "approved_amount",
+  "payment_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "business_trip_reference",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Business Trip Reference",
+   "options": "Business Trip Request ST",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "business_trip_reference.business_trip_start_date",
+   "fieldname": "business_trip_start_date",
+   "fieldtype": "Date",
+   "label": "Business Trip Start Date"
+  },
+  {
+   "fetch_from": "business_trip_reference.business_trip_end_date",
+   "fieldname": "business_trip_end_date",
+   "fieldtype": "Date",
+   "label": "Business Trip End Date"
+  },
+  {
+   "fetch_from": "business_trip_reference.employee_no",
+   "fieldname": "employee_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee No",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "business_trip_reference.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name"
+  },
+  {
+   "fetch_from": "business_trip_reference.sub_department",
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Sub Department",
+   "options": "Department"
+  },
+  {
+   "fetch_from": "business_trip_reference.no_of_days",
+   "fieldname": "no_of_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "No of Days"
+  },
+  {
+   "fieldname": "approved_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Approved Days"
+  },
+  {
+   "fieldname": "approved_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Approved Amount"
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Payment Status"
+  },
+  {
+   "fieldname": "column_break_fbsn",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-08-23 07:42:22.704658",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Employee Details ST",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

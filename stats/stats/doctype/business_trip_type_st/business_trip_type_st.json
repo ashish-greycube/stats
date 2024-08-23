@@ -6,14 +6,9 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "section_break_jjti",
   "business_trip_type"
  ],
  "fields": [
-  {
-   "fieldname": "section_break_jjti",
-   "fieldtype": "Section Break"
-  },
   {
    "fieldname": "business_trip_type",
    "fieldtype": "Data",
@@ -25,7 +20,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-22 07:06:36.073202",
+ "modified": "2024-08-22 08:40:46.242948",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Type ST",

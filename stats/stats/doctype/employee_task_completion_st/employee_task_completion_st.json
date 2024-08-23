@@ -1,0 +1,157 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "TC-.#####",
+ "creation": "2024-08-22 13:24:48.233398",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "business_trip_reference",
+  "employee_no",
+  "employee_name",
+  "main_department",
+  "sub_department",
+  "section",
+  "column_break_fjth",
+  "business_trip_type",
+  "trip_direction",
+  "business_trip_start_date",
+  "business_trip_end_date",
+  "no_of_days",
+  "approved_days",
+  "section_break_iysk",
+  "trip_cost_detail",
+  "notes_about_the_trip"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "business_trip_reference",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Business Trip Reference",
+   "options": "Business Trip Request ST",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "business_trip_reference.employee_no",
+   "fieldname": "employee_no",
+   "fieldtype": "Link",
+   "label": "Employee No",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "business_trip_reference.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fetch_from": "business_trip_reference.main_department",
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fetch_from": "business_trip_reference.sub_department",
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
+  },
+  {
+   "fetch_from": "business_trip_reference.section",
+   "fieldname": "section",
+   "fieldtype": "Link",
+   "label": "Section",
+   "options": "Section ST"
+  },
+  {
+   "fieldname": "column_break_fjth",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "business_trip_reference.business_trip_type",
+   "fieldname": "business_trip_type",
+   "fieldtype": "Link",
+   "label": "Business Trip Type",
+   "options": "Business Trip Type ST"
+  },
+  {
+   "fetch_from": "business_trip_reference.trip_direction",
+   "fieldname": "trip_direction",
+   "fieldtype": "Data",
+   "label": "Trip Direction"
+  },
+  {
+   "fetch_from": "business_trip_reference.business_trip_start_date",
+   "fieldname": "business_trip_start_date",
+   "fieldtype": "Date",
+   "label": "Business Trip Start Date"
+  },
+  {
+   "fetch_from": "business_trip_reference.business_trip_end_date",
+   "fieldname": "business_trip_end_date",
+   "fieldtype": "Date",
+   "label": "Business Trip End Date"
+  },
+  {
+   "fetch_from": "business_trip_reference.no_of_days",
+   "fieldname": "no_of_days",
+   "fieldtype": "Int",
+   "label": "No of Days"
+  },
+  {
+   "fieldname": "approved_days",
+   "fieldtype": "Int",
+   "label": "Approved Days"
+  },
+  {
+   "fieldname": "section_break_iysk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "trip_cost_detail",
+   "fieldtype": "Table",
+   "label": "Trip Cost Details",
+   "options": "Trip Cost Details ST"
+  },
+  {
+   "fieldname": "notes_about_the_trip",
+   "fieldtype": "Small Text",
+   "label": "Notes about the trip"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-22 13:44:33.541679",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Employee Task Completion ST",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
