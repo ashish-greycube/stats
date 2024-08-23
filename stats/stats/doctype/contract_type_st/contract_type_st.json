@@ -6,7 +6,8 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "contract_type"
+  "contract_type",
+  "no_of_allowed_business_trip_days"
  ],
  "fields": [
   {
@@ -16,11 +17,17 @@
    "label": "Contract Type",
    "reqd": 1,
    "unique": 1
+  },
+  {
+   "description": "per year",
+   "fieldname": "no_of_allowed_business_trip_days",
+   "fieldtype": "Int",
+   "label": "No Of Allowed Business Trip Days"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-08 15:06:31.099758",
+ "modified": "2024-08-23 11:02:37.935802",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Contract Type ST",
