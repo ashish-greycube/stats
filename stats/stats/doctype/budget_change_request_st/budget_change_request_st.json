@@ -1,0 +1,114 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "BCR-.######",
+ "creation": "2024-08-23 07:57:15.645056",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "fiscal_year",
+  "budget_change_type",
+  "column_break_tnjn",
+  "created_by",
+  "main_department",
+  "budget_change_request_details_section",
+  "change_request",
+  "enhancement_details_section",
+  "enhancement",
+  "allocate_details_section",
+  "allocate_to"
+ ],
+ "fields": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "fiscal_year",
+   "fieldtype": "Link",
+   "label": "Fiscal Year",
+   "options": "Fiscal Year"
+  },
+  {
+   "fieldname": "column_break_tnjn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "created_by",
+   "fieldtype": "Date",
+   "label": "Created By"
+  },
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "budget_change_type",
+   "fieldtype": "Select",
+   "label": "Budget Change Type",
+   "options": "\nEnhancement\nInternal Transfer"
+  },
+  {
+   "fieldname": "budget_change_request_details_section",
+   "fieldtype": "Section Break",
+   "label": "Budget Change Request Details"
+  },
+  {
+   "fieldname": "change_request",
+   "fieldtype": "Table",
+   "label": "Change Request",
+   "options": "Budget Change Request Details ST"
+  },
+  {
+   "fieldname": "enhancement_details_section",
+   "fieldtype": "Section Break",
+   "label": "Enhancement Details"
+  },
+  {
+   "fieldname": "enhancement",
+   "fieldtype": "Table",
+   "label": "Enhancement",
+   "options": "Enhancement Details ST"
+  },
+  {
+   "fieldname": "allocate_details_section",
+   "fieldtype": "Section Break",
+   "label": "Allocate Details"
+  },
+  {
+   "fieldname": "allocate_to",
+   "fieldtype": "Table",
+   "label": "Allocate to",
+   "options": "Allocate to Details ST"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-23 08:21:24.484256",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Budget Change Request ST",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -50,9 +50,16 @@ def set_todo_status_in_onboarding_procedures(self, method):
 	if not self.is_new():
 		doc = frappe.get_doc('Onboarding Procedures ST', {'todo':self.name})
 		if doc:
-			frappe.db.set_value('Onboarding Procedures ST', doc.name, 'status', self.status)
-			# frappe.db.set_value('Onboarding Procedures ST', doc.name, 'date_of_completion', self.date)
-			frappe.msgprint(_("Update Status in {0} 's Onboarding Procedures Row No. {1}").format(doc.parent, doc.idx), alert=1)
+			if self.status == "Closed":
+				frappe.db.set_value('Onboarding Procedures ST', doc.name, 'date_of_completion', self.date)
+				frappe.db.set_value('Onboarding Procedures ST', doc.name, 'status', self.status)
+				frappe.msgprint(_("Update Status and Date of Completion in {0} 's Onboarding Procedures Row No. {1}")
+					.format(doc.parent, doc.idx), alert=1)
+			else:
+				frappe.db.set_value('Onboarding Procedures ST', doc.name, 'status', self.status)
+				frappe.db.set_value('Onboarding Procedures ST', doc.name, 'date_of_completion', None)
+				frappe.msgprint(_("Update Status in {0} 's Onboarding Procedures Row No. {1}")
+					.format(doc.parent, doc.idx), alert=1)
 
 def calculate_years_of_experience(self, method):
 	diff = relativedelta.relativedelta(getdate(nowdate()), getdate(self.date_of_joining))

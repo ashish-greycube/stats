@@ -52,7 +52,6 @@
   },
   {
    "allow_on_submit": 1,
-   "default": "Today",
    "fieldname": "date_of_completion",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -71,7 +70,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-22 11:06:22.059128",
+ "modified": "2024-08-22 15:01:21.755607",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Onboarding Procedures ST",

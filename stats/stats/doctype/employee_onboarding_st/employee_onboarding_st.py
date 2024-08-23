@@ -15,7 +15,6 @@ class EmployeeOnboardingST(Document):
 
 				todo = frappe.new_doc('ToDo')
 				todo.description = op.activity_name
-				todo.custom_date_of_completion = op.date_of_completion
 				todo.custom_candidate_name = self.candidate_name
 				todo.custom_candidate_namein_english = self.candidate_namein_english
 				todo.custom_email = self.email

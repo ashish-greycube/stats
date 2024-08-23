@@ -1,0 +1,80 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "AB-.######",
+ "creation": "2024-08-23 07:43:39.898509",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "fiscal_year",
+  "column_break_afob",
+  "created_by",
+  "divide_method",
+  "section_break_wqsb",
+  "account_details"
+ ],
+ "fields": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "fiscal_year",
+   "fieldtype": "Link",
+   "label": "Fiscal Year",
+   "options": "Fiscal Year"
+  },
+  {
+   "fieldname": "created_by",
+   "fieldtype": "Date",
+   "label": "Created By"
+  },
+  {
+   "fieldname": "divide_method",
+   "fieldtype": "Select",
+   "label": "Divide Method",
+   "options": "\nEqually\nManually"
+  },
+  {
+   "fieldname": "column_break_afob",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_wqsb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "account_details",
+   "fieldtype": "Table",
+   "label": "Account Details",
+   "options": "Accumulative Budget Details ST"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-23 08:21:47.297516",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Accumulative Budget ST",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

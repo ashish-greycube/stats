@@ -34,7 +34,8 @@ frappe.ui.form.on("Opening Job ST", {
                         main_department: r.message.main_job_department,
                         sub_department: r.message.sub_job_department,
                         grade: r.message.grade,
-                        section: r.message.section
+                        section: r.message.section,
+                        branch : r.message.branch
                     })
                 }
             })

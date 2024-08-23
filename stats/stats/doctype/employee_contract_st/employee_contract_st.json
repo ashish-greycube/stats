@@ -69,7 +69,8 @@
   {
    "fieldname": "contract_start_date",
    "fieldtype": "Date",
-   "label": "Contract Start Date"
+   "label": "Contract Start Date",
+   "mandatory_depends_on": "eval:doc.test_period_renewed==\"Yes\""
   },
   {
    "fieldname": "contract_end_date",
@@ -78,8 +79,9 @@
   },
   {
    "fieldname": "trial_period_end_date",
-   "fieldtype": "Duration",
-   "label": "Trial Period End Date"
+   "fieldtype": "Date",
+   "label": "Trial Period End Date",
+   "read_only": 1
   },
   {
    "fieldname": "status",
@@ -117,7 +119,8 @@
   {
    "fieldname": "end_of_new_test_period",
    "fieldtype": "Date",
-   "label": "End of New Test Period"
+   "label": "End of New Test Period",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_npff",
@@ -147,7 +150,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-21 14:44:02.878217",
+ "modified": "2024-08-23 06:52:45.462031",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Contract ST",

@@ -1,42 +1,44 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-08-13 14:59:54.806824",
+ "creation": "2024-08-23 08:07:20.618863",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "deduction",
-  "column_break_pacg",
-  "value"
+  "main_department",
+  "account_name",
+  "allocated_amount"
  ],
  "fields": [
   {
-   "fieldname": "deduction",
+   "fieldname": "main_department",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Deduction",
-   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
-   "options": "Salary Component"
+   "label": "Main Department",
+   "options": "Department"
   },
   {
-   "fieldname": "column_break_pacg",
-   "fieldtype": "Column Break"
+   "fieldname": "account_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Account name",
+   "options": "Account"
   },
   {
-   "fieldname": "value",
+   "fieldname": "allocated_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Value"
+   "label": "Allocated Amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-22 14:56:03.811720",
+ "modified": "2024-08-23 08:17:53.790366",
  "modified_by": "Administrator",
  "module": "Stats",
- "name": "Deduction ST",
+ "name": "Allocate to Details ST",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

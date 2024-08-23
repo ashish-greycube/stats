@@ -1,0 +1,155 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "DB-.######",
+ "creation": "2024-08-23 06:55:38.587530",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_w7ts",
+  "date",
+  "fiscal_year",
+  "amended_from",
+  "column_break_hnfw",
+  "requested_by",
+  "main_department",
+  "cost_center",
+  "account_details_section",
+  "account_table",
+  "budget_update_section",
+  "reference",
+  "allocated_to",
+  "column_break_nulb",
+  "account",
+  "budget_date",
+  "column_break_jiqy",
+  "allocated_amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_w7ts",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Department Budget ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "fiscal_year",
+   "fieldtype": "Link",
+   "label": "Fiscal Year",
+   "options": "Fiscal Year"
+  },
+  {
+   "fieldname": "column_break_hnfw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "requested_by",
+   "fieldtype": "Link",
+   "label": "Requested By",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "account_details_section",
+   "fieldtype": "Section Break",
+   "label": "Account Details"
+  },
+  {
+   "fieldname": "account",
+   "fieldtype": "Link",
+   "label": "Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "budget_update_section",
+   "fieldtype": "Section Break",
+   "label": "Budget Update"
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "label": "Reference"
+  },
+  {
+   "fieldname": "account_table",
+   "fieldtype": "Table",
+   "label": "Account Table",
+   "options": "Accounts Details ST"
+  },
+  {
+   "fieldname": "allocated_amount",
+   "fieldtype": "Currency",
+   "label": "Allocated Amount"
+  },
+  {
+   "fieldname": "allocated_to",
+   "fieldtype": "Link",
+   "label": "Allocated to",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "budget_date",
+   "fieldtype": "Date",
+   "label": "Budget Date"
+  },
+  {
+   "fieldname": "column_break_nulb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_jiqy",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-08-23 08:22:07.842136",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Department Budget ST",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

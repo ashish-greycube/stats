@@ -12,5 +12,5 @@ class OpeningJobST(Document):
 @frappe.whitelist()
 def get_job_deatils(job_title):
 	job_deatils = frappe.db.get_value('MP Jobs Details ST', job_title, 
-								   ['designation', 'main_job_department', 'sub_job_department', 'grade', 'section', 'salary'], as_dict=1)
+								   ['designation', 'main_job_department', 'sub_job_department', 'grade', 'section', 'salary', 'branch'], as_dict=1)
 	return job_deatils

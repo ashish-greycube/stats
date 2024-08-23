@@ -15,7 +15,7 @@
   "position_status",
   "grade",
   "year_of_experience",
-  "position_location",
+  "branch",
   "column_break_htec",
   "direct_manager",
   "job_category",
@@ -78,12 +78,6 @@
    "in_list_view": 1,
    "label": "Position Status",
    "options": "\nFilled\nVacant\nUnplanned"
-  },
-  {
-   "fieldname": "position_location",
-   "fieldtype": "Link",
-   "label": "Position Location",
-   "options": "Branch"
   },
   {
    "fieldname": "grade",
@@ -197,12 +191,18 @@
   {
    "fieldname": "column_break_tilr",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-21 14:29:53.684906",
+ "modified": "2024-08-22 14:48:37.884441",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "MP Jobs Details ST",
