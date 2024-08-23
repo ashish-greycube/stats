@@ -4,13 +4,14 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import get_link_to_form,today
+from frappe.utils import get_link_to_form,today,date_diff
 
 
 class BusinessTripProcessingST(Document):
 	def validate(self):
 		self.change_btr_status()
 		self.change_btp_status()
+		self.calculate_no_of_days_for_multi_direction()
 
 	def change_btr_status(self):
 		if len(self.get("business_trip_detail")) > 0:
@@ -35,6 +36,12 @@ class BusinessTripProcessingST(Document):
 					status = "Processed"
 			if status == "Processed":
 				frappe.msgprint(_("Status of {0} is changed to {1}").format(get_link_to_form("Business Trip Processing ST", self.name),self.status),alert=1)
+
+	def calculate_no_of_days_for_multi_direction(self):
+		if len(self.business_trip_multi_direction_detail)>0:
+			for row in self.business_trip_multi_direction_detail:
+				if row.from_date and row.to_date:
+					self.no_of_days = date_diff(row.to_date, row.from_date)
 
 @frappe.whitelist()
 def fetch_business_trip_request(name):

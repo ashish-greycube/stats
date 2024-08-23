@@ -27,6 +27,15 @@ frappe.ui.form.on("Business Trip Processing ST", {
     }
 });
 
+frappe.ui.form.on("Business Trip Processing Multi Direction Details ST", {
+    from_date(frm, cdt, cdn) {
+        calculate_no_of_days_in_multi_direction(frm, cdt, cdn)
+    },
+    to_date(frm, cdt, cdn) {
+        calculate_no_of_days_in_multi_direction(frm, cdt, cdn)
+    }
+})
+
 let fetch_business_trips_from_business_trip_request = function (frm) {
     frappe.call({
         method: "stats.stats.doctype.business_trip_processing_st.business_trip_processing_st.fetch_business_trip_request",
@@ -45,3 +54,9 @@ let fetch_business_trips_from_business_trip_request = function (frm) {
         }
     })
 }
+
+let calculate_no_of_days_in_multi_direction = function (frm, cdt, cdn) {
+    let row = locals[cdt][cdn]
+    let no_of_day = frappe.datetime.get_day_diff(row.to_date, row.from_date)
+    frappe.model.set_value(row.doctype, row.name,"no_of_days", no_of_day)
+    }

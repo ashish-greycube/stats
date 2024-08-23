@@ -24,9 +24,9 @@ frappe.ui.form.on("Business Trip Request ST", {
         set_no_of_days(frm)
     },
 
-    business_trip_end_date(frm){
+    business_trip_end_date(frm) {
         set_no_of_days(frm)
-    }
+    },
 
 });
 
@@ -37,5 +37,4 @@ let set_no_of_days = function (frm) {
         let no_of_day = frappe.datetime.get_day_diff(end_date, start_date)
         frm.set_value("no_of_days", no_of_day)
     }
-
 }

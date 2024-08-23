@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "business_trip_reference",
+  "employee_task_completion_reference",
   "business_trip_start_date",
   "business_trip_end_date",
   "employee_no",
@@ -16,7 +17,8 @@
   "no_of_days",
   "approved_days",
   "approved_amount",
-  "payment_status"
+  "ticket_amount",
+  "total_amount"
  ],
  "fields": [
   {
@@ -31,13 +33,15 @@
    "fetch_from": "business_trip_reference.business_trip_start_date",
    "fieldname": "business_trip_start_date",
    "fieldtype": "Date",
-   "label": "Business Trip Start Date"
+   "label": "Business Trip Start Date",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.business_trip_end_date",
    "fieldname": "business_trip_end_date",
    "fieldtype": "Date",
-   "label": "Business Trip End Date"
+   "label": "Business Trip End Date",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.employee_no",
@@ -45,14 +49,16 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Employee No",
-   "options": "Employee"
+   "options": "Employee",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Employee Name"
+   "label": "Employee Name",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.sub_department",
@@ -60,20 +66,24 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Sub Department",
-   "options": "Department"
+   "options": "Department",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.no_of_days",
    "fieldname": "no_of_days",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "No of Days"
+   "label": "No of Days",
+   "read_only": 1
   },
   {
+   "fetch_from": "employee_task_completion_reference.approved_days",
    "fieldname": "approved_days",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Approved Days"
+   "label": "Approved Days",
+   "read_only": 1
   },
   {
    "fieldname": "approved_amount",
@@ -82,20 +92,33 @@
    "label": "Approved Amount"
   },
   {
-   "fieldname": "payment_status",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Payment Status"
-  },
-  {
    "fieldname": "column_break_fbsn",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "employee_task_completion_reference",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee Task Completion Reference",
+   "options": "Employee Task Completion ST"
+  },
+  {
+   "fieldname": "ticket_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Ticket Amount"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-23 07:42:22.704658",
+ "modified": "2024-08-23 16:13:41.421040",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Details ST",

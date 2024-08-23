@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from frappe.utils import getdate,nowdate,format_duration
+from frappe.utils import getdate,nowdate,format_duration,cint
 from dateutil import relativedelta
 
 @frappe.whitelist()
@@ -72,3 +72,10 @@ def calculate_years_of_experience(self, method):
 
 	self.custom_current_years_of_experience = str(years) + " years " + str(months) + " months " + str(days) + " days"
 	self.custom_total_years_of_experience = str(previous_years) + " years " + str(months) + " months " + str(days) + " days"
+
+@frappe.whitelist()
+def fetch_employee_per_diem_amount(employee,no_of_days):
+	employee_grade = frappe.db.get_value("Employee",employee,"grade")
+	employee_per_diem_amount = frappe.db.get_value("Employee Grade",employee_grade,"custom_per_diem")
+	total_employee_amount_for_trip = employee_per_diem_amount * cint(no_of_days)
+	return total_employee_amount_for_trip

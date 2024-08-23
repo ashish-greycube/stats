@@ -9,13 +9,16 @@
   "date",
   "created_by",
   "fetch_business_trip",
+  "payment_status",
+  "payment_request_reference",
   "column_break_za1l",
   "from_date",
   "to_date",
   "main_department",
   "sub_department",
   "section_break_ppjm",
-  "employee_detail"
+  "employee_detail",
+  "amended_from"
  ],
  "fields": [
   {
@@ -71,11 +74,34 @@
    "fieldname": "fetch_business_trip",
    "fieldtype": "Button",
    "label": "Fetch Business Trip"
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Select",
+   "label": "Payment Status",
+   "options": "\nPaid\nNot Paid"
+  },
+  {
+   "fieldname": "payment_request_reference",
+   "fieldtype": "Link",
+   "label": "Payment Request Reference",
+   "options": "Payment Request"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Business Trip Sheet ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-08-22 14:37:30.557757",
+ "modified": "2024-08-23 16:24:31.644958",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Sheet ST",

@@ -18,6 +18,7 @@
   "trip_direction",
   "business_trip_start_date",
   "business_trip_end_date",
+  "process_status",
   "no_of_days",
   "approved_days",
   "section_break_iysk",
@@ -44,34 +45,39 @@
    "fieldname": "employee_no",
    "fieldtype": "Link",
    "label": "Employee No",
-   "options": "Employee"
+   "options": "Employee",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
-   "label": "Employee Name"
+   "label": "Employee Name",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.main_department",
    "fieldname": "main_department",
    "fieldtype": "Link",
    "label": "Main Department",
-   "options": "Department"
+   "options": "Department",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.sub_department",
    "fieldname": "sub_department",
    "fieldtype": "Link",
    "label": "Sub Department",
-   "options": "Department"
+   "options": "Department",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.section",
    "fieldname": "section",
    "fieldtype": "Link",
    "label": "Section",
-   "options": "Section ST"
+   "options": "Section ST",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_fjth",
@@ -82,36 +88,41 @@
    "fieldname": "business_trip_type",
    "fieldtype": "Link",
    "label": "Business Trip Type",
-   "options": "Business Trip Type ST"
+   "options": "Business Trip Type ST",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.trip_direction",
    "fieldname": "trip_direction",
    "fieldtype": "Data",
-   "label": "Trip Direction"
+   "label": "Trip Direction",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.business_trip_start_date",
    "fieldname": "business_trip_start_date",
    "fieldtype": "Date",
-   "label": "Business Trip Start Date"
+   "label": "Business Trip Start Date",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.business_trip_end_date",
    "fieldname": "business_trip_end_date",
    "fieldtype": "Date",
-   "label": "Business Trip End Date"
+   "label": "Business Trip End Date",
+   "read_only": 1
   },
   {
    "fetch_from": "business_trip_reference.no_of_days",
    "fieldname": "no_of_days",
    "fieldtype": "Int",
-   "label": "No of Days"
+   "label": "No of Days",
+   "read_only": 1
   },
   {
    "fieldname": "approved_days",
    "fieldtype": "Int",
-   "label": "Approved Days"
+   "label": "No. of Approved Days"
   },
   {
    "fieldname": "section_break_iysk",
@@ -127,11 +138,19 @@
    "fieldname": "notes_about_the_trip",
    "fieldtype": "Small Text",
    "label": "Notes about the trip"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "process_status",
+   "fieldtype": "Select",
+   "label": "Process Status",
+   "options": "\nPending\nProcessed",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-22 13:44:33.541679",
+ "modified": "2024-08-23 16:18:45.535304",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Task Completion ST",
