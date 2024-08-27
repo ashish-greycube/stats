@@ -107,7 +107,7 @@
    "default": "Pending",
    "fieldname": "status",
    "fieldtype": "Select",
-   "label": "Status",
+   "label": "Status : Business Trip Processing",
    "options": "\nPending\nApproved\nRejected",
    "read_only": 1
   },
@@ -163,7 +163,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-27 09:05:02.323317",
+ "modified": "2024-08-27 10:18:26.164219",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Request ST",

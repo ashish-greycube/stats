@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"0GIT10xVKD\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0627\u0644\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a \u0627\u0644\u0633\u0631\u064a\u0639\u0629</b></span>\",\"col\":12}},{\"id\":\"6V6schO-w0\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0627\u0644\u0645\u0648\u0638\u0641\u064a\u0646 \u0627\u0644\u0646\u0634\u0637\u064a\u0646\",\"col\":4}},{\"id\":\"0SfLvdQyks\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0645\u0648\u0638\u0641\u064a\u0646 \u0642\u064a\u062f \u0627\u0644\u062a\u0648\u0638\u064a\u0641\",\"col\":4}},{\"id\":\"VfGWfoLahC\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a \u0627\u0644\u0639\u0645\u0644\u064a\u0627\u062a</b></span>\",\"col\":12}},{\"id\":\"ypzfSsxxP5\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0627\u0639\u062f\u0627\u062f\u0627\u062a \u0627\u0644\u0639\u0627\u0645\u0629\",\"col\":4}},{\"id\":\"v8HwlNUrFC\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0645\u0631\u0643\u0632 \u062a\u0645\u064a\u0632 \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629\",\"col\":4}},{\"id\":\"PyNDYJOJEp\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0633\u062a\u0642\u0637\u0627\u0628 \u0627\u0644\u0645\u0648\u0627\u0647\u0628\",\"col\":4}},{\"id\":\"dhgDwVmNY9\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b></b></span>\",\"col\":12}},{\"id\":\"-CKwestrHV\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u062f\u0627\u0631\u0629 \u0627\u0644\u062a\u0648\u0627\u0635\u0644 \u0627\u0644\u062f\u0627\u062e\u0644\u064a\",\"col\":4}}]",
+ "content": "[{\"id\":\"0GIT10xVKD\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0627\u0644\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a \u0627\u0644\u0633\u0631\u064a\u0639\u0629</b></span>\",\"col\":12}},{\"id\":\"6V6schO-w0\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0627\u0644\u0645\u0648\u0638\u0641\u064a\u0646 \u0627\u0644\u0646\u0634\u0637\u064a\u0646\",\"col\":4}},{\"id\":\"0SfLvdQyks\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0645\u0648\u0638\u0641\u064a\u0646 \u0642\u064a\u062f \u0627\u0644\u062a\u0648\u0638\u064a\u0641\",\"col\":4}},{\"id\":\"VfGWfoLahC\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a \u0627\u0644\u0639\u0645\u0644\u064a\u0627\u062a</b></span>\",\"col\":12}},{\"id\":\"ypzfSsxxP5\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0627\u0639\u062f\u0627\u062f\u0627\u062a \u0627\u0644\u0639\u0627\u0645\u0629\",\"col\":4}},{\"id\":\"v8HwlNUrFC\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0645\u0631\u0643\u0632 \u062a\u0645\u064a\u0632 \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629\",\"col\":4}},{\"id\":\"PyNDYJOJEp\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0633\u062a\u0642\u0637\u0627\u0628 \u0627\u0644\u0645\u0648\u0627\u0647\u0628\",\"col\":4}},{\"id\":\"dhgDwVmNY9\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b></b></span>\",\"col\":12}},{\"id\":\"-CKwestrHV\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u062f\u0627\u0631\u0629 \u0627\u0644\u062a\u0648\u0627\u0635\u0644 \u0627\u0644\u062f\u0627\u062e\u0644\u064a\",\"col\":4}},{\"id\":\"mbHuXrJlj2\",\"type\":\"card\",\"data\":{\"card_name\":\"Business Trip Section\",\"col\":4}},{\"id\":\"PfiVYq5oLH\",\"type\":\"card\",\"data\":{\"card_name\":\"Budget Managment\",\"col\":4}}]",
  "creation": "2024-08-06 15:54:16.748573",
  "custom_blocks": [],
  "docstatus": 0,
@@ -178,9 +178,118 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "description": "Test Preview",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Business Trip Section",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Business Trip Request ST",
+   "link_count": 0,
+   "link_to": "Business Trip Request ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Business Trip Processing ST",
+   "link_count": 0,
+   "link_to": "Business Trip Processing ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Business Trip Sheet ST",
+   "link_count": 0,
+   "link_to": "Business Trip Sheet ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Business Trip Type ST",
+   "link_count": 0,
+   "link_to": "Business Trip Type ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ticket Request ST",
+   "link_count": 0,
+   "link_to": "Ticket Request ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Employee Task Completion ST",
+   "link_count": 0,
+   "link_to": "Employee Task Completion ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Budget Managment",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Department Budget ST",
+   "link_count": 0,
+   "link_to": "Department Budget ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Accumulative Budget ST",
+   "link_count": 0,
+   "link_to": "Accumulative Budget ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Budget Change Request ST",
+   "link_count": 0,
+   "link_to": "Budget Change Request ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-08-22 13:24:35.758208",
+ "modified": "2024-08-26 22:41:54.444430",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats",
