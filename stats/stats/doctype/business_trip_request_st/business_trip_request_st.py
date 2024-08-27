@@ -3,6 +3,7 @@
 
 import frappe
 from frappe import _
+from frappe.model.mapper import get_mapped_doc
 from frappe.model.document import Document
 from frappe.utils import date_diff
 from stats.api import fetch_employee_per_diem_amount
@@ -27,3 +28,28 @@ class BusinessTripRequestST(Document):
 		amount_for_trip = fetch_employee_per_diem_amount(self.employee_no,self.no_of_days)
 		print(amount_for_trip,"amount")
 		self.total_employee_amount_for_trip = amount_for_trip
+
+@frappe.whitelist()
+def create_ticket_request_from_business_trip_request(source_name, target_doc=None):
+	print("="*10)
+	btr_doc = frappe.get_doc("Business Trip Request ST",source_name)
+	
+	def set_missing_values(source, target):
+
+		target.business_trip_reference=source_name
+	
+	doc = get_mapped_doc('Business Trip Request ST', source_name, {
+		'Business Trip Request ST': {
+			'doctype': 'Ticket Request ST',
+			# 'field_map': {
+			# 	'agent_name':'name',
+			# },			
+			'validation': {
+				'docstatus': ['!=', 2]
+			}
+		}		
+	}, target_doc,set_missing_values)
+	doc.run_method("set_missing_values")
+	doc.run_method("calculate_taxes_and_totals")
+	doc.save()	
+	return doc.name
