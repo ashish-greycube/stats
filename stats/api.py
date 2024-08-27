@@ -79,3 +79,15 @@ def fetch_employee_per_diem_amount(employee,no_of_days):
 	employee_per_diem_amount = frappe.db.get_value("Employee Grade",employee_grade,"custom_per_diem")
 	total_employee_amount_for_trip = employee_per_diem_amount * cint(no_of_days)
 	return total_employee_amount_for_trip
+
+
+@frappe.whitelist()
+def set_no_of_business_trip_days_available_at_start_of_every_year():
+	employees=frappe.db.get_list('Employee', filters={'status': ['=', 'Active']})
+	for employee in employees:
+		emp_doc=frappe.get_doc("Employee",employee)
+		custom_contract_type=emp_doc.custom_contract_type
+		no_of_allowed_business_trip_days = frappe.db.get_value('Contract Type ST', custom_contract_type, 'no_of_allowed_business_trip_days')
+		emp_doc.custom_no_of_business_trip_days_remaining=no_of_allowed_business_trip_days
+		emp_doc.add_comment("Comment", text='No of business trip days are set to {0} on {1} by system.'.format(no_of_allowed_business_trip_days,nowdate()))
+		emp_doc.save(ignore_permissions=True)

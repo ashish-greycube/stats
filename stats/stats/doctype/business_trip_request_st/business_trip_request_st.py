@@ -14,7 +14,15 @@ class BusinessTripRequestST(Document):
 		self.set_no_of_days()
 		self.validate_no_of_days()
 		self.set_total_employee_amount_for_trip()
+		self.set_no_of_trip_days_in_employee()
 	
+	
+	def set_no_of_trip_days_in_employee(self):
+		if self.status=='Approved':
+			custom_no_of_business_trip_days_remaining = frappe.db.get_value('Employee', self.employee_no, 'custom_no_of_business_trip_days_remaining')
+			no_of_business_trip_days_remaining=custom_no_of_business_trip_days_remaining-self.no_of_days
+			frappe.db.set_value('Task', 'TASK00002', 'subject', 'New Subject')
+
 	def set_no_of_days(self):
 		if self.business_trip_start_date and self.business_trip_end_date:
 			no_of_day = date_diff(self.business_trip_end_date, self.business_trip_start_date)

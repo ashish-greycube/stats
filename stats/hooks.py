@@ -144,7 +144,14 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
+	"cron": {
+        # at start of every year at 1:30 night
+		"30 1 1 1 *": [
+			"stats.api.set_no_of_business_trip_days_available_at_start_of_every_year",
+		],
+	},
+}
 # 	"all": [
 # 		"stats.tasks.all"
 # 	],

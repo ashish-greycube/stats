@@ -135,6 +135,7 @@
   },
   {
    "allow_on_submit": 1,
+   "fetch_from": "employee_no.custom_no_of_business_trip_days_remaining",
    "fieldname": "trip_remaining_balance",
    "fieldtype": "Currency",
    "label": "Trip Remaining Balance",
@@ -162,7 +163,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-23 16:16:43.915590",
+ "modified": "2024-08-27 09:05:02.323317",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Request ST",
