@@ -50,6 +50,35 @@ def create_ticket_request_from_business_trip_request(source_name, target_doc=Non
 		}		
 	}, target_doc,set_missing_values)
 	doc.run_method("set_missing_values")
-	doc.run_method("calculate_taxes_and_totals")
+	doc.save()	
+	return doc.name
+
+@frappe.whitelist()
+def create_employee_task_completion_from_business_trip_request(source_name, target_doc=None):
+	print("="*10)
+	btr_doc = frappe.get_doc("Business Trip Request ST",source_name)
+	
+	def set_missing_values(source, target):
+
+		target.business_trip_reference=source_name
+		trip_cost_template=frappe.db.get_single_value('Stats Settings ST', 'default_trip_cost_template')
+		tct_doc = frappe.get_doc("Trip Cost Template ST",trip_cost_template)
+		for tc_detail in tct_doc.trip_cost_template_details:
+			target.append('trip_cost_detail',{'element':tc_detail.element,'payment_method':tc_detail.payment_method})
+		target.trip_cost_template=trip_cost_template
+
+	doc = get_mapped_doc('Business Trip Request ST', source_name, {
+		'Business Trip Request ST': {
+			'doctype': 'Employee Task Completion ST',
+			# 'field_map': {
+			# 	'agent_name':'name',
+			# },			
+			'validation': {
+				'docstatus': ['!=', 2]
+			}
+		}		
+	}, target_doc,set_missing_values)
+	doc.run_method("set_missing_values")
+	print('doc',doc.get('trip_cost_detail'))
 	doc.save()	
 	return doc.name

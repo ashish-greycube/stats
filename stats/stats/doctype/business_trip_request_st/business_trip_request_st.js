@@ -22,11 +22,11 @@ frappe.ui.form.on("Business Trip Request ST", {
 
     refresh(frm) {
         if (!frm.is_new()) {
-            frm.add_custom_button(__('Create Ticket Request'), () => create_ticket_request_from_business_trip_request(frm), __("Create"));
+            frm.add_custom_button(__('Ticket Request'), () => create_ticket_request_from_business_trip_request(frm), __("Create"));
         }
-        // if (!frm.is_new()) {
-        //     frm.add_custom_button(__('Create Employee Task Completion'), () => create_task_completion_from_business_trip_request(frm), __("Create"));
-        // }
+        if (!frm.is_new()) {
+            frm.add_custom_button(__('Employee Task Completion'), () => create_task_completion_from_business_trip_request(frm), __("Create"));
+        }
     },
 
     business_trip_start_date(frm) {
@@ -69,6 +69,23 @@ let create_ticket_request_from_business_trip_request = function (frm) {
     })
 }
 
-// let create_task_completion_from_business_trip_request = function (frm) {
+let create_task_completion_from_business_trip_request = function (frm) {
+    if (frm.is_dirty() == true) {
+        frappe.throw({
+            message: __("Please save the form to proceed..."),
+            indicator: "red",
+        });
+    }
 
-// }
+    frappe.call({
+        method: "stats.stats.doctype.business_trip_request_st.business_trip_request_st.create_employee_task_completion_from_business_trip_request",
+        args: {
+            source_name: frm.doc.name
+        },
+        callback: function (r) {
+            if (r.message) {
+                window.open(`/app/employee-task-completion-st/` +  r.message);
+            }
+        }
+    })
+}
