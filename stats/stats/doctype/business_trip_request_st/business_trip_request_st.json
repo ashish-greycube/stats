@@ -43,28 +43,35 @@
    "label": "Employee Name"
   },
   {
+   "fetch_from": "employee_no.department",
    "fieldname": "main_department",
    "fieldtype": "Link",
    "label": "Main Department",
-   "options": "Department"
+   "options": "Department",
+   "read_only": 1
   },
   {
+   "fetch_from": "employee_no.custom_sub_department",
    "fieldname": "sub_department",
    "fieldtype": "Link",
    "label": "Sub Department",
-   "options": "Department"
+   "options": "Department",
+   "read_only": 1
   },
   {
    "fetch_from": "sub_department.custom_direct_manager",
    "fieldname": "direct_manager",
    "fieldtype": "Data",
-   "label": "Direct Manager"
+   "label": "Direct Manager",
+   "read_only": 1
   },
   {
+   "fetch_from": "employee_no.custom_section",
    "fieldname": "section",
    "fieldtype": "Link",
    "label": "Section",
-   "options": "Section ST"
+   "options": "Section ST",
+   "read_only": 1
   },
   {
    "fieldname": "business_trip_type",
@@ -134,10 +141,9 @@
    "options": "\nInternal\nExternal"
   },
   {
-   "allow_on_submit": 1,
    "fetch_from": "employee_no.custom_no_of_business_trip_days_remaining",
    "fieldname": "trip_remaining_balance",
-   "fieldtype": "Currency",
+   "fieldtype": "Int",
    "label": "Trip Remaining Balance",
    "read_only": 1
   },
@@ -163,7 +169,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-27 10:18:26.164219",
+ "modified": "2024-08-27 10:59:21.196560",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Request ST",

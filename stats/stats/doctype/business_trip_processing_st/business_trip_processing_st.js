@@ -37,6 +37,12 @@ frappe.ui.form.on("Business Trip Processing Multi Direction Details ST", {
 })
 
 let fetch_business_trips_from_business_trip_request = function (frm) {
+    if (frm.is_dirty() == true) {
+        frappe.throw({
+            message: __("Please save the form to proceed..."),
+            indicator: "red",
+        });
+    }
     frappe.call({
         method: "stats.stats.doctype.business_trip_processing_st.business_trip_processing_st.fetch_business_trip_request",
         args: {

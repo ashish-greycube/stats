@@ -21,10 +21,10 @@ frappe.ui.form.on("Business Trip Request ST", {
     },
 
     refresh(frm) {
-        if (!frm.is_new()) {
+        if (frm.doc.docstatus == 1 && frm.doc.status == "Approved") {
             frm.add_custom_button(__('Ticket Request'), () => create_ticket_request_from_business_trip_request(frm), __("Create"));
         }
-        if (!frm.is_new()) {
+        if (frm.doc.docstatus == 1 && frm.doc.status == "Approved") {
             frm.add_custom_button(__('Employee Task Completion'), () => create_task_completion_from_business_trip_request(frm), __("Create"));
         }
     },
@@ -63,7 +63,7 @@ let create_ticket_request_from_business_trip_request = function (frm) {
         },
         callback: function (r) {
             if (r.message) {
-                window.open(`/app/ticket-request-st/` +  r.message);
+                window.open(`/app/ticket-request-st/` + r.message);
             }
         }
     })
@@ -84,7 +84,7 @@ let create_task_completion_from_business_trip_request = function (frm) {
         },
         callback: function (r) {
             if (r.message) {
-                window.open(`/app/employee-task-completion-st/` +  r.message);
+                window.open(`/app/employee-task-completion-st/` + r.message);
             }
         }
     })
