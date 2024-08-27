@@ -19,8 +19,25 @@ class BusinessTripRequestST(Document):
 	
 	
 	def check_trip_days_not_in_personal_vacation(self):
-		pass
-	
+		leave_details=	frappe.db.sql(
+					"""
+					select
+						name, leave_type, posting_date, from_date, to_date, total_leave_days, half_day_date
+					from `tabLeave Application`
+					where employee = %(employee)s and docstatus < 2 and status in ('Open', 'Approved')
+					and to_date >= %(from_date)s and from_date <= %(to_date)s
+					""",
+					{
+						"employee": self.employee_no,
+						"from_date": self.business_trip_start_date,
+						"to_date": self.business_trip_end_date,
+					},
+					as_dict=1,
+				)
+		if len(leave_details)>0:
+			leave_names=",".join(i.name for i in leave_details)
+			frappe.throw(_("You have leave application <b>{0}</b> during your business trip days. It is not allowed.").format(leave_names))
+
 	def set_no_of_trip_days_in_employee(self):
 		if self.status=='Approved':
 			custom_no_of_business_trip_days_remaining = frappe.db.get_value('Employee', self.employee_no, 'custom_no_of_business_trip_days_remaining')
