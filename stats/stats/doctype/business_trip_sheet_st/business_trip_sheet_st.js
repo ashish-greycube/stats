@@ -19,4 +19,24 @@ frappe.ui.form.on("Business Trip Sheet ST", {
             }
 		})
     },
+    fetch_business_trip(frm){
+        frm.set_value("employee_detail", "");
+        frm.call({
+            doc: frm.doc,
+            method: "get_business_trip",
+            freeze: true,
+            callback: (r) => {
+                if (r.message) {
+                    // console.log(r.message)
+                    r.message.forEach((e) => {
+                        // console.log(e)
+                        var d = frm.add_child("employee_detail");
+                        frappe.model.set_value(d.doctype, d.name, "employee_task_completion_reference", e.name)
+                    });
+                    refresh_field("employee_detail");
+                    frm.save()
+                }
+            },
+        });
+    }
 });

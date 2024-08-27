@@ -6,7 +6,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "date",
+  "task_creation_date",
   "business_trip_reference",
   "employee_no",
   "employee_name",
@@ -24,15 +24,10 @@
   "section_break_iysk",
   "trip_cost_template",
   "trip_cost_detail",
-  "notes_about_the_trip"
+  "notes_about_the_trip",
+  "amended_from"
  ],
  "fields": [
-  {
-   "default": "Today",
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "label": "Date"
-  },
   {
    "fieldname": "business_trip_reference",
    "fieldtype": "Link",
@@ -141,6 +136,7 @@
    "label": "Notes about the trip"
   },
   {
+   "allow_on_submit": 1,
    "default": "Pending",
    "fieldname": "process_status",
    "fieldtype": "Select",
@@ -153,11 +149,28 @@
    "fieldtype": "Link",
    "label": "Trip Cost Template",
    "options": "Trip Cost Template ST"
+  },
+  {
+   "default": "Today",
+   "fieldname": "task_creation_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Employee Task Completion ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-08-27 08:16:44.194802",
+ "modified": "2024-08-27 09:46:23.593979",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Task Completion ST",
