@@ -91,3 +91,24 @@ def set_no_of_business_trip_days_available_at_start_of_every_year():
 		emp_doc.custom_no_of_business_trip_days_remaining=no_of_allowed_business_trip_days
 		emp_doc.add_comment("Comment", text='No of business trip days are set to {0} on {1} by system.'.format(no_of_allowed_business_trip_days,nowdate()))
 		emp_doc.save(ignore_permissions=True)
+
+@frappe.whitelist()
+def check_leave_is_not_in_business_days(self,method):
+		business_trip_request_details=	frappe.db.sql(
+					"""
+					select
+						name
+					from `tabBusiness Trip Request ST`
+					where employee_no = %(employee)s and docstatus < 2 and status in ('Pending', 'Approved')
+					and business_trip_start_date >= %(from_date)s and business_trip_end_date <= %(to_date)s
+					""",
+					{
+						"employee": self.employee,
+						"from_date": self.from_date,
+						"to_date": self.to_date,
+					},
+					as_dict=1,
+				)
+		if len(business_trip_request_details)>0:
+			business_trip_names=",".join(i.name for i in business_trip_request_details)
+			frappe.throw(_("You have business trip <b>{0}</b> during your leave applicatino days. It is not allowed.").format(business_trip_names))	

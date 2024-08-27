@@ -130,7 +130,10 @@ doc_events = {
 	},
     "Employee": {
         "validate":"stats.api.calculate_years_of_experience"
-	}
+	},
+    "Leave Application": {
+        "validate":"stats.api.check_leave_is_not_in_business_days"
+	}    
 }
 
 # doc_events = {
