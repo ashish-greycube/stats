@@ -62,7 +62,7 @@ class BusinessTripProcessingST(Document):
 	def update_no_of_trip_days_remaining(self):
 		if len(self.get("business_trip_detail"))>0:
 			for row in self.get("business_trip_detail"):
-				if row.status == "Approved":
+				if row.action == "Approved":
 					print("----"*100)
 					btr_doc_emp = frappe.db.get_value("Business Trip Request ST",row.business_trip_reference,"employee_no")
 					custom_no_of_business_trip_days_remaining = frappe.db.get_value("Employee",btr_doc_emp,"custom_no_of_business_trip_days_remaining")
