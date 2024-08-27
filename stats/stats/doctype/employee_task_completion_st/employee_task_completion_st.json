@@ -170,7 +170,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-27 09:46:23.593979",
+ "modified": "2024-08-27 14:36:59.192265",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Task Completion ST",
@@ -187,6 +187,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],
