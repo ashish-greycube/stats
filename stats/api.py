@@ -100,7 +100,11 @@ def check_leave_is_not_in_business_days(self,method):
 						name
 					from `tabBusiness Trip Request ST`
 					where employee_no = %(employee)s and docstatus < 2 and status in ('Pending', 'Approved')
-					and business_trip_start_date >= %(from_date)s and business_trip_end_date <= %(to_date)s
+					and (
+					( business_trip_start_date <= %(from_date)s and business_trip_end_date >= %(from_date)s )
+					or ( business_trip_start_date >= %(from_date)s and business_trip_end_date <= %(to_date)s )
+					or ( business_trip_start_date <= %(to_date)s and business_trip_end_date >= %(to_date)s )
+					)
 					""",
 					{
 						"employee": self.employee,
