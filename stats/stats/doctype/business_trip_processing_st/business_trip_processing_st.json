@@ -8,7 +8,8 @@
  "field_order": [
   "date",
   "status",
-  "created_by",
+  "created_by_employee",
+  "created_by_sub_department",
   "column_break_upfm",
   "main_department",
   "sub_department",
@@ -16,7 +17,8 @@
   "to_date",
   "section_break_yku7",
   "business_trip_detail",
-  "business_trip_multi_direction_detail"
+  "business_trip_multi_direction_detail",
+  "amended_from"
  ],
  "fields": [
   {
@@ -31,13 +33,6 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "\nPending\nProcessed"
-  },
-  {
-   "default": "__user",
-   "fieldname": "created_by",
-   "fieldtype": "Link",
-   "label": "Created By",
-   "options": "User"
   },
   {
    "fieldname": "column_break_upfm",
@@ -80,11 +75,32 @@
    "fieldname": "to_date",
    "fieldtype": "Date",
    "label": "To Date"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Business Trip Processing ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "created_by_employee",
+   "fieldtype": "Data",
+   "label": "Created By Employee"
+  },
+  {
+   "fieldname": "created_by_sub_department",
+   "fieldtype": "Data",
+   "label": "Created By Sub Department"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-08-22 12:29:22.715796",
+ "modified": "2024-08-27 12:01:52.415530",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Processing ST",
