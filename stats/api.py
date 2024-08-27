@@ -107,8 +107,9 @@ def check_leave_is_not_in_business_days(self,method):
 						"from_date": self.from_date,
 						"to_date": self.to_date,
 					},
-					as_dict=1,
+					as_dict=1,debug=1
 				)
+		print('business_trip_request_details',business_trip_request_details)
 		if len(business_trip_request_details)>0:
 			business_trip_names=",".join(i.name for i in business_trip_request_details)
 			frappe.throw(_("You have business trip <b>{0}</b> during your leave applicatino days. It is not allowed.").format(business_trip_names))	
