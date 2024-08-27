@@ -35,6 +35,7 @@ class BusinessTripSheetST(Document):
 				frappe.msgprint(_("Process status of {0} is changed to {1}").format(get_link_to_form("Employee Task Completion ST", row.employee_task_completion_reference),"Processed"),alert=1)
 				ticket_request_name = frappe.db.get_all("Ticket Request ST",filters={"business_trip_reference":row.business_trip_reference},fields=["name"])
 				frappe.db.set_value("Ticket Request ST",ticket_request_name[0].name,"process_status","Processed")
+				frappe.msgprint(_("Process status of {0} is changed to {1}").format(get_link_to_form("Ticket Request ST", ticket_request_name[0].name),"Processed"),alert=1)
 
 	@frappe.whitelist()
 	def get_business_trip(self):
