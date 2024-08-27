@@ -23,19 +23,7 @@ frappe.ui.form.on("Business Trip Processing ST", {
     refresh(frm) {
         if (!frm.is_new() && (frm.doc.business_trip_detail).length < 1) {
             frm.add_custom_button(__('Fetch Business Trips'), () => fetch_business_trips_from_business_trip_request(frm));
-        }
-
-        if(frm.doc.created_by_employee=='' || frm.doc.created_by_employee==undefined)
-            if (frappe.boot.user.employee) {
-                frappe.db.get_value('Employee', frappe.boot.user.employee, ['employee_name', 'custom_sub_department'])
-                .then(r => {
-                    let values = r.message;
-                    frm.set_value({
-                        created_by_employee: values.employee_name,
-                        created_by_sub_department: values.custom_sub_department
-                    })                    
-            })           
-            }        
+        }     
     }
 });
 

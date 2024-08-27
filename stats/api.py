@@ -76,9 +76,10 @@ def calculate_years_of_experience(self, method):
 @frappe.whitelist()
 def fetch_employee_per_diem_amount(employee,no_of_days):
 	employee_grade = frappe.db.get_value("Employee",employee,"grade")
-	employee_per_diem_amount = frappe.db.get_value("Employee Grade",employee_grade,"custom_per_diem")
-	total_employee_amount_for_trip = employee_per_diem_amount * cint(no_of_days)
-	return total_employee_amount_for_trip
+	if employee_grade:
+		employee_per_diem_amount = frappe.db.get_value("Employee Grade",employee_grade,"custom_per_diem")
+		total_employee_amount_for_trip = employee_per_diem_amount * cint(no_of_days)
+		return total_employee_amount_for_trip
 
 
 @frappe.whitelist()
