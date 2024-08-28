@@ -34,6 +34,7 @@
    "label": "Date"
   },
   {
+   "fetch_from": "employee.employee_name",
    "fieldname": "created_by",
    "fieldtype": "Data",
    "label": "Created By"
@@ -135,7 +136,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-28 13:20:22.771278",
+ "modified": "2024-08-28 14:07:57.037285",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Certificate of Appreciation ST",

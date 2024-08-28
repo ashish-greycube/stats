@@ -68,10 +68,11 @@ def calculate_years_of_experience(self, method):
 	months = diff.months
 	days = diff.days
 
-	previous_years = years + self.custom_previous_years_of_experience
+	if self.custom_previous_years_of_experience:
+		previous_years = years + self.custom_previous_years_of_experience
 
-	self.custom_current_years_of_experience = str(years) + " years " + str(months) + " months " + str(days) + " days"
-	self.custom_total_years_of_experience = str(previous_years) + " years " + str(months) + " months " + str(days) + " days"
+		self.custom_current_years_of_experience = str(years) + " years " + str(months) + " months " + str(days) + " days"
+		self.custom_total_years_of_experience = str(previous_years) + " years " + str(months) + " months " + str(days) + " days"
 
 @frappe.whitelist()
 def fetch_employee_per_diem_amount(employee,no_of_days):
