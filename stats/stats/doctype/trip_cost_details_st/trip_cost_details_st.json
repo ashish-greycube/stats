@@ -16,7 +16,8 @@
    "fieldname": "element",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Element"
+   "label": "Element",
+   "read_only": 1
   },
   {
    "fieldname": "payment_method",
@@ -38,7 +39,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-27 08:13:49.492407",
+ "modified": "2024-08-28 07:37:36.223687",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Trip Cost Details ST",

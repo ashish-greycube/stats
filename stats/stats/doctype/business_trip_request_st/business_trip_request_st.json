@@ -169,7 +169,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-27 10:59:21.196560",
+ "modified": "2024-08-28 07:50:29.338146",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Request ST",
@@ -186,6 +186,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

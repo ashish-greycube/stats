@@ -71,6 +71,7 @@
    "options": "Employee Details ST"
   },
   {
+   "depends_on": "eval: doc.docstatus == 0",
    "fieldname": "fetch_business_trip",
    "fieldtype": "Button",
    "label": "Fetch Business Trip"
@@ -79,13 +80,15 @@
    "fieldname": "payment_status",
    "fieldtype": "Select",
    "label": "Payment Status",
-   "options": "\nPaid\nNot Paid"
+   "options": "\nPaid\nNot Paid",
+   "read_only": 1
   },
   {
    "fieldname": "payment_request_reference",
    "fieldtype": "Link",
    "label": "Payment Request Reference",
-   "options": "Payment Request"
+   "options": "Payment Request",
+   "read_only": 1
   },
   {
    "fieldname": "amended_from",
@@ -101,7 +104,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-23 16:24:31.644958",
+ "modified": "2024-08-28 07:50:05.123240",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Sheet ST",
@@ -118,6 +121,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

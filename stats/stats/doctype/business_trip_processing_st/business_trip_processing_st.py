@@ -41,7 +41,7 @@ class BusinessTripProcessingST(Document):
 					status = "Pending"
 					return
 				else :
-					self.status = "Processed"
+					frappe.db.set_value("Business Trip Processing ST",self.name,"status","Processed")
 					status = "Processed"
 			if status == "Processed":
 				frappe.msgprint(_("Status of {0} is changed to {1}").format(get_link_to_form("Business Trip Processing ST", self.name),self.status),alert=1)
@@ -54,10 +54,11 @@ class BusinessTripProcessingST(Document):
 
 	def set_created_by(self):
 		if not self.created_by_employee:
-			emp=frappe.get_doc('Employee',{'user_id': frappe.session.user})
-			if emp:
-				self.created_by_employee=emp.employee_name
-				self.created_by_sub_department=emp.custom_sub_department
+			if frappe.session.user!="Administrator":
+				emp=frappe.get_doc('Employee',{'user_id': frappe.session.user})
+				if emp:
+					self.created_by_employee=emp.employee_name
+					self.created_by_sub_department=emp.custom_sub_department
 
 	def update_no_of_trip_days_remaining(self):
 		if len(self.get("business_trip_detail"))>0:
@@ -73,7 +74,32 @@ class BusinessTripProcessingST(Document):
 @frappe.whitelist()
 def fetch_business_trip_request(name):
 	main_department, sub_department, from_date, to_date = frappe.db.get_value("Business Trip Processing ST",name,["main_department","sub_department","from_date","to_date"])
+	if not from_date:
+		frappe.throw(_("From date is requied"))
+	if not to_date:
+		frappe.throw(_("To date is requied"))
+
+	filters={"docstatus":1,"status":"Pending","creation_date":["between",[from_date,to_date]]}
+	if main_department:
+		filters["main_department"]=main_department
+	if sub_department:
+		filters["sub_department"]=sub_department
+	
 	btr_list = frappe.db.get_all("Business Trip Request ST",
-							  filters={"docstatus":1,"status":"Pending","main_department":main_department,"sub_department":sub_department,"creation_date":["between",[from_date,to_date]]},
+							  filters=filters,
 							  fields=["name"])
-	return btr_list
+	final_btr_list = []
+	print(btr_list,"list",filters)
+	btp_list = frappe.db.get_all("Business Trip Processing Details ST",filters={"docstatus":0},fields=["business_trip_reference"])
+
+	for btr in btr_list:
+		found=False
+		if len(btp_list)>0:
+			for btp in btp_list:
+				if btp.business_trip_reference == btr.name:
+					found=True
+					break
+		if found==False:
+			final_btr_list.append(btr)
+						
+	return final_btr_list

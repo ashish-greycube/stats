@@ -88,7 +88,8 @@
    "fieldname": "approved_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Approved Amount"
+   "label": "Approved Amount",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_fbsn",
@@ -106,19 +107,21 @@
    "fieldname": "ticket_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Ticket Amount"
+   "label": "Ticket Amount",
+   "read_only": 1
   },
   {
    "fieldname": "total_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Total Amount"
+   "label": "Total Amount",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-27 10:13:17.909476",
+ "modified": "2024-08-28 07:00:04.597211",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Details ST",
