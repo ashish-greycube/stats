@@ -18,16 +18,16 @@
   },
   {
    "fieldname": "payment_method",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Payment Method",
-   "options": "\nEmployee\nBy Other Organization"
+   "options": "Payment Method ST"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-27 07:55:12.306045",
+ "modified": "2024-08-28 09:33:03.158347",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Trip Cost Template Detail ST",
