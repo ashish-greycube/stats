@@ -27,7 +27,7 @@ class BusinessTripSheetST(Document):
 				if len(ticket_request_name)>0:
 					ticket_value = frappe.db.get_value("Ticket Request ST",ticket_request_name[0].name,"ticket_value")
 					row.ticket_amount = ticket_value
-					row.total_amount = row.ticket_amount + row.approved_amount
+				row.total_amount = (row.ticket_amount or 0) + row.approved_amount
 
 	def on_submit(self):
 		if len(self.employee_detail)>0:
