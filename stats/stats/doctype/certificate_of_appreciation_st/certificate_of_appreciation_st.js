@@ -11,4 +11,11 @@ frappe.ui.form.on("Certificate of Appreciation ST", {
             })
         }  
     },
+    setup(frm){
+        frm.set_query("employee_no","main_department_invitation", function (doc,cdt,cdn){
+            return {
+                query: "stats.stats.doctype.certificate_of_appreciation_st.certificate_of_appreciation_st.get_main_department_manager",
+            }
+        });
+    }
 });
