@@ -80,6 +80,7 @@
    "fieldname": "payment_status",
    "fieldtype": "Select",
    "label": "Payment Status",
+   "no_copy": 1,
    "options": "\nPaid\nNot Paid",
    "read_only": 1
   },
@@ -104,7 +105,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-28 07:50:05.123240",
+ "modified": "2024-08-28 11:01:29.603760",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Sheet ST",

@@ -107,6 +107,7 @@
    "fieldname": "date_of_approval",
    "fieldtype": "Date",
    "label": "Date of Approval",
+   "no_copy": 1,
    "read_only": 1
   },
   {
@@ -115,6 +116,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status : Business Trip Processing",
+   "no_copy": 1,
    "options": "\nPending\nApproved\nRejected",
    "read_only": 1
   },
@@ -169,7 +171,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-28 07:50:29.338146",
+ "modified": "2024-08-28 11:00:15.241406",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Request ST",

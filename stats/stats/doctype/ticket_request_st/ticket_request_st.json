@@ -113,6 +113,7 @@
    "fieldname": "process_status",
    "fieldtype": "Select",
    "label": "Process Status",
+   "no_copy": 1,
    "options": "\nPending\nProcessed",
    "read_only": 1
   }
@@ -120,7 +121,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-23 15:56:41.052591",
+ "modified": "2024-08-28 11:01:00.788197",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Ticket Request ST",
