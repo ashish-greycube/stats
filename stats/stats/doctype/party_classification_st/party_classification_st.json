@@ -1,29 +1,29 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:payment_method",
- "creation": "2024-08-28 09:26:15.647828",
+ "autoname": "field:party_classification",
+ "creation": "2024-08-28 12:32:15.312532",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "payment_method"
+  "party_classification"
  ],
  "fields": [
   {
-   "fieldname": "payment_method",
+   "fieldname": "party_classification",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Payment Method",
+   "label": "Party Classification",
    "reqd": 1,
    "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-28 13:24:42.308866",
+ "modified": "2024-08-28 12:41:57.260897",
  "modified_by": "Administrator",
  "module": "Stats",
- "name": "Payment Method ST",
+ "name": "Party Classification ST",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
