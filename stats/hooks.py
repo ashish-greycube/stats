@@ -154,6 +154,9 @@ scheduler_events = {
 		"30 1 1 1 *": [
 			"stats.api.set_no_of_business_trip_days_available_at_start_of_every_year",
 		],
+        "30 1 1 * *": [
+            "stats.api.set_years_of_experience_at_start_of_every_month",
+		]
 	},
 }
 # 	"all": [

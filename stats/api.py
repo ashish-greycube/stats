@@ -75,6 +75,23 @@ def calculate_years_of_experience(self, method):
 		self.custom_total_years_of_experience = str(previous_years) + " years " + str(months) + " months " + str(days) + " days"
 
 @frappe.whitelist()
+def set_years_of_experience_at_start_of_every_month():
+	employees=frappe.db.get_list('Employee', filters={'status': ['=', 'Active']})
+	for employee in employees:
+		emp_doc=frappe.get_doc("Employee",employee)
+		diff = relativedelta.relativedelta(getdate(nowdate()), getdate(emp_doc.date_of_joining))
+
+		years = diff.years
+		months = diff.months
+		days = diff.days
+
+		if emp_doc.custom_previous_years_of_experience:
+			previous_years = years + emp_doc.custom_previous_years_of_experience
+			emp_doc.custom_current_years_of_experience = str(years) + " years " + str(months) + " months " + str(days) + " days"
+			emp_doc.custom_total_years_of_experience = str(previous_years) + " years " + str(months) + " months " + str(days) + " days"
+			emp_doc.save(ignore_permissions=True)
+
+@frappe.whitelist()
 def fetch_employee_per_diem_amount(employee,no_of_days):
 	employee_grade = frappe.db.get_value("Employee",employee,"grade")
 	if employee_grade:
