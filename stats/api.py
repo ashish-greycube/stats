@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from frappe.utils import getdate,nowdate,format_duration,cint
+from frappe.utils import getdate,nowdate,format_duration,cint,get_link_to_form
 from dateutil import relativedelta
 
 @frappe.whitelist()
@@ -96,6 +96,8 @@ def fetch_employee_per_diem_amount(employee,no_of_days):
 	employee_grade = frappe.db.get_value("Employee",employee,"grade")
 	if employee_grade:
 		employee_per_diem_amount = frappe.db.get_value("Employee Grade",employee_grade,"custom_per_diem")
+		if employee_per_diem_amount == 0:
+			frappe.throw(_("Please set per diem amount for employee in employee grade {0}").format(get_link_to_form("Employee Grade",employee_grade)))
 		total_employee_amount_for_trip = employee_per_diem_amount * cint(no_of_days)
 		return total_employee_amount_for_trip
 

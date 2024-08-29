@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "PAYR-.#####",
  "creation": "2024-08-23 08:20:29.467341",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -10,9 +11,10 @@
   "reference_name",
   "reference_no",
   "mode_of_payment",
+  "payment_type",
   "amended_from",
   "column_break_akfy",
-  "account_type",
+  "party_type",
   "party_name",
   "journal_entry_reference",
   "payment_proceedure_reference",
@@ -41,20 +43,13 @@
    "label": "Date"
   },
   {
-   "fieldname": "account_type",
-   "fieldtype": "Select",
-   "label": "Account Type",
-   "options": "\nSupplier\nEmployee"
-  },
-  {
    "fieldname": "column_break_akfy",
    "fieldtype": "Column Break"
   },
   {
    "fieldname": "party_name",
-   "fieldtype": "Link",
-   "label": "Party Name",
-   "options": "Customer"
+   "fieldtype": "Data",
+   "label": "Party Name"
   },
   {
    "fieldname": "reference_name",
@@ -102,15 +97,28 @@
    "fieldtype": "Table",
    "label": "Employees",
    "options": "Employee Details For Payment ST"
+  },
+  {
+   "fieldname": "payment_type",
+   "fieldtype": "Select",
+   "label": "Payment Type",
+   "options": "\nBank Transfer\nCheque"
+  },
+  {
+   "fieldname": "party_type",
+   "fieldtype": "Select",
+   "label": "Party Type",
+   "options": "\nSupplier\nEmployee"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-29 08:11:39.190115",
+ "modified": "2024-08-29 09:27:17.046017",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Payment Request ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

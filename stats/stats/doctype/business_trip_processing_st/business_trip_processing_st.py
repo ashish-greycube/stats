@@ -44,7 +44,7 @@ class BusinessTripProcessingST(Document):
 					frappe.db.set_value("Business Trip Processing ST",self.name,"status","Processed")
 					status = "Processed"
 			if status == "Processed":
-				frappe.msgprint(_("Status of {0} is changed to {1}").format(get_link_to_form("Business Trip Processing ST", self.name),self.status),alert=1)
+				frappe.msgprint(_("Status of {0} is changed to {1}").format(get_link_to_form("Business Trip Processing ST", self.name),"Processed"),alert=1)
 
 	def calculate_no_of_days_for_multi_direction(self):
 		if len(self.get("business_trip_multi_direction_detail"))>0:

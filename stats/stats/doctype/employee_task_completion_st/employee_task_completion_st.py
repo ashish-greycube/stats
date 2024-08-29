@@ -11,8 +11,10 @@ class EmployeeTaskCompletionST(Document):
 		self.validate_approved_days()
 	
 	def validate_approved_days(self):
-		print(self.no_of_days,self.approved_days,"days")
 		if self.no_of_days and self.approved_days:
-			print(self.no_of_days,self.approved_days,"days")
 			if self.approved_days > self.no_of_days:
 				frappe.throw(_("Approved days cannot be greater than no of days"))
+
+	def on_submit(self):
+		if not self.approved_days:
+			frappe.throw(_("Please set approve days"))

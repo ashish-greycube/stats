@@ -98,12 +98,14 @@
    "label": "Next Steps"
   },
   {
+   "fetch_from": "employee.department",
    "fieldname": "main_department",
    "fieldtype": "Link",
    "label": "Main Department",
    "options": "Department"
   },
   {
+   "fetch_from": "employee.custom_sub_department",
    "fieldname": "sub_department",
    "fieldtype": "Link",
    "label": "Sub Department",
@@ -147,7 +149,7 @@
    "link_fieldname": "post_request_reference"
   }
  ],
- "modified": "2024-08-08 15:21:53.367920",
+ "modified": "2024-08-29 10:43:05.000591",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Post Request ST",

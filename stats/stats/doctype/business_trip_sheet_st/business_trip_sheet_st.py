@@ -6,6 +6,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import get_link_to_form
 from stats.api import fetch_employee_per_diem_amount
+from frappe.utils import today
 
 
 class BusinessTripSheetST(Document):
@@ -18,6 +19,7 @@ class BusinessTripSheetST(Document):
 			for row in self.employee_detail:
 				employee_no = frappe.db.get_value("Business Trip Request ST",row.business_trip_reference,"employee_no")
 				approved_amount = fetch_employee_per_diem_amount(employee_no,row.approved_days)
+				print(approved_amount,"approved_amount")
 				row.approved_amount = approved_amount
 	
 	def set_ticket_amount_and_total_amount(self):
@@ -27,7 +29,7 @@ class BusinessTripSheetST(Document):
 				if len(ticket_request_name)>0:
 					ticket_value = frappe.db.get_value("Ticket Request ST",ticket_request_name[0].name,"ticket_value")
 					row.ticket_amount = ticket_value
-				row.total_amount = (row.ticket_amount or 0) + row.approved_amount
+				row.total_amount = (row.ticket_amount or 0) + (row.approved_amount or 0)
 
 	def on_submit(self):
 		if len(self.employee_detail)>0:
@@ -38,6 +40,24 @@ class BusinessTripSheetST(Document):
 				if len(ticket_request_name)>0:
 					frappe.db.set_value("Ticket Request ST",ticket_request_name[0].name,"process_status","Processed")
 					frappe.msgprint(_("Process status of {0} is changed to {1}").format(get_link_to_form("Ticket Request ST", ticket_request_name[0].name),"Processed"),alert=1)
+				
+			self.create_payment_request_on_submit_of_bts()
+
+	def create_payment_request_on_submit_of_bts(self):
+
+		pr_doc = frappe.new_doc("Payment Request ST")
+		pr_doc.date = today()
+		pr_doc.reference_name = "Business Trip Sheet ST"
+		pr_doc.reference_no = self.name
+		
+		if len(self.employee_detail)>0:
+			for row in self.employee_detail:
+				pr_row = pr_doc.append("employees",{})
+				pr_row.employee_no = row.employee_no
+				pr_row.amount = row.total_amount
+
+		pr_doc.save(ignore_permissions=True)
+		frappe.msgprint(_("Payment Request {0} is created").format(get_link_to_form("Payment Request ST", pr_doc.name)),alert=1)
 
 	@frappe.whitelist()
 	def get_business_trip(self):
