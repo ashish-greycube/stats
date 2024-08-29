@@ -58,13 +58,15 @@
   },
   {
    "fieldname": "reference_name",
-   "fieldtype": "Data",
-   "label": "Reference Name"
+   "fieldtype": "Link",
+   "label": "Reference Name",
+   "options": "DocType"
   },
   {
    "fieldname": "reference_no",
-   "fieldtype": "Data",
-   "label": "Reference No"
+   "fieldtype": "Dynamic Link",
+   "label": "Reference No",
+   "options": "reference_name"
   },
   {
    "fieldname": "mode_of_payment",
@@ -105,7 +107,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-23 14:51:23.258420",
+ "modified": "2024-08-29 08:11:39.190115",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Payment Request ST",
