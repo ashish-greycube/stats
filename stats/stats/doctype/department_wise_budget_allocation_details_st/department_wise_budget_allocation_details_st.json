@@ -33,13 +33,14 @@
   {
    "fieldname": "requested_amount",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Requested Amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-29 15:07:38.866311",
+ "modified": "2024-08-29 15:34:06.147783",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Department Wise Budget Allocation Details ST",

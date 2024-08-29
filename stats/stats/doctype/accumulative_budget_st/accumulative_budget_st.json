@@ -65,11 +65,13 @@
    "fieldtype": "Section Break"
   },
   {
+   "depends_on": "eval:(doc.account_details.length)>0",
    "fieldname": "allocate_department_wise_budget",
    "fieldtype": "Button",
    "label": "Allocate Department Wise Budget"
   },
   {
+   "depends_on": "eval:(doc.account_details.length)>0",
    "fieldname": "department_wise_budget_allocation_details",
    "fieldtype": "Table",
    "label": "Department Wise Budget Allocation Details",
@@ -78,7 +80,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-29 15:01:12.384473",
+ "modified": "2024-08-29 15:31:05.136369",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Accumulative Budget ST",
