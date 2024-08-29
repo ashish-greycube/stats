@@ -6,4 +6,10 @@ from frappe.model.document import Document
 
 
 class DepartmentBudgetST(Document):
-	pass
+	def validate(self):
+		self.calculate_net_balance()
+
+	def calculate_net_balance(self):
+		if len(self.account_table)>0:
+			for row in self.account_table:
+				row.net_balance = (row.approved_amount or 0) + (row.previous_balance or 0)
