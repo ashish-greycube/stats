@@ -8,11 +8,15 @@
  "field_order": [
   "date",
   "fiscal_year",
+  "department_budget_requests",
   "column_break_afob",
   "created_by",
   "divide_method",
   "section_break_wqsb",
-  "account_details"
+  "account_details",
+  "section_break_lyym",
+  "allocate_department_wise_budget",
+  "department_wise_budget_allocation_details"
  ],
  "fields": [
   {
@@ -35,7 +39,7 @@
    "fieldname": "divide_method",
    "fieldtype": "Select",
    "label": "Divide Method",
-   "options": "\nEqually\nManually"
+   "options": "\nProportionally\nManually"
   },
   {
    "fieldname": "column_break_afob",
@@ -50,11 +54,31 @@
    "fieldtype": "Table",
    "label": "Account Details",
    "options": "Accumulative Budget Details ST"
+  },
+  {
+   "fieldname": "department_budget_requests",
+   "fieldtype": "Button",
+   "label": "Department Budget Requests"
+  },
+  {
+   "fieldname": "section_break_lyym",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "allocate_department_wise_budget",
+   "fieldtype": "Button",
+   "label": "Allocate Department Wise Budget"
+  },
+  {
+   "fieldname": "department_wise_budget_allocation_details",
+   "fieldtype": "Table",
+   "label": "Department Wise Budget Allocation Details",
+   "options": "Department Wise Budget Allocation Details ST"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-23 08:21:47.297516",
+ "modified": "2024-08-29 15:01:12.384473",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Accumulative Budget ST",

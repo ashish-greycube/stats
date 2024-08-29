@@ -1,0 +1,51 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-29 14:21:17.098851",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "main_department",
+  "budget_account",
+  "requested_amount",
+  "approved_amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Main Department"
+  },
+  {
+   "fieldname": "budget_account",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Budget Account"
+  },
+  {
+   "fieldname": "approved_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Approved Amount"
+  },
+  {
+   "fieldname": "requested_amount",
+   "fieldtype": "Currency",
+   "label": "Requested Amount"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-08-29 15:07:38.866311",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Department Wise Budget Allocation Details ST",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
