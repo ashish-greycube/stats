@@ -20,8 +20,9 @@ class DepartmentBudgetST(Document):
 @frappe.validate_and_sanitize_search_inputs
 def get_budget_account(doctype, txt, searchfield, start, page_len, filters):
 	company = erpnext.get_default_company()
-	accounts = frappe.db.get_all("Company",filters={"name":company},
+	account_list = frappe.db.get_all("Company",filters={"name":company},
 							  fields=["custom_default_business_trip_budget_account","custom_default_business_trip_chargeable_account"],as_list=1)
-	account_list = list(accounts)
-	print(account_list,"account_list")
-	return accounts
+	account_tuple_list=[]
+	for account in account_list:
+		account_tuple_list.append(tuple(account))
+	return account_tuple_list.insert(0,)
