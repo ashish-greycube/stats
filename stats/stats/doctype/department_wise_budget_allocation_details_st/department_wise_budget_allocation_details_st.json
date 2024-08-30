@@ -18,7 +18,8 @@
    "fieldname": "main_department",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Main Department"
+   "label": "Main Department",
+   "read_only": 1
   },
   {
    "fieldname": "approved_amount",
@@ -30,29 +31,33 @@
    "fieldname": "requested_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Requested Amount"
+   "label": "Requested Amount",
+   "read_only": 1
   },
   {
    "fieldname": "department_budget_name",
    "fieldtype": "Data",
-   "label": "Department Budget Name"
+   "label": "Department Budget Name",
+   "read_only": 1
   },
   {
    "fieldname": "department_acct_details_name",
    "fieldtype": "Data",
-   "label": "Department Acct Details Name"
+   "label": "Department Acct Details Name",
+   "read_only": 1
   },
   {
    "fieldname": "budget_expense_account",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Budget Account"
+   "label": "Budget Account",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-30 10:09:20.137301",
+ "modified": "2024-08-30 11:45:38.499778",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Department Wise Budget Allocation Details ST",

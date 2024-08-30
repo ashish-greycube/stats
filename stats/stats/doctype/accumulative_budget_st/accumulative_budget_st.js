@@ -32,12 +32,14 @@ frappe.ui.form.on("Accumulative Budget ST", {
             freeze: true,
             callback: (r) => {
                 if (r.message) {
-                    console.log(r.message,'--------message')
+                    // console.log(r.message,'--------message')
                     r.message.forEach((e) => {
-                        console.log(e)
-                        console.log(e, '--------e')
+                        // console.log(e)
+                        // console.log(e, '--------e')
                         var d = frm.add_child("department_wise_budget_allocation_details");
+                        frappe.model.set_value(d.doctype, d.name, "department_budget_name", e.department_budget_name)
                         frappe.model.set_value(d.doctype, d.name, "main_department", e.main_department)
+                        frappe.model.set_value(d.doctype, d.name, "department_acct_details_name", e.department_acct_details_name)
                         frappe.model.set_value(d.doctype, d.name, "budget_expense_account", e.budget_expense_account)
                         frappe.model.set_value(d.doctype, d.name, "requested_amount", e.requested_amount)
                         frappe.model.set_value(d.doctype, d.name, "approved_amount", e.approved_amount)

@@ -3,16 +3,52 @@
 
 import frappe
 from frappe.model.document import Document
-
+from frappe import _
 
 class AccumulativeBudgetST(Document):
 	def validate(self):
 			self.calculate_amount_difference()
+			self.validate_approved_amount_in_budget_allocation()
+			self.set_approved_amount_in_department_budget()
+	
+	# def on_submit(self):
+	# 	self.set_approved_amount_in_department_budget()
 
 	def calculate_amount_difference(self):
 		if len(self.account_details) > 0:
 			for row in self.account_details:
 				row.difference = (row.total_requested_amount or 0) - (row.total_approved_amount or 0)
+
+	def set_approved_amount_in_department_budget(self):
+		if len(self.department_wise_budget_allocation_details) > 0:
+			for row in self.department_wise_budget_allocation_details:
+				# db_doc = frappe.get_doc('Accounts Details ST', row.department_acct_details_name)
+				# # print(db_doc.approved_amount,'-----before----')
+				# db_doc.approved_amount = row.approved_amount
+
+
+				# db_doc.save(ignore_permissions=True)
+				# print(db_doc.approved_amount, '----after----')
+				frappe.db.set_value('Accounts Details ST', row.department_acct_details_name, 'approved_amount', row.approved_amount)
+
+				doc = frappe.get_doc('Department Budget ST', row.department_budget_name)
+				# doc.allocated_amount = row.approved_amount
+				doc.save(ignore_permissions=True)
+				# frappe.db.set_value('Department Budget ST', row.department_budget_name, 'allocated_amount', row.approved_amount)
+				frappe.msgprint(_("In Department Budget {0} approved amount set.")
+					.format(row.department_budget_name), alert=1)
+				
+	def validate_approved_amount_in_budget_allocation(self):
+		if len(self.account_details) > 0:
+			for ad in self.account_details:
+				total_approved_amount = 0
+				if len(self.department_wise_budget_allocation_details) > 0:
+					for row in self.department_wise_budget_allocation_details:
+						if ad.budget_expense_account == row.budget_expense_account:
+							total_approved_amount = total_approved_amount + row.approved_amount
+
+					if ad.total_approved_amount and total_approved_amount > ad.total_approved_amount:
+						frappe.throw(_("Allocated Approved Amount cann't be greater than Total approved amount"))
 
 	@frappe.whitelist()
 	def get_department_budget_requests(self):

@@ -16,7 +16,8 @@
   "account_details",
   "section_break_lyym",
   "allocate_department_wise_budget",
-  "department_wise_budget_allocation_details"
+  "department_wise_budget_allocation_details",
+  "amended_from"
  ],
  "fields": [
   {
@@ -31,9 +32,11 @@
    "options": "Fiscal Year"
   },
   {
+   "default": "__user",
    "fieldname": "created_by",
-   "fieldtype": "Date",
-   "label": "Created By"
+   "fieldtype": "Link",
+   "label": "Created By",
+   "options": "User"
   },
   {
    "fieldname": "divide_method",
@@ -76,11 +79,22 @@
    "fieldtype": "Table",
    "label": "Department Wise Budget Allocation Details",
    "options": "Department Wise Budget Allocation Details ST"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Accumulative Budget ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-08-29 15:31:05.136369",
+ "modified": "2024-08-30 12:23:33.877882",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Accumulative Budget ST",

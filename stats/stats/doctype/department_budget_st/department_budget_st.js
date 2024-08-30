@@ -2,6 +2,15 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Department Budget ST", {
+    onload(frm) {
+        if (frm.is_new()){
+            frappe.db.get_value('Employee', { user_id: frappe.session.user }, 'name')
+            .then(r => {
+                let values = r.message;
+                frm.set_value('requested_by', values.name)
+            })
+        }  
+    },
     setup(frm) {
         frm.set_query("budget_expense_account","account_table", function (doc,cdt,cdn) {
             return {
