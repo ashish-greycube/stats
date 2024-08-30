@@ -12,14 +12,15 @@ class AccumulativeBudgetST(Document):
 	def calculate_amount_difference(self):
 		if len(self.account_details) > 0:
 			for row in self.account_details:
-				row.difference = (row.requested_amount or 0) - (row.approved_amount or 0)
+				row.difference = (row.total_requested_amount or 0) - (row.total_approved_amount or 0)
 
 	@frappe.whitelist()
 	def get_department_budget_requests(self):
 		fetch_accumulative_budget_request = frappe.db.sql("""SELECT	ad.budget_expense_account, sum(ad.requested_amount) as total_requested_amount
 													FROM `tabAccounts Details ST` AS ad 
 													inner join `tabDepartment Budget ST` AS db on db.name = ad.parent 
-													where db.fiscal_year = %s group by ad.budget_expense_account""",self.fiscal_year,as_dict=True)
+													where db.fiscal_year = %s and db.docstatus = 1 
+													group by ad.budget_expense_account""",self.fiscal_year,as_dict=True)
 		return fetch_accumulative_budget_request
 	
 	@frappe.whitelist()
@@ -46,5 +47,5 @@ class AccumulativeBudgetST(Document):
 					`tabAccounts Details ST` ad
 				inner join `tabDepartment Budget ST` db on
 					db.name = ad.parent
-				where db.fiscal_year = %s""",self.fiscal_year,as_dict=True)
+				where db.fiscal_year = %s and db.docstatus = 1 """,self.fiscal_year,as_dict=True)
 		return department_and_account_budget_requests	

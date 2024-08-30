@@ -3,7 +3,7 @@
 
 frappe.ui.form.on("Department Budget ST", {
     setup(frm) {
-        frm.set_query("account_name","account_table", function (doc,cdt,cdn) {
+        frm.set_query("budget_expense_account","account_table", function (doc,cdt,cdn) {
             return {
                 query: "stats.stats.doctype.department_budget_st.department_budget_st.get_budget_account",
                 // filters: {

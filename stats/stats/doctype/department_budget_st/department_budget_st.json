@@ -41,6 +41,7 @@
    "search_index": 1
   },
   {
+   "default": "Today",
    "fieldname": "date",
    "fieldtype": "Date",
    "label": "Date"
@@ -48,8 +49,10 @@
   {
    "fieldname": "fiscal_year",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Fiscal Year",
-   "options": "Fiscal Year"
+   "options": "Fiscal Year",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_hnfw",
@@ -62,6 +65,7 @@
    "options": "Employee"
   },
   {
+   "fetch_from": "requested_by.department",
    "fieldname": "main_department",
    "fieldtype": "Link",
    "label": "Main Department",
@@ -129,7 +133,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-29 12:05:58.145356",
+ "modified": "2024-08-30 09:58:09.785592",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Department Budget ST",

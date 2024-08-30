@@ -1,6 +1,6 @@
 frappe.ui.form.on("Company", {
     setup(frm) {
-        frm.set_query("custom_default_business_trip_budget_account", function (doc) {
+        frm.set_query("custom_business_trip_budget_expense_account", function (doc) {
             return {
                 filters: {
                     "company": frm.doc.name,
@@ -9,7 +9,7 @@ frappe.ui.form.on("Company", {
                 }
             };
         })
-        frm.set_query("custom_default_business_trip_chargeable_account", function (doc) {
+        frm.set_query("custom_business_trip_budget_chargeable_account", function (doc) {
             return {
                 filters: {
                     "company": frm.doc.name,
