@@ -6,34 +6,13 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "account_name",
-  "requested_amount",
-  "approved_amount",
+  "budget_expense_account",
+  "total_requested_amount",
+  "total_approved_amount",
   "difference",
-  "available_balance"
+  "total_available_balance"
  ],
  "fields": [
-  {
-   "fieldname": "account_name",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Account Name",
-   "options": "Account",
-   "read_only": 1
-  },
-  {
-   "fieldname": "requested_amount",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Requested Amount",
-   "read_only": 1
-  },
-  {
-   "fieldname": "approved_amount",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Approved Amount"
-  },
   {
    "fieldname": "difference",
    "fieldtype": "Currency",
@@ -42,16 +21,37 @@
    "read_only": 1
   },
   {
-   "fieldname": "available_balance",
+   "fieldname": "budget_expense_account",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Account Name",
+   "options": "Account",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_requested_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Available Balance"
+   "label": "Total Requested Amt",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_approved_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Approved Amt"
+  },
+  {
+   "fieldname": "total_available_balance",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Available Balance"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-29 15:01:40.748505",
+ "modified": "2024-08-30 08:57:59.999909",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Accumulative Budget Details ST",

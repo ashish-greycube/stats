@@ -16,10 +16,10 @@ class AccumulativeBudgetST(Document):
 
 	@frappe.whitelist()
 	def get_department_budget_requests(self):
-		fetch_accumulative_budget_request = frappe.db.sql("""SELECT	ad.account_name, sum(ad.requested_amount) as requested_amount
+		fetch_accumulative_budget_request = frappe.db.sql("""SELECT	ad.budget_expense_account, sum(ad.requested_amount) as total_requested_amount
 													FROM `tabAccounts Details ST` AS ad 
 													inner join `tabDepartment Budget ST` AS db on db.name = ad.parent 
-													where db.fiscal_year = %s group by ad.account_name""",self.fiscal_year,as_dict=True)
+													where db.fiscal_year = %s group by ad.budget_expense_account""",self.fiscal_year,as_dict=True)
 		return fetch_accumulative_budget_request
 	
 	@frappe.whitelist()
@@ -29,9 +29,9 @@ class AccumulativeBudgetST(Document):
 
 		for budget_amount in department_and_account_budget_requests:
 			for acct_amount in accumulative_budget_request:
-				if acct_amount.account_name==budget_amount['account_name']:
-					budget_amount['total_requested_amount']=acct_amount.requested_amount
-					budget_amount['approved_amount']= (budget_amount['requested_amount']/acct_amount.requested_amount)*acct_amount.approved_amount
+				if budget_amount['budget_expense_account']==acct_amount.budget_expense_account:
+					budget_amount['total_requested_amount']=acct_amount.total_requested_amount
+					budget_amount['approved_amount']= (budget_amount['requested_amount']/acct_amount.total_requested_amount)*acct_amount.total_approved_amount
 					break
 		return department_and_account_budget_requests
 
@@ -39,7 +39,8 @@ class AccumulativeBudgetST(Document):
 	@frappe.whitelist()
 	def get_department_and_account_budget_requests(self):
 		department_and_account_budget_requests = frappe.db.sql("""SELECT
-					db.main_department ,ad.account_name,
+					db.name as department_budget_name ,db.main_department ,
+					ad.name as department_acct_details_name ,ad.budget_expense_account,
 					0 as total_requested_amount, ad.requested_amount , 0 as approved_amount
 				FROM
 					`tabAccounts Details ST` ad

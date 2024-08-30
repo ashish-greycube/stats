@@ -4,6 +4,7 @@
 import frappe
 import erpnext
 from frappe.model.document import Document
+from stats.constants import BUDGET_EXPENSE_ACCOUNT
 
 
 class DepartmentBudgetST(Document):
@@ -21,12 +22,12 @@ class DepartmentBudgetST(Document):
 def get_budget_account(doctype, txt, searchfield, start, page_len, filters):
 	company = erpnext.get_default_company()
 	account_list = frappe.db.get_all("Company",filters={"name":company},
-							  fields=["custom_default_business_trip_budget_account","custom_default_business_trip_chargeable_account"],as_list=0)
+							  fields=BUDGET_EXPENSE_ACCOUNT,as_list=0)
 
 	account_name_list = []
-	for ele in account_list:
-		account_name = (ele.custom_default_business_trip_budget_account,)
-		account_name_list.append(account_name)	
-		account_name = (ele.custom_default_business_trip_chargeable_account,)
-		account_name_list.append(account_name)	
+	for acct in account_list:
+		for budget_account in BUDGET_EXPENSE_ACCOUNT:
+			account_name = (acct.get(budget_account),)
+			account_name_list.append(account_name)	
+
 	return account_name_list

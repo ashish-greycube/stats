@@ -15,8 +15,8 @@ frappe.ui.form.on("Accumulative Budget ST", {
                         // console.log(e)
                         // console.log(e, '--------e')
                         var d = frm.add_child("account_details");
-                        frappe.model.set_value(d.doctype, d.name, "account_name", e.account_name)
-                        frappe.model.set_value(d.doctype, d.name, "requested_amount", e.requested_amount)
+                        frappe.model.set_value(d.doctype, d.name, "budget_expense_account", e.budget_expense_account)
+                        frappe.model.set_value(d.doctype, d.name, "total_requested_amount", e.total_requested_amount)
                     });
                     refresh_field("account_details");
                     frm.save()
@@ -33,14 +33,15 @@ frappe.ui.form.on("Accumulative Budget ST", {
             callback: (r) => {
                 if (r.message) {
                     console.log(r.message,'--------message')
-                    // r.message.forEach((e) => {
-                        // console.log(e)
-                        // console.log(e, '--------e')
-                        // var d = frm.add_child("department_wise_budget_allocation_details");
-                        // frappe.model.set_value(d.doctype, d.name, "main_department", e.account_name)
-                        // frappe.model.set_value(d.doctype, d.name, "budget_account", e.requested_amount)
-                        // frappe.model.set_value(d.doctype, d.name, "requested_amount", e.requested_amount)
-                    // });
+                    r.message.forEach((e) => {
+                        console.log(e)
+                        console.log(e, '--------e')
+                        var d = frm.add_child("department_wise_budget_allocation_details");
+                        frappe.model.set_value(d.doctype, d.name, "main_department", e.main_department)
+                        frappe.model.set_value(d.doctype, d.name, "budget_expense_account", e.budget_expense_account)
+                        frappe.model.set_value(d.doctype, d.name, "requested_amount", e.requested_amount)
+                        frappe.model.set_value(d.doctype, d.name, "approved_amount", e.approved_amount)
+                    });
                     refresh_field("department_wise_budget_allocation_details");
                     frm.save()
                 }
