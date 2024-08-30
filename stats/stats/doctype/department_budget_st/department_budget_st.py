@@ -22,7 +22,10 @@ def get_budget_account(doctype, txt, searchfield, start, page_len, filters):
 	company = erpnext.get_default_company()
 	account_list = frappe.db.get_all("Company",filters={"name":company},
 							  fields=["custom_default_business_trip_budget_account","custom_default_business_trip_chargeable_account"],as_list=1)
-	account_tuple_list=[]
-	for account in account_list:
-		account_tuple_list.append(tuple(account))
-	return account_tuple_list.insert(0,)
+
+	account_name_list = []
+	for ele in account_list[0]:
+		account_name = tuple(map(str, ele.split(', ')))
+		account_name_list.append(account_name)
+	
+	return account_name_list
