@@ -14,8 +14,6 @@
   "column_break_za1l",
   "from_date",
   "to_date",
-  "main_department",
-  "sub_department",
   "section_break_ppjm",
   "employee_detail",
   "amended_from"
@@ -47,18 +45,6 @@
    "fieldname": "to_date",
    "fieldtype": "Date",
    "label": "To Date"
-  },
-  {
-   "fieldname": "main_department",
-   "fieldtype": "Link",
-   "label": "Main Department",
-   "options": "Department"
-  },
-  {
-   "fieldname": "sub_department",
-   "fieldtype": "Link",
-   "label": "Sub Department",
-   "options": "Department"
   },
   {
    "fieldname": "section_break_ppjm",
@@ -110,7 +96,7 @@
    "link_fieldname": "reference_no"
   }
  ],
- "modified": "2024-08-29 10:15:10.534853",
+ "modified": "2024-08-30 08:38:27.824851",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Sheet ST",

@@ -50,7 +50,7 @@ class BusinessTripRequestST(Document):
 			no_of_day = date_diff(self.business_trip_end_date, self.business_trip_start_date)
 			self.no_of_days = no_of_day
 	def validate_no_of_days(self):
-		if self.trip_remaining_balance :
+		if self.trip_remaining_balance and self.no_of_days :
 			if self.trip_remaining_balance < self.no_of_days :
 				frappe.throw(_("No of days cannot be greater than Trip remaining balance"))
 
@@ -58,6 +58,10 @@ class BusinessTripRequestST(Document):
 		amount_for_trip = fetch_employee_per_diem_amount(self.employee_no,self.no_of_days)
 		print(amount_for_trip,"amount")
 		self.total_employee_amount_for_trip = amount_for_trip
+
+	def on_submit(self):
+		if self.workflow_state and self.workflow_state != "Approved":
+			frappe.throw(_("You cannot submit before DM has Approved"))
 
 @frappe.whitelist()
 def create_ticket_request_from_business_trip_request(source_name, target_doc=None):

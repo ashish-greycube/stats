@@ -67,10 +67,10 @@ class BusinessTripSheetST(Document):
 			frappe.throw(_("To date is requied"))
 
 		filters={"docstatus":1,"process_status": "Pending","task_creation_date":["between", [self.from_date, self.to_date]]}
-		if self.main_department:
-			filters["main_department"]=self.main_department
-		if self.sub_department:
-			filters["sub_department"]=self.sub_department
+		# if self.main_department:
+		# 	filters["main_department"]=self.main_department
+		# if self.sub_department:
+		# 	filters["sub_department"]=self.sub_department
 		etc = frappe.db.get_all('Employee Task Completion ST', filters=filters,fields=["name"])
 		print(etc, '--------etc')
 		return etc

@@ -13,6 +13,7 @@
   "employee_no",
   "employee_name",
   "column_break_fbsn",
+  "main_department",
   "sub_department",
   "no_of_days",
   "approved_days",
@@ -116,12 +117,19 @@
    "in_list_view": 1,
    "label": "Total Amount",
    "read_only": 1
+  },
+  {
+   "fetch_from": "employee_task_completion_reference.main_department",
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-28 07:00:04.597211",
+ "modified": "2024-08-30 08:37:54.684057",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Details ST",
