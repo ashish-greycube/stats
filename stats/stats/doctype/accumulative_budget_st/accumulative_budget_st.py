@@ -16,7 +16,7 @@ class AccumulativeBudgetST(Document):
 
 	@frappe.whitelist()
 	def get_department_budget_requests(self):
-		fetch_accumulative_budget_request = frappe.db.sql("""SELECT	ad.account_name, sum(ad.requested_amount) as total_requested_amount
+		fetch_accumulative_budget_request = frappe.db.sql("""SELECT	ad.account_name, sum(ad.requested_amount) as requested_amount
 													FROM `tabAccounts Details ST` AS ad 
 													inner join `tabDepartment Budget ST` AS db on db.name = ad.parent 
 													where db.fiscal_year = %s group by ad.account_name""",self.fiscal_year,as_dict=True)
@@ -25,7 +25,7 @@ class AccumulativeBudgetST(Document):
 	@frappe.whitelist()
 	def get_department_wise_budegt_allocation(self):
 		accumulative_budget_request=self.account_details
-		department_and_account_budget_requests=self.get_department_and_account_budget_requests
+		department_and_account_budget_requests=self.get_department_and_account_budget_requests()
 
 		for budget_amount in department_and_account_budget_requests:
 			for acct_amount in accumulative_budget_request:
