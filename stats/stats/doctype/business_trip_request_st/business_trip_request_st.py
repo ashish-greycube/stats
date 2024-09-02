@@ -50,7 +50,7 @@ class BusinessTripRequestST(Document):
 			no_of_day = date_diff(self.business_trip_end_date, self.business_trip_start_date)
 			self.no_of_days = no_of_day
 	def validate_no_of_days(self):
-		if self.trip_remaining_balance and self.no_of_days :
+		if self.no_of_days :
 			if self.trip_remaining_balance < self.no_of_days :
 				frappe.throw(_("No of days cannot be greater than Trip remaining balance"))
 

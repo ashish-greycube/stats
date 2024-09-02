@@ -10,9 +10,14 @@ from frappe.model.document import Document
 
 class PaymentRequestST(Document):
 	def on_submit(self):
+		self.create_journal_entry_on_submit_of_payment_request()
+		self.create_payment_procedure_on_submit_of_payment_request()
+	
+	def create_journal_entry_on_submit_of_payment_request(self):
 		je = frappe.new_doc("Journal Entry")
 		je.voucher_type = "Journal Entry"
 		je.posting_date = today()
+		je.custom_payment_request_reference = self.name
 		
 		accounts = []
 		employee_detais = frappe.db.sql("""
@@ -25,7 +30,7 @@ class PaymentRequestST(Document):
 				parent = %s
 			GROUP By
 				main_department
-		""",self.name,as_dict=1)
+		""",self.name,as_dict=1,debug=1)
 		print(employee_detais,"employee_detais")
 
 		employee_total_amount = 0
@@ -56,5 +61,20 @@ class PaymentRequestST(Document):
 		je.run_method('set_missing_values')
 		je.save(ignore_permissions=True)
 
-		frappe.msgprint(_("Journal Entry {0} is created").format(get_link_to_form("Journal Entry",je.name)),alert=1)
-		
+		frappe.msgprint(_("Journal Entry Due Expense is created from Payment Request {0}").format(get_link_to_form("Journal Entry",je.name)),alert=1)
+
+	def create_payment_procedure_on_submit_of_payment_request(self):
+		pp_doc = frappe.new_doc("Payment Procedure ST")
+		pp_doc.payment_request_reference = self.name
+		pp_doc.mode_of_payment = self.mode_of_payment
+		pp_doc.mode_of_payment_type = self.payment_type
+		pp_doc.budget_account = self.budget_account
+
+		if len(self.employees)>0:
+			for row in self.employees:
+				pp_row = pp_doc.append("employees",{})
+				pp_row.employee_no = row.employee_no
+				pp_row.amount = row.amount
+
+		pp_doc.save(ignore_permissions=True)
+		frappe.msgprint(_("Payment Procedure {0} is created").format(get_link_to_form("Payment Procedure ST", pp_doc.name)),alert=1)

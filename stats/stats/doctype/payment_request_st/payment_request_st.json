@@ -7,7 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "section_break_jpvh",
-  "date",
+  "transaction_date",
   "reference_name",
   "reference_no",
   "mode_of_payment",
@@ -15,7 +15,8 @@
   "amended_from",
   "column_break_akfy",
   "party_type",
-  "party_name",
+  "party_name_employee",
+  "party_name_supplier",
   "journal_entry_reference",
   "payment_proceedure_reference",
   "budget_account",
@@ -38,18 +39,8 @@
    "search_index": 1
   },
   {
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "label": "Date"
-  },
-  {
    "fieldname": "column_break_akfy",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "party_name",
-   "fieldtype": "Data",
-   "label": "Party Name"
   },
   {
    "fieldname": "reference_name",
@@ -109,12 +100,31 @@
    "fieldtype": "Select",
    "label": "Party Type",
    "options": "\nSupplier\nEmployee"
+  },
+  {
+   "depends_on": "eval: doc.party_type == \"Employee\"",
+   "fieldname": "party_name_employee",
+   "fieldtype": "Data",
+   "label": "Party Name"
+  },
+  {
+   "depends_on": "eval: doc.party_type == \"Supplier\"",
+   "fieldname": "party_name_supplier",
+   "fieldtype": "Link",
+   "label": "Party Name",
+   "options": "Supplier"
+  },
+  {
+   "default": "Today",
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "label": "Transaction Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-29 09:27:17.046017",
+ "modified": "2024-09-02 09:15:18.067615",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Payment Request ST",
