@@ -46,8 +46,8 @@ class DepartmentBudgetST(Document):
 	
 	def validate_duplicate_department_budget_entry(self):
 		if self.is_new():
-			if frappe.db.exists("Department Budget ST", {"fiscal_year": self.fiscal_year, "main_department":self.main_department}):
-				frappe.throw(_("In {0} fiscal year for {1} department, budget is already created").format(self.fiscal_year, self.main_department))
+			if frappe.db.exists("Department Budget ST", {"fiscal_year": self.fiscal_year, "main_department":self.main_department,"docstatus":["!=",2]}):
+				frappe.throw(_("In {0} fiscal year for {1} Department Budget is already created").format(self.fiscal_year, self.main_department))
 				pass
 
 	def initial_budget_updates(self):

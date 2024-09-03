@@ -60,7 +60,7 @@ class PaymentRequestST(Document):
 		je.set("accounts",accounts)
 		je.run_method('set_missing_values')
 		je.save(ignore_permissions=True)
-
+		je.submit()
 		frappe.msgprint(_("Journal Entry Due Expense is created from Payment Request {0}").format(get_link_to_form("Journal Entry",je.name)),alert=1)
 
 	def create_payment_procedure_on_submit_of_payment_request(self):

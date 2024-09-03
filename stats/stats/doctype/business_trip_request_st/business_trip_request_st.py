@@ -60,7 +60,7 @@ class BusinessTripRequestST(Document):
 		self.total_employee_amount_for_trip = amount_for_trip
 
 	def on_submit(self):
-		if self.workflow_state and self.workflow_state != "Approved":
+		if self.get("workflow_state") and self.workflow_state != "Approved":
 			frappe.throw(_("You cannot submit before DM has Approved"))
 
 @frappe.whitelist()
@@ -96,6 +96,9 @@ def create_employee_task_completion_from_business_trip_request(source_name, targ
 
 		target.business_trip_reference=source_name
 		trip_cost_template=frappe.db.get_single_value('Stats Settings ST', 'default_trip_cost_template')
+		print('trip_cost_template',trip_cost_template)
+		if not trip_cost_template:
+			frappe.throw(_("Please set 'default trip cost template' in Stats Settings"))
 		tct_doc = frappe.get_doc("Trip Cost Template ST",trip_cost_template)
 		for tc_detail in tct_doc.trip_cost_template_details:
 			target.append('trip_cost_detail',{'element':tc_detail.element,'payment_method':tc_detail.payment_method})
