@@ -6,7 +6,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "date",
+  "transaction_date",
   "fiscal_year",
   "department_budget_requests",
   "column_break_afob",
@@ -20,11 +20,6 @@
   "amended_from"
  ],
  "fields": [
-  {
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "label": "Date"
-  },
   {
    "fieldname": "fiscal_year",
    "fieldtype": "Link",
@@ -89,12 +84,17 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "label": "Transaction Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-30 12:23:33.877882",
+ "modified": "2024-09-02 07:54:58.068764",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Accumulative Budget ST",

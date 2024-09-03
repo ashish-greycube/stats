@@ -7,7 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "section_break_w7ts",
-  "date",
+  "transaction_date",
   "fiscal_year",
   "amended_from",
   "column_break_hnfw",
@@ -17,13 +17,7 @@
   "account_details_section",
   "account_table",
   "budget_update_section",
-  "reference",
-  "allocated_to",
-  "column_break_nulb",
-  "account",
-  "budget_date",
-  "column_break_jiqy",
-  "allocated_amount"
+  "budget_update"
  ],
  "fields": [
   {
@@ -39,12 +33,6 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
-  },
-  {
-   "default": "Today",
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "label": "Date"
   },
   {
    "fieldname": "fiscal_year",
@@ -84,20 +72,9 @@
    "label": "Account Details"
   },
   {
-   "fieldname": "account",
-   "fieldtype": "Link",
-   "label": "Account",
-   "options": "Account"
-  },
-  {
    "fieldname": "budget_update_section",
    "fieldtype": "Section Break",
    "label": "Budget Update"
-  },
-  {
-   "fieldname": "reference",
-   "fieldtype": "Data",
-   "label": "Reference"
   },
   {
    "fieldname": "account_table",
@@ -106,34 +83,23 @@
    "options": "Accounts Details ST"
   },
   {
-   "fieldname": "allocated_amount",
-   "fieldtype": "Currency",
-   "label": "Allocated Amount"
-  },
-  {
-   "fieldname": "allocated_to",
-   "fieldtype": "Link",
-   "label": "Allocated to",
-   "options": "Employee"
-  },
-  {
-   "fieldname": "budget_date",
+   "default": "Today",
+   "fieldname": "transaction_date",
    "fieldtype": "Date",
-   "label": "Budget Date"
+   "label": "Transaction Date"
   },
   {
-   "fieldname": "column_break_nulb",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_jiqy",
-   "fieldtype": "Column Break"
+   "allow_on_submit": 1,
+   "fieldname": "budget_update",
+   "fieldtype": "Table",
+   "label": "Budget Update",
+   "options": "Department Budget Update Details ST"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-30 13:21:51.780425",
+ "modified": "2024-09-02 11:39:05.043230",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Department Budget ST",

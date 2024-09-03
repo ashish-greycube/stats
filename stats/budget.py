@@ -9,7 +9,7 @@ def get_budget_account_details(budget_cost_center,budget_expense_account,fiscal_
         'budget_expense_account':budget_expense_account,
         'fiscal_year':fiscal_year
         }
-    budget_detials = frappe.db.sql(
+    budget_details = frappe.db.sql(
         """
             select
                             b.cost_center,
@@ -34,8 +34,9 @@ def get_budget_account_details(budget_cost_center,budget_expense_account,fiscal_
                 gl.name
         """,filters,as_dict=1,debug=1)
     
-    if len(budget_detials)>0:
-        return budget_detials[0]
+    print(budget_details)
+    if len(budget_details)>0:
+        return budget_details[0]
     else:
         return None
 

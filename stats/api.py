@@ -137,4 +137,22 @@ def check_leave_is_not_in_business_days(self,method):
 		print('business_trip_request_details',business_trip_request_details)
 		if len(business_trip_request_details)>0:
 			business_trip_names=",".join(i.name for i in business_trip_request_details)
-			frappe.throw(_("You have business trip <b>{0}</b> during your leave applicatino days. It is not allowed.").format(business_trip_names))	
+			frappe.throw(_("You have business trip <b>{0}</b> during your leave applicatino days. It is not allowed.").format(business_trip_names))
+			
+				
+def create_budget(cost_center, fiscal_year, budget_expense_account, net_balance):
+	print('create_budget')
+
+	new_budget = frappe.new_doc('Budget')
+	new_budget.cost_center = cost_center
+	new_budget.fiscal_year = fiscal_year
+	row = new_budget.append('accounts',{})
+	row.account = budget_expense_account
+	row.budget_amount = net_balance
+
+	new_budget.submit()
+	frappe.msgprint(_("Budget {0} is created."
+		.format(get_link_to_form('Budget No', new_budget.name))), alert=True)
+	print(new_budget.name ,'------new_budget')
+
+	return new_budget.name

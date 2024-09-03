@@ -2,6 +2,23 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Department Budget ST", {
+    refresh: function (frm) {
+        if (frm.doc.budget_update.length > 0) {
+			frm.add_custom_button(
+				__("Used Budget"),
+				function () {
+					frappe.route_options = {
+					from_fiscal_year:frm.doc.fiscal_year,
+					to_fiscal_year: frm.doc.fiscal_year,
+					period:'Yearly',
+					company:frappe.defaults.get_default("company"),
+					budget_against:"Cost Center",
+					budget_against_filter:frm.doc.cost_center
+				};
+				frappe.set_route("query-report", "Budget Variance Report");
+				});
+		}
+    },
     onload(frm) {
         if (frm.is_new()){
             frappe.db.get_value('Employee', { user_id: frappe.session.user }, 'name')

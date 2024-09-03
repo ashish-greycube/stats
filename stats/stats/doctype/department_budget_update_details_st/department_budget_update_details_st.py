@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class EnhancementDetailsST(Document):
+class DepartmentBudgetUpdateDetailsST(Document):
 	pass

@@ -9,10 +9,10 @@ class AccumulativeBudgetST(Document):
 	def validate(self):
 			self.calculate_amount_difference()
 			self.validate_approved_amount_in_budget_allocation()
-			self.set_approved_amount_in_department_budget()
+			# self.set_approved_amount_in_department_budget()
 	
-	# def on_submit(self):
-	# 	self.set_approved_amount_in_department_budget()
+	def on_submit(self):
+		self.set_approved_amount_in_department_budget()
 
 	def calculate_amount_difference(self):
 		if len(self.account_details) > 0:
