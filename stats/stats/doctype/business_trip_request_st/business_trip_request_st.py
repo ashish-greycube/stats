@@ -75,7 +75,6 @@ class BusinessTripRequestST(Document):
 			print(department_cost_center, '--department_cost_center', company, '--company', fiscal_year, '--fiscal_year')
 			if department_cost_center:
 				acc_details = get_budget_account_details(department_cost_center,company_business_trip_budget_expense_account,fiscal_year)
-				print(acc_details.available, '---acc_details.available')
 				if acc_details:
 					if self.total_employee_amount_for_trip > acc_details.available:
 						frappe.throw(_('There is no budget amount'))
