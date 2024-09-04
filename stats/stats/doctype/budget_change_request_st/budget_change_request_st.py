@@ -8,6 +8,7 @@ from frappe import _
 from stats.api import create_budget
 from stats.constants import BUDGET_EXPENSE_ACCOUNT
 from stats.budget import get_budget_account_details
+from frappe.utils import flt
 
 class BudgetChangeRequestST(Document):
 
@@ -30,16 +31,17 @@ class BudgetChangeRequestST(Document):
 			self.to_amount = self.internal_amount
 
 	def validate_interal_transfer_amount(self):
-		from_db_doc = frappe.get_doc("Department Budget ST", {"fiscal_year":self.fiscal_year, "main_department":self.from_main_department})
-		acc_details = get_budget_account_details(from_db_doc.cost_center,self.from_account,self.fiscal_year)
-		print(acc_details, '-acc_details')
-		acc_details.available = self.available_amount
+		if self.budget_change_type == "Internal Transfer":
+			from_db_doc = frappe.get_doc("Department Budget ST", {"fiscal_year":self.fiscal_year, "main_department":self.from_main_department})
+			acc_details = get_budget_account_details(from_db_doc.cost_center,self.from_account,self.fiscal_year)
+			self.available_amount = acc_details.available
 
-		if self.internal_amount > self.available_amount :
-			frappe.throw(_("You Cann't tranfer more than {0} from {1} account").format(self.available_amount, self.from_amount))
+			if self.internal_amount > acc_details.available:
+				frappe.throw(_("You Cann't tranfer more than {0} from {1} account").format(self.available_amount, self.from_amount))
 	
 	def budget_update_for_enhancement_type(self):
 		if self.budget_change_type == "Enhancement":
+			print("hello")
 			db_doc = frappe.get_doc("Department Budget ST", {"fiscal_year":self.fiscal_year, "main_department":self.to_main_department})
 			print(db_doc.name, '-----------------name--------')
 			if db_doc:
@@ -47,9 +49,9 @@ class BudgetChangeRequestST(Document):
 					if acc.budget_expense_account == self.to_account:
 						prev_approved_amt = acc.approved_amount
 						net_balance = acc.net_balance
-						acc.approved_amount = self.enhancement_amount + prev_approved_amt
+						acc.approved_amount = flt((self.enhancement_amount + prev_approved_amt),2)
 
-						budget_amount = net_balance + self.enhancement_amount
+						budget_amount = flt((net_balance + self.enhancement_amount),2)
 						print(budget_amount, '---------budget_amount')
 
 						budget = db_doc.append("budget_update", {})
@@ -82,7 +84,7 @@ class BudgetChangeRequestST(Document):
 					if from_acc.budget_expense_account == self.from_account:
 						prev_from_approved_amt = from_acc.approved_amount
 						from_net_balance = from_acc.net_balance
-						from_acc.approved_amount = (prev_from_approved_amt or 0) - (self.internal_amount or 0)
+						from_acc.approved_amount = flt(((prev_from_approved_amt or 0) - (self.internal_amount or 0)),2)
 
 						from_budget_amount = from_net_balance + self.from_amount
 
@@ -107,7 +109,7 @@ class BudgetChangeRequestST(Document):
 					if to_acc.budget_expense_account == self.to_account:
 						prev_to_approved_amt = to_acc.approved_amount
 						to_net_balance = to_acc.net_balance
-						to_acc.approved_amount = (prev_to_approved_amt or 0) + (self.internal_amount or 0)
+						to_acc.approved_amount = flt(((prev_to_approved_amt or 0) + (self.internal_amount or 0)),2)
 
 						to_budget_amount = to_net_balance + self.to_amount
 

@@ -152,7 +152,7 @@ def create_budget(cost_center, fiscal_year, budget_expense_account, net_balance)
 
 	new_budget.submit()
 	frappe.msgprint(_("Budget {0} is created."
-		.format(get_link_to_form('Budget No', new_budget.name))), alert=True)
+		.format(get_link_to_form('Budget', new_budget.name))), alert=True)
 	print(new_budget.name ,'------new_budget')
 
 	return new_budget.name

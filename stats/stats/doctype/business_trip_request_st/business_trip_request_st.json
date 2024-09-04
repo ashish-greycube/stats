@@ -123,12 +123,14 @@
   {
    "fieldname": "business_trip_start_date",
    "fieldtype": "Date",
-   "label": "Business Trip Start Date"
+   "label": "Business Trip Start Date",
+   "reqd": 1
   },
   {
    "fieldname": "business_trip_end_date",
    "fieldtype": "Date",
-   "label": "Business Trip End Date"
+   "label": "Business Trip End Date",
+   "reqd": 1
   },
   {
    "fieldname": "no_of_days",
@@ -171,7 +173,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-28 11:00:15.241406",
+ "modified": "2024-09-04 07:00:21.064330",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Request ST",

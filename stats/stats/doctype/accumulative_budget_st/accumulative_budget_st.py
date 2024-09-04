@@ -4,6 +4,7 @@
 import frappe
 from frappe.model.document import Document
 from frappe import _
+from frappe.utils import flt
 
 class AccumulativeBudgetST(Document):
 	def validate(self):
@@ -17,7 +18,7 @@ class AccumulativeBudgetST(Document):
 	def calculate_amount_difference(self):
 		if len(self.account_details) > 0:
 			for row in self.account_details:
-				row.difference = (row.total_requested_amount or 0) - (row.total_approved_amount or 0)
+				row.difference = flt(((row.total_requested_amount or 0) - (row.total_approved_amount or 0)),2)
 
 	def set_approved_amount_in_department_budget(self):
 		if len(self.department_wise_budget_allocation_details) > 0:
@@ -45,7 +46,7 @@ class AccumulativeBudgetST(Document):
 				if len(self.department_wise_budget_allocation_details) > 0:
 					for row in self.department_wise_budget_allocation_details:
 						if ad.budget_expense_account == row.budget_expense_account:
-							total_approved_amount = total_approved_amount + row.approved_amount
+							total_approved_amount = flt((total_approved_amount + row.approved_amount),2)
 
 					if ad.total_approved_amount and total_approved_amount > ad.total_approved_amount:
 						frappe.throw(_("Allocated Approved Amount cann't be greater than Total approved amount"))

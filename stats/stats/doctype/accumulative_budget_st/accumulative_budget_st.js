@@ -2,6 +2,16 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Accumulative Budget ST", {
+    refresh(frm){
+        if(frm.is_new()){
+            frm.set_df_property('department_budget_requests', 'hidden', 1)
+            frm.set_df_property('account_details', 'hidden', 1)
+        }
+        else{
+            frm.set_df_property('department_budget_requests', 'hidden', 0)
+            frm.set_df_property('account_details', 'hidden', 0)
+        }
+    },
 	department_budget_requests(frm){
         frm.set_value("account_details", "");
         frm.call({

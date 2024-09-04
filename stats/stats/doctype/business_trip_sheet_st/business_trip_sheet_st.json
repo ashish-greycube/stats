@@ -39,12 +39,16 @@
   {
    "fieldname": "from_date",
    "fieldtype": "Date",
-   "label": "From Date"
+   "in_list_view": 1,
+   "label": "From Date",
+   "reqd": 1
   },
   {
    "fieldname": "to_date",
    "fieldtype": "Date",
-   "label": "To Date"
+   "in_list_view": 1,
+   "label": "To Date",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_ppjm",
@@ -96,7 +100,7 @@
    "link_fieldname": "reference_no"
   }
  ],
- "modified": "2024-08-30 08:38:27.824851",
+ "modified": "2024-09-04 07:00:26.970126",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Sheet ST",

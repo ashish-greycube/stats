@@ -71,12 +71,16 @@
   {
    "fieldname": "from_date",
    "fieldtype": "Date",
-   "label": "From Date"
+   "in_list_view": 1,
+   "label": "From Date",
+   "reqd": 1
   },
   {
    "fieldname": "to_date",
    "fieldtype": "Date",
-   "label": "To Date"
+   "in_list_view": 1,
+   "label": "To Date",
+   "reqd": 1
   },
   {
    "fieldname": "amended_from",
@@ -104,7 +108,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-28 11:00:35.206205",
+ "modified": "2024-09-04 07:00:24.435576",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Processing ST",

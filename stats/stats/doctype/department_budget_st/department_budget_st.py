@@ -8,6 +8,7 @@ from stats.constants import BUDGET_EXPENSE_ACCOUNT
 from frappe import _
 from frappe.utils import get_link_to_form
 from stats.api import create_budget
+from frappe.utils import flt
 # from stats.stats.doctype.department_budget_st.department_budget_st import create_budget
 
 class DepartmentBudgetST(Document):
@@ -31,7 +32,7 @@ class DepartmentBudgetST(Document):
 	def calculate_net_balance(self):
 		if len(self.account_table)>0:
 			for row in self.account_table:
-				net_balance = (row.approved_amount or 0) + (row.previous_balance or 0)
+				net_balance = flt(((row.approved_amount or 0) + (row.previous_balance or 0)),2)
 				frappe.db.set_value(row.doctype, row.name, 'net_balance', net_balance)
 				print(row.net_balance ,'---row.net_balance ')
 
@@ -66,7 +67,7 @@ class DepartmentBudgetST(Document):
 				budget.to_account = acc.budget_expense_account
 				budget.change_amount = acc.approved_amount
 
-				budget_amount =  (acc.net_balance or 0) + (acc.approved_amount or 0)
+				budget_amount =  flt(((acc.net_balance or 0) + (acc.approved_amount or 0)),2)
 				print(budget_amount, '======budget_amount')
 				print(acc.net_balance, '-----acc.net_balance')
 
@@ -75,23 +76,6 @@ class DepartmentBudgetST(Document):
 				budget.erpnext_budget_reference = new_budget
 				self.save(ignore_permissions=True)
 				print(budget.erpnext_budget_reference, '-------budget.erpnext_budget_reference------', budget.name)
-
-# def create_budget(cost_center, fiscal_year, budget_expense_account, net_balance):
-# 	print('create_budget')
-
-# 	new_budget = frappe.new_doc('Budget')
-# 	new_budget.cost_center = cost_center
-# 	new_budget.fiscal_year = fiscal_year
-# 	row = new_budget.append('accounts',{})
-# 	row.account = budget_expense_account
-# 	row.budget_amount = net_balance
-
-# 	new_budget.submit()
-# 	frappe.msgprint(_("Budget {0} is created."
-# 		.format(get_link_to_form('Budget No', new_budget.name))), alert=True)
-# 	print(new_budget.name ,'------new_budget')
-
-# 	return new_budget.name
 
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs

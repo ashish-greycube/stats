@@ -101,6 +101,7 @@
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Change Amount",
+   "precision": "2",
    "read_only": 1
   },
   {
@@ -119,7 +120,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-03 13:37:11.659202",
+ "modified": "2024-09-03 15:41:49.171186",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Department Budget Update Details ST",
