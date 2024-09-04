@@ -123,8 +123,17 @@
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2024-09-02 09:15:18.067615",
+ "links": [
+  {
+   "link_doctype": "Journal Entry",
+   "link_fieldname": "custom_payment_request_reference"
+  },
+  {
+   "link_doctype": "Payment Procedure ST",
+   "link_fieldname": "payment_request_reference"
+  }
+ ],
+ "modified": "2024-09-04 08:11:04.297718",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Payment Request ST",

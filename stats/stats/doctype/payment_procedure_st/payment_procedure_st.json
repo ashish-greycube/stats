@@ -133,8 +133,13 @@
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2024-09-02 10:34:15.498123",
+ "links": [
+  {
+   "link_doctype": "Journal Entry",
+   "link_fieldname": "custom_payment_procedure_reference"
+  }
+ ],
+ "modified": "2024-09-04 08:12:04.567050",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Payment Procedure ST",
