@@ -151,7 +151,7 @@
    "hide_border": 0,
    "hide_days": 0,
    "hide_seconds": 0,
-   "idx": 10,
+   "idx": 11,
    "ignore_user_permissions": 0,
    "ignore_xss_filter": 0,
    "in_global_search": 0,
@@ -186,7 +186,7 @@
    "show_dashboard": 0,
    "sort_options": 0,
    "translatable": 0,
-   "unique": 0,
+   "unique": 1,
    "width": null
   },
   {
@@ -703,7 +703,7 @@
    "_comments": null,
    "_liked_by": null,
    "_user_tags": null,
-   "creation": "2024-08-29 10:33:10.599468",
+   "creation": "2024-09-03 13:07:27.052844",
    "default_value": null,
    "doc_type": "Department",
    "docstatus": 0,
@@ -711,7 +711,7 @@
    "field_name": null,
    "idx": 0,
    "is_system_generated": 0,
-   "modified": "2024-08-29 10:33:10.599468",
+   "modified": "2024-09-03 13:07:27.052844",
    "modified_by": "Administrator",
    "module": null,
    "name": "Department-main-field_order",
@@ -719,7 +719,7 @@
    "property": "field_order",
    "property_type": "Data",
    "row_name": null,
-   "value": "[\"department_name\", \"parent_department\", \"column_break_3\", \"company\", \"is_group\", \"disabled\", \"custom_direct_manager\", \"custom_main_department_manager\", \"section_break_4\", \"payroll_cost_center\", \"department_cost_center\", \"column_break_9\", \"leave_block_list\", \"approvers\", \"shift_request_approver\", \"leave_approvers\", \"expense_approvers\", \"lft\", \"rgt\", \"old_parent\"]"
+   "value": "[\"department_name\", \"parent_department\", \"column_break_3\", \"company\", \"is_group\", \"disabled\", \"custom_direct_manager\", \"custom_main_department_manager\", \"section_break_4\", \"payroll_cost_center\", \"custom_department_cost_center\", \"column_break_9\", \"leave_block_list\", \"approvers\", \"shift_request_approver\", \"leave_approvers\", \"expense_approvers\", \"lft\", \"rgt\", \"old_parent\"]"
   }
  ],
  "sync_on_migrate": 1
