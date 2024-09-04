@@ -19,11 +19,13 @@
   "enhancement_amount",
   "budget_updates_section",
   "from_column",
+  "from",
   "from_main_department",
   "from_account",
   "from_amount",
   "available_amount",
   "to_column",
+  "to",
   "to_main_department",
   "to_account",
   "to_amount",
@@ -76,8 +78,7 @@
   {
    "depends_on": "eval:doc.budget_change_type==\"Internal Transfer\"",
    "fieldname": "from_column",
-   "fieldtype": "Column Break",
-   "label": "From"
+   "fieldtype": "Column Break"
   },
   {
    "depends_on": "eval:doc.budget_change_type==\"Internal Transfer\"",
@@ -89,10 +90,10 @@
   },
   {
    "fieldname": "to_column",
-   "fieldtype": "Column Break",
-   "label": "To"
+   "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.budget_change_type!=\"\"",
    "fieldname": "to_main_department",
    "fieldtype": "Link",
    "label": "Main Department",
@@ -108,6 +109,7 @@
    "options": "Account"
   },
   {
+   "depends_on": "eval:doc.budget_change_type!=\"\"",
    "fieldname": "to_account",
    "fieldtype": "Link",
    "label": "Account",
@@ -179,12 +181,26 @@
    "label": "Available Amount ",
    "precision": "2",
    "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.budget_change_type==\"Internal Transfer\"",
+   "fieldname": "from",
+   "fieldtype": "HTML",
+   "label": "From",
+   "options": "<h5><b>From</b></h5>"
+  },
+  {
+   "depends_on": "eval:doc.budget_change_type!=\"\"",
+   "fieldname": "to",
+   "fieldtype": "HTML",
+   "label": "To",
+   "options": "<h5><b>To</b></h5>"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-04 10:14:23.277358",
+ "modified": "2024-09-04 13:48:38.667659",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Budget Change Request ST",

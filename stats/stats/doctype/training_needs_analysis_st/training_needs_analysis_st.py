@@ -8,6 +8,15 @@ from frappe.model.document import Document
 
 
 class TrainingNeedsAnalysisST(Document):
+
+	def validate(self):
+		self.validate_start_date_and_end_date()
+
+	def validate_start_date_and_end_date(self):
+		if self.request_from_date and self.request_to_date:
+			if self.request_to_date < self.request_from_date:
+				frappe.throw(_("End date can not be less than Start date"))
+
 	def on_submit(self):
 		if len(self.training_needs_analysis_employee_details)>0:
 			for row in self.training_needs_analysis_employee_details:

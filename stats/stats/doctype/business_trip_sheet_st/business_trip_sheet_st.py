@@ -13,6 +13,7 @@ class BusinessTripSheetST(Document):
 	def validate(self):
 		self.calculate_approved_amount()
 		self.set_ticket_amount_and_total_amount()
+		self.validate_start_date_and_end_date()
 
 	def calculate_approved_amount(self):
 		if len(self.employee_detail)>0:
@@ -30,6 +31,11 @@ class BusinessTripSheetST(Document):
 					ticket_value = frappe.db.get_value("Ticket Request ST",ticket_request_name[0].name,"ticket_value")
 					row.ticket_amount = ticket_value
 				row.total_amount = (row.ticket_amount or 0) + (row.approved_amount or 0)
+
+	def validate_start_date_and_end_date(self):
+		if self.from_date and self.to_date:
+			if self.to_date < self.from_date:
+				frappe.throw(_("End date can not be less than Start date"))
 
 	def on_submit(self):
 		if len(self.employee_detail)>0:

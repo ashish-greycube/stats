@@ -11,6 +11,7 @@ class BusinessTripProcessingST(Document):
 	def validate(self):
 		self.calculate_no_of_days_for_multi_direction()
 		self.set_created_by()
+		self.validate_start_date_and_end_date()
 
 	def on_submit(self):
 		if len(self.business_trip_detail)>0:
@@ -69,6 +70,11 @@ class BusinessTripProcessingST(Document):
 					custom_no_of_business_trip_days_remaining = frappe.db.get_value("Employee",btr_doc_emp,"custom_no_of_business_trip_days_remaining")
 					current_remaining_trip_days = custom_no_of_business_trip_days_remaining - row.no_of_days
 					frappe.db.set_value("Employee",btr_doc_emp,"custom_no_of_business_trip_days_remaining",current_remaining_trip_days)
+	
+	def validate_start_date_and_end_date(self):
+		if self.from_date and self.to_date:
+			if self.to_date < self.from_date:
+				frappe.throw(_("End date can not be less than Start date"))
 
 
 @frappe.whitelist()

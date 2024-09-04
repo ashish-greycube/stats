@@ -9,6 +9,14 @@ from frappe.model.document import Document
 
 
 class TrainingEventST(Document):
+	def validate(self):
+		self.validate_start_date_and_end_date()
+
+	def validate_start_date_and_end_date(self):
+		if self.training_start_date and self.training_end_date:
+			if self.training_end_date < self.training_start_date:
+				frappe.throw(_("End date can not be less than Start date"))
+
 	def on_submit(self):
 		if self.training_status == "Closed":
 			if len(self.training_event_employee_details)>0:

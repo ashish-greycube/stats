@@ -34,10 +34,14 @@ class BudgetChangeRequestST(Document):
 		if self.budget_change_type == "Internal Transfer":
 			from_db_doc = frappe.get_doc("Department Budget ST", {"fiscal_year":self.fiscal_year, "main_department":self.from_main_department})
 			acc_details = get_budget_account_details(from_db_doc.cost_center,self.from_account,self.fiscal_year)
-			self.available_amount = acc_details.available
 
-			if self.internal_amount > acc_details.available:
-				frappe.throw(_("You Cann't tranfer more than {0} from {1} account").format(self.available_amount, self.from_amount))
+			if acc_details:
+				self.available_amount = acc_details.available
+
+				if self.internal_amount > acc_details.available:
+					frappe.throw(_("You Cann't tranfer more than {0}").format(self.available_amount))
+			else:
+				frappe.throw(_("No Budget Found"))
 	
 	def budget_update_for_enhancement_type(self):
 		if self.budget_change_type == "Enhancement":
@@ -143,18 +147,23 @@ def cancel_previous_budget_doc(fiscal_year, cost_center, account):
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
 def get_budget_account_for_budget_change_request(doctype, txt, searchfield, start, page_len, filters):
-	company = erpnext.get_default_company()
-	account_list = frappe.db.get_all("Company",filters={"name":company},
-							  fields=BUDGET_EXPENSE_ACCOUNT,as_list=0)
+	main_department = filters.get('main_department')
+	fiscal_year = filters.get('fiscal_year')
 
+	db_list = frappe.db.get_all("Department Budget ST", filters={"main_department":main_department,"fiscal_year":fiscal_year, "docstatus":1}, fields=["name"])
+	
 	account_name_list = []
-	for acct in account_list:
-		for budget_account in BUDGET_EXPENSE_ACCOUNT:
-			account_name = (acct.get(budget_account),)
-			participate_in_budget_change_equest = frappe.db.get_value('Account', account_name, 'custom_acct_not_in_budget_change_request')
-			if participate_in_budget_change_equest == 0:
-				account_name_list.append(account_name)
-			else:
-				continue
 
-	return account_name_list
+	if len(db_list) > 0:
+		for db in db_list:
+			db_doc = frappe.get_doc("Department Budget ST", db.name)
+			for acct in db_doc.account_table:
+				participate_in_budget_change_equest = frappe.db.get_value('Account', acct.budget_expense_account, 'custom_acct_not_in_budget_change_request')
+				if participate_in_budget_change_equest == 0:
+					account_name = (acct.get('budget_expense_account'),)
+					account_name_list.append(account_name)
+				else:
+					continue
+		return account_name_list
+	else:
+		frappe.throw(_("No Department Budget Found"))

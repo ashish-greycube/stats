@@ -35,11 +35,19 @@ frappe.ui.form.on("Budget Change Request ST", {
         frm.set_query("to_account", function () {
             return {
                 query: "stats.stats.doctype.budget_change_request_st.budget_change_request_st.get_budget_account_for_budget_change_request",
+                filters:{
+                    main_department: frm.doc.to_main_department,
+                    fiscal_year: frm.doc.fiscal_year
+                }
             };
         }),
         frm.set_query("from_account", function () {
             return {
                 query: "stats.stats.doctype.budget_change_request_st.budget_change_request_st.get_budget_account_for_budget_change_request",
+                filters:{
+                    main_department: frm.doc.from_main_department,
+                    fiscal_year: frm.doc.fiscal_year
+                }
             };
         }),
         frm.set_query("from_main_department", function (doc) {

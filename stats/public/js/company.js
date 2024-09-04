@@ -5,7 +5,7 @@ frappe.ui.form.on("Company", {
                 filters: {
                     "company": frm.doc.name,
                     "is_group": 0,
-                    "account_type": "Expense Account"
+                    "account_type": ["in",["Expense Account", "Indirect Expense"]]
                 }
             };
         })

@@ -34,8 +34,8 @@ class DepartmentBudgetST(Document):
 		if len(self.account_table)>0:
 			for row in self.account_table:
 				net_balance = flt(((row.approved_amount or 0) + (row.previous_balance or 0)),2)
+				row.net_balance = net_balance
 				frappe.db.set_value(row.doctype, row.name, 'net_balance', net_balance)
-				print(row.net_balance ,'---row.net_balance ')
 
 	def validate_duplicate_account(self):
 		if len(self.account_table) > 1:
@@ -68,11 +68,7 @@ class DepartmentBudgetST(Document):
 				budget.to_account = acc.budget_expense_account
 				budget.change_amount = acc.approved_amount
 
-				budget_amount =  flt(((acc.net_balance or 0) + (acc.approved_amount or 0)),2)
-				print(budget_amount, '======budget_amount')
-				print(acc.net_balance, '-----acc.net_balance')
-
-				new_budget = create_budget(self.cost_center, self.fiscal_year, acc.budget_expense_account, budget_amount)
+				new_budget = create_budget(self.cost_center, self.fiscal_year, acc.budget_expense_account, acc.net_balance)
 
 				budget.erpnext_budget_reference = new_budget
 				self.save(ignore_permissions=True)
