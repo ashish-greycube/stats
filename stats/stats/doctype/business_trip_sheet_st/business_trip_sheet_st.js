@@ -26,10 +26,9 @@ frappe.ui.form.on("Business Trip Sheet ST", {
             method: "get_business_trip",
             freeze: true,
             callback: (r) => {
-                if (r.message) {
-                    // console.log(r.message)
-                    r.message.forEach((e) => {
-                        // console.log(e)
+                let business_trip_list = r.message
+                if (business_trip_list) {
+                    business_trip_list.forEach((e) => {
                         var d = frm.add_child("employee_detail");
                         frappe.model.set_value(d.doctype, d.name, "employee_task_completion_reference", e.name)
                     });

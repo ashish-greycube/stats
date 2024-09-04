@@ -22,6 +22,18 @@ frappe.ui.form.on("Training Needs Analysis ST", {
     }
 });
 
+frappe.ui.form.on("Training Needs Analysis Employee Details ST", {
+	check_evaluation(frm,cdt,cdn) {
+        let row=locals[cdt][cdn]
+        if (row) {
+            frappe.route_options = {
+                employee_no:row.employee_no,
+                order_by: "creation desc",
+            };
+            frappe.set_route("List", "Training Evaluation ST");        
+        }
+    },
+})
 let fetch_training_request = function(frm){
     if (frm.is_dirty() == true) {
         frappe.throw({

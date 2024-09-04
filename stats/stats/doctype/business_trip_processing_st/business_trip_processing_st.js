@@ -49,14 +49,15 @@ let fetch_business_trips_from_business_trip_request = function (frm) {
             name: frm.doc.name
         },
         callback: function (r) {
-            console.log(r.message,"response")
-            r.message.forEach((ele) => {
-                var d = frm.add_child("business_trip_detail");
-                // d.business_trip_reference = ele.name
-                frappe.model.set_value(d.doctype, d.name, "business_trip_reference", ele.name)
-            })
-            frm.refresh_field('business_trip_detail')
-            frm.save()
+            let business_trip_list = r.message
+            if (business_trip_list.length > 0){
+                business_trip_list.forEach((ele) => {
+                    var d = frm.add_child("business_trip_detail");
+                    frappe.model.set_value(d.doctype, d.name, "business_trip_reference", ele.name)
+                })
+                frm.refresh_field('business_trip_detail')
+                frm.save()
+            }
         }
     })
 }

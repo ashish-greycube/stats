@@ -18,7 +18,7 @@
   "training_classification",
   "training_level",
   "check_evaluation",
-  "status"
+  "action"
  ],
  "fields": [
   {
@@ -107,22 +107,22 @@
    "label": "Check Evaluation"
   },
   {
-   "default": "Pending",
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Status",
-   "options": "\nPending\nAccepted\nRejected"
-  },
-  {
    "fieldname": "column_break_xuga",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "action",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Action",
+   "options": "\nPending\nAccepted\nRejected"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-04 08:18:00.802355",
+ "modified": "2024-09-04 10:15:36.602713",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Training Needs Analysis Employee Details ST",

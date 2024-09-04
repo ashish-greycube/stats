@@ -24,7 +24,11 @@
   "location",
   "certificate_attachment",
   "amended_from",
-  "required_certificate"
+  "required_certificate",
+  "training_feedback_section",
+  "training_content_feedback",
+  "column_break_aapq",
+  "trainer_feedback"
  ],
  "fields": [
   {
@@ -161,12 +165,33 @@
    "label": "Required Certificate",
    "options": "\nYes\nNo",
    "read_only": 1
+  },
+  {
+   "fieldname": "training_feedback_section",
+   "fieldtype": "Section Break",
+   "label": "Training Feedback"
+  },
+  {
+   "fieldname": "training_content_feedback",
+   "fieldtype": "Small Text",
+   "label": "Training Content Feedback",
+   "mandatory_depends_on": "eval: doc.docstatus==0"
+  },
+  {
+   "fieldname": "trainer_feedback",
+   "fieldtype": "Small Text",
+   "label": "Trainer Feedback",
+   "mandatory_depends_on": "eval: doc.docstatus==0"
+  },
+  {
+   "fieldname": "column_break_aapq",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-04 08:16:12.863298",
+ "modified": "2024-09-04 10:48:25.541219",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Training Evaluation ST",

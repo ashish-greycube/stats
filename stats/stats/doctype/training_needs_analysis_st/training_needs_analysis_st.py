@@ -11,16 +11,15 @@ class TrainingNeedsAnalysisST(Document):
 	def on_submit(self):
 		if len(self.training_needs_analysis_employee_details)>0:
 			for row in self.training_needs_analysis_employee_details:
-				if row.status == "Pending":
+				if row.action == "Pending":
 					frappe.throw(_("You cannot submit.<br>Please Approve or Reject Training Request {0} in row {1}").format(row.training_request_reference,row.idx))
 		self.change_training_request_status()
 
 	def change_training_request_status(self):
 		if len(self.training_needs_analysis_employee_details)>0:
 			for row in self.training_needs_analysis_employee_details:
-				if row.status == "Accepted":
-					frappe.db.set_value("Training Request ST",row.training_request_reference,"status",row.status)
-					frappe.msgprint(_("Status of {0} is changed to {1}").format(get_link_to_form("Training Request ST", row.training_request_reference),row.status),alert=1)
+				frappe.db.set_value("Training Request ST",row.training_request_reference,"status",row.action)
+				frappe.msgprint(_("Status of {0} is changed to {1}").format(get_link_to_form("Training Request ST", row.training_request_reference),row.action),alert=1)
 
 	@frappe.whitelist()
 	def fetch_training_request(self):

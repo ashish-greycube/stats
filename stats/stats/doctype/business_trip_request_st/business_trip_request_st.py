@@ -50,7 +50,7 @@ class BusinessTripRequestST(Document):
 	def set_no_of_days(self):
 		if self.business_trip_start_date and self.business_trip_end_date:
 			no_of_day = date_diff(self.business_trip_end_date, self.business_trip_start_date)
-			self.no_of_days = no_of_day
+			self.no_of_days = (no_of_day or 0)+1
 	def validate_no_of_days(self):
 		if self.no_of_days :
 			if self.trip_remaining_balance < self.no_of_days :

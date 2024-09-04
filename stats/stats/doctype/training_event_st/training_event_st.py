@@ -16,6 +16,7 @@ class TrainingEventST(Document):
 					frappe.db.set_value("Training Request ST",row.training_request_reference,"status","Finished")
 					frappe.msgprint(_("Status of {0} is changed to {1}").format(get_link_to_form("Training Request ST", row.training_request_reference),"Finished"),alert=1)
 					create_training_evaluation(self.name,row.employee_no)
+					frappe.db.set_value("Training Event ST",self.name,"training_status","Finished")
 		
 
 	@frappe.whitelist()

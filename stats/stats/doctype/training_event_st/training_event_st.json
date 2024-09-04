@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "TE-.#####",
+ "autoname": "format:TE-{training_name}",
  "creation": "2024-09-02 15:30:33.661489",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -53,7 +53,9 @@
   {
    "fieldname": "training_name",
    "fieldtype": "Data",
-   "label": "Training Name"
+   "in_list_view": 1,
+   "label": "Training Name",
+   "reqd": 1
   },
   {
    "fieldname": "training_type",
@@ -166,12 +168,13 @@
    "options": "\nYes\nNo"
   },
   {
+   "allow_on_submit": 1,
    "default": "Open",
    "fieldname": "training_status",
    "fieldtype": "Select",
    "label": "Training Status",
    "no_copy": 1,
-   "options": "\nOpen\nOn Going\nClosed"
+   "options": "\nOpen\nOn Going\nClosed\nFinished"
   },
   {
    "fieldname": "section_break_duaf",
@@ -199,11 +202,11 @@
    "link_fieldname": "training_event"
   }
  ],
- "modified": "2024-09-04 08:13:21.778597",
+ "modified": "2024-09-04 11:05:47.314503",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Training Event ST",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

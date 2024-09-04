@@ -44,7 +44,7 @@ let set_no_of_days = function (frm) {
     let end_date = frm.doc.business_trip_end_date
     if (start_date && end_date) {
         let no_of_day = frappe.datetime.get_day_diff(end_date, start_date)
-        frm.set_value("no_of_days", no_of_day)
+        frm.set_value("no_of_days", (no_of_day || 0)+1)
     }
 }
 
