@@ -16,11 +16,10 @@
   "party_type",
   "party_name_employee",
   "party_name_supplier",
-  "journal_entry_reference",
-  "payment_proceedure_reference",
   "budget_account",
   "payment_type",
   "middle_bank_account",
+  "total_amount",
   "employee_details_section",
   "employees"
  ],
@@ -50,20 +49,9 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "journal_entry_reference",
-   "fieldtype": "Link",
-   "label": "Journal Entry Reference",
-   "options": "Journal Entry"
-  },
-  {
-   "fieldname": "payment_proceedure_reference",
-   "fieldtype": "Link",
-   "label": "Payment Proceedure Reference",
-   "options": "Journal Entry"
-  },
-  {
    "fieldname": "budget_account",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Budget Account",
    "options": "Account"
   },
@@ -78,7 +66,7 @@
    "fieldname": "middle_bank_account",
    "fieldtype": "Link",
    "label": "Middle Bank Account",
-   "link_filters": "[[\"Account\",\"account_type\",\"=\",\"Bank\"]]",
+   "link_filters": "[[\"Account\",\"account_type\",\"in\",[\"Bank\",\"Cash\"]],[\"Account\",\"is_group\",\"=\",0]]",
    "mandatory_depends_on": "eval: doc.payment_type == \"Indirect\"",
    "options": "Account"
   },
@@ -129,6 +117,12 @@
    "fieldtype": "Select",
    "label": "Mode of Payment Type",
    "options": "\nBank Transfer\nCheque"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Int",
+   "label": "Total Amount",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -139,7 +133,7 @@
    "link_fieldname": "custom_payment_procedure_reference"
   }
  ],
- "modified": "2024-09-04 08:12:04.567050",
+ "modified": "2024-09-04 14:56:40.713180",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Payment Procedure ST",

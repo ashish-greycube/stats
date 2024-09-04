@@ -17,9 +17,8 @@
   "party_type",
   "party_name_employee",
   "party_name_supplier",
-  "journal_entry_reference",
-  "payment_proceedure_reference",
   "budget_account",
+  "total_amount",
   "employee_details_st_section",
   "employees"
  ],
@@ -61,20 +60,9 @@
    "options": "Mode of Payment"
   },
   {
-   "fieldname": "journal_entry_reference",
-   "fieldtype": "Link",
-   "label": "Journal Entry Reference",
-   "options": "Journal Entry"
-  },
-  {
-   "fieldname": "payment_proceedure_reference",
-   "fieldtype": "Link",
-   "label": "Payment Proceedure Reference",
-   "options": "Journal Entry"
-  },
-  {
    "fieldname": "budget_account",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Budget Account",
    "options": "Account"
   },
@@ -119,6 +107,12 @@
    "fieldname": "transaction_date",
    "fieldtype": "Date",
    "label": "Transaction Date"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Int",
+   "label": "Total Amount",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -133,7 +127,7 @@
    "link_fieldname": "payment_request_reference"
   }
  ],
- "modified": "2024-09-04 08:11:04.297718",
+ "modified": "2024-09-04 13:45:09.848689",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Payment Request ST",

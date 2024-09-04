@@ -9,6 +9,13 @@ from frappe.model.document import Document
 
 
 class PaymentRequestST(Document):
+
+	def validate(self):
+		total_amount = 0
+		if len(self.employees)>0:
+			for row in self.employees:
+				total_amount = total_amount + (row.amount or 0)
+		self.total_amount = total_amount
 	def on_submit(self):
 		self.create_journal_entry_on_submit_of_payment_request()
 		self.create_payment_procedure_on_submit_of_payment_request()

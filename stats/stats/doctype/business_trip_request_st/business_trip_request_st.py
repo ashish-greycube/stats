@@ -13,12 +13,18 @@ from erpnext.accounts.utils import get_fiscal_year
 
 class BusinessTripRequestST(Document):
 	def validate(self):
+		self.validate_start_date_and_end_date()
 		self.set_no_of_days()
 		self.validate_no_of_days()
 		self.set_total_employee_amount_for_trip()
 		self.check_trip_days_not_in_personal_vacation()
 		self.set_no_of_trip_days_in_employee()	
 		self.check_availabel_balance_for_department()
+
+	def validate_start_date_and_end_date(self):
+		if self.business_trip_start_date and self.business_trip_end_date:
+			if self.business_trip_end_date < self.business_trip_start_date:
+				frappe.throw(_("End date can not be less than Start date"))
 	
 	def check_trip_days_not_in_personal_vacation(self):
 		leave_details=	frappe.db.sql(
