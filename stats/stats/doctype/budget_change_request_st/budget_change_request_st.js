@@ -18,6 +18,9 @@ frappe.ui.form.on("Budget Change Request ST", {
 				frappe.set_route("query-report", "Budget Variance Report");
 				});
 		}
+        else{
+            frm.set_value('fiscal_year', erpnext.utils.get_fiscal_year(frappe.datetime.get_today()))
+        }
     },
 	onload(frm) {
         if (frm.is_new()){

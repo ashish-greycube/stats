@@ -26,6 +26,7 @@ frappe.ui.form.on("Department Budget ST", {
                 let values = r.message;
                 frm.set_value('requested_by', values.name)
             })
+            frm.set_value('fiscal_year', erpnext.utils.get_fiscal_year(frappe.datetime.get_today()))
         }  
     },
     setup(frm) {

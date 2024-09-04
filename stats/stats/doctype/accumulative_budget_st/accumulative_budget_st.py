@@ -67,6 +67,8 @@ class AccumulativeBudgetST(Document):
 
 		for budget_amount in department_and_account_budget_requests:
 			for acct_amount in accumulative_budget_request:
+				if acct_amount.total_approved_amount <= 0:
+					frappe.throw(_('Approved amount should ne greater than zero in {0} row').format(acct_amount.idx))
 				if budget_amount['budget_expense_account']==acct_amount.budget_expense_account:
 					budget_amount['total_requested_amount']=acct_amount.total_requested_amount
 					budget_amount['approved_amount']= (budget_amount['requested_amount']/acct_amount.total_requested_amount)*acct_amount.total_approved_amount

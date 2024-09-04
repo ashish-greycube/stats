@@ -2,12 +2,14 @@
 # For license information, please see license.txt
 
 import frappe
+import erpnext
 from frappe import _
 from frappe.model.mapper import get_mapped_doc
 from frappe.model.document import Document
 from frappe.utils import date_diff
 from stats.api import fetch_employee_per_diem_amount
-
+from stats.budget import get_budget_account_details
+from erpnext.accounts.utils import get_fiscal_year
 
 class BusinessTripRequestST(Document):
 	def validate(self):
@@ -15,8 +17,8 @@ class BusinessTripRequestST(Document):
 		self.validate_no_of_days()
 		self.set_total_employee_amount_for_trip()
 		self.check_trip_days_not_in_personal_vacation()
-		self.set_no_of_trip_days_in_employee()
-	
+		self.set_no_of_trip_days_in_employee()	
+		self.check_availabel_balance_for_department()
 	
 	def check_trip_days_not_in_personal_vacation(self):
 		leave_details=	frappe.db.sql(
@@ -60,8 +62,25 @@ class BusinessTripRequestST(Document):
 		self.total_employee_amount_for_trip = amount_for_trip
 
 	def on_submit(self):
+		self.check_availabel_balance_for_department()
 		if self.get("workflow_state") and self.workflow_state != "Approved":
 			frappe.throw(_("You cannot submit before DM has Approved"))
+
+	def check_availabel_balance_for_department(self):
+		if self.main_department:
+			department_cost_center = frappe.db.get_value('Department', self.main_department, 'custom_department_cost_center')
+			company = erpnext.get_default_company()
+			company_business_trip_budget_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
+			fiscal_year = get_fiscal_year(self.creation_date)[0]
+			print(department_cost_center, '--department_cost_center', company, '--company', fiscal_year, '--fiscal_year')
+			if department_cost_center:
+				acc_details = get_budget_account_details(department_cost_center,company_business_trip_budget_expense_account,fiscal_year)
+				print(acc_details.available, '---acc_details.available')
+				if acc_details:
+					if self.total_employee_amount_for_trip > acc_details.available:
+						frappe.throw(_('There is no budget amount'))
+				else:
+					frappe.throw(_('No Budget Found.'))
 
 @frappe.whitelist()
 def create_ticket_request_from_business_trip_request(source_name, target_doc=None):
