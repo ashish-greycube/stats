@@ -39,6 +39,11 @@ frappe.ui.form.on("Department Budget ST", {
                 //     "account_type": "Expense Account"
                 // }
             };
+        }),
+        frm.set_query("main_department", function (doc) {
+            return {
+                query: "stats.api.get_main_department",
+            };
         })
     }
 });

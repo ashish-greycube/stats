@@ -19,8 +19,9 @@ class DepartmentBudgetST(Document):
 
 	def on_cancel(self):
 		for row in self.account_table:
-			if frappe.db.exists("Department Wise Budget Allocation Details ST", {"department_acct_details_name": row.name}):
+			if frappe.db.exists("Department Wise Budget Allocation Details ST", {"department_acct_details_name": row.name, "docstatus":1}):
 				frappe.throw(_("You Cann't delete this department budget because of Accumulative Budget is created."))
+		self.cancel_connected_budget()
 
 	def on_update_after_submit(self):
 
@@ -76,6 +77,13 @@ class DepartmentBudgetST(Document):
 				budget.erpnext_budget_reference = new_budget
 				self.save(ignore_permissions=True)
 				print(budget.erpnext_budget_reference, '-------budget.erpnext_budget_reference------', budget.name)
+
+	def cancel_connected_budget(self):
+		for budget in self.budget_update:
+			doc = frappe.get_doc('Budget', budget.erpnext_budget_reference)
+			print(doc.name, '---budget')
+			if doc.docstatus == 1:
+				doc.cancel()
 
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
