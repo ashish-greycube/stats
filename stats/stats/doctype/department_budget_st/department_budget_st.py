@@ -39,12 +39,12 @@ class DepartmentBudgetST(Document):
 
 	def validate_duplicate_account(self):
 		if len(self.account_table) > 1:
+			account_name=[]
 			for acc in self.account_table:
-				for dup in self.account_table:
-					if acc.budget_expense_account == dup.budget_expense_account:
+				if acc.budget_expense_account in account_name:
 						frappe.throw(_("You Cann't use same account multiple time"))
-					else:
-						return
+				else:
+					account_name.append(acc.budget_expense_account)
 	
 	def validate_duplicate_department_budget_entry(self):
 		if self.is_new():
