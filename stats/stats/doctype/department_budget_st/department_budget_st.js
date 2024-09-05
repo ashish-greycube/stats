@@ -31,14 +31,17 @@ frappe.ui.form.on("Department Budget ST", {
     },
     setup(frm) {
         frm.set_query("budget_expense_account","account_table", function (doc,cdt,cdn) {
+            const default_company = frappe.defaults.get_default("company");
             return {
-                query: "stats.stats.doctype.department_budget_st.department_budget_st.get_budget_account",
-                // filters: {
-                //     "company": frm.doc.name,
-                //     "is_group": 0,
-                //     "account_type": "Expense Account"
-                // }
+                filters: {
+                    "company": default_company,
+                    "is_group": 0,
+                    "account_type": ["in",["Expense Account", "Indirect Expense"]]
+                }
             };
+            // return {
+            //     query: "stats.stats.doctype.department_budget_st.department_budget_st.get_budget_account",
+            // };
         }),
         frm.set_query("main_department", function (doc) {
             return {
