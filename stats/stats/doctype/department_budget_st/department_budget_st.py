@@ -76,10 +76,13 @@ class DepartmentBudgetST(Document):
 
 	def cancel_connected_budget(self):
 		for budget in self.budget_update:
-			doc = frappe.get_doc('Budget', budget.erpnext_budget_reference)
-			print(doc.name, '---budget')
-			if doc.docstatus == 1:
-				doc.cancel()
+			budget_exists=frappe.db.exists('Budget', budget.erpnext_budget_reference)
+			if budget_exists:
+				doc = frappe.get_doc('Budget', budget.erpnext_budget_reference)
+				if doc:
+					print(doc.name, '---budget')
+					if doc.docstatus == 1:
+						doc.cancel()
 
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
