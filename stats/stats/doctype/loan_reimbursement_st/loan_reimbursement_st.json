@@ -1,0 +1,168 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-09-06 14:48:59.028989",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_no",
+  "employee_name",
+  "main_department",
+  "sub_department",
+  "section",
+  "decision_number",
+  "decision_date",
+  "reference_number_of_the_discounting_entity",
+  "column_break_cnfc",
+  "deduction_start_date",
+  "number_of_instalments",
+  "status",
+  "type_of_deduction",
+  "total_amount",
+  "instalment_value",
+  "first_instalment",
+  "last_instalment",
+  "previously_deducted_instalments",
+  "section_break_tckc",
+  "table_of_discounts"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee_no",
+   "fieldtype": "Link",
+   "label": "Employee No",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_no.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_no.department",
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_no.custom_sub_department",
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section",
+   "fieldtype": "Link",
+   "label": "Section",
+   "options": "Section ST"
+  },
+  {
+   "fieldname": "decision_number",
+   "fieldtype": "Data",
+   "label": "Decision number"
+  },
+  {
+   "fieldname": "decision_date",
+   "fieldtype": "Date",
+   "label": "Decision date"
+  },
+  {
+   "fieldname": "reference_number_of_the_discounting_entity",
+   "fieldtype": "Data",
+   "label": "Reference number of the discounting entity"
+  },
+  {
+   "fieldname": "deduction_start_date",
+   "fieldtype": "Date",
+   "label": "Deduction Start Date "
+  },
+  {
+   "fieldname": "number_of_instalments",
+   "fieldtype": "Int",
+   "label": "Number of Instalments",
+   "read_only": 1
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nCompleted\nEarly Payment"
+  },
+  {
+   "fieldname": "type_of_deduction",
+   "fieldtype": "Select",
+   "label": "Type of Deduction",
+   "options": "\nMonthly Instalment"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount"
+  },
+  {
+   "fieldname": "instalment_value",
+   "fieldtype": "Currency",
+   "label": "Instalment Value"
+  },
+  {
+   "fieldname": "first_instalment",
+   "fieldtype": "Currency",
+   "label": "First Instalment"
+  },
+  {
+   "fieldname": "last_instalment",
+   "fieldtype": "Currency",
+   "label": "Last Instalment"
+  },
+  {
+   "fieldname": "previously_deducted_instalments",
+   "fieldtype": "Date",
+   "label": "Previously Deducted Instalments"
+  },
+  {
+   "fieldname": "column_break_cnfc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_tckc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "table_of_discounts",
+   "fieldtype": "Table",
+   "label": "Table Of Discounts",
+   "options": "Table Of Discounts ST"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-09-06 15:18:17.489888",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Loan Reimbursement ST",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
