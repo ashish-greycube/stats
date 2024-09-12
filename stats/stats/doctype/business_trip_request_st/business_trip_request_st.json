@@ -182,7 +182,7 @@
    "link_fieldname": "business_trip_reference"
   }
  ],
- "modified": "2024-09-04 08:06:06.609873",
+ "modified": "2024-09-11 12:09:29.916048",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Request ST",
@@ -190,6 +190,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,

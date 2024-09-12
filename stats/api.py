@@ -85,10 +85,15 @@ def set_years_of_experience_at_start_of_every_month():
 		months = diff.months
 		days = diff.days
 
+		print("in employee")
+
 		if emp_doc.custom_previous_years_of_experience:
+			print("yes")
 			previous_years = years + emp_doc.custom_previous_years_of_experience
 			emp_doc.custom_current_years_of_experience = str(years) + " years " + str(months) + " months " + str(days) + " days"
 			emp_doc.custom_total_years_of_experience = str(previous_years) + " years " + str(months) + " months " + str(days) + " days"
+			emp_doc.add_comment("Comment", text='Employee experience added till {0}'.format(nowdate()))
+			print("added")
 			emp_doc.save(ignore_permissions=True)
 
 @frappe.whitelist()
@@ -156,3 +161,23 @@ def create_budget(cost_center, fiscal_year, budget_expense_account, net_balance)
 	print(new_budget.name ,'------new_budget')
 
 	return new_budget.name
+
+@frappe.whitelist()
+def set_scholarship_status_closed():
+	open_scholarship_list = frappe.db.get_all("Scholarship ST",
+										   filters = {"docstatus":1,"status":"Open"},
+										   fields=["name","apply_end_date","status"])
+	for scholarship in open_scholarship_list:
+		if scholarship.apply_end_date == getdate(nowdate()):
+			scholarship_doc = frappe.get_doc("Scholarship ST",scholarship.name)
+			scholarship_doc.status = "Closed"
+			scholarship_doc.add_comment("Comment", text='Scholarship status is Closed on {0} by system.'.format(nowdate()))
+			scholarship_doc.save(ignore_permissions = True)
+
+def create_salary_component(name,abbreviation,type):
+	salary_component_doc = frappe.new_doc("Salary Component")
+	salary_component_doc.salary_component = name
+	salary_component_doc.salary_component_abbr = abbreviation
+	salary_component_doc.type = "Deduction"
+	salary_component_doc.run_method('set_missing_values')
+	salary_component_doc.save(ignore_permissions=True)

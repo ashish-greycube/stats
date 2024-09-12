@@ -74,7 +74,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-03 10:27:48.441212",
+ "modified": "2024-09-11 12:15:24.612226",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Training Announcement ST",
@@ -82,6 +82,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,

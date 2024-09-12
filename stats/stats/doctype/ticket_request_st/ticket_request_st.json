@@ -121,7 +121,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-28 11:01:00.788197",
+ "modified": "2024-09-11 12:13:41.043966",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Ticket Request ST",
@@ -129,6 +129,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,

@@ -159,7 +159,11 @@ scheduler_events = {
 		],
         "30 1 1 * *": [
             "stats.api.set_years_of_experience_at_start_of_every_month",
-		]
+		],
+        # at 11:30 PM every day
+        "30 23 * * *": [
+            "stats.api.set_scholarship_status_closed"
+        ]
 	},
 }
 # 	"all": [

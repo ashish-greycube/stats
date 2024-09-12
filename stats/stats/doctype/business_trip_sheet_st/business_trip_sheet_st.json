@@ -100,7 +100,7 @@
    "link_fieldname": "reference_no"
   }
  ],
- "modified": "2024-09-04 07:00:26.970126",
+ "modified": "2024-09-11 12:09:56.684733",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Sheet ST",
@@ -108,6 +108,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
