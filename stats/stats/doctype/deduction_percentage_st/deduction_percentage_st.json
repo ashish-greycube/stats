@@ -1,42 +1,44 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-08-13 14:57:13.138802",
+ "creation": "2024-08-13 14:59:54.806824",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "earning",
-  "column_break_kgoi",
-  "value"
+  "deduction",
+  "column_break_pacg",
+  "percent"
  ],
  "fields": [
   {
-   "fieldname": "earning",
+   "fieldname": "deduction",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Earning",
-   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Earning\"]]",
+   "label": "Deduction",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"],[\"Salary Component\",\"disabled\",\"=\",0]]",
    "options": "Salary Component"
   },
   {
-   "fieldname": "column_break_kgoi",
+   "fieldname": "column_break_pacg",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "value",
-   "fieldtype": "Currency",
+   "default": "0",
+   "fieldname": "percent",
+   "fieldtype": "Percent",
    "in_list_view": 1,
-   "label": "Value"
+   "label": "Percent",
+   "precision": "2"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-22 14:55:39.284581",
+ "modified": "2024-09-13 10:06:39.905790",
  "modified_by": "Administrator",
  "module": "Stats",
- "name": "Earning ST",
+ "name": "Deduction Percentage ST",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

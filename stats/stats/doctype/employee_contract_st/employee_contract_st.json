@@ -6,26 +6,35 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "job_offer_details_section",
   "job_offer_reference",
   "candidate_name",
   "candidate_namein_english",
-  "main_department",
-  "sub_department",
-  "section",
-  "contract_start_date",
-  "contract_end_date",
-  "trial_period_end_date",
+  "contract_type",
   "column_break_npff",
   "status",
-  "employment_type",
-  "contract_type",
+  "main_department",
+  "section",
+  "sub_department",
   "grade",
+  "employment_type",
+  "contract_details_section",
   "test_period_renewed",
+  "contract_start_date",
+  "contract_end_date",
+  "column_break_bfsv",
+  "trial_period_end_date",
   "end_of_new_test_period",
+  "total_monthly_salary",
+  "employee_details_section",
+  "employee_no",
+  "column_break_rqzr",
+  "employee_name",
   "salary_details_section",
   "earning",
   "column_break_eegg",
-  "deduction"
+  "deduction",
+  "amended_from"
  ],
  "fields": [
   {
@@ -70,7 +79,8 @@
    "fieldname": "contract_start_date",
    "fieldtype": "Date",
    "label": "Contract Start Date",
-   "mandatory_depends_on": "eval:doc.test_period_renewed==\"Yes\""
+   "mandatory_depends_on": "eval:doc.test_period_renewed==\"Yes\"",
+   "reqd": 1
   },
   {
    "fieldname": "contract_end_date",
@@ -135,7 +145,8 @@
    "fieldname": "earning",
    "fieldtype": "Table",
    "label": "Earning",
-   "options": "Earning ST"
+   "options": "Earning Amount ST",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_eegg",
@@ -145,12 +156,69 @@
    "fieldname": "deduction",
    "fieldtype": "Table",
    "label": "Deduction",
-   "options": "Deduction ST"
+   "options": "Deduction Amount ST",
+   "read_only": 1
+  },
+  {
+   "fieldname": "job_offer_details_section",
+   "fieldtype": "Section Break",
+   "label": "Job Offer Details"
+  },
+  {
+   "fieldname": "contract_details_section",
+   "fieldtype": "Section Break",
+   "label": "Contract Details"
+  },
+  {
+   "fieldname": "column_break_bfsv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "employee_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee No",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_rqzr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee_no.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Employee Contract ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "total_monthly_salary",
+   "fieldtype": "Currency",
+   "label": "Total Monthly Salary",
+   "precision": "2",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-08-23 06:52:45.462031",
+ "modified": "2024-09-13 12:34:29.780309",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Contract ST",
@@ -158,6 +226,8 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -166,7 +236,9 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class DeductionST(Document):
+class EarningAmountST(Document):
 	pass

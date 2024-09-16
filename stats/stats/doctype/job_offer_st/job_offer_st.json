@@ -161,8 +161,7 @@
    "fieldname": "date_of_birth",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Date of Birth",
-   "reqd": 1
+   "label": "Date of Birth"
   },
   {
    "fieldname": "column_break_uncl",
@@ -202,13 +201,13 @@
    "fieldname": "earning",
    "fieldtype": "Table",
    "label": "Earning",
-   "options": "Earning ST"
+   "options": "Earning Amount ST"
   },
   {
    "fieldname": "deduction",
    "fieldtype": "Table",
    "label": "Deduction",
-   "options": "Deduction ST"
+   "options": "Deduction Amount ST"
   },
   {
    "fieldname": "column_break_yybj",
@@ -226,7 +225,7 @@
    "link_fieldname": "job_offer_reference"
   }
  ],
- "modified": "2024-08-22 13:31:56.589114",
+ "modified": "2024-09-13 10:01:13.243727",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Offer ST",

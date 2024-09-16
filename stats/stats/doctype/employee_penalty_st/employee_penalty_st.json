@@ -1,35 +1,36 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "EPT-.######",
  "creation": "2024-08-21 12:21:07.389261",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "section_break_zdrn",
+  "penalty_date",
   "employee",
-  "job_no",
-  "main_department",
-  "column_break_agai",
   "employee_name",
-  "section",
+  "main_department",
   "sub_department",
-  "section_break_dzfh",
+  "section",
+  "column_break_agai",
   "violation_type",
-  "number_of_times",
-  "column_break_qnod",
-  "deduction_method",
-  "penalty_amount",
+  "recurrence_count_of_violation",
+  "action_type",
+  "deduction",
   "section_break_ivde",
   "description_of_the_violation",
   "column_break_osmi",
-  "legal_committee_recommendation"
+  "legal_committee_recommendation",
+  "amended_from"
  ],
  "fields": [
   {
    "fieldname": "employee",
    "fieldtype": "Link",
    "label": "Employee",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "fetch_from": "employee.employee_name",
@@ -38,24 +39,21 @@
    "label": "Employee Name"
   },
   {
-   "fieldname": "job_no",
-   "fieldtype": "Link",
-   "label": "Job No",
-   "options": "Job No ST"
-  },
-  {
+   "fetch_from": "employee.department",
    "fieldname": "main_department",
    "fieldtype": "Link",
    "label": "Main Department",
    "options": "Department"
   },
   {
+   "fetch_from": "employee.custom_sub_department",
    "fieldname": "sub_department",
    "fieldtype": "Link",
    "label": "Sub Department",
    "options": "Department"
   },
   {
+   "fetch_from": "employee.custom_section",
    "fieldname": "section",
    "fieldtype": "Link",
    "label": "Section",
@@ -63,23 +61,9 @@
   },
   {
    "fieldname": "violation_type",
-   "fieldtype": "Data",
-   "label": "Violation Type"
-  },
-  {
-   "fieldname": "number_of_times",
-   "fieldtype": "Int",
-   "label": "Number of times"
-  },
-  {
-   "fieldname": "deduction_method",
-   "fieldtype": "Percent",
-   "label": "Deduction Method"
-  },
-  {
-   "fieldname": "penalty_amount",
-   "fieldtype": "Data",
-   "label": "Penalty Amount"
+   "fieldtype": "Link",
+   "label": "Violation Type",
+   "options": "Violation ST"
   },
   {
    "fieldname": "column_break_agai",
@@ -88,14 +72,6 @@
   {
    "fieldname": "section_break_zdrn",
    "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "section_break_dzfh",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_qnod",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "section_break_ivde",
@@ -114,17 +90,56 @@
    "fieldname": "legal_committee_recommendation",
    "fieldtype": "Small Text",
    "label": "Legal Committee Recommendation"
+  },
+  {
+   "fieldname": "recurrence_count_of_violation",
+   "fieldtype": "Int",
+   "label": "Recurrence Count of Violation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "action_type",
+   "fieldtype": "Data",
+   "label": "Action Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "deduction",
+   "fieldtype": "Percent",
+   "label": "Deduction %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Employee Penalty ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "penalty_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Penalty Date",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-08-21 12:38:58.307084",
+ "modified": "2024-09-13 15:09:55.518530",
  "modified_by": "Administrator",
  "module": "Stats",
- "name": "Employee Penalty",
+ "name": "Employee Penalty ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -134,6 +149,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

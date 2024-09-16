@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class EarningST(Document):
+class PenaltyDetailsST(Document):
 	pass

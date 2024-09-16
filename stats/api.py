@@ -181,3 +181,43 @@ def create_salary_component(name,abbreviation,type):
 	salary_component_doc.type = "Deduction"
 	salary_component_doc.run_method('set_missing_values')
 	salary_component_doc.save(ignore_permissions=True)
+
+def check_monthly_salary_component_offer_term(self,method):
+    if self.custom_is_monthly_salary_component == 1:
+        offer_term_list = frappe.db.get_all("Offer Term",
+                                      filters={"custom_is_monthly_salary_component":1, "name": ["!=", self.name]},
+                                      fields=["name"])
+        if len(offer_term_list)>0:
+                frappe.throw(_("Offer Term <b>'{0}'</b> is already set as Monthly Salary Component".format(offer_term_list[0].name)))
+
+def create_salary_structure_assignment(self, method):
+	if self.custom_employee_contract_ref:
+		amount = frappe.db.get_value("Employee Contract ST", self.custom_employee_contract_ref, "total_monthly_salary")
+		assignment = frappe.new_doc("Salary Structure Assignment")
+		assignment.employee = self.custom_employee_no
+		assignment.salary_structure = self.name
+		assignment.from_date = self.custom_contract_start_date
+		assignment.base = amount
+
+		assignment.save(ignore_permissions=True)
+		frappe.msgprint(_("Salary Structure Assignment {0} created.".format(assignment.name)), alert=True)
+
+def get_monthly_salary_from_job_offer(job_offer):
+	doc = frappe.get_doc("Job Offer ST", job_offer)
+
+	if doc:
+		monthly_salary = 0
+		if len(doc.offer_details) > 0:
+			for offer in doc.offer_details:
+				monthly_salary_component = frappe.db.get_value('Offer Term', offer.offer_term, 'custom_is_monthly_salary_component')
+				if monthly_salary_component == 1:
+					monthly_salary = offer.value
+
+	return monthly_salary
+
+def get_base_amount_from_salary_structure_assignment(employee):
+	base = frappe.db.get_value("Salary Structure Assignment", {"employee":employee}, 'base')
+	if base == None:
+		frappe.throw(_("No Base Amount Found"))
+	else:
+		return base

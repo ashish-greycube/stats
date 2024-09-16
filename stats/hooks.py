@@ -137,7 +137,14 @@ doc_events = {
 	},
     "Leave Application": {
         "validate":"stats.api.check_leave_is_not_in_business_days"
-	}    
+	},
+    # uncomment this
+    # "Offer Term": {
+    #     "validate":"stats.api.check_monthly_salary_component_offer_term"
+    # },
+    # "Salary Structure": {
+    #     "on_submit":"stats.api.create_salary_structure_assignment"
+    # }    
 }
 
 # doc_events = {

@@ -7,7 +7,11 @@
  "engine": "InnoDB",
  "field_order": [
   "contract_type",
-  "no_of_allowed_business_trip_days"
+  "no_of_allowed_business_trip_days",
+  "section_break_yyew",
+  "earning",
+  "column_break_ssot",
+  "deduction"
  ],
  "fields": [
   {
@@ -22,12 +26,36 @@
    "description": "per year",
    "fieldname": "no_of_allowed_business_trip_days",
    "fieldtype": "Int",
-   "label": "No Of Allowed Business Trip Days"
+   "label": "No Of Allowed Business Trip Days",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_yyew",
+   "fieldtype": "Section Break",
+   "label": "Salary Structure"
+  },
+  {
+   "fieldname": "earning",
+   "fieldtype": "Table",
+   "label": "Earning",
+   "options": "Earning Percentage ST",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ssot",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "deduction",
+   "fieldtype": "Table",
+   "label": "Deduction",
+   "options": "Deduction Percentage ST",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-23 11:02:37.935802",
+ "modified": "2024-09-13 07:34:05.000097",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Contract Type ST",

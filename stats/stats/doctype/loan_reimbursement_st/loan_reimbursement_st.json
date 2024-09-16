@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "LR-.######",
  "creation": "2024-09-06 14:48:59.028989",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -12,26 +13,28 @@
   "section",
   "decision_number",
   "decision_date",
-  "reference_number_of_the_discounting_entity",
+  "bank_loan_reference",
+  "salary_component",
   "column_break_cnfc",
   "deduction_start_date",
-  "number_of_instalments",
   "status",
-  "type_of_deduction",
   "total_amount",
   "instalment_value",
   "first_instalment",
   "last_instalment",
+  "number_of_instalments",
   "previously_deducted_instalments",
   "section_break_tckc",
-  "table_of_discounts"
+  "table_of_discounts",
+  "amended_from"
  ],
  "fields": [
   {
    "fieldname": "employee_no",
    "fieldtype": "Link",
    "label": "Employee No",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "fetch_from": "employee_no.employee_name",
@@ -57,6 +60,7 @@
    "read_only": 1
   },
   {
+   "fetch_from": "employee_no.custom_section",
    "fieldname": "section",
    "fieldtype": "Link",
    "label": "Section",
@@ -73,14 +77,10 @@
    "label": "Decision date"
   },
   {
-   "fieldname": "reference_number_of_the_discounting_entity",
-   "fieldtype": "Data",
-   "label": "Reference number of the discounting entity"
-  },
-  {
    "fieldname": "deduction_start_date",
    "fieldtype": "Date",
-   "label": "Deduction Start Date "
+   "label": "Deduction Start Date ",
+   "reqd": 1
   },
   {
    "fieldname": "number_of_instalments",
@@ -89,41 +89,42 @@
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "default": "Active",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Active\nCompleted\nEarly Payment"
-  },
-  {
-   "fieldname": "type_of_deduction",
-   "fieldtype": "Select",
-   "label": "Type of Deduction",
-   "options": "\nMonthly Instalment"
+   "options": "\nActive\nCompleted\nEarly Payment"
   },
   {
    "fieldname": "total_amount",
    "fieldtype": "Currency",
-   "label": "Total Amount"
+   "in_list_view": 1,
+   "label": "Total Amount",
+   "reqd": 1
   },
   {
    "fieldname": "instalment_value",
    "fieldtype": "Currency",
-   "label": "Instalment Value"
+   "in_list_view": 1,
+   "label": "Instalment Value",
+   "reqd": 1
   },
   {
    "fieldname": "first_instalment",
    "fieldtype": "Currency",
-   "label": "First Instalment"
+   "label": "First Instalment",
+   "read_only": 1
   },
   {
    "fieldname": "last_instalment",
    "fieldtype": "Currency",
-   "label": "Last Instalment"
+   "label": "Last Instalment",
+   "read_only": 1
   },
   {
    "fieldname": "previously_deducted_instalments",
-   "fieldtype": "Date",
+   "fieldtype": "Int",
    "label": "Previously Deducted Instalments"
   },
   {
@@ -139,17 +140,43 @@
    "fieldtype": "Table",
    "label": "Table Of Discounts",
    "options": "Table Of Discounts ST"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Loan Reimbursement ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "bank_loan_reference",
+   "fieldtype": "Data",
+   "label": "Bank Loan Reference"
+  },
+  {
+   "fieldname": "salary_component",
+   "fieldtype": "Link",
+   "label": "Salary Component",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"],[\"Salary Component\",\"disabled\",\"=\",0]]",
+   "options": "Salary Component",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-09-06 15:18:17.489888",
+ "modified": "2024-09-13 13:57:17.407216",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Loan Reimbursement ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -159,6 +186,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

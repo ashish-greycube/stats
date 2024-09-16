@@ -21,6 +21,7 @@ frappe.ui.form.on("Job Offer ST", {
     },
     refresh: function (frm) {
         if (frm.doc.status == 'Accepted') {
+			frm.set_df_property('date_of_birth', 'reqd', 1)
 			frm.add_custom_button(
 				__("Create Employee"),
 				function () {
