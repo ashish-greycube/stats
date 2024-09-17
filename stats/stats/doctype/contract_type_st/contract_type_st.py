@@ -7,8 +7,8 @@ from frappe.model.document import Document
 
 
 class ContractTypeST(Document):
-	def validate(self):
-		self.validate_salary_structure_percentage()
+	# def validate(self):
+	# 	self.validate_salary_structure_percentage()
 
 	def validate_salary_structure_percentage(self):
 		total_percentage = 0

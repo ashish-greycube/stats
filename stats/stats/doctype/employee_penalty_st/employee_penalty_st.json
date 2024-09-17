@@ -63,7 +63,8 @@
    "fieldname": "violation_type",
    "fieldtype": "Link",
    "label": "Violation Type",
-   "options": "Violation ST"
+   "options": "Violation ST",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_agai",
@@ -131,7 +132,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-13 15:09:55.518530",
+ "modified": "2024-09-17 08:11:53.632396",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Penalty ST",

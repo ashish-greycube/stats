@@ -91,11 +91,11 @@ class JobOfferST(Document):
 						ded.amount = (monthly_salary) * (ded.percent / 100)
 						# total_monthly_salary = total_monthly_salary + ded.amount
 
-					if ded.formula:
-						formula = ded.formula
-						print(formula.strip(), '--strip')
+					# if ded.formula:
+					# 	formula = ded.formula
+					# 	print(formula.strip(), '--strip')
 
-						print(formula, '---formula')
+					# 	print(formula, '---formula')
 
 			# print(total_monthly_salary, '--total_monthly_salary')
 			print(monthly_salary, '---monthly_salary')
