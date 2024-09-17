@@ -9,9 +9,7 @@
   "deduction",
   "abbr",
   "column_break_txil",
-  "percent",
   "formula",
-  "column_break_admf",
   "amount"
  ],
  "fields": [
@@ -25,16 +23,6 @@
   },
   {
    "fieldname": "column_break_txil",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "percent",
-   "fieldtype": "Percent",
-   "in_list_view": 1,
-   "label": "Percent"
-  },
-  {
-   "fieldname": "column_break_admf",
    "fieldtype": "Column Break"
   },
   {
@@ -63,7 +51,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-16 14:13:01.586319",
+ "modified": "2024-09-17 13:40:43.968452",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Deduction Amount ST",

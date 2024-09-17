@@ -92,8 +92,10 @@
    "fetch_from": "opening_job_reference.contract_type",
    "fieldname": "contract_type",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Contract Type",
-   "options": "Contract Type ST"
+   "options": "Contract Type ST",
+   "reqd": 1
   },
   {
    "fetch_from": "opening_job_reference.section",
@@ -138,7 +140,7 @@
    "link_fieldname": "job_application_reference"
   }
  ],
- "modified": "2024-08-22 13:03:25.555692",
+ "modified": "2024-09-17 13:48:36.410530",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Application ST",

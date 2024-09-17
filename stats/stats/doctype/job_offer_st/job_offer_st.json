@@ -105,7 +105,8 @@
    "fieldname": "contract_type",
    "fieldtype": "Link",
    "label": "Contract Type",
-   "options": "Contract Type ST"
+   "options": "Contract Type ST",
+   "reqd": 1
   },
   {
    "fetch_from": "job_application_reference.branch",
@@ -223,9 +224,13 @@
   {
    "link_doctype": "Employee Contract ST",
    "link_fieldname": "job_offer_reference"
+  },
+  {
+   "link_doctype": "Employee",
+   "link_fieldname": "custom_job_offer_reference"
   }
  ],
- "modified": "2024-09-13 10:01:13.243727",
+ "modified": "2024-09-17 13:49:03.260568",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Offer ST",

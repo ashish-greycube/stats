@@ -16,17 +16,20 @@ class JobOfferST(Document):
 		self.validate_offer_term_details()
 		self.validate_duplicate_entry_for_offer_term_with_monthly_salary_component()
 		self.validate_value_in_offer_details()
-		self.calculate_salary_earnings_and_deduction()
+		# self.calculate_salary_earnings_and_deduction()
 		# self.validate_total_monthly_salary_earnings_and_deductions()
 
 	def fetch_salary_tables_from_contract_type(self):
-		if self.contract_type:
+		self.earning = []
+		self.deduction = []
+		if self.contract_type and self.is_new():
 			contract_type = frappe.get_doc("Contract Type ST", self.contract_type)
 			if len(self.offer_details) > 0:
 				if len(self.earning) == 0:
 					for ear in contract_type.earning:
 						earn = self.append("earning", {})
 						earn.earning = ear.earning
+						earn.abbr = ear.abbr
 						earn.percent = ear.percent
 						earn.formula = ear.formula
 
@@ -34,6 +37,7 @@ class JobOfferST(Document):
 					for ded in contract_type.deduction:
 						dedu = self.append("deduction", {})
 						dedu.deduction = ded.deduction
+						dedu.abbr = ded.abbr
 						dedu.percent = ded.percent
 						dedu.formula = ded.formula
 			else:

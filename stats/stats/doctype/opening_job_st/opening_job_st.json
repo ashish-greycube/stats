@@ -94,7 +94,8 @@
    "fieldname": "contract_type",
    "fieldtype": "Link",
    "label": "Contract Type",
-   "options": "Contract Type ST"
+   "options": "Contract Type ST",
+   "reqd": 1
   },
   {
    "fieldname": "sub_department",
@@ -111,7 +112,7 @@
    "link_fieldname": "opening_job_reference"
   }
  ],
- "modified": "2024-08-21 12:31:38.223288",
+ "modified": "2024-09-17 13:47:54.689866",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Opening Job ST",
