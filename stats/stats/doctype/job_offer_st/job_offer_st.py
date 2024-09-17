@@ -73,38 +73,48 @@ class JobOfferST(Document):
 						frappe.throw(_("Row #{0}: Value cannot be 0").format(row.idx))
 
 	def calculate_salary_earnings_and_deduction(self):
-		monthly_salary = 0
-
+		field_name_of_total_monthly_salary='total_monthly_salary'
+		total_monthly_salary = 0
+		salary_abbreviation_dict={}
 		if len(self.offer_details) > 0:
 			for offer in self.offer_details:
 				monthly_salary_component = frappe.db.get_value('Offer Term', offer.offer_term, 'custom_is_monthly_salary_component')
 				if monthly_salary_component == 1:
-					monthly_salary = offer.value
+					total_monthly_salary = offer.value
 
 		# total_monthly_salary = 0
-		if monthly_salary > 0 :
+		if total_monthly_salary > 0 :
+			# logic for forumla having total_monthly_salary
 			if len(self.earning)>0:
 				for ear in self.earning:
-					if int(ear.percent) > 0:
-						ear.amount = (monthly_salary) * (ear.percent / 100)
-						# total_monthly_salary = total_monthly_salary + ear.amount
-
+					formula=ear.formula
+					if formula  and formula.find(field_name_of_total_monthly_salary)>-1:
+						ear.amount ==frappe.safe_eval(formula, None,total_monthly_salary)
+						salary_abbreviation_dict[ear.abbr]=ear.amount
+						
 			if len(self.deduction)>0:
 				for ded in self.deduction:
-					if ded.percent > 0:
-						ded.amount = (monthly_salary) * (ded.percent / 100)
-						# total_monthly_salary = total_monthly_salary + ded.amount
+					formula=ded.formula
+					if formula  and formula.find(field_name_of_total_monthly_salary)>-1:
+						ded.amount ==frappe.safe_eval(formula, None,total_monthly_salary)
+						salary_abbreviation_dict[ded.abbr]=ded.amount				
+				
+			# logic for forumla having abbr
+			if len(self.earning)>0:
+				for ear in self.earning:
+					formula=ear.formula
+					if formula  and formula.find(field_name_of_total_monthly_salary)==-1:
+						ear.amount ==frappe.safe_eval(formula, None,salary_abbreviation_dict)
+						
+						
+			if len(self.deduction)>0:
+				for ded in self.deduction:
+					formula=ded.formula
+					if formula  and formula.find(field_name_of_total_monthly_salary)==-1:
+						ded.amount ==frappe.safe_eval(formula, None,salary_abbreviation_dict)
+								
 
-					# if ded.formula:
-					# 	formula = ded.formula
-					# 	print(formula.strip(), '--strip')
 
-					# 	print(formula, '---formula')
-
-			# print(total_monthly_salary, '--total_monthly_salary')
-			print(monthly_salary, '---monthly_salary')
-			# if total_monthly_salary != monthly_salary:
-			# 	frappe.throw(_("Total of earnings and deductions amount must be {0}").format(monthly_salary))
 
 	def validate_total_monthly_salary_earnings_and_deductions(self):
 		if not self.is_new():
