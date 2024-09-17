@@ -9,12 +9,11 @@ from frappe.utils import add_to_date
 from stats.api import get_monthly_salary_from_job_offer
 
 class EmployeeContractST(Document):
-	# uncomment this
-	# def validate(self):
-	# 	self.validate_trial_period()
+	def validate(self):
+		self.validate_trial_period()
 
-	# def on_submit(self):
-	# 	self.create_salary_structure()
+	def on_submit(self):
+		self.create_salary_structure()
 
 	def validate_trial_period(self):	
 		if self.job_offer_reference:

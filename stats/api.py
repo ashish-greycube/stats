@@ -216,7 +216,7 @@ def get_monthly_salary_from_job_offer(job_offer):
 	return monthly_salary
 
 def get_base_amount_from_salary_structure_assignment(employee):
-	base = frappe.db.get_value("Salary Structure Assignment", {"employee":employee}, 'base')
+	base = frappe.db.get_value("Salary Structure Assignment", {"employee":employee, "docstatus":1}, 'base')
 	if base == None:
 		frappe.throw(_("No Base Amount Found"))
 	else:

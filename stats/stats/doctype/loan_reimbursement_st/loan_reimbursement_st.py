@@ -39,7 +39,7 @@ class LoanReimbursementST(Document):
 			for x in range(self.number_of_instalments):
 				if (x + 1) == self.number_of_instalments:
 					row = self.append('table_of_discounts', {})
-					row.instalment_value = self.last_instalments
+					row.instalment_value = self.last_instalment
 				else:
 					row = self.append('table_of_discounts', {})	
 					row.instalment_value = self.first_instalment

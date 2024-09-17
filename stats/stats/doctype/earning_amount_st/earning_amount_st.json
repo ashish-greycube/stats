@@ -7,8 +7,10 @@
  "engine": "InnoDB",
  "field_order": [
   "earning",
+  "abbr",
   "column_break_ozjh",
   "percent",
+  "formula",
   "column_break_sbpu",
   "amount"
  ],
@@ -44,12 +46,27 @@
    "in_list_view": 1,
    "label": "Amount",
    "precision": "2"
+  },
+  {
+   "fetch_from": "earning.salary_component_abbr",
+   "fieldname": "abbr",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Abbr",
+   "read_only": 1
+  },
+  {
+   "fieldname": "formula",
+   "fieldtype": "Code",
+   "in_list_view": 1,
+   "label": "Formula",
+   "options": "PythonExpression"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-13 10:06:07.853938",
+ "modified": "2024-09-16 14:11:42.870318",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Earning Amount ST",
