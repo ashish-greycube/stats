@@ -20,13 +20,25 @@ class PaymentProcedureST(Document):
 	def on_submit(self):
 		if not self.payment_type:
 			frappe.throw(_("Please select payment type"))
-		if self.payment_type == "Direct":
-			self.create_payment_journal_entry_from_payment_procedure_for_direct_type()
-		elif self.payment_type == "Indirect":
-			self.create_payment_journal_entry_from_payment_procedure_for_indirect_type()
-			self.create_payment_journal_entry_from_payment_procedure_for_direct_type()
+		company = erpnext.get_default_company()
+		if self.payment_request_reference:
+			reference_type = frappe.db.get_value("Payment Request ST",self.payment_request_reference,"reference_name")
+			if reference_type == "Business Trip Sheet ST":
+				company_business_trip_budget_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
+				if self.payment_type == "Direct":
+					self.create_payment_journal_entry_from_payment_procedure_for_direct_type(company_business_trip_budget_expense_account)
+				elif self.payment_type == "Indirect":
+					self.create_payment_journal_entry_from_payment_procedure_for_indirect_type()
+					self.create_payment_journal_entry_from_payment_procedure_for_direct_type(company_business_trip_budget_expense_account)
+			elif reference_type == "Employee Reallocation Sheet ST":
+				company_reallocation_budget_expense_account = frappe.db.get_value("Company",company,"custom_reallocation_budget_expense_account")
+				if self.payment_type == "Direct":
+					self.create_payment_journal_entry_from_payment_procedure_for_direct_type(company_reallocation_budget_expense_account)
+				elif self.payment_type == "Indirect":
+					self.create_payment_journal_entry_from_payment_procedure_for_indirect_type()
+					self.create_payment_journal_entry_from_payment_procedure_for_direct_type(company_reallocation_budget_expense_account)
 
-	def create_payment_journal_entry_from_payment_procedure_for_direct_type(self):
+	def create_payment_journal_entry_from_payment_procedure_for_direct_type(self,company_budget_expense_account):
 		payment_je_doc = frappe.new_doc("Journal Entry")
 		payment_je_doc.voucher_type = "Journal Entry"
 		payment_je_doc.posting_date = today()
@@ -35,14 +47,14 @@ class PaymentProcedureST(Document):
 		accounts = []
 
 		company = erpnext.get_default_company()
-		company_business_trip_budget_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
+		# company_business_trip_budget_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
 		company_default_cost_center = frappe.db.get_value("Company",company,"cost_center")
 		total_employee_amount = 0
 		for row in self.employees:
 			total_employee_amount = total_employee_amount + (row.amount or 0)
 
 		accounts_row = {
-			"account":company_business_trip_budget_expense_account,
+			"account":company_budget_expense_account,
 			"cost_center":company_default_cost_center,
 			"debit_in_account_currency":total_employee_amount,
 		}
@@ -75,7 +87,7 @@ class PaymentProcedureST(Document):
 		accounts = []
 
 		company = erpnext.get_default_company()
-		company_business_trip_budget_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
+		# company_business_trip_budget_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
 		company_default_cost_center = frappe.db.get_value("Company",company,"cost_center")
 		total_employee_amount = 0
 		for row in self.employees:

@@ -17,10 +17,20 @@ class PaymentRequestST(Document):
 				total_amount = total_amount + (row.amount or 0)
 		self.total_amount = total_amount
 	def on_submit(self):
-		self.create_journal_entry_on_submit_of_payment_request()
-		self.create_payment_procedure_on_submit_of_payment_request()
+		company = erpnext.get_default_company()
+		if self.reference_name == "Business Trip Sheet ST":
+			company_business_trip_budget_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
+			company_business_trip_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_chargeable_account")
+			self.create_journal_entry_on_submit_of_payment_request(company_business_trip_budget_expense_account,company_business_trip_budget_chargeable_account)
+			self.create_payment_procedure_on_submit_of_payment_request()
+		elif self.reference_name == "Employee Reallocation Sheet ST":
+			company_reallocation_budget_expense_account = frappe.db.get_value("Company",company,"custom_reallocation_budget_expense_account")
+			company_reallocation_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_reallocation_budget_chargeable_account")
+			self.create_journal_entry_on_submit_of_payment_request(company_reallocation_budget_expense_account,company_reallocation_budget_chargeable_account)
+			self.create_payment_procedure_on_submit_of_payment_request()
 	
-	def create_journal_entry_on_submit_of_payment_request(self):
+	
+	def create_journal_entry_on_submit_of_payment_request(self,company_budget_expense_account,company_budget_chargeable_account):
 		je = frappe.new_doc("Journal Entry")
 		je.voucher_type = "Journal Entry"
 		je.posting_date = today()
@@ -43,14 +53,14 @@ class PaymentRequestST(Document):
 		employee_total_amount = 0
 		company = erpnext.get_default_company()
 		if len(employee_detais)>0:
-			company_business_trip_budget_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
-			company_business_trip_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_chargeable_account")
+			# company_business_trip_budget_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
+			# company_business_trip_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_chargeable_account")
 			company_default_cost_center = frappe.db.get_value("Company",company,"cost_center")
 			for detail_row in employee_detais:
 				employee_total_amount = employee_total_amount + detail_row.amount
 				department_cost_center = frappe.db.get_value("Department",detail_row.main_department,"custom_department_cost_center")
 				accounts_row = {
-					"account":company_business_trip_budget_expense_account,
+					"account":company_budget_expense_account,
 					"cost_center":department_cost_center,
 					"department":detail_row.main_department,
 					"debit_in_account_currency":detail_row.amount,
@@ -58,7 +68,7 @@ class PaymentRequestST(Document):
 				accounts.append(accounts_row)
 
 			accounts_row_2 = {
-					"account":company_business_trip_budget_chargeable_account,
+					"account":company_budget_chargeable_account,
 					"cost_center":company_default_cost_center,
 					"department":detail_row.main_department,
 					"credit_in_account_currency":employee_total_amount,
