@@ -96,32 +96,41 @@
   {
    "fieldname": "new_branch",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "New Branch",
-   "options": "Branch"
+   "options": "Branch",
+   "reqd": 1
   },
   {
    "fieldname": "new_main_department",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "New Main Department",
-   "options": "Department"
+   "options": "Department",
+   "reqd": 1
   },
   {
    "fieldname": "new_sub_department",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "New Sub Department",
-   "options": "Department"
+   "options": "Department",
+   "reqd": 1
   },
   {
    "fieldname": "new_section",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "New Section",
-   "options": "Section ST"
+   "options": "Section ST",
+   "reqd": 1
   },
   {
    "fieldname": "assign_current_tasks_to",
    "fieldtype": "Link",
    "label": "Assign Current Tasks To",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "fieldname": "created_by",
@@ -162,7 +171,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-13 14:42:29.392393",
+ "modified": "2024-09-18 10:37:49.613508",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Reallocation ST",

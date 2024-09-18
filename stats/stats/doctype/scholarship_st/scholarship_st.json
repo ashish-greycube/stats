@@ -99,7 +99,8 @@
    "fieldname": "scholarship_details",
    "fieldtype": "Table",
    "label": "Scholarship Details",
-   "options": "Scholarship Details ST"
+   "options": "Scholarship Details ST",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_bvmb",
@@ -114,7 +115,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-10 15:35:47.329649",
+ "modified": "2024-09-18 10:13:39.906296",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Scholarship ST",

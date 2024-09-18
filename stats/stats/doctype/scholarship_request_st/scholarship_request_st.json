@@ -51,6 +51,8 @@
    "fetch_from": "employee_no.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Employee Name",
    "read_only": 1
   },
@@ -58,6 +60,8 @@
    "fetch_from": "employee_no.department",
    "fieldname": "main_department",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Main Department",
    "options": "Department",
    "read_only": 1
@@ -80,8 +84,8 @@
   {
    "fieldname": "last_qualification",
    "fieldtype": "Attach",
-   "in_list_view": 1,
    "label": "Last Qualification",
+   "no_copy": 1,
    "reqd": 1
   },
   {
@@ -93,6 +97,7 @@
   {
    "fieldname": "specialisation_type",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Specialisation Type",
    "options": "Specialisation Type ST"
   },
@@ -120,6 +125,8 @@
    "default": "Open",
    "fieldname": "acceptance_status",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Acceptance Status",
    "options": "\nOpen\nAccepted\nRejected",
    "read_only": 1
@@ -145,7 +152,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-10 15:36:04.557934",
+ "modified": "2024-09-18 10:28:17.056204",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Scholarship Request ST",
