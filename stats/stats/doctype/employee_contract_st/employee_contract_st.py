@@ -50,11 +50,10 @@ class EmployeeContractST(Document):
 					deduction.amount = ded.amount
 					deduction.amount_based_on_formula = 0
 					deduction.is_tax_applicable = 0
-					deduction.do_not_include_in_total = 1
 			
 			salary_structure.save(ignore_permissions=True)
 
-			frappe.msgprint(_("Serial No {0} is created."
+			frappe.msgprint(_("Salary Structure {0} is created."
 					 .format(get_link_to_form('Salary Structure', salary_structure.name))), alert=True)
 
 @frappe.whitelist()
@@ -64,7 +63,8 @@ def get_salary_details(parent, parenttype):
 		"Earning Amount ST",
 		fields=[
 			"earning",
-			"percent",
+			"abbr",
+			"formula",
 			"amount"
 		],
 		filters={"parent": parent, "parenttype": parenttype},
@@ -75,7 +75,8 @@ def get_salary_details(parent, parenttype):
 		"Deduction Amount ST",
 		fields=[
 			"deduction",
-			"percent",
+			"abbr",
+			"formula",
 			"amount"
 		],
 		filters={"parent": parent, "parenttype": parenttype},

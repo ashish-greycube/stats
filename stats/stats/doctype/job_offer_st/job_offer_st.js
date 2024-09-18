@@ -31,6 +31,44 @@ frappe.ui.form.on("Job Offer ST", {
 					});
 				});
 		}
+	},
+	job_application_reference: function(frm){
+		if(frm.is_new() && frm.doc.contract_type){
+			fill_salary_tables(frm)
+		}
+	},
+	contract_type: function(frm) {
+		if(frm.is_new()){
+			fill_salary_tables(frm)
+		}
+		// if (frm.is_new()) {
+		// 	frm.set_value("earning", "");
+		// 	frm.set_value("deduction", "");
+		// 	if (frm.doc.contract_type) {
+		// 		frappe.call({
+		// 			method: "stats.stats.doctype.job_offer_st.job_offer_st.fetch_salary_tables_from_contract_type",
+		// 			args: {
+		// 				parent: frm.doc.contract_type,
+		// 				parenttype: "Contract Type ST",
+		// 			},
+		// 			callback: function (r) {
+		// 				if (r.message[0]) {
+		// 					r.message[0].forEach((e) => {
+		// 						frm.add_child("earning", e);
+		// 					});
+		// 					refresh_field("earning");
+		// 				}
+		// 				if (r.message[1]) {
+		// 					r.message[1].forEach((d) => {
+		// 						frm.add_child("deduction", d);
+		// 					});
+		// 					refresh_field("deduction");
+		// 				}
+		// 			},
+		// 		});
+		// 	}
+		// }
+		
 	}
 });
 
@@ -41,10 +79,16 @@ frappe.ui.form.on("Job Offer Details ST", {
 			frappe.db.get_value('Offer Term', row.offer_term, 'custom_is_monthly_salary_component')
 				.then(r => {
 					if(r.message.custom_is_monthly_salary_component == 1){
-						console.log(r.message.custom_is_monthly_salary_component == 1)
-						frm.save()
-					} // Open
+						if(frm.is_new() && frm.doc.contract_type){
+							fill_salary_tables(frm)
+						}
+					} 
 				})
 		}
 	}
 })
+
+let fill_salary_tables = function(frm) {
+	frm.call("fill_salary_tables");
+	// frm.save()
+}

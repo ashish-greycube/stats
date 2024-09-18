@@ -188,6 +188,7 @@
    "label": "Terms And Condition"
   },
   {
+   "depends_on": "eval:doc.contract_type",
    "fieldname": "offer_details",
    "fieldtype": "Table",
    "label": "Offer Details",
@@ -199,12 +200,14 @@
    "label": "Salary Details"
   },
   {
+   "depends_on": "eval:doc.offer_details.length>0",
    "fieldname": "earning",
    "fieldtype": "Table",
    "label": "Earning",
    "options": "Earning Amount ST"
   },
   {
+   "depends_on": "eval:doc.offer_details.length>0",
    "fieldname": "deduction",
    "fieldtype": "Table",
    "label": "Deduction",
@@ -230,7 +233,7 @@
    "link_fieldname": "custom_job_offer_reference"
   }
  ],
- "modified": "2024-09-17 13:49:03.260568",
+ "modified": "2024-09-18 10:47:13.569572",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Offer ST",
