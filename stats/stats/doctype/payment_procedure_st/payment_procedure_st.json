@@ -9,6 +9,8 @@
   "section_break_odj0",
   "transaction_date",
   "payment_request_reference",
+  "reference_name",
+  "reference_no",
   "mode_of_payment_type",
   "mode_of_payment",
   "amended_from",
@@ -123,6 +125,18 @@
    "fieldtype": "Int",
    "label": "Total Amount",
    "read_only": 1
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Link",
+   "label": "Reference Name",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Dynamic Link",
+   "label": "Reference No",
+   "options": "reference_name"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -133,7 +147,7 @@
    "link_fieldname": "custom_payment_procedure_reference"
   }
  ],
- "modified": "2024-09-04 14:56:40.713180",
+ "modified": "2024-09-18 14:16:38.428557",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Payment Procedure ST",

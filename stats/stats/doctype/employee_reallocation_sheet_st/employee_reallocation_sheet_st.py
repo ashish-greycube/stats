@@ -30,6 +30,7 @@ class EmployeeReallocationSheetST(Document):
 		pr_doc.reference_name = "Employee Reallocation Sheet ST"
 		pr_doc.reference_no = self.name
 		pr_doc.budget_account = company_default_reallocation_budget_expense_account
+		pr_doc.party_type = "Employee"
 		
 		if len(self.employee_reallocation_request_details)>0:
 			for row in self.employee_reallocation_request_details:

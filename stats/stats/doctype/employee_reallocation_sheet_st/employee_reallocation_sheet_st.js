@@ -31,6 +31,13 @@ frappe.ui.form.on("Employee Reallocation Sheet ST", {
     },
 
     fetch_reallocation_request(frm){
+        if (frm.is_dirty() == true) {
+            frappe.throw({
+                message: __("Please save the form to proceed..."),
+                indicator: "red",
+            });
+        }
+        
         frm.set_value("employee_reallocation_request_details", "");
         frm.call("fetch_employee_reallocation_request").then((r) => {
             let available_training_request_list = r.message

@@ -64,13 +64,13 @@
    "fieldname": "from_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "From Date"
+   "label": "Request From Date"
   },
   {
    "fieldname": "to_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "To Date"
+   "label": "Request To Date"
   },
   {
    "fieldname": "main_department",
@@ -114,7 +114,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-10 15:36:20.286345",
+ "modified": "2024-09-18 15:52:46.977525",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Scholarship Requests Processing ST",

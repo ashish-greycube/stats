@@ -66,5 +66,5 @@ def get_employee_based_on_main_department(doctype, txt, searchfield, start, page
 	main_department = filters.get("main_department")
 	employee_list = frappe.db.get_all("Employee",
 				   filters={"department":main_department},
-				   fields=["name"],as_list=1)
+				   fields=["name","employee_name"],as_list=1)
 	return employee_list

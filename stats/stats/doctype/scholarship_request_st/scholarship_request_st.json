@@ -135,7 +135,8 @@
    "fieldname": "english_language_attachment",
    "fieldtype": "Attach",
    "label": "English Language Attachment",
-   "mandatory_depends_on": "eval:doc.english_required == \"Yes\""
+   "mandatory_depends_on": "eval:doc.english_required == \"Yes\"",
+   "no_copy": 1
   },
   {
    "fieldname": "column_break_xufn",
@@ -152,7 +153,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-18 10:28:17.056204",
+ "modified": "2024-09-18 15:07:08.863037",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Scholarship Request ST",

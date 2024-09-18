@@ -49,6 +49,13 @@ frappe.ui.form.on("Scholarship Requests Processing ST", {
     },
 
     fetch_scholarship_requests(frm) {
+        if (frm.is_dirty() == true) {
+            frappe.throw({
+                message: __("Please save the form to proceed..."),
+                indicator: "red",
+            });
+        }
+        
         frm.set_value("scholarship_request_details", "");
         frm.call({
             doc: frm.doc,

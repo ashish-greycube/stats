@@ -9,6 +9,7 @@ from frappe.model.document import Document
 class ScholarshipRequestST(Document):
 	def validate(self):
 		self.validate_duplicate_entry_based_on_employee_scholarship_and_specialisation_type()
+		self.validate_maximum_applications()
 
 	def validate_duplicate_entry_based_on_employee_scholarship_and_specialisation_type(self):
 		scholarship_list = frappe.db.get_all
@@ -16,6 +17,21 @@ class ScholarshipRequestST(Document):
 		print(exists_scholarship,self.employee_no,self.scholarship_no,self.specialisation_type,self.name,"--------------------")
 		if exists_scholarship != None and exists_scholarship != self.name:
 			frappe.throw(_("You cannot create Scholarship Request for same employee, scholarship no and specification type."))
+
+	def validate_maximum_applications(self):
+		if self.scholarship_no and self.specialisation_type:
+			scholarship = frappe.db.get_all("Scholarship ST",filters={"scholarship_no":self.scholarship_no},fields=["name"])
+			if len(scholarship)>0:
+				scholarship_doc = frappe.get_doc("Scholarship ST",scholarship[0].name)
+				for row in scholarship_doc.scholarship_details:
+					if row.specialisation_type == self.specialisation_type:
+						maximum_applicants = row.max_no_of_applicants
+				scholarship_requests_list = frappe.db.get_all("Scholarship Request ST",
+												  filters={"scholarship_no":self.scholarship_no,"specialisation_type":self.specialisation_type},
+												  fields=["name"])
+				print(len(scholarship_requests_list),"len(scholarship_requests_list)",maximum_applicants,"maximum_applicants")
+				if len(scholarship_requests_list) and len(scholarship_requests_list) > maximum_applicants:
+					frappe.throw(_("You cannot apply for scholarship because maximum limit is {0}").format(maximum_applicants))
 
 	@frappe.whitelist()
 	def fetch_scholarship_details_based_on_specialisation_type(self):
