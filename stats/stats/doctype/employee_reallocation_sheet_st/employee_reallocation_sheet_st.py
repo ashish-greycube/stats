@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
+import erpnext
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import get_link_to_form,today
@@ -22,10 +23,13 @@ class EmployeeReallocationSheetST(Document):
 				frappe.msgprint(_("Status of {0} is changed to Processed").format(get_link_to_form("Employee Reallocation ST",employee_reallocation_doc.name)),alert=True)
 	
 	def create_payment_request_on_submit_of_reallocation_sheet(self):
+		company = erpnext.get_default_company()
+		company_default_reallocation_budget_expense_account = frappe.db.get_value("Company",company,"custom_reallocation_budget_expense_account")
 		pr_doc = frappe.new_doc("Payment Request ST")
 		pr_doc.date = today()
 		pr_doc.reference_name = "Employee Reallocation Sheet ST"
 		pr_doc.reference_no = self.name
+		pr_doc.budget_account = company_default_reallocation_budget_expense_account
 		
 		if len(self.employee_reallocation_request_details)>0:
 			for row in self.employee_reallocation_request_details:

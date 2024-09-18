@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
+import erpnext
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import get_link_to_form
@@ -50,11 +51,13 @@ class BusinessTripSheetST(Document):
 			self.create_payment_request_on_submit_of_bts()
 
 	def create_payment_request_on_submit_of_bts(self):
-
+		company = erpnext.get_default_company()
+		company_default_business_trip_budget_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
 		pr_doc = frappe.new_doc("Payment Request ST")
 		pr_doc.date = today()
 		pr_doc.reference_name = "Business Trip Sheet ST"
 		pr_doc.reference_no = self.name
+		pr_doc.budget_account = company_default_business_trip_budget_expense_account
 		
 		if len(self.employee_detail)>0:
 			for row in self.employee_detail:
