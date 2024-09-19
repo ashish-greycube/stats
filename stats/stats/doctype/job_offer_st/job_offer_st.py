@@ -122,27 +122,27 @@ class JobOfferST(Document):
 								
 
 	def validate_total_monthly_salary_earnings_and_deductions(self):
-		if not self.is_new():
-			# monthly_salary = get_monthly_salary_from_job_offer(self.name)
-			monthly_salary = 0
-			if len(self.offer_details) > 0:
-				for offer in self.offer_details:
-					monthly_salary_component = frappe.db.get_value('Offer Term', offer.offer_term, 'custom_is_monthly_salary_component')
-					if monthly_salary_component == 1:
-						monthly_salary = offer.value
+		# if not self.is_new():
+		# monthly_salary = get_monthly_salary_from_job_offer(self.name)
+		monthly_salary = 0
+		if len(self.offer_details) > 0:
+			for offer in self.offer_details:
+				monthly_salary_component = frappe.db.get_value('Offer Term', offer.offer_term, 'custom_is_monthly_salary_component')
+				if monthly_salary_component == 1:
+					monthly_salary = offer.value
 
-			if monthly_salary > 0 :
-				total_monthly_salary = 0
-				if len(self.earning)>0:
-					for ear in self.earning:
-						total_monthly_salary = total_monthly_salary + ear.amount
+		if monthly_salary > 0 :
+			total_monthly_salary = 0
+			if len(self.earning)>0:
+				for ear in self.earning:
+					total_monthly_salary = total_monthly_salary + ear.amount
 
-				# if len(self.deduction)>0:
-				# 	for ded in self.deduction:
-				# 		total_monthly_salary = total_monthly_salary + ded.amount
+			# if len(self.deduction)>0:
+			# 	for ded in self.deduction:
+			# 		total_monthly_salary = total_monthly_salary + ded.amount
 
-				if total_monthly_salary != monthly_salary:
-					frappe.throw(_("Total of earnings and deductions amount must be {0} not {1}.").format(monthly_salary, total_monthly_salary))
+			if total_monthly_salary != monthly_salary:
+				frappe.throw(_("Total of earnings and deductions amount must be {0} not {1}.").format(monthly_salary, total_monthly_salary))
 
 	@frappe.whitelist()
 	def fill_salary_tables(self):
@@ -207,8 +207,8 @@ class JobOfferST(Document):
 					if ded.amount == 0 or ded.amount == None:
 						set_formula_base_amount = False
 
-			# if set_formula_base_amount == False:
-			# 	frappe.throw(_("Please put correct formula using 'total_monthly_salary' "))						
+			if set_formula_base_amount == False:
+				frappe.throw(_("Please put correct formula using 'total_monthly_salary' "))						
 				
 			# logic for forumla having abbr
 			if len(self.earning)>0:
