@@ -207,8 +207,8 @@ class JobOfferST(Document):
 					if ded.amount == 0 or ded.amount == None:
 						set_formula_base_amount = False
 
-			if set_formula_base_amount == False:
-				frappe.throw(_("Please put correct formula using 'total_monthly_salary' "))						
+			# if set_formula_base_amount == False:
+			# 	frappe.throw(_("Please put correct formula using 'total_monthly_salary' "))						
 				
 			# logic for forumla having abbr
 			if len(self.earning)>0:
