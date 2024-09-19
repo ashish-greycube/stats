@@ -41,6 +41,7 @@ frappe.ui.form.on("Employee Reallocation ST", {
                             .then(resopnse => {
                                 let full_name = resopnse.message.employee_name
                                 frm.set_value("created_by", full_name)
+                                frm.set_value("assign_current_tasks_to", "")
                             })
                     }
                 })

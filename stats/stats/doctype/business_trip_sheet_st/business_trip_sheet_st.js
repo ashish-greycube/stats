@@ -20,6 +20,13 @@ frappe.ui.form.on("Business Trip Sheet ST", {
 		})
     },
     fetch_business_trip(frm){
+        if (frm.is_dirty() == true) {
+            frappe.throw({
+                message: __("Please save the form to proceed..."),
+                indicator: "red",
+            });
+        }
+
         frm.set_value("employee_detail", "");
         frm.call({
             doc: frm.doc,

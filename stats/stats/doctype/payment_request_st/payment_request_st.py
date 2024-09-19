@@ -16,6 +16,13 @@ class PaymentRequestST(Document):
 			for row in self.employees:
 				total_amount = total_amount + (row.amount or 0)
 		self.total_amount = total_amount
+
+		self.set_party_name_based_on_party_type()
+
+	def set_party_name_based_on_party_type(self):
+		if self.party_type and self.party_type == "Employee":
+			self.party_name_employee = "Multiple Payment"
+
 	def on_submit(self):
 		company = erpnext.get_default_company()
 		if self.reference_name == "Business Trip Sheet ST":

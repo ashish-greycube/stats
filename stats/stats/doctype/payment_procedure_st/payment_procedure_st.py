@@ -17,6 +17,12 @@ class PaymentProcedureST(Document):
 				total_amount = total_amount + (row.amount or 0)
 		self.total_amount = total_amount
 
+		self.set_party_name_based_on_party_type()
+
+	def set_party_name_based_on_party_type(self):
+		if self.party_type and self.party_type == "Employee":
+			self.party_name_employee = "Multiple Payment"
+
 	def on_submit(self):
 		if not self.payment_type:
 			frappe.throw(_("Please select payment type"))
