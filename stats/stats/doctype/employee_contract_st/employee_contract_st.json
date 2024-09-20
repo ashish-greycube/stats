@@ -70,6 +70,7 @@
    "options": "Department"
   },
   {
+   "fetch_from": "job_offer_reference.section",
    "fieldname": "section",
    "fieldtype": "Link",
    "label": "Section",
@@ -94,6 +95,7 @@
    "read_only": 1
   },
   {
+   "default": "Active",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -218,7 +220,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-13 12:34:29.780309",
+ "modified": "2024-09-20 11:24:11.913169",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Contract ST",
