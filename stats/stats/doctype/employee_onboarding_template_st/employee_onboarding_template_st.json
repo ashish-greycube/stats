@@ -8,7 +8,7 @@
  "field_order": [
   "title",
   "section_break_wuvz",
-  "table_wvqw"
+  "activities"
  ],
  "fields": [
   {
@@ -24,14 +24,15 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "table_wvqw",
+   "fieldname": "activities",
    "fieldtype": "Table",
+   "label": "Activities",
    "options": "Employee Boarding Activity ST"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-21 13:47:10.823332",
+ "modified": "2024-09-20 14:43:23.029960",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Onboarding Template ST",

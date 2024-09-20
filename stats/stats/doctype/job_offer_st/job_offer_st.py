@@ -142,7 +142,7 @@ class JobOfferST(Document):
 			# 		total_monthly_salary = total_monthly_salary + ded.amount
 
 			if total_monthly_salary != monthly_salary:
-				frappe.throw(_("Total of earnings and deductions amount must be {0} not {1}.").format(monthly_salary, total_monthly_salary))
+				frappe.throw(_("Total of earnings amount must be {0} not {1}.").format(monthly_salary, total_monthly_salary))
 
 	@frappe.whitelist()
 	def fill_salary_tables(self):
@@ -192,10 +192,10 @@ class JobOfferST(Document):
 						# print(formula, '---formula---',total_monthly_salary, '---total_monthly_salary---')
 						ear.amount = frappe.safe_eval(formula, None,{field_name_of_total_monthly_salary:total_monthly_salary})
 						salary_abbreviation_dict[ear.abbr]=ear.amount
-
-					print(ear.amount, '--ear.amount')
-					if ear.amount == 0 or ear.amount == None:
-							set_formula_base_amount = False
+						
+						print(ear.amount, '--ear.amount')
+						if ear.amount == 0 or ear.amount == None:
+								set_formula_base_amount = False
 						
 			if len(self.deduction)>0:
 				for ded in self.deduction:
@@ -203,12 +203,10 @@ class JobOfferST(Document):
 					if formula  and formula.find(field_name_of_total_monthly_salary)>-1:
 						ded.amount = frappe.safe_eval(formula, None,{field_name_of_total_monthly_salary:total_monthly_salary})
 						salary_abbreviation_dict[ded.abbr]=ded.amount
-					print(ded.amount, '--ded.amount')
-					if ded.amount == 0 or ded.amount == None:
-						set_formula_base_amount = False
-
-			# if set_formula_base_amount == False:
-			# 	frappe.throw(_("Please put correct formula using 'total_monthly_salary' "))						
+						
+						print(ded.amount, '--ded.amount')
+						if ded.amount == 0 or ded.amount == None:
+							set_formula_base_amount = False					
 				
 			# logic for forumla having abbr
 			if len(self.earning)>0:
@@ -216,11 +214,10 @@ class JobOfferST(Document):
 					formula=ear.formula
 					if formula  and formula.find(field_name_of_total_monthly_salary)==-1:
 						ear.amount = frappe.safe_eval(formula, None,salary_abbreviation_dict)
-
-					print(ear.amount, '--ear.amount')
-					if ear.amount == 0 or ear.amount == None:
-							set_formula_base_amount = False
 						
+						print(ear.amount, '--ear.amount')
+						if ear.amount == 0 or ear.amount == None:
+								set_formula_base_amount = False
 						
 			if len(self.deduction)>0:
 				for ded in self.deduction:
@@ -228,15 +225,13 @@ class JobOfferST(Document):
 					if formula  and formula.find(field_name_of_total_monthly_salary)==-1:
 						ded.amount = frappe.safe_eval(formula, None,salary_abbreviation_dict)
 
-					print(ded.amount, '--ded.amount')
-					if ded.amount == 0 or ded.amount == None:
-						set_formula_base_amount = False
-					
+						print(ded.amount, '--ded.amount')
+						if ded.amount == 0 or ded.amount == None:
+							set_formula_base_amount = False
 
 			if set_formula_base_amount == True:
-				frappe.msgprint(_("Amount is set in Salary Tables"), alert=True)
-			
-			if set_formula_base_amount == False:
+				frappe.msgprint(_("Amount is set in Tables"), alert=True)
+			else:
 				frappe.msgprint(_("Amoumt is not set"), alert=True)
 
 @frappe.whitelist()
@@ -249,13 +244,24 @@ def make_employee(source_name, target_doc=None):
 		target.personal_email = source.email
 		target.status = "Active"
 		target.first_name = source.candidate_name
+		target.custom_employee_name_in_english = source.candidate_namein_english
+		target.custom_nationality = source.nationality
+		target.custom_religion = source.religion
+		target.custom_id__igama_no = source.id_igama_no
 		target.department = source.main_department
+		target.custom_section = source.section
 		target.custom_sub_department = source.sub_department
 		target.custom_contract_type = source.contract_type
 		target.employment_type = source.employment_type
 		target.custom_idresidency_number = source.id_igama_no
 		target.custom_id_expiration_date = source.id_expiration_date
 		target.cell_number = source.phone_no
+		target.custom_building_number = source.building_number
+		target.custom_neighbourhood = source.neighbourhood
+		target.custom_postal_code = source.postal_code
+		target.custom_street_name = source.street_name
+		target.custom_city = source.city
+		target.custom_additional_number = source.additional_number
 
 	doc = get_mapped_doc(
 		"Job Offer ST",

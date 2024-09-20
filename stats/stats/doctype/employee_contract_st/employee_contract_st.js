@@ -27,6 +27,13 @@ frappe.ui.form.on("Employee Contract ST", {
 					}
 				},
 			});
+
+			frappe.db.get_value('Employee', { custom_job_offer_reference: frm.doc.job_offer_reference }, 'name')
+				.then(r => {
+					let employee = r.message;
+					console.log(employee.name)
+					frm.set_value("employee_no", employee.name);
+				})
 		}
 	},
     contract_start_date: function(frm){

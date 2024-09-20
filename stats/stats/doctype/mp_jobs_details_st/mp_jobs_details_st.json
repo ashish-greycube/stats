@@ -11,11 +11,12 @@
   "no_of_position",
   "employee_no",
   "designation",
-  "sub_department",
   "position_status",
   "grade",
   "year_of_experience",
   "branch",
+  "employment_type",
+  "contract_type",
   "column_break_htec",
   "direct_manager",
   "job_category",
@@ -23,7 +24,7 @@
   "job_family",
   "sub_job_family",
   "main_job_department",
-  "sub_job_department",
+  "sub_department",
   "section",
   "employee_unit",
   "column_break_tilr",
@@ -125,12 +126,6 @@
    "options": "Job Family ST"
   },
   {
-   "fieldname": "sub_job_department",
-   "fieldtype": "Link",
-   "label": "Sub Job Department ",
-   "options": "Department"
-  },
-  {
    "fieldname": "section",
    "fieldtype": "Link",
    "label": "Section",
@@ -197,12 +192,24 @@
    "fieldtype": "Link",
    "label": "Branch",
    "options": "Branch"
+  },
+  {
+   "fieldname": "employment_type",
+   "fieldtype": "Link",
+   "label": "Employment Type",
+   "options": "Employment Type"
+  },
+  {
+   "fieldname": "contract_type",
+   "fieldtype": "Link",
+   "label": "Contract Type",
+   "options": "Contract Type ST"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-22 14:48:37.884441",
+ "modified": "2024-09-20 13:46:59.732861",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "MP Jobs Details ST",

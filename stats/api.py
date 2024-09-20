@@ -60,6 +60,16 @@ def set_todo_status_in_onboarding_procedures(self, method):
 				frappe.db.set_value('Onboarding Procedures ST', doc.name, 'date_of_completion', None)
 				frappe.msgprint(_("Update Status in {0} 's Onboarding Procedures Row No. {1}")
 					.format(doc.parent, doc.idx), alert=1)
+				
+def set_employee_company_email(self, method):
+	if self.reference_type == "Employee Onboarding ST":
+		if self.custom_create_company_email_for_employee == 1 and self.custom_company_email and self.status == "Open":
+			job_offer_reference = frappe.db.get_value("Employee Onboarding ST", self.reference_name, 'job_offer_reference')
+			if job_offer_reference:
+				employee = frappe.get_doc("Employee", {'custom_job_offer_reference': job_offer_reference})
+				employee.company_email = self.custom_company_email
+				employee.save(ignore_permissions=True)
+
 
 def calculate_years_of_experience(self, method):
 	diff = relativedelta.relativedelta(getdate(nowdate()), getdate(self.date_of_joining))

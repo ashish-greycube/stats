@@ -130,7 +130,8 @@ doctype_js = {"ToDo" : "public/js/todo.js",
 
 doc_events = {
     "ToDo": {
-		"validate":"stats.api.set_todo_status_in_onboarding_procedures"
+		"validate":["stats.api.set_todo_status_in_onboarding_procedures",
+                    "stats.api.set_employee_company_email"]
 	},
     "Employee": {
         "validate":"stats.api.calculate_years_of_experience"

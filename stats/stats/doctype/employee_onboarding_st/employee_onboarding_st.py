@@ -22,6 +22,9 @@ class EmployeeOnboardingST(Document):
 				todo.reference_type = self.doctype
 				todo.reference_name = self.name
 
+				if op.company_email_creation_task == 1:
+					todo.custom_create_company_email_for_employee = 1
+
 				todo.run_method("set_missing_values")
 				todo.save(ignore_permissions=True)
 
@@ -37,6 +40,7 @@ def get_onboarding_details(parent, parenttype):
 			"activity_name",
 			"user",
 			"full_name",
+			"company_email_creation_task"
 		],
 		filters={"parent": parent, "parenttype": parenttype},
 		order_by="idx",

@@ -7,19 +7,22 @@ from frappe.model.document import Document
 
 
 class ContractTypeST(Document):
-	# def validate(self):
-	# 	self.validate_salary_structure_percentage()
+	def validate(self):
+		self.validate_salary_structure_percentage()
 
 	def validate_salary_structure_percentage(self):
-		total_percentage = 0
-		if len(self.earning) > 0 :
+		field_name_of_total_monthly_salary='total_monthly_salary'
+		if len(self.earning) > 0:
+			total_monthly_salary = 100
+			calculate_amount = 0
+
 			for ear in self.earning:
-				total_percentage = total_percentage + int(ear.percent)
+					formula=ear.formula
+					if formula  and formula.find(field_name_of_total_monthly_salary)>-1:
+						amount = frappe.safe_eval(formula, None,{field_name_of_total_monthly_salary:total_monthly_salary})
+						calculate_amount = calculate_amount + amount
+					elif formula.find(field_name_of_total_monthly_salary) == -1:
+						frappe.throw(_("In Row {0}: Please use correct variable 'total_monthly_salary' in formula.").format(ear.idx))
 
-		if len(self.deduction) > 0:
-			for ded in self.deduction:
-				print(type(total_percentage), '--total_percentage', )
-				total_percentage = total_percentage + int(ded.percent)
-
-		if total_percentage > 100:
-			frappe.throw(_("Salary Structure Percentage cann't be  greater than 100"))
+			if calculate_amount != total_monthly_salary:
+				frappe.throw(_("Total of earnings must be 100%"))
