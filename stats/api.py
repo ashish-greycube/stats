@@ -63,7 +63,7 @@ def set_todo_status_in_onboarding_procedures(self, method):
 				
 def set_employee_company_email(self, method):
 	if self.reference_type == "Employee Onboarding ST":
-		if self.custom_create_company_email_for_employee == 1 and self.custom_company_email and self.status == "Open":
+		if self.custom_create_company_email == 1 and self.custom_company_email and self.status == "Open":
 			job_offer_reference = frappe.db.get_value("Employee Onboarding ST", self.reference_name, 'job_offer_reference')
 			if job_offer_reference:
 				employee = frappe.get_doc("Employee", {'custom_job_offer_reference': job_offer_reference})
@@ -210,7 +210,8 @@ def create_salary_structure_assignment(self, method):
 		assignment.base = amount
 
 		assignment.save(ignore_permissions=True)
-		frappe.msgprint(_("Salary Structure Assignment {0} created.".format(assignment.name)), alert=True)
+		frappe.msgprint(_("Salary Structure Assignment {0} created." .format(get_link_to_form('Salary Structure Assignment', assignment.name))), alert=True)
+		assignment.submit()
 
 def get_monthly_salary_from_job_offer(job_offer):
 	doc = frappe.get_doc("Job Offer ST", job_offer)

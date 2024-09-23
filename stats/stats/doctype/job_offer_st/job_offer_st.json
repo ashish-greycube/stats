@@ -33,7 +33,6 @@
   "column_break_emth",
   "phone_no",
   "email",
-  "company_email",
   "candidate_national_address_section",
   "building_number",
   "neighbourhood",
@@ -260,11 +259,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "company_email",
-   "fieldtype": "Data",
-   "label": "Company Email"
-  },
-  {
    "fieldname": "candidate_national_address_section",
    "fieldtype": "Section Break",
    "label": "Candidate National Address"
@@ -320,7 +314,7 @@
    "link_fieldname": "custom_job_offer_reference"
   }
  ],
- "modified": "2024-09-20 11:06:43.201209",
+ "modified": "2024-09-23 06:48:34.916105",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Offer ST",

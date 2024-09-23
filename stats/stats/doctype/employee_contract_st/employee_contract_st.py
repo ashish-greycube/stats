@@ -55,6 +55,8 @@ class EmployeeContractST(Document):
 
 			frappe.msgprint(_("Salary Structure {0} is created."
 					 .format(get_link_to_form('Salary Structure', salary_structure.name))), alert=True)
+			
+			salary_structure.submit()
 
 @frappe.whitelist()
 def get_salary_details(parent, parenttype):
