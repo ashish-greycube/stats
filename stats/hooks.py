@@ -31,6 +31,7 @@ doctype_js = {"ToDo" : "public/js/todo.js",
               "Employee":"public/js/employee.js",
               "Company":"public/js/company.js",
               "Department":"public/js/department.js",
+              "Designation":"public/js/designation.js"
               }
 
 # include js in doctype views
@@ -144,6 +145,9 @@ doc_events = {
     },
     "Salary Structure": {
         "on_submit":"stats.api.create_salary_structure_assignment"
+    },
+    "Designation": {
+        "validate":"stats.api.validate_weight_and_set_degree_based_on_weight"
     }    
 }
 
@@ -172,6 +176,10 @@ scheduler_events = {
             "stats.api.set_scholarship_status_closed"
         ]
 	},
+    "daily": [
+        "stats.api.create_employee_evaluation_yearly_and_half_yearly",
+        "stats.api.create_employee_evaluation_based_on_employee_contract"
+    ]
 }
 # 	"all": [
 # 		"stats.tasks.all"

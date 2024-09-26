@@ -23,7 +23,7 @@
   "contract_start_date",
   "contract_end_date",
   "column_break_bfsv",
-  "trial_period_end_date",
+  "test_period_end_date",
   "end_of_new_test_period",
   "total_monthly_salary",
   "employee_details_section",
@@ -89,12 +89,7 @@
    "label": "Contract End Date"
   },
   {
-   "fieldname": "trial_period_end_date",
-   "fieldtype": "Date",
-   "label": "Trial Period End Date",
-   "read_only": 1
-  },
-  {
+   "allow_on_submit": 1,
    "default": "Active",
    "fieldname": "status",
    "fieldtype": "Select",
@@ -122,6 +117,7 @@
    "options": "Employee Grade"
   },
   {
+   "allow_on_submit": 1,
    "default": "No",
    "fieldname": "test_period_renewed",
    "fieldtype": "Select",
@@ -129,6 +125,7 @@
    "options": "Yes\nNo"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "end_of_new_test_period",
    "fieldtype": "Date",
    "label": "End of New Test Period",
@@ -215,12 +212,18 @@
    "label": "Total Monthly Salary",
    "precision": "2",
    "read_only": 1
+  },
+  {
+   "fieldname": "test_period_end_date",
+   "fieldtype": "Date",
+   "label": "Test Period End Date",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-20 11:24:11.913169",
+ "modified": "2024-09-25 13:50:28.906620",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Contract ST",

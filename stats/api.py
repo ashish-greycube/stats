@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from frappe.utils import getdate,nowdate,format_duration,cint,get_link_to_form
+from frappe.utils import getdate,nowdate,format_duration,cint,get_link_to_form,flt,add_years
 from dateutil import relativedelta
 
 @frappe.whitelist()
@@ -232,3 +232,199 @@ def get_base_amount_from_salary_structure_assignment(employee):
 		frappe.throw(_("No Base Amount Found"))
 	else:
 		return base
+
+def validate_weight_and_set_degree_based_on_weight(self, method):
+	set_degree_based_on_weight(self.custom_management_skills)
+	validate_weight(self.custom_management_skills)
+
+def set_degree_based_on_weight(details):
+	if len(details)>0:
+		for row in details:
+			if row.weight and row.target_degree:
+					row.degree_based_on_weight = flt((row.weight * row.target_degree) / 100,2)
+
+def validate_weight(details):
+	if len(details)>0:
+		total_weight = 0
+		for row in details:
+			if row.weight:
+				total_weight = total_weight + row.weight
+			else:
+				frappe.throw(_("Row #{0}: Weight cannot be 0").format(row.idx))
+		if total_weight != 100:
+			frappe.throw(_("Total of weight must be 100"))
+
+def calculate_actual_degree_based_on_weight(details):
+	if len(details)>0:
+		for row in details:
+			if row.actual_degree and row.weight:
+				row.actual_degree_based_on_weight = flt((row.actual_degree * row.weight) / 100, 2)
+
+@frappe.whitelist()
+def create_employee_evaluation_yearly_and_half_yearly():
+	stats_settings_doc = frappe.get_doc("Stats Settings ST")
+	today = getdate(nowdate())
+	# today = getdate("2026-12-31")
+	print(today,"today",type(today),"stats_settings_doc",stats_settings_doc.annual_creation_date,type(getdate(stats_settings_doc.annual_creation_date)))
+	if today == getdate(stats_settings_doc.annual_creation_date):
+		all_active_employee_list = frappe.db.get_all("Employee",filters={"status":"Active","custom_test_period_completed":"Yes"},fields=["name"])
+
+		if len(all_active_employee_list)>0:
+			for employee in all_active_employee_list:
+				employee_doc = frappe.get_doc("Employee",employee.name)
+				employee_evaluation_doc = frappe.new_doc("Employee Evaluation ST")
+				if today == getdate(stats_settings_doc.annual_creation_date):
+					employee_evaluation_doc.employee_no = employee.name
+					employee_evaluation_doc.creation_date = stats_settings_doc.annual_creation_date
+					employee_evaluation_doc.evaluation_type = "Yearly"
+					employee_evaluation_doc.evaluation_from = stats_settings_doc.annual_evaluation_from
+					employee_evaluation_doc.evaluation_to = stats_settings_doc.annual_evaluation_to
+
+				elif today == getdate(stats_settings_doc.half_yearly_creation_date):
+					employee_evaluation_doc = frappe.new_doc("Employee Evaluation ST")
+					employee_evaluation_doc.employee_no = employee.name
+					employee_evaluation_doc.creation_date = stats_settings_doc.half_yearly_creation_date
+					employee_evaluation_doc.evaluation_type = "Half Yearly"
+					employee_evaluation_doc.evaluation_from = stats_settings_doc.half_yearly_evaluation_from
+					employee_evaluation_doc.evaluation_to = stats_settings_doc.half_yearly_evaluation_to
+				
+				employee_personal_goal = frappe.db.get_all("Employee Personal Goals ST",
+												filters={"employee_no":employee.name,"docstatus":1},
+												fields=["name"])
+				if len(employee_personal_goal)>0:
+					employee_personal_goal_doc = frappe.get_doc("Employee Personal Goals ST",employee_personal_goal[0].name)
+					if len(employee_personal_goal_doc.personal_goals)>0:
+						for row in employee_personal_goal_doc.personal_goals:
+							personal_goal = employee_evaluation_doc.append("employee_personal_goals",{})
+							personal_goal.goals = row.goals
+							personal_goal.weight = row.weight
+							personal_goal.target_degree = row.target_degree
+
+				if employee_doc.grade:
+					evaluation_template = frappe.db.get_all("Employee Evaluation Template ST",
+												filters={"grade":employee_doc.grade},
+												fields=["name"])
+					if len(evaluation_template)>0:
+						evaluation_template_doc = frappe.get_doc("Employee Evaluation Template ST",evaluation_template[0].name)
+						if len(evaluation_template_doc.job_goals)>0:
+							for row in evaluation_template_doc.job_goals:
+								job_goal = employee_evaluation_doc.append("employee_job_goals",{})
+								job_goal.goals = row.goals
+								job_goal.weight = row.weight
+								job_goal.uom = row.uom
+								job_goal.target_degree = row.target_degree
+
+				if employee_doc.designation:
+					designation_doc = frappe.get_doc("Designation",employee_doc.designation)
+					if len(designation_doc.custom_management_skills)>0:
+						for row in designation_doc.custom_management_skills:
+							management_skill = employee_evaluation_doc.append("employee_management_skills",{})
+							management_skill.skill = row.skill
+							management_skill.skill_description = row.skill_description
+							management_skill.weight = row.weight
+							management_skill.target_degree = row.target_degree
+
+				employee_evaluation_doc.save(ignore_permissions=True)
+				employee_evaluation_doc.add_comment("Comment",text="Created by system on {0}".format(nowdate()))
+
+			if today == getdate(stats_settings_doc.annual_creation_date):
+				next_yearly_evaluation_date = add_years(stats_settings_doc.annual_creation_date, 1)
+				next_yearly_evaluation_from_date = add_years(stats_settings_doc.annual_evaluation_from, 1)
+				next_yearly_evaluation_to_date = add_years(stats_settings_doc.annual_evaluation_to, 1)
+
+				print(next_yearly_evaluation_date,"next_yearly_evaluation_date","----",next_yearly_evaluation_from_date,'next_yearly_evaluation_from_date',"----",next_yearly_evaluation_to_date,"next_yearly_evaluation_to_date")
+				stats_settings_doc.annual_creation_date = next_yearly_evaluation_date
+				stats_settings_doc.annual_evaluation_from = next_yearly_evaluation_from_date
+				stats_settings_doc.annual_evaluation_to = next_yearly_evaluation_to_date
+				stats_settings_doc.add_comment("Comment",text="Annual Evaluation Default Dates are updated on {0}".format(nowdate()))
+				stats_settings_doc.save(ignore_permissions=True)
+				
+			elif today == getdate(stats_settings_doc.half_yearly_creation_date):
+				next_half_yearly_evaluation_date = add_years(stats_settings_doc.half_yearly_creation_date, 1)
+				next_half_yearly_evaluation_from_date = add_years(stats_settings_doc.half_yearly_evaluation_from, 1)
+				next_half_yearly_evaluation_to_date = add_years(stats_settings_doc.half_yearly_evaluation_to, 1)
+
+				print(next_half_yearly_evaluation_date,"next_half_yearly_evaluation_date","----",next_half_yearly_evaluation_from_date,'next_half_yearly_evaluation_from_date',"----",next_half_yearly_evaluation_to_date,"next_yearly_evaluation_to_date")
+				stats_settings_doc.half_yearly_creation_date = next_half_yearly_evaluation_date
+				stats_settings_doc.half_yearly_evaluation_from = next_half_yearly_evaluation_from_date
+				stats_settings_doc.half_yearly_evaluation_to = next_half_yearly_evaluation_to_date
+				stats_settings_doc.add_comment("Comment",text="Half-Yearly Evaluation Default Dates are updated on {0}".format(nowdate()))
+				stats_settings_doc.save(ignore_permissions=True)
+
+@frappe.whitelist()
+def create_employee_evaluation_based_on_employee_contract():
+	today = getdate(nowdate())
+	# today = getdate("2024-12-26")
+	employee_contract_list = frappe.db.get_all("Employee Contract ST",
+											filters={"docstatus":1},
+											or_filters={"test_period_end_date":today,"end_of_new_test_period":today},
+											fields=["name"])
+	default_template_for_test_period = frappe.db.get_single_value("Stats Settings ST","default_evaluation_template_for_test_period")
+	if len(employee_contract_list)>0:
+		for contract in employee_contract_list:
+			print(contract,"--")
+			employee_contract_doc = frappe.get_doc("Employee Contract ST",contract.name)
+			if employee_contract_doc.end_of_new_test_period or employee_contract_doc.test_period_end_date:
+				employee_evaluation_doc = frappe.new_doc("Employee Evaluation ST")
+				employee_evaluation_doc.employee_no = employee_contract_doc.employee_no
+				employee_evaluation_doc.creation_date = today
+				employee_evaluation_doc.evaluation_type = "Test Period"
+				employee_evaluation_doc.employee_contract_reference = employee_contract_doc.name
+
+				if employee_contract_doc.end_of_new_test_period == today:
+					employee_evaluation_doc.evaluation_from = employee_contract_doc.test_period_end_date
+					employee_evaluation_doc.evaluation_to = employee_contract_doc.end_of_new_test_period
+
+				elif employee_contract_doc.test_period_end_date == today:
+					employee_evaluation_doc.evaluation_from = employee_contract_doc.contract_start_date
+					employee_evaluation_doc.evaluation_to = employee_contract_doc.test_period_end_date
+				
+				employee_grade = frappe.db.get_value("Employee",employee_contract_doc.employee_no,"grade")
+				employee_designation = frappe.db.get_value("Employee",employee_contract_doc.employee_no,"designation")
+				employee_personal_goal = frappe.db.get_all("Employee Personal Goals ST",
+											filters={"employee_no":employee_contract_doc.employee_no,"docstatus":1},
+											fields=["name"])
+				if len(employee_personal_goal)>0:
+					employee_personal_goal_doc = frappe.get_doc("Employee Personal Goals ST",employee_personal_goal[0].name)
+					if len(employee_personal_goal_doc.personal_goals)>0:
+						for row in employee_personal_goal_doc.personal_goals:
+							personal_goal = employee_evaluation_doc.append("employee_personal_goals",{})
+							personal_goal.goals = row.goals
+							personal_goal.weight = row.weight
+							personal_goal.target_degree = row.target_degree
+
+				if employee_grade:
+					evaluation_template = frappe.db.get_all("Employee Evaluation Template ST",
+												filters={"grade":employee_grade},
+												fields=["name"])
+					if len(evaluation_template)>0:
+						evaluation_template_doc = frappe.get_doc("Employee Evaluation Template ST",evaluation_template[0].name)
+						if len(evaluation_template_doc.job_goals)>0:
+							for row in evaluation_template_doc.job_goals:
+								job_goal = employee_evaluation_doc.append("employee_job_goals",{})
+								job_goal.goals = row.goals
+								job_goal.weight = row.weight
+								job_goal.uom = row.uom
+								job_goal.target_degree = row.target_degree
+				if default_template_for_test_period:
+					evaluation_template_doc = frappe.get_doc("Employee Evaluation Template ST",default_template_for_test_period)
+					if len(evaluation_template_doc.job_goals)>0:
+						for row in evaluation_template_doc.job_goals:
+							job_goal = employee_evaluation_doc.append("employee_job_goals",{})
+							job_goal.goals = row.goals
+							job_goal.weight = row.weight
+							job_goal.uom = row.uom
+							job_goal.target_degree = row.target_degree
+
+				if employee_designation:
+					designation_doc = frappe.get_doc("Designation",employee_designation)
+					if len(designation_doc.custom_management_skills)>0:
+						for row in designation_doc.custom_management_skills:
+							management_skill = employee_evaluation_doc.append("employee_management_skills",{})
+							management_skill.skill = row.skill
+							management_skill.skill_description = row.skill_description
+							management_skill.weight = row.weight
+							management_skill.target_degree = row.target_degree
+
+				employee_evaluation_doc.save(ignore_permissions=True)
+				employee_evaluation_doc.add_comment("Comment",text="Created by system on {0}".format(nowdate()))

@@ -2,6 +2,25 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Employee Contract ST", {
+
+	setup(frm) {
+        frm.set_query("main_department", function (doc) {
+			return {
+				query: "stats.api.get_main_department",
+			};
+		});
+		frm.set_query("sub_department", function (doc){
+            if (frm.doc.main_department) {
+                return {
+                    filters: {
+                        parent_department: frm.doc.main_department,
+                        is_group: 0
+                    }
+                };       
+            }
+		})
+    },
+
 	job_offer_reference: function (frm) {
 		frm.set_value("earning", "");
         frm.set_value("deduction", "");
@@ -39,15 +58,18 @@ frappe.ui.form.on("Employee Contract ST", {
     contract_start_date: function(frm){
         if(frm.doc.contract_start_date){
             let trial_period = frappe.datetime.add_months(frm.doc.contract_start_date, 3)
-            frm.set_value('trial_period_end_date', trial_period)
+			let contract_end_date = frappe.datetime.add_months(frm.doc.contract_start_date, 12)
+            frm.set_value('test_period_end_date', trial_period)
+			frm.set_value('contract_end_date', contract_end_date)
+
         }
         else{
-            frm.set_value('trial_period_end_date', '')
+            frm.set_value('test_period_end_date', '')
         }
     },
     test_period_renewed: function(frm){
         if(frm.doc.test_period_renewed == "Yes"){
-            let renew_trial_period = frappe.datetime.add_months(frm.doc.trial_period_end_date, 3)
+            let renew_trial_period = frappe.datetime.add_months(frm.doc.test_period_end_date, 3)
             frm.set_value('end_of_new_test_period', renew_trial_period)
         }
         else{

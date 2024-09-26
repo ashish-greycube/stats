@@ -12,7 +12,6 @@ class ScholarshipRequestST(Document):
 		self.validate_maximum_applications()
 
 	def validate_duplicate_entry_based_on_employee_scholarship_and_specialisation_type(self):
-		scholarship_list = frappe.db.get_all
 		exists_scholarship = frappe.db.exists("Scholarship Request ST", {"employee_no": self.employee_no,"scholarship_no": self.scholarship_no,"specialisation_type": self.specialisation_type})
 		print(exists_scholarship,self.employee_no,self.scholarship_no,self.specialisation_type,self.name,"--------------------")
 		if exists_scholarship != None and exists_scholarship != self.name:

@@ -5,7 +5,7 @@ import frappe
 from frappe import _
 from frappe.utils import get_link_to_form
 from frappe.model.document import Document
-from frappe.utils import add_to_date
+from frappe.utils import add_to_date,add_years
 from stats.api import get_monthly_salary_from_job_offer
 
 class EmployeeContractST(Document):
@@ -20,11 +20,16 @@ class EmployeeContractST(Document):
 			monthly_salary = get_monthly_salary_from_job_offer(self.job_offer_reference)
 			self.total_monthly_salary = monthly_salary
 		if self.contract_start_date:
-			self.trial_period_end_date = add_to_date(self.contract_start_date, months=3)
+			self.test_period_end_date = add_to_date(self.contract_start_date, months=3)
+			self.contract_end_date = add_years(self.contract_start_date, 1)
 			if self.test_period_renewed == "Yes":
-				self.end_of_new_test_period = add_to_date(self.trial_period_end_date, months=3)
+				self.end_of_new_test_period = add_to_date(self.test_period_end_date, months=3)
 			else:
 				self.end_of_new_test_period = None
+
+	def on_update_after_submit(self):
+		if self.test_period_renewed == "Yes":
+			self.end_of_new_test_period = add_to_date(self.test_period_end_date, months=3)
 
 	def create_salary_structure(self):
 		if self.contract_type:

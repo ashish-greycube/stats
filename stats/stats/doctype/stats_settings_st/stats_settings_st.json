@@ -6,7 +6,34 @@
  "engine": "InnoDB",
  "field_order": [
   "default_trip_cost_template",
-  "maximum_reallocation_amount"
+  "column_break_yxct",
+  "maximum_reallocation_amount",
+  "column_break_yrnt",
+  "default_evaluation_template_for_test_period",
+  "normal_employee_evaluation_percentage_section",
+  "normal_employee_personal_goals",
+  "column_break_gduf",
+  "normal_job_goals",
+  "management_team_section",
+  "management_employee_personal_goals",
+  "column_break_ldes",
+  "management_job_goals",
+  "column_break_epgv",
+  "management_skills",
+  "section_break_ncpb",
+  "evaluation_slots",
+  "annual_evaluation_default_dates_section",
+  "annual_creation_date",
+  "column_break_jpgv",
+  "annual_evaluation_from",
+  "column_break_hpgl",
+  "annual_evaluation_to",
+  "half_yearly_evaluation_default_dates_section",
+  "half_yearly_creation_date",
+  "column_break_axhq",
+  "half_yearly_evaluation_from",
+  "column_break_zmap",
+  "half_yearly_evaluation_to"
  ],
  "fields": [
   {
@@ -22,12 +49,157 @@
    "fieldtype": "Currency",
    "label": "Maximum Reallocation Amount",
    "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "normal_employee_evaluation_percentage_section",
+   "fieldtype": "Section Break",
+   "label": "Normal Employee Evaluation Percentage"
+  },
+  {
+   "fieldname": "column_break_gduf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "normal_employee_personal_goals",
+   "fieldtype": "Percent",
+   "label": "Employee Personal Goals %",
+   "reqd": 1
+  },
+  {
+   "fieldname": "normal_job_goals",
+   "fieldtype": "Percent",
+   "label": "Job Goals %",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "management_team_section",
+   "fieldtype": "Section Break",
+   "label": "Management Team"
+  },
+  {
+   "fieldname": "column_break_ldes",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_epgv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "management_skills",
+   "fieldtype": "Percent",
+   "label": "Management Skills %",
+   "reqd": 1
+  },
+  {
+   "fieldname": "management_employee_personal_goals",
+   "fieldtype": "Percent",
+   "label": "Employee Personal Goals %",
+   "reqd": 1
+  },
+  {
+   "fieldname": "management_job_goals",
+   "fieldtype": "Percent",
+   "label": "Job Goals %",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_yxct",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ncpb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "range should not be overlap Ex. 0-0.99,1-1.99",
+   "fieldname": "evaluation_slots",
+   "fieldtype": "Table",
+   "label": "Evaluation Slots",
+   "options": "Evaluation Slots Details ST",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "annual_evaluation_default_dates_section",
+   "fieldtype": "Section Break",
+   "label": "<b>Annual Evaluation Default Dates</b>"
+  },
+  {
+   "fieldname": "column_break_jpgv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "annual_creation_date",
+   "fieldtype": "Date",
+   "label": "Next Creation date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "annual_evaluation_from",
+   "fieldtype": "Date",
+   "label": "Next Evaluation From",
+   "reqd": 1
+  },
+  {
+   "fieldname": "annual_evaluation_to",
+   "fieldtype": "Date",
+   "label": "Next Evaluation To",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "half_yearly_evaluation_default_dates_section",
+   "fieldtype": "Section Break",
+   "label": "<b>Half-Yearly Evaluation Default Dates</b>"
+  },
+  {
+   "fieldname": "column_break_axhq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "half_yearly_creation_date",
+   "fieldtype": "Date",
+   "label": "Next Creation date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "half_yearly_evaluation_from",
+   "fieldtype": "Date",
+   "label": "Next Evaluation From",
+   "reqd": 1
+  },
+  {
+   "fieldname": "half_yearly_evaluation_to",
+   "fieldtype": "Date",
+   "label": "Next Evaluation To",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_hpgl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_zmap",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_yrnt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_evaluation_template_for_test_period",
+   "fieldtype": "Link",
+   "label": "Default Evaluation Template For Test Period",
+   "options": "Employee Evaluation Template ST",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-09-12 13:57:32.929536",
+ "modified": "2024-09-25 14:48:32.754562",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats Settings ST",
