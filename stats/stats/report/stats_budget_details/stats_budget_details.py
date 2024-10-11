@@ -75,11 +75,11 @@ def get_columns(filters):
 def get_conditions(filters):
 	conditions =""
 
-	# if filters.fiscal_year:
-	# 	conditions += " and b.fiscal_year = '{0}'".format(filters.fiscal_year)
+	if filters.fiscal_year:
+		conditions += " b.fiscal_year = '{0}'".format(filters.fiscal_year)
 
 	if filters.cost_center:
-		conditions += " b.cost_center = '{0}'".format(filters.cost_center)
+		conditions += "and b.cost_center = '{0}'".format(filters.cost_center)
 	
 	if filters.account:
 		conditions += " and ba.account = '{0}'".format(filters.account)
@@ -89,6 +89,7 @@ def get_conditions(filters):
 def get_data(filters):
 	data = []
 	conditions = get_conditions(filters)
+	print(filters, '===filters')
 
 	data = frappe.db.sql(
 		"""SELECT
@@ -111,8 +112,9 @@ def get_data(filters):
             left join    `tabGL Entry` gl
             on ba.account = gl.account 
             and b.cost_center = gl.cost_center 
+		where {1}
 		group by gl.name
 		order by b.cost_center,ba.account
-		""".format(filters.get('fiscal_year')),filters,as_dict=1)
+		""".format(filters.get('fiscal_year'), conditions),filters,as_dict=1)
 
 	return data

@@ -1,0 +1,128 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "OR-.#####",
+ "creation": "2024-10-10 10:57:25.998048",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_yiye",
+  "creation_date",
+  "main_department",
+  "amended_from",
+  "column_break_itlz",
+  "overtime_start_date",
+  "overtime_end_date",
+  "created_by",
+  "employee",
+  "section_break_cqhn",
+  "fetch_employee",
+  "section_break_kbpg",
+  "employee_overtime_request"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_yiye",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Overtime Request ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "creation_date",
+   "fieldtype": "Date",
+   "label": "Creation Date"
+  },
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_itlz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "overtime_start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Overtime Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "overtime_end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Overtime End Date",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "created_by",
+   "fieldtype": "Data",
+   "label": "Created By"
+  },
+  {
+   "fieldname": "section_break_cqhn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "fetch_employee",
+   "fieldtype": "Button",
+   "label": "Fetch Employee"
+  },
+  {
+   "fieldname": "section_break_kbpg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "employee_overtime_request",
+   "fieldtype": "Table",
+   "label": "Employee Overtime Request",
+   "options": "Employee Overtime Request Details ST"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-10-11 09:30:05.191237",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Overtime Request ST",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
