@@ -148,6 +148,9 @@ doc_events = {
     },
     "Designation": {
         "validate":"stats.api.validate_weight_and_set_degree_based_on_weight"
+    },
+    "Attendance": {
+        "validate":"stats.api.calculate_extra_working_hours"
     }    
 }
 

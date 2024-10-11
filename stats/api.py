@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from frappe.utils import getdate,nowdate,format_duration,cint,get_link_to_form,flt,add_years
+from frappe.utils import getdate,nowdate,format_duration,cint,get_link_to_form,flt,add_years,time_diff_in_hours
 from dateutil import relativedelta
 
 @frappe.whitelist()
@@ -428,3 +428,13 @@ def create_employee_evaluation_based_on_employee_contract():
 
 				employee_evaluation_doc.save(ignore_permissions=True)
 				employee_evaluation_doc.add_comment("Comment",text="Created by system on {0}".format(nowdate()))
+
+def calculate_extra_working_hours(self,method):
+	shift_start_time = frappe.db.get_value("Shift Type",self.shift,"start_time")
+	shift_end_time = frappe.db.get_value("Shift Type",self.shift,"end_time")
+
+	actual_working_hours = time_diff_in_hours(shift_end_time, shift_start_time)
+	employee_working_hours = self.working_hours
+
+	if employee_working_hours > actual_working_hours:
+		self.custom_extra_hours = employee_working_hours - actual_working_hours

@@ -1,0 +1,146 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-09-27 13:44:04.992326",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_u1eo",
+  "date",
+  "time",
+  "created_by",
+  "column_break_aemn",
+  "attendance_from",
+  "attendance_to",
+  "amended_from",
+  "filters_section",
+  "section",
+  "branch",
+  "fetch",
+  "column_break_xzix",
+  "main_department",
+  "sub_department",
+  "section_break_ossf",
+  "employee_attendance_checkup_details"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_u1eo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Employee Attendance Checkup ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "label": "Time"
+  },
+  {
+   "fieldname": "created_by",
+   "fieldtype": "Data",
+   "label": "Created By"
+  },
+  {
+   "fieldname": "column_break_aemn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "attendance_from",
+   "fieldtype": "Time",
+   "label": "Attendance From"
+  },
+  {
+   "fieldname": "attendance_to",
+   "fieldtype": "Time",
+   "label": "Attendance To"
+  },
+  {
+   "fieldname": "filters_section",
+   "fieldtype": "Section Break",
+   "label": "Filters"
+  },
+  {
+   "fieldname": "section",
+   "fieldtype": "Link",
+   "label": "Section",
+   "options": "Section ST"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "column_break_xzix",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fetch",
+   "fieldtype": "Button",
+   "label": "Fetch"
+  },
+  {
+   "fieldname": "section_break_ossf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "employee_attendance_checkup_details",
+   "fieldtype": "Table",
+   "label": "Employee Attendance Checkup Details",
+   "options": "Employee Attendance Checkup Details ST"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-09-27 14:01:52.930477",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Employee Attendance Checkup ST",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
