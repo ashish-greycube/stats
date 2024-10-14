@@ -6,25 +6,60 @@ from erpnext.accounts.utils import get_fiscal_year
 from frappe.utils import today, flt
 from frappe.utils import date_diff
 
-def check_if_holiday_between_applied_dates(from_date, to_date,employee=None, holiday_list=None):
+def check_if_holiday_between_applied_dates(employee, from_date, to_date, holiday_list=None):
     number_of_days = date_diff(to_date, from_date)
     number_of_days = flt(number_of_days) - flt(	get_holidays(employee, from_date, to_date, holiday_list=holiday_list))
     return number_of_days
 
-def check_employee_in_scholarship(employee,from_date, to_date):
-    scholarship = frappe.db.exists("Scholarship Request ST", {"employee_no": employee, 
-                                                              "transaction_date": ["between", [from_date, to_date]],
-                                                              "acceptance_status": "Accepted"})
+def check_employee_in_scholarship(employee, from_date, to_date=None):
+    if not to_date:
+        to_date=from_date
+
+    scholarship = frappe.qb.DocType('Scholarship Request ST')
+    overlapping_scholarship = (
+	frappe.qb.from_(scholarship)
+            .select(scholarship.name)
+            .where(
+                (scholarship.employee_no == employee)
+                & (scholarship.docstatus < 2)
+                & (to_date >= scholarship.scholarship_start_date)
+		        & (from_date <= scholarship.scholarship_end_date)
+                & (scholarship.acceptance_status == "Accepted")
+            )
+        ).run(as_dict=True)
     
-    # print(scholarship, '--scholarship')
-    return scholarship
+    print(overlapping_scholarship, '--overlapping_scholarship')
+    if overlapping_scholarship:
+        return True
+    else: return False
 
 def check_employee_in_training(employee,from_date, to_date):
-    training = frappe.db.exists("Training Request ST", {"employee_no":employee,
-                                                        "date":["between", [from_date, to_date]],
-                                                        "status": ["in", ["Accepted", "Finished"]]})
-    # print(training, '---training')
-    return training
+    if not to_date:
+        to_date=from_date
+
+    training = frappe.qb.DocType('Training Request ST')
+    overlapping_training = (
+	frappe.qb.from_(training)
+            .select(training.name)
+            .where(
+                (training.employee_no == employee)
+                & (training.docstatus < 2)
+                & (to_date >= training.training_start_date)
+		        & (from_date <= training.training_end_date)
+                & (training.status == "Accepted")
+            )
+        ).run(as_dict=True)
+    
+    print(overlapping_training, '--overlapping_training')
+    if overlapping_training:
+        return True
+    else: return False
+
+    # training = frappe.db.exists("Training Request ST", {"employee_no":employee,
+    #                                                     "date":["between", [from_date, to_date]],
+    #                                                     "status": ["in", ["Accepted", "Finished"]]})
+    # # print(training, '---training')
+    # return training
 
 
 def check_available_amount_for_budget(budget_account,cost_center):
