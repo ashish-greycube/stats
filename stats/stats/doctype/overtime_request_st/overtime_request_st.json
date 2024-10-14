@@ -18,7 +18,8 @@
   "section_break_cqhn",
   "fetch_employee",
   "section_break_kbpg",
-  "employee_overtime_request"
+  "employee_overtime_request",
+  "total_due_amount"
  ],
  "fields": [
   {
@@ -97,12 +98,19 @@
    "fieldtype": "Table",
    "label": "Employee Overtime Request",
    "options": "Employee Overtime Request Details ST"
+  },
+  {
+   "fieldname": "total_due_amount",
+   "fieldtype": "Currency",
+   "label": "Total Due Amount",
+   "precision": "2",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-11 09:30:05.191237",
+ "modified": "2024-10-14 12:34:40.762826",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Overtime Request ST",

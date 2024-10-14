@@ -7,9 +7,11 @@ from frappe.utils import today, flt
 from frappe.utils import date_diff
 
 def check_if_holiday_between_applied_dates(employee, from_date, to_date, holiday_list=None):
-    number_of_days = date_diff(to_date, from_date)
-    number_of_days = flt(number_of_days) - flt(	get_holidays(employee, from_date, to_date, holiday_list=holiday_list))
-    return number_of_days
+    holidays = get_holidays(employee, from_date, to_date, holiday_list=holiday_list)
+    # print(holidays, '-----holiday b/w')
+    if holidays > 0:
+        return True
+    else: return False
 
 def check_employee_in_scholarship(employee, from_date, to_date=None):
     if not to_date:
@@ -28,7 +30,7 @@ def check_employee_in_scholarship(employee, from_date, to_date=None):
             )
         ).run(as_dict=True)
     
-    print(overlapping_scholarship, '--overlapping_scholarship')
+    # print(overlapping_scholarship, '--overlapping_scholarship')
     if overlapping_scholarship:
         return True
     else: return False
@@ -50,17 +52,10 @@ def check_employee_in_training(employee,from_date, to_date):
             )
         ).run(as_dict=True)
     
-    print(overlapping_training, '--overlapping_training')
+    # print(overlapping_training, '--overlapping_training')
     if overlapping_training:
         return True
     else: return False
-
-    # training = frappe.db.exists("Training Request ST", {"employee_no":employee,
-    #                                                     "date":["between", [from_date, to_date]],
-    #                                                     "status": ["in", ["Accepted", "Finished"]]})
-    # # print(training, '---training')
-    # return training
-
 
 def check_available_amount_for_budget(budget_account,cost_center):
     fiscal_year = get_fiscal_year(today())[0]
