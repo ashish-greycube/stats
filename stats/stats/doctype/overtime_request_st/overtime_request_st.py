@@ -13,8 +13,13 @@ from frappe.utils import date_diff
 
 class OvertimeRequestST(Document):
 	def validate(self):
+		self.validate_overtime_dates()
 		self.calculate_employee_due_amount()
 		self.validate_budget_for_overtime()
+
+	def validate_overtime_dates(self):
+		if self.overtime_start_date and self.overtime_end_date and self.overtime_start_date > self.overtime_end_date:
+			frappe.throw(_("Overtime start date cann't be greater than overtime end date"))
 
 	def calculate_employee_due_amount(self):
 		company = erpnext.get_default_company()
@@ -25,7 +30,7 @@ class OvertimeRequestST(Document):
 				monthly_salary = get_latest_total_monthly_salary_of_employee(row.employee_no)
 				# print(monthly_salary, type(monthly_salary))
 				# print(row.employee_no, '--employee_no')
-				row.due_amount = row.no_of_hours_per_day * no_of_day * ((monthly_salary or 0)/30)
+				row.due_amount = (row.no_of_hours_per_day or 0) * (no_of_day or 0) * ((monthly_salary or 0)/30)
 				row.rate_per_hour = ((monthly_salary or 0)/(30 * 8)) 
 				row.overtime_rate_per_hour = (row.rate_per_hour * 0.5) + row.rate_per_hour
 				total_due_amt = total_due_amt + row.due_amount
@@ -50,13 +55,13 @@ class OvertimeRequestST(Document):
 	def get_employee(self):
 		emp = {}
 		emp_list=[]
-		
-		employee_list = frappe.db.get_all("Employee", filters={"status":"Active"}, fields=["name"])
+		employee_list = frappe.db.get_all("Employee", filters={"status":"Active", "department":self.main_department}, fields=["name"])
 		if len(employee_list) > 0:
 			for employee in employee_list:
 				scholarship = check_employee_in_scholarship(employee.name,self.overtime_start_date, self.overtime_end_date)
 				training = check_employee_in_training(employee.name,self.overtime_start_date, self.overtime_end_date)
 				holiday = check_if_holiday_between_applied_dates(self.overtime_start_date, self.overtime_end_date,employee.name)
+				# print(scholarship, '--scholarship', training, '--training', holiday, '--holiday', employee.name)
 				if scholarship == None and training == None and holiday !=  date_diff(self.overtime_end_date, self.overtime_start_date):
 					emp["employee_no"]=employee.name
 					emp_list.append(emp.copy())
