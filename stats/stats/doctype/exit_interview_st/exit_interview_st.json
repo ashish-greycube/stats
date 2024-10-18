@@ -1,0 +1,696 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:EI-{employee_no}-{###}",
+ "creation": "2024-10-16 12:31:37.038731",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_axmy",
+  "interview_done_by",
+  "resignation_reference",
+  "resignation_date",
+  "amended_from",
+  "column_break_hxiu",
+  "employee_no",
+  "employee_name",
+  "sub_department",
+  "nationality",
+  "marital_status",
+  "id_no",
+  "direct_manager",
+  "leaving_reasons_section",
+  "better_salary",
+  "business_circumstance",
+  "working_days",
+  "other",
+  "other_reasons_details",
+  "column_break_clew",
+  "better_job",
+  "family_reasons",
+  "work_type",
+  "no_good_supervising",
+  "section_break_hwhl",
+  "html_chkq",
+  "work_environment",
+  "salary",
+  "treatment",
+  "work_training",
+  "team_work",
+  "communication",
+  "supervising",
+  "respect",
+  "column_break_cjhb",
+  "excellent",
+  "work_environment_ex",
+  "salary_ex",
+  "treatment_ex",
+  "work_training_ex",
+  "team_work_ex",
+  "communication_ex",
+  "supervising_ex",
+  "respect_ex",
+  "column_break_jbom",
+  "very_good",
+  "work_environment_vg",
+  "salary_vg",
+  "treatment_vg",
+  "work_training_vg",
+  "team_work_vg",
+  "communication_vg",
+  "supervising_vg",
+  "respect_vg",
+  "column_break_bbtk",
+  "good",
+  "work_environment_go",
+  "salary_go",
+  "treatment_go",
+  "work_training_go",
+  "team_work_go",
+  "communication_go",
+  "supervising_go",
+  "respect_go",
+  "column_break_brbl",
+  "weak",
+  "work_environment_wk",
+  "salary_wk",
+  "treatment_wk",
+  "work_training_wk",
+  "team_work_wk",
+  "communication_wk",
+  "supervising_wk",
+  "respect_wk",
+  "column_break_ehlo",
+  "very_weak",
+  "work_environment_vwk",
+  "salary_vwk",
+  "treatment_vwk",
+  "work_training_vwk",
+  "team_work_vwk",
+  "communication_vwk",
+  "supervising_vwk",
+  "respect_vwk",
+  "did_you_receive_your_tasks_on_joining__section",
+  "question",
+  "column_break_advw",
+  "joining_yes",
+  "column_break_ptgu",
+  "joining_no",
+  "do_you_wish_to_work_with_us_again__section",
+  "html_swto",
+  "column_break_ucxm",
+  "work_yes",
+  "column_break_ivhj",
+  "work_no",
+  "do_you_wish_to_work_for_the_same_department_again__section",
+  "html_brmu",
+  "column_break_ewhv",
+  "department_yes",
+  "column_break_grtb",
+  "department_no",
+  "section_break_orfe",
+  "other_comment"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_axmy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Exit Interview ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "interview_done_by",
+   "fieldtype": "Data",
+   "label": "Interview Done By"
+  },
+  {
+   "fieldname": "resignation_reference",
+   "fieldtype": "Data",
+   "label": "Resignation Reference"
+  },
+  {
+   "fieldname": "resignation_date",
+   "fieldtype": "Date",
+   "label": "Resignation Date"
+  },
+  {
+   "fieldname": "employee_no",
+   "fieldtype": "Link",
+   "label": "Employee No",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_no.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_no.custom_sub_department",
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_no.custom_nationality",
+   "fieldname": "nationality",
+   "fieldtype": "Data",
+   "label": "Nationality",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_no.marital_status",
+   "fieldname": "marital_status",
+   "fieldtype": "Select",
+   "label": "Marital Status",
+   "options": "\nSingle\nMarried\nDivorced\nWidowed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_hxiu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee_no.custom_id__igama_no",
+   "fieldname": "id_no",
+   "fieldtype": "Data",
+   "label": "ID No",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_no.reports_to",
+   "fieldname": "direct_manager",
+   "fieldtype": "Link",
+   "label": "Direct Manager",
+   "options": "Employee",
+   "read_only": 1
+  },
+  {
+   "fieldname": "leaving_reasons_section",
+   "fieldtype": "Section Break",
+   "label": "<b>Leaving Reasons</b>"
+  },
+  {
+   "default": "0",
+   "fieldname": "better_salary",
+   "fieldtype": "Check",
+   "label": "Better Salary"
+  },
+  {
+   "default": "0",
+   "fieldname": "business_circumstance",
+   "fieldtype": "Check",
+   "label": "Business circumstance"
+  },
+  {
+   "default": "0",
+   "fieldname": "working_days",
+   "fieldtype": "Check",
+   "label": "Working Days"
+  },
+  {
+   "depends_on": "eval:doc.other == 1",
+   "fieldname": "other_reasons_details",
+   "fieldtype": "Data",
+   "label": "Other Reasons Details",
+   "mandatory_depends_on": "eval:doc.other == 1"
+  },
+  {
+   "fieldname": "column_break_clew",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "better_job",
+   "fieldtype": "Check",
+   "label": "Better Job"
+  },
+  {
+   "default": "0",
+   "fieldname": "family_reasons",
+   "fieldtype": "Check",
+   "label": "Family Reasons"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_type",
+   "fieldtype": "Check",
+   "label": "Work Type"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_good_supervising",
+   "fieldtype": "Check",
+   "label": "No Good Supervising"
+  },
+  {
+   "default": "0",
+   "fieldname": "other",
+   "fieldtype": "Check",
+   "label": "Other ( Please Explain )"
+  },
+  {
+   "fieldname": "did_you_receive_your_tasks_on_joining__section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "joining_yes",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "fieldname": "column_break_ptgu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "joining_no",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "do_you_wish_to_work_with_us_again__section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_yes",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "fieldname": "column_break_ivhj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_no",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "do_you_wish_to_work_for_the_same_department_again__section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "department_yes",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "fieldname": "column_break_grtb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "department_no",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "section_break_orfe",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "other_comment",
+   "fieldtype": "Small Text",
+   "label": "Other Comment"
+  },
+  {
+   "fieldname": "column_break_advw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "question",
+   "fieldtype": "HTML",
+   "label": "Question",
+   "options": "<h5>Did you receive your Tasks on Joining ?</h5>"
+  },
+  {
+   "fieldname": "html_swto",
+   "fieldtype": "HTML",
+   "options": "<h5>Do you wish to work with us Again ?</h5>"
+  },
+  {
+   "fieldname": "column_break_ucxm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "html_brmu",
+   "fieldtype": "HTML",
+   "options": "<h5>Do you wish to work for the same department Again ?</h5>"
+  },
+  {
+   "fieldname": "column_break_ewhv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_hwhl",
+   "fieldtype": "Section Break",
+   "label": "<b>Evaluate Following in your Department</b>"
+  },
+  {
+   "fieldname": "html_chkq",
+   "fieldtype": "HTML",
+   "label": "Evaluate Following in your Department"
+  },
+  {
+   "fieldname": "work_environment",
+   "fieldtype": "HTML",
+   "label": "Work Environment",
+   "options": "<h5 style=\"padding-top:20px;\">Work Environment</h5>"
+  },
+  {
+   "fieldname": "salary",
+   "fieldtype": "HTML",
+   "label": "Salary",
+   "options": "<h5 style=\"padding-top:15px;\">Salary</h5>"
+  },
+  {
+   "fieldname": "treatment",
+   "fieldtype": "HTML",
+   "label": "Treatment",
+   "options": "<h5 style=\"padding-top:15px;\">Treatment</h5>"
+  },
+  {
+   "fieldname": "work_training",
+   "fieldtype": "HTML",
+   "label": "Work Training",
+   "options": "<h5 style=\"padding-top:15px;\">Work Training</h5>"
+  },
+  {
+   "fieldname": "team_work",
+   "fieldtype": "HTML",
+   "label": "Team Work",
+   "options": "<h5 style=\"padding-top:15px;\">Team Work</h5>"
+  },
+  {
+   "fieldname": "communication",
+   "fieldtype": "HTML",
+   "label": "Communication",
+   "options": "<h5 style=\"padding-top:15px;\">Communication</h5>"
+  },
+  {
+   "fieldname": "supervising",
+   "fieldtype": "HTML",
+   "label": "Supervising",
+   "options": "<h5 style=\"padding-top:15px;\">Supervising</h5>"
+  },
+  {
+   "fieldname": "respect",
+   "fieldtype": "HTML",
+   "label": "Respect",
+   "options": "<h5 style=\"padding-top:15px;\">Respect</h5>"
+  },
+  {
+   "fieldname": "column_break_cjhb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "excellent",
+   "fieldtype": "HTML",
+   "label": "Excellent",
+   "options": "<h5>Excellent</h5>"
+  },
+  {
+   "fieldname": "column_break_jbom",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "very_good",
+   "fieldtype": "HTML",
+   "label": "Very good",
+   "options": "<h5>Very good</h5>"
+  },
+  {
+   "fieldname": "column_break_bbtk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "good",
+   "fieldtype": "HTML",
+   "label": "Good",
+   "options": "<h5>Good</h5>"
+  },
+  {
+   "fieldname": "column_break_brbl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "weak",
+   "fieldtype": "HTML",
+   "label": "Weak",
+   "options": "<h5>Weak</h5>"
+  },
+  {
+   "fieldname": "column_break_ehlo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "very_weak",
+   "fieldtype": "HTML",
+   "label": "Very Weak",
+   "options": "<h5>Very Weak</h5>"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_environment_ex",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_environment_vg",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_environment_go",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_environment_wk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_environment_vwk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "salary_ex",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "salary_vg",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "salary_go",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "salary_wk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "salary_vwk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "treatment_ex",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "treatment_vg",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "treatment_go",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "treatment_wk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "treatment_vwk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_training_ex",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_training_vg",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_training_go",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_training_wk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "work_training_vwk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "team_work_ex",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "team_work_vg",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "team_work_go",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "team_work_wk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "team_work_vwk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "communication_ex",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "communication_vg",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "communication_go",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "communication_wk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "communication_vwk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "supervising_ex",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "supervising_vg",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "supervising_go",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "supervising_wk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "supervising_vwk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "respect_ex",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "respect_vg",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "respect_go",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "respect_wk",
+   "fieldtype": "Check"
+  },
+  {
+   "default": "0",
+   "fieldname": "respect_vwk",
+   "fieldtype": "Check"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-10-17 09:21:55.406470",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Exit Interview ST",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

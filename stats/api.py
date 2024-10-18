@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from frappe.utils import getdate,nowdate,format_duration,cint,get_link_to_form,flt,add_years,time_diff_in_hours
+from frappe.utils import getdate,nowdate,format_duration,cint,get_link_to_form,flt,add_years,time_diff_in_hours,now,rounded
 from dateutil import relativedelta
 
 @frappe.whitelist()
@@ -430,11 +430,48 @@ def create_employee_evaluation_based_on_employee_contract():
 				employee_evaluation_doc.add_comment("Comment",text="Created by system on {0}".format(nowdate()))
 
 def calculate_extra_working_hours(self,method):
+	print('--'*10,'from stas validate',self.get('working_hours'))
 	shift_start_time = frappe.db.get_value("Shift Type",self.shift,"start_time")
 	shift_end_time = frappe.db.get_value("Shift Type",self.shift,"end_time")
 
 	actual_working_hours = time_diff_in_hours(shift_end_time, shift_start_time)
 	employee_working_hours = self.working_hours
 
-	if employee_working_hours > actual_working_hours:
-		self.custom_extra_hours = employee_working_hours - actual_working_hours
+	# rounded_employee_working_hours = rounded(employee_working_hours - actual_working_hours, 0)
+
+	if employee_working_hours and (employee_working_hours > 0):
+		if employee_working_hours > actual_working_hours:
+			# int_hours, dec_min = divmod(employee_working_hours - actual_working_hours, 1)
+			# extra_min = dec_min * 60
+			# extra_hours = str(int_hours)+"."+str(extra_min)
+			self.custom_extra_hours = employee_working_hours - actual_working_hours
+
+def validate_duplicate_record_for_employee_checkin(self):
+		# employee_checkin = frappe.db.get_all("Employee Checkin",
+		# 							   filters={"employee":self.employee,"log_type":self.log_type,"time":self.time},
+		# 							   fields=["name","time"])
+		employee_checkin = frappe.db.exists("Employee Checkin",{"employee":self.employee,"log_type":self.log_type,"time":self.time})
+		
+		print(employee_checkin,"-----")
+		# if len(employee_checkin)>0:
+		if employee_checkin != None and employee_checkin != self.name:
+			print("Done")
+			frappe.throw(_("This employee already has a employee checkin with the same date and attendance type <br><b>{0}</b>").format(get_link_to_form("Employee Checkin",ele.name)))
+
+def set_last_sync_of_checkin_in_all_shift_type():
+	shift_list = frappe.get_all("Shift Type", filters={"enable_auto_attendance": "1"}, pluck="name")
+	for shift in shift_list:
+		shift_type_doc = frappe.get_doc("Shift Type",shift)
+		shift_type_doc.last_sync_of_checkin = now()
+		shift_type_doc.add_comment("Comment",text="Last Sync of Checkin is updated by system on {0}".format(now()))
+		shift_type_doc.save(ignore_permissions=True)
+
+def set_last_sync_of_checkin_on_save_of_employee_checkin(self,method):
+	if not (self.skip_auto_attendance or not self.shift):
+		print("IN FUNC ----------------------------")
+		latest_checkin = frappe.get_last_doc("Employee Checkin", filters={"shift": self.shift}, order_by="time desc")
+		current_last_sync_of_checkin_in_shift = frappe.db.get_value("Shift Type", self.shift, "last_sync_of_checkin")
+		print(latest_checkin.time,"latest_checkin.time-------",type(latest_checkin.time),current_last_sync_of_checkin_in_shift,"current_last_sync_of_checkin_in_shift",type(current_last_sync_of_checkin_in_shift))
+		if latest_checkin.time > current_last_sync_of_checkin_in_shift:
+			print("Valid -----")
+			frappe.db.set_value("Shift Type", self.shift, "last_sync_of_checkin", latest_checkin.time)

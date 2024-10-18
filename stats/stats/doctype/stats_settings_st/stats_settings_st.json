@@ -33,7 +33,9 @@
   "column_break_axhq",
   "half_yearly_evaluation_from",
   "column_break_zmap",
-  "half_yearly_evaluation_to"
+  "half_yearly_evaluation_to",
+  "section_break_etcm",
+  "percentage_for_overtime"
  ],
  "fields": [
   {
@@ -194,12 +196,22 @@
    "label": "Default Evaluation Template For Test Period",
    "options": "Employee Evaluation Template ST",
    "reqd": 1
+  },
+  {
+   "fieldname": "section_break_etcm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "percentage_for_overtime",
+   "fieldtype": "Percent",
+   "label": "Percentage For Overtime",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-09-25 14:48:32.754562",
+ "modified": "2024-10-18 14:59:26.602290",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats Settings ST",

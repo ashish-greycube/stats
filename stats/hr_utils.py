@@ -3,7 +3,7 @@ from frappe import _
 from hrms.hr.doctype.leave_application.leave_application import get_holidays
 from stats.stats.report.stats_budget_details.stats_budget_details import get_data
 from erpnext.accounts.utils import get_fiscal_year
-from frappe.utils import today, flt
+from frappe.utils import today, flt, getdate, nowdate
 from frappe.utils import date_diff
 
 def check_if_holiday_between_applied_dates(employee, from_date, to_date, holiday_list=None):
@@ -35,7 +35,7 @@ def check_employee_in_scholarship(employee, from_date, to_date=None):
         return True
     else: return False
 
-def check_employee_in_training(employee,from_date, to_date):
+def check_employee_in_training(employee,from_date, to_date=None):
     if not to_date:
         to_date=from_date
 
@@ -54,6 +54,28 @@ def check_employee_in_training(employee,from_date, to_date):
     
     # print(overlapping_training, '--overlapping_training')
     if overlapping_training:
+        return True
+    else: return False
+
+def check_employee_in_salary_freezing(employee,from_date, to_date=None):
+    if not to_date:
+        to_date=from_date
+
+    salary_freezing = frappe.qb.DocType('Salary Freezing ST')
+    overlapping_salary_freezing = (
+	frappe.qb.from_(salary_freezing)
+            .select(salary_freezing.name)
+            .where(
+                (salary_freezing.employee_no == employee)
+                & (salary_freezing.docstatus < 2)
+                & (to_date >= salary_freezing.salary_freezing_start_date)
+		        & (from_date <= salary_freezing.salary_freezing_end_date)
+                & (salary_freezing.decision_number.isnull() == 0)
+            )
+        ).run(as_dict=True)
+    
+    print(overlapping_salary_freezing, '--overlapping_salary_freezing')
+    if overlapping_salary_freezing:
         return True
     else: return False
 
@@ -80,3 +102,25 @@ def get_latest_total_monthly_salary_of_employee(employee):
         return employee_monthly_salary[0].base
     else: 
         return
+
+def validate_dates(employee, from_date, to_date):
+	date_of_joining, relieving_date = frappe.db.get_value(
+		"Employee", employee, ["date_of_joining", "relieving_date"]
+	)
+	if getdate(from_date) > getdate(to_date):
+		frappe.throw(_("To date can not be less than from date"))
+	elif getdate(from_date) > getdate(nowdate()):
+		frappe.throw(_("Future dates not allowed"))
+	elif date_of_joining and getdate(from_date) < getdate(date_of_joining):
+		frappe.throw(_("From date can not be less than employee's joining date"))
+	elif relieving_date and getdate(to_date) > getdate(relieving_date):
+		frappe.throw(_("To date can not greater than employee's relieving date"))
+          
+@frappe.whitelist()
+def get_employee_emails(details):
+    email_id_list = []
+    for row in details:
+        email_id_list.append(row.email_id)
+
+    combine_email_id = ",".join((ele if ele!=None else '') for ele in email_id_list)
+    return combine_email_id  

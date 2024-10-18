@@ -9,14 +9,15 @@
   "section_break_yiye",
   "creation_date",
   "main_department",
-  "amended_from",
+  "sub_department",
+  "fetch_employee",
   "column_break_itlz",
   "overtime_start_date",
   "overtime_end_date",
+  "status_overtime_request_processing",
   "created_by",
   "employee",
-  "section_break_cqhn",
-  "fetch_employee",
+  "amended_from",
   "section_break_kbpg",
   "employee_overtime_request",
   "total_due_amount"
@@ -74,10 +75,6 @@
    "label": "Created By"
   },
   {
-   "fieldname": "section_break_cqhn",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "fetch_employee",
    "fieldtype": "Button",
    "label": "Fetch Employee"
@@ -105,12 +102,25 @@
    "label": "Total Due Amount",
    "precision": "2",
    "read_only": 1
+  },
+  {
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status_overtime_request_processing",
+   "fieldtype": "Select",
+   "label": "Status: Overtime Request Processing",
+   "options": "\nPending\nApproved\nRejected"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-14 12:34:40.762826",
+ "modified": "2024-10-18 14:56:40.726424",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Overtime Request ST",

@@ -66,10 +66,10 @@ doctype_js = {"ToDo" : "public/js/todo.js",
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "stats.utils.jinja_methods",
-# 	"filters": "stats.utils.jinja_filters"
-# }
+jinja = {
+	"methods": "stats.hr_utils.get_employee_emails",
+	# "filters": "stats.utils.jinja_filters"
+}
 
 # Installation
 # ------------
@@ -151,6 +151,9 @@ doc_events = {
     },
     "Attendance": {
         "validate":"stats.api.calculate_extra_working_hours"
+    },
+    "Employee Checkin": {
+        "after_insert":"stats.api.set_last_sync_of_checkin_on_save_of_employee_checkin"
     }    
 }
 
@@ -176,7 +179,8 @@ scheduler_events = {
 		],
         # at 11:30 PM every day
         "30 23 * * *": [
-            "stats.api.set_scholarship_status_closed"
+            "stats.api.set_scholarship_status_closed",
+            "stats.api.set_last_sync_of_checkin_in_all_shift_type"
         ]
 	},
     "daily": [

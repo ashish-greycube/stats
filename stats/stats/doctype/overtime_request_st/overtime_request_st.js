@@ -17,6 +17,16 @@ frappe.ui.form.on("Overtime Request ST", {
                 query: "stats.api.get_main_department",
             };
         });
+        frm.set_query("sub_department", function (doc) {
+            if (frm.doc.main_department) {
+                return {
+                    filters: {
+                        parent_department: frm.doc.main_department,
+                        is_group: 0
+                    }
+                };
+            }
+        })
     },
     fetch_employee(frm){
         if (frm.is_dirty() == true) {

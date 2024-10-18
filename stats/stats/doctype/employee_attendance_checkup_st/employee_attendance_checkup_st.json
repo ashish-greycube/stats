@@ -1,22 +1,24 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "EAC-.#####",
  "creation": "2024-09-27 13:44:04.992326",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "section_break_u1eo",
   "date",
-  "time",
   "created_by",
+  "fetch_attendance",
   "column_break_aemn",
+  "attendance_date",
   "attendance_from",
   "attendance_to",
   "amended_from",
   "filters_section",
   "section",
   "branch",
-  "fetch",
+  "fetch_employee",
   "column_break_xzix",
   "main_department",
   "sub_department",
@@ -45,11 +47,6 @@
    "label": "Date"
   },
   {
-   "fieldname": "time",
-   "fieldtype": "Time",
-   "label": "Time"
-  },
-  {
    "fieldname": "created_by",
    "fieldtype": "Data",
    "label": "Created By"
@@ -61,12 +58,16 @@
   {
    "fieldname": "attendance_from",
    "fieldtype": "Time",
-   "label": "Attendance From"
+   "in_list_view": 1,
+   "label": "Attendance From",
+   "reqd": 1
   },
   {
    "fieldname": "attendance_to",
    "fieldtype": "Time",
-   "label": "Attendance To"
+   "in_list_view": 1,
+   "label": "Attendance To",
+   "reqd": 1
   },
   {
    "fieldname": "filters_section",
@@ -102,11 +103,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "fetch",
-   "fieldtype": "Button",
-   "label": "Fetch"
-  },
-  {
    "fieldname": "section_break_ossf",
    "fieldtype": "Section Break"
   },
@@ -115,15 +111,36 @@
    "fieldtype": "Table",
    "label": "Employee Attendance Checkup Details",
    "options": "Employee Attendance Checkup Details ST"
+  },
+  {
+   "default": "Today",
+   "fieldname": "attendance_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Attendance Date",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.docstatus == 1",
+   "fieldname": "fetch_attendance",
+   "fieldtype": "Button",
+   "label": "Fetch Attendance"
+  },
+  {
+   "depends_on": "eval:doc.docstatus == 0",
+   "fieldname": "fetch_employee",
+   "fieldtype": "Button",
+   "label": "Fetch Employee"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-27 14:01:52.930477",
+ "modified": "2024-10-17 14:32:10.828397",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Attendance Checkup ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -142,5 +159,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }
