@@ -15,10 +15,10 @@
  "fields": [
   {
    "fieldname": "evaluation_classification",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Evaluation classification",
-   "options": "\nHighly Exceed Expectation\nExceed Expectation\nMeet Expectation\nRequired Training\nLess Than Expectation"
+   "options": "Evaluation Classification ST"
   },
   {
    "fieldname": "column_break_jrjt",
@@ -46,7 +46,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-24 11:13:37.522905",
+ "modified": "2024-10-21 08:34:46.509708",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Evaluation Slots Details ST",

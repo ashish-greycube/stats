@@ -10,6 +10,7 @@
   "created_by",
   "department",
   "employee_evaluation",
+  "fetch_employees",
   "column_break_twrv",
   "no_of_years_for_retirement",
   "main_department",
@@ -81,12 +82,18 @@
    "fieldtype": "Table",
    "label": "High Performance Employee Details",
    "options": "High Performance Employee Details ST"
+  },
+  {
+   "depends_on": "eval:doc.docstatus == 0",
+   "fieldname": "fetch_employees",
+   "fieldtype": "Button",
+   "label": "Fetch Employees"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-17 08:26:42.446173",
+ "modified": "2024-10-21 08:49:47.475249",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "High Performance Employee ST",

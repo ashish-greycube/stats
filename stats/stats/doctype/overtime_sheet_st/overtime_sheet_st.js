@@ -54,18 +54,18 @@ frappe.ui.form.on("Overtime Sheet ST", {
                     frappe.model.set_value(d.doctype, d.name, "overtime_rate_per_hour", ele.overtime_rate_per_hour)
                 })
                 frm.refresh_field('overtime_sheet_employee_details')
-                frm.save()
+                // frm.save()
             }
         })
     }
 });
 
-// frappe.ui.form.on("Overtime Sheet ST", {
-//     actual_extra_hours(frm, cdt, cdn) {
-//         let row = locals[cdt][cdn]
-//         if (row.actual_extra_hours){
-//             let total_amount = 
-//             frappe.model.set_value(row.doctype, row.name,"total_1a_1b", total_1a_1b)
-//         }
-//     }
-// })
+frappe.ui.form.on("Overtime Sheet Employee Details ST", {
+    actual_extra_hours(frm, cdt, cdn) {
+        let row = locals[cdt][cdn]
+        if (row.actual_extra_hours){
+            let total_amount = row.actual_extra_hours * row.overtime_rate_per_hour
+            frappe.model.set_value(row.doctype, row.name,"amount", total_amount)
+        }
+    }
+})

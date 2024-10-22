@@ -28,7 +28,7 @@ class OvertimeRequestST(Document):
 		if len(self.employee_overtime_request) > 0:
 			total_due_amt = 0
 			no_of_day = date_diff(self.overtime_end_date, self.overtime_start_date)
-			percentage_for_overtime = frappe.db.get_single_value("Stats Settings","percentage_for_overtime")
+			percentage_for_overtime = frappe.db.get_single_value("Stats Settings ST","percentage_for_overtime")
 			if percentage_for_overtime:
 				for row in self.employee_overtime_request:	
 					monthly_salary = get_latest_total_monthly_salary_of_employee(row.employee_no)

@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from frappe.utils import getdate,nowdate,format_duration,cint,get_link_to_form,flt,add_years,time_diff_in_hours,now,rounded
+from frappe.utils import getdate,nowdate,format_duration,cint,get_link_to_form,flt,add_years,time_diff_in_hours,now,rounded,flt
 from dateutil import relativedelta
 
 @frappe.whitelist()
@@ -438,13 +438,19 @@ def calculate_extra_working_hours(self,method):
 	employee_working_hours = self.working_hours
 
 	# rounded_employee_working_hours = rounded(employee_working_hours - actual_working_hours, 0)
-
+	print(employee_working_hours,"employee_working_hours",actual_working_hours,"actual_working_hours")
 	if employee_working_hours and (employee_working_hours > 0):
 		if employee_working_hours > actual_working_hours:
-			# int_hours, dec_min = divmod(employee_working_hours - actual_working_hours, 1)
-			# extra_min = dec_min * 60
-			# extra_hours = str(int_hours)+"."+str(extra_min)
-			self.custom_extra_hours = employee_working_hours - actual_working_hours
+			print(employee_working_hours,"employee_working_hours",actual_working_hours,"actual_working_hours")
+			int_hours, dec_min = divmod(employee_working_hours - actual_working_hours, 1)
+			print(int_hours, dec_min,"int_hours, dec_min",rounded(int_hours, 0))
+			extra_min = cint(rounded(dec_min * 60,0)) 
+			int_hours = cint(int_hours)
+
+			print(extra_min,"extra_min",int_hours)
+			extra_hours = flt(str(int_hours)+"."+str(extra_min))
+			print(extra_hours,"extra_hours",type(extra_hours),flt(extra_hours))
+			self.custom_extra_hours = extra_hours
 
 def validate_duplicate_record_for_employee_checkin(self):
 		# employee_checkin = frappe.db.get_all("Employee Checkin",

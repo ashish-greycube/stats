@@ -10,8 +10,8 @@ from stats.hr_utils import get_latest_total_monthly_salary_of_employee
 
 class OvertimeSheetST(Document):
 	
-	def validate(self):
-		self.calculate_amount_based_on_actual_extra_hours_and_set_total_amount()
+	# def validate(self):
+	# 	self.calculate_amount_based_on_actual_extra_hours_and_set_total_amount()
 
 	def calculate_amount_based_on_actual_extra_hours_and_set_total_amount(self):
 		if len(self.overtime_sheet_employee_details)>0:
