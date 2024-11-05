@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "opening_job_reference",
+  "job_title",
   "designation",
   "candidate_name",
   "candidate_namein_english",
@@ -131,6 +132,13 @@
    "fieldtype": "Link",
    "label": "Grade",
    "options": "Employee Grade"
+  },
+  {
+   "fetch_from": "opening_job_reference.job_title",
+   "fieldname": "job_title",
+   "fieldtype": "Link",
+   "label": "Job No",
+   "options": "Job No ST"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -140,7 +148,7 @@
    "link_fieldname": "job_application_reference"
   }
  ],
- "modified": "2024-09-17 13:48:36.410530",
+ "modified": "2024-11-05 13:19:24.378860",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Application ST",

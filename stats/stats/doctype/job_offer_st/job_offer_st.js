@@ -73,6 +73,24 @@ frappe.ui.form.on("Job Offer ST", {
 });
 
 frappe.ui.form.on("Job Offer Details ST", {
+	// offer_term: function (frm, cdt, cdn) {
+	// 	let row = locals[cdt][cdn]
+	// 	frappe.db.get_value('Offer Term', row.offer_term, 'custom_is_monthly_salary_component')
+	// 	.then(r => {
+	// 		console.log(r.message.custom_is_monthly_salary_component, '---r.message.custom_is_monthly_salary_component == 1')
+	// 		if(r.message.custom_is_monthly_salary_component == 1){
+	// 			console.log("hello")
+	// 			frappe.db.get_value('MP Jobs Details ST', frm.doc.job_title , 'salary')
+	// 			.then(value => {
+	// 				console.log(value, '---value')
+	// 				// let values = value.message;
+	// 				// console.log(values.salary)
+	// 					console.log(value.salary, '---value.salary')
+	// 					// frappe.model.set_value(cdt, cdn, 'value', value.salary)
+	// 			})
+	// 		}
+	// 	})
+	// },
 	value: function (frm, cdt, cdn) {
 		let row = locals[cdt][cdn]
 		if (row.offer_term) {

@@ -8,6 +8,7 @@
  "field_order": [
   "offer_information_section",
   "job_application_reference",
+  "job_title",
   "offer_date",
   "main_department",
   "sub_department",
@@ -19,7 +20,6 @@
   "contract_type",
   "section",
   "branch",
-  "country",
   "candidate_information_section",
   "candidate_name",
   "candidate_namein_english",
@@ -28,7 +28,7 @@
   "column_break_uncl",
   "gender",
   "id_expiration_date",
-  "nationality",
+  "country",
   "religion",
   "column_break_emth",
   "phone_no",
@@ -244,11 +244,6 @@
    "options": "Gender"
   },
   {
-   "fieldname": "nationality",
-   "fieldtype": "Data",
-   "label": "Nationality"
-  },
-  {
    "fieldname": "religion",
    "fieldtype": "Select",
    "label": "Religion",
@@ -297,6 +292,13 @@
    "fieldtype": "Data",
    "label": "Additional number",
    "options": "Phone"
+  },
+  {
+   "fetch_from": "job_application_reference.job_title",
+   "fieldname": "job_title",
+   "fieldtype": "Link",
+   "label": "Job No",
+   "options": "Job No ST"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -314,7 +316,7 @@
    "link_fieldname": "custom_job_offer_reference"
   }
  ],
- "modified": "2024-09-23 06:48:34.916105",
+ "modified": "2024-11-05 13:28:05.456413",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Offer ST",

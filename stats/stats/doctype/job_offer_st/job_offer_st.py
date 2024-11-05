@@ -47,7 +47,9 @@ class JobOfferST(Document):
 				is_monthly_salary_component = frappe.db.get_value("Offer Term",row.offer_term,"custom_is_monthly_salary_component")
 				if is_monthly_salary_component == 1:
 					if not row.value:
-						frappe.throw(_("Row #{0}: Value cannot be 0").format(row.idx))
+						salary = frappe.db.get_value("MP Jobs Details ST",{"job_no":self.job_title},"salary")
+						row.value = salary
+						# frappe.throw(_("Row #{0}: Value cannot be 0").format(row.idx))
 
 	def fetch_salary_tables_from_contract_type(self):
 		if self.contract_type and self.is_new():
@@ -245,9 +247,9 @@ def make_employee(source_name, target_doc=None):
 		target.status = "Active"
 		target.first_name = source.candidate_name
 		target.custom_employee_name_in_english = source.candidate_namein_english
-		target.custom_nationality = source.nationality
+		target.custom_country = source.country
 		target.custom_religion = source.religion
-		target.custom_id__igama_no = source.id_igama_no
+		# target.custom_id__igama_no = source.id_igama_no
 		target.department = source.main_department
 		target.custom_section = source.section
 		target.custom_sub_department = source.sub_department

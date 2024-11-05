@@ -19,6 +19,7 @@
   "contract_type",
   "column_break_htec",
   "direct_manager",
+  "direct_manager_name",
   "job_category",
   "job_group",
   "job_family",
@@ -70,7 +71,6 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Sub Department",
-   "link_filters": "[[\"Department\",\"is_group\",\"=\",0]]",
    "options": "Department"
   },
   {
@@ -177,7 +177,8 @@
   {
    "fieldname": "salary",
    "fieldtype": "Currency",
-   "label": "Salary"
+   "label": "Salary",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_htec",
@@ -204,12 +205,19 @@
    "fieldtype": "Link",
    "label": "Contract Type",
    "options": "Contract Type ST"
+  },
+  {
+   "fetch_from": "direct_manager.employee_name",
+   "fieldname": "direct_manager_name",
+   "fieldtype": "Data",
+   "label": "Direct Manager Name",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-20 13:46:59.732861",
+ "modified": "2024-11-05 13:28:55.226602",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "MP Jobs Details ST",

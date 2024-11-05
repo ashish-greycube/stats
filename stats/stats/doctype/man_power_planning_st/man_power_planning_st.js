@@ -37,7 +37,7 @@ frappe.ui.form.on("Man Power Planning ST", {
                 query: "stats.api.get_main_department",
             }
         });
-        frm.set_query("sub_job_department","job_details", function (doc,cdt,cdn){
+        frm.set_query("sub_department","job_details", function (doc,cdt,cdn){
                 let row = locals[cdt][cdn]
                 return {
                     filters: {

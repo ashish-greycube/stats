@@ -15,7 +15,7 @@
   "employee_no",
   "employee_name",
   "sub_department",
-  "nationality",
+  "country",
   "marital_status",
   "id_no",
   "direct_manager",
@@ -160,13 +160,6 @@
    "fieldtype": "Link",
    "label": "Sub Department",
    "options": "Department",
-   "read_only": 1
-  },
-  {
-   "fetch_from": "employee_no.custom_nationality",
-   "fieldname": "nationality",
-   "fieldtype": "Data",
-   "label": "Nationality",
    "read_only": 1
   },
   {
@@ -664,12 +657,20 @@
    "default": "0",
    "fieldname": "respect_vwk",
    "fieldtype": "Check"
+  },
+  {
+   "fetch_from": "employee_no.custom_country",
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-17 09:21:55.406470",
+ "modified": "2024-11-05 12:55:27.495260",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Exit Interview ST",

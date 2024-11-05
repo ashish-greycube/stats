@@ -4,14 +4,20 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import date_diff, add_to_date, get_datetime, get_date_str, cstr
+from frappe.utils import date_diff, add_to_date, get_datetime, get_date_str, cstr, get_first_day, get_last_day, getdate
 from stats.hr_utils import check_if_holiday_between_applied_dates
-
 
 class ScholarshipRequestST(Document):
 	def validate(self):
 		self.validate_duplicate_entry_based_on_employee_scholarship_and_specialisation_type()
 		self.validate_maximum_applications()
+		# self.create_salary_structure_for_other_than_start_date_of_month()
+		# self.create_additional_salary_structure()
+
+	def on_update_after_submit(self):
+		self.create_salary_structure_for_start_date_of_month()
+		self.create_salary_structure_for_other_than_start_date_of_month()
+		self.create_additional_salary_structure()
 
 	def validate_duplicate_entry_based_on_employee_scholarship_and_specialisation_type(self):
 		exists_scholarship = frappe.db.exists("Scholarship Request ST", {"employee_no": self.employee_no,"scholarship_no": self.scholarship_no,"specialisation_type": self.specialisation_type})
@@ -72,6 +78,116 @@ class ScholarshipRequestST(Document):
 												filters={"parent":scholarship_doc.name,"specialisation_type":self.specialisation_type},
 												fields=["qualification","scholarship_start_date","scholarship_end_date","english_required"])
 			return scholarship_details_list
+		
+	def create_salary_structure_for_start_date_of_month(self):
+		if self.docstatus == 1:
+			if self.acceptance_status == "Accepted" and self.scholarship_start_date:
+				latest_salary_structure = frappe.db.get_all("Salary Structure", 
+												fields=["custom_employee_no", "name"],
+												filters={"custom_employee_no": self.employee_no, "docstatus":1}, limit=1)
+				
+				if len(latest_salary_structure) > 0:
+					print(get_first_day(self.scholarship_start_date), '-----get_first_day(self.scholarship_start_date)s')
+					if get_first_day(self.scholarship_start_date) == self.scholarship_start_date:
+						prev_ss = frappe.get_doc("Salary Structure", latest_salary_structure[0].name)
+						new_ss = frappe.copy_doc(prev_ss)
+						new_ss.__newname = self.employee_no + "/" + self.name
+						new_ss.name = self.employee_no + "/" + self.name
+						new_ss.custom_contract_start_date = self.scholarship_start_date
+
+						basic_ear = 0
+						for row in prev_ss.earnings:
+							if row.salary_component == "Basic" :
+								basic_ear = row.amount
+
+						new_ss.earnings = []
+						new_ss.deductions = []
+						ear = new_ss.append("earnings", {})
+						ear.salary_component = "Basic"
+						ear.amount = basic_ear * 0.5
+						ear.amount_based_on_formula = 0
+						ear.is_tax_applicable = 0
+
+						new_ss.save(ignore_permissions=True)
+
+						frappe.msgprint(_("Salary Structure {0} created.").format(new_ss.name), alert=1)
+					else:
+						frappe.msgprint("Hello", alert=1)
+
+	def create_additional_salary_structure(self):
+		# if self.docstatus == 1:
+			if self.acceptance_status == "Accepted" and self.scholarship_start_date:
+				latest_salary_structure = frappe.db.get_all("Salary Structure", 
+												fields=["custom_employee_no", "name"],
+												filters={"custom_employee_no": self.employee_no, "docstatus":1}, limit=1)
+				
+				if len(latest_salary_structure) > 0:
+					if get_first_day(self.scholarship_start_date) != self.scholarship_start_date:
+						prev_ss = frappe.get_doc("Salary Structure", latest_salary_structure[0].name)
+						for ear in prev_ss.earnings:
+							additional_salary = frappe.new_doc('Additional Salary')
+							additional_salary.employee = self.employee_no
+							additional_salary.payroll_date = self.scholarship_start_date
+							additional_salary.salary_component =  ear.salary_component
+							additional_salary.overwrite_salary_structure_amount = 1
+
+							before_scholarship_days = (getdate(self.scholarship_start_date).day - 1)
+							if ear.salary_component == "Basic":
+								end_date = get_last_day(self.scholarship_start_date).day - before_scholarship_days
+								salary_before_scholarship = (before_scholarship_days * ear.amount) / 30
+								salary_scholarship = (end_date * 0.5 * ear.amount) / 30
+								additional_salary.amount = salary_before_scholarship + salary_scholarship
+							else:
+								additional_salary.amount = (before_scholarship_days * ear.amount) / 30
+
+							additional_salary.save(ignore_permissions=True)
+							frappe.msgprint(_("Additional Salary {0} Created").format(additional_salary.name), alert=1)
+
+						# for ded in prev_ss.deductions:
+						# 	additional_ded = frappe.new_doc('Additional Salary')
+						# 	additional_ded.employee = self.employee_no
+						# 	additional_ded.payroll_date = self.scholarship_start_date
+						# 	additional_ded.salary_component = ded.salary_component
+						# 	additional_ded.overwrite_salary_structure_amount = 1
+						# 	additional_ded.amount = "will do calculation"
+
+						# 	additional_ded.save(ignore_permissions=True)
+
+	def create_salary_structure_for_other_than_start_date_of_month(self):
+		# if self.docstatus == 1:
+			if self.acceptance_status == "Accepted" and self.scholarship_start_date:
+				latest_salary_structure = frappe.db.get_all("Salary Structure", 
+												fields=["custom_employee_no", "name"],
+												filters={"custom_employee_no": self.employee_no, "docstatus":1}, limit=1)
+				
+				if len(latest_salary_structure) > 0:
+					# print(get_first_day(self.scholarship_start_date), '-----get_first_day(self.scholarship_start_date)s')
+					if get_first_day(self.scholarship_start_date) != self.scholarship_start_date:
+						next_month_date = add_to_date(self.scholarship_start_date,months=1)
+						prev_ss = frappe.get_doc("Salary Structure", latest_salary_structure[0].name)
+						new_ss = frappe.copy_doc(prev_ss)
+						new_ss.__newname = self.employee_no + "/" + self.name
+						new_ss.name = self.employee_no + "/" + self.name
+						new_ss.custom_contract_start_date = get_first_day(next_month_date)
+
+						basic_ear = 0
+						for row in prev_ss.earnings:
+							if row.salary_component == "Basic" :
+								basic_ear = row.amount
+
+						new_ss.earnings = []
+						new_ss.deductions = []
+						ear = new_ss.append("earnings", {})
+						ear.salary_component = "Basic"
+						ear.amount = basic_ear * 0.5
+						ear.amount_based_on_formula = 0
+						ear.is_tax_applicable = 0
+
+						new_ss.save(ignore_permissions=True)
+
+						frappe.msgprint(_("Salary Structure {0} created.").format(new_ss.name), alert=1)
+					else:
+						frappe.msgprint("Hello", alert=1)
 		
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs

@@ -135,7 +135,8 @@ doc_events = {
                     "stats.api.set_employee_company_email"]
 	},
     "Employee": {
-        "validate":"stats.api.calculate_years_of_experience"
+        "validate":["stats.api.calculate_years_of_experience",
+                    "stats.api.set_employee_in_man_power_planning_for_job_no"]
 	},
     "Leave Application": {
         "validate":"stats.api.check_leave_is_not_in_business_days"

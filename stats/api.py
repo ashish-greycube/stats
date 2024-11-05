@@ -84,6 +84,13 @@ def calculate_years_of_experience(self, method):
 		self.custom_current_years_of_experience = str(years) + " years " + str(months) + " months " + str(days) + " days"
 		self.custom_total_years_of_experience = str(previous_years) + " years " + str(months) + " months " + str(days) + " days"
 
+def set_employee_in_man_power_planning_for_job_no(self, method):
+	if self.custom_job_no and not self.is_new():
+		job_no = frappe.get_doc("MP Jobs Details ST",{"job_no":self.custom_job_no})
+		if not job_no.employee_no:
+			frappe.db.set_value(job_no.doctype, job_no.name, "employee_no", self.name)
+			frappe.msgprint(_("set Employee {0} in Job No {1}").format(self.name, self.custom_job_no), alert=True)
+
 @frappe.whitelist()
 def set_years_of_experience_at_start_of_every_month():
 	employees=frappe.db.get_list('Employee', filters={'status': ['=', 'Active']})

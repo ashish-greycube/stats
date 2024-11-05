@@ -28,11 +28,12 @@ frappe.ui.form.on("Opening Job ST", {
 					job_title: frm.doc.job_title
 				}
 			}).then(r => {
+                console.log(r.message, '---r.message')
                 if (r.message){
                     frm.set_value({
                         designation: r.message.designation,
                         main_department: r.message.main_job_department,
-                        sub_department: r.message.sub_job_department,
+                        sub_department: r.message.sub_department,
                         grade: r.message.grade,
                         section: r.message.section,
                         branch : r.message.branch,
