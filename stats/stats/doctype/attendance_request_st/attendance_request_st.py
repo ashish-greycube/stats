@@ -51,6 +51,7 @@ class AttendanceRequestST(Document):
 		elif self.attendance_type == "OUT":
 			employee_checkin_doc.time = get_datetime(get_date_str(self.request_date) + " " + cstr(shift_end_time))
 		employee_checkin_doc.custom_attendance_request_st = self.name
+		employee_checkin_doc.custom_created_by_system = 1
 		employee_checkin_doc.save(ignore_permissions=True)
 		frappe.msgprint(_("Employee Checkin is created <b>{0}</b>").format(get_link_to_form("Employee Checkin",employee_checkin_doc.name)),alert=True)
 
@@ -94,12 +95,10 @@ class AttendanceRequestST(Document):
 			exist_out_record = frappe.db.get_all("Employee Checkin",
 											filters={"time":["between",[self.request_date,self.request_date]],"employee":self.employee_no,"log_type":"OUT"},
 											fields=["name","log_type"])
-			print(exist_out_record,"++++++++++++++++ exist_out_record")
 			if len(exist_out_record)>0:
 				get_old_attendance = frappe.db.get_all("Attendance",
 										   filters={"employee":self.employee_no,"attendance_date":self.request_date},
 										   fields=["name"])
-				print(get_old_attendance,"-----------get_old_attendance")
 				if len(get_old_attendance)>0:
 					attendance_doc = frappe.get_doc("Attendance",get_old_attendance[0].name)
 					attendance_doc.cancel()
@@ -109,12 +108,10 @@ class AttendanceRequestST(Document):
 			exist_in_record = frappe.db.get_all("Employee Checkin",
 											filters={"time":["between",[self.request_date,self.request_date]],"employee":self.employee_no,"log_type":"IN"},
 											fields=["name","log_type"])
-			print(exist_in_record,"-------------------exist_in_record")
 			if len(exist_in_record)>0:
 				get_old_attendance = frappe.db.get_all("Attendance",
 										   filters={"employee":self.employee_no,"attendance_date":self.request_date},
 										   fields=["name"])
-				print(get_old_attendance,"++++++++++++++++++++get_old_attendance")
 				if len(get_old_attendance)>0:
 					attendance_doc = frappe.get_doc("Attendance",get_old_attendance[0].name)
 					attendance_doc.cancel()

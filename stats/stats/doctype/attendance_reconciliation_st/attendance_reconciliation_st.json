@@ -1,0 +1,91 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:AR-{employee_no}-{#####}",
+ "creation": "2024-10-25 09:50:28.017507",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "month",
+  "fetch",
+  "column_break_pxfv",
+  "employee_no",
+  "employee_name",
+  "section_break_vaig",
+  "attendance_reconciliation_details"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "employee_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee No",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee_no.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Select",
+   "label": "Month",
+   "options": "\nJanuary\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember"
+  },
+  {
+   "fieldname": "column_break_pxfv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fetch",
+   "fieldtype": "Button",
+   "label": "Fetch"
+  },
+  {
+   "fieldname": "section_break_vaig",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "attendance_reconciliation_details",
+   "fieldtype": "Table",
+   "label": "Attendance Reconciliation Details",
+   "options": "Attendance Reconciliation Details ST"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-25 13:27:13.613699",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Attendance Reconciliation ST",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

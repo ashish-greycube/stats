@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from frappe.utils import getdate,nowdate,format_duration,cint,get_link_to_form,flt,add_years,time_diff_in_hours,now,rounded,flt
+from frappe.utils import getdate,nowdate,format_duration,cint,get_link_to_form,flt,add_years,time_diff_in_hours,now,rounded,flt,get_time,time_diff_in_seconds
 from dateutil import relativedelta
 
 @frappe.whitelist()
@@ -446,11 +446,21 @@ def calculate_extra_working_hours(self,method):
 			print(int_hours, dec_min,"int_hours, dec_min",rounded(int_hours, 0))
 			extra_min = cint(rounded(dec_min * 60,0)) 
 			int_hours = cint(int_hours)
-
-			print(extra_min,"extra_min",int_hours)
-			extra_hours = flt(str(int_hours)+"."+str(extra_min))
-			print(extra_hours,"extra_hours",type(extra_hours),flt(extra_hours))
-			self.custom_extra_hours = extra_hours
+			total_extra_min = (int_hours*60) + extra_min
+			self.custom_extra_hours = total_extra_min
+	if self.late_entry == 1:
+		late_entry_duration = time_diff_in_seconds(str((self.in_time).time()),str(get_time(str(shift_start_time))))
+		self.custom_actual_delay = cint(rounded(late_entry_duration/60,0))
+	
+	if self.early_exit == 1:
+		early_exit_duration = time_diff_in_seconds(str(get_time(str(shift_end_time))),str((self.out_time).time()))
+		self.custom_actual_early = cint(rounded(early_exit_duration/60,0))
+	
+	if not self.custom_attendance_type:
+		if self.status:
+			self.custom_attendance_type = self.status
+	if self.custom_net_early and self.custom_net_delay:
+		self.custom_net_extra_hours = (self.custom_net_early or 0) - (self.custom_net_delay or 0)
 
 def validate_duplicate_record_for_employee_checkin(self):
 		# employee_checkin = frappe.db.get_all("Employee Checkin",
@@ -481,3 +491,10 @@ def set_last_sync_of_checkin_on_save_of_employee_checkin(self,method):
 		if latest_checkin.time > current_last_sync_of_checkin_in_shift:
 			print("Valid -----")
 			frappe.db.set_value("Shift Type", self.shift, "last_sync_of_checkin", latest_checkin.time)
+
+def create_employee_checkin_checkout_for_training():
+	today = nowdate()
+	# training_request_list = frappe.db.get_all("Training Request ST",
+	# 									   filters={"employee_checkin_required":"Yes","employee_checkout_required":"Yes"},
+	# 									   or_filters={'training_start_date':['between',[filter__from_date,filter__to_date]],
+    #                                           'all_line_cast_off':['between',[filter__from_date,filter__to_date]] },)

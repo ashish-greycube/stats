@@ -181,6 +181,10 @@ scheduler_events = {
         "30 23 * * *": [
             "stats.api.set_scholarship_status_closed",
             "stats.api.set_last_sync_of_checkin_in_all_shift_type"
+        ],
+        # at 01:30 AM every day
+        "30 1 * * *":[
+            "stats.api.create_employee_checkin_checkout_for_training"
         ]
 	},
     "daily": [

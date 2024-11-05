@@ -5,11 +5,13 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "account_tab",
   "default_trip_cost_template",
   "column_break_yxct",
   "maximum_reallocation_amount",
   "column_break_yrnt",
-  "default_evaluation_template_for_test_period",
+  "percentage_for_overtime",
+  "evaluation_tab",
   "normal_employee_evaluation_percentage_section",
   "normal_employee_personal_goals",
   "column_break_gduf",
@@ -35,7 +37,16 @@
   "column_break_zmap",
   "half_yearly_evaluation_to",
   "section_break_etcm",
-  "percentage_for_overtime"
+  "default_evaluation_template_for_test_period",
+  "attendance_tab",
+  "civil_contract_section",
+  "cc_min_hours_in_month",
+  "column_break_erro",
+  "cc_permission_balance_per_month",
+  "direct_contract_section",
+  "dc_min_hours_in_month",
+  "column_break_sedn",
+  "dc_permission_balance_per_year"
  ],
  "fields": [
   {
@@ -206,12 +217,73 @@
    "fieldtype": "Percent",
    "label": "Percentage For Overtime",
    "reqd": 1
+  },
+  {
+   "fieldname": "account_tab",
+   "fieldtype": "Tab Break",
+   "label": "Account"
+  },
+  {
+   "fieldname": "evaluation_tab",
+   "fieldtype": "Tab Break",
+   "label": "Evaluation"
+  },
+  {
+   "fieldname": "attendance_tab",
+   "fieldtype": "Tab Break",
+   "label": "Attendance"
+  },
+  {
+   "fieldname": "civil_contract_section",
+   "fieldtype": "Section Break",
+   "label": "Civil Contract"
+  },
+  {
+   "description": "(in hours)",
+   "fieldname": "cc_min_hours_in_month",
+   "fieldtype": "Int",
+   "label": "Minimum Hours Per Month",
+   "reqd": 1
+  },
+  {
+   "description": "(in mins)",
+   "fieldname": "cc_permission_balance_per_month",
+   "fieldtype": "Int",
+   "label": "Permission Balance Per Month",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_erro",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "direct_contract_section",
+   "fieldtype": "Section Break",
+   "label": "Direct Contract"
+  },
+  {
+   "description": "(in hours)",
+   "fieldname": "dc_min_hours_in_month",
+   "fieldtype": "Int",
+   "label": "Minimum Hours Per Month",
+   "reqd": 1
+  },
+  {
+   "description": "(in mins)",
+   "fieldname": "dc_permission_balance_per_year",
+   "fieldtype": "Int",
+   "label": "Permission Balance Per Year",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_sedn",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-10-18 14:59:26.602290",
+ "modified": "2024-10-29 15:28:10.727251",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats Settings ST",

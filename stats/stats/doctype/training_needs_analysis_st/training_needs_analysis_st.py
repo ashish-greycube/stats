@@ -27,7 +27,10 @@ class TrainingNeedsAnalysisST(Document):
 	def change_training_request_status(self):
 		if len(self.training_needs_analysis_employee_details)>0:
 			for row in self.training_needs_analysis_employee_details:
-				frappe.db.set_value("Training Request ST",row.training_request_reference,"status",row.action)
+				# frappe.db.set_value("Training Request ST",row.training_request_reference,"status",row.action)
+				tr_doc = frappe.get_doc("Training Request ST",row.training_request_reference)
+				tr_doc.status = row.action
+				tr_doc.save(ignore_permissions=True)
 				frappe.msgprint(_("Status of {0} is changed to {1}").format(get_link_to_form("Training Request ST", row.training_request_reference),row.action),alert=1)
 
 	@frappe.whitelist()

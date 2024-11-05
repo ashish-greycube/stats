@@ -41,26 +41,56 @@ def get_columns(filters):
 			"width":"200"
 		},
 		{
-			"fieldname": "delay",
-			"label":_("Delay"),
+			"fieldname": "status",
+			"label":_("Status"),
+			"fieldtype": "Data",
+			"width":"200"
+		},
+		{
+			"fieldname": "actual_delay",
+			"label":_("Actual Delay"),
 			"fieldtype": "Int",
 			"width":"100"
 		},
 		{
-			"fieldname": "early",
+			"fieldname": "net_delay",
+			"label":_("Net Delay"),
+			"fieldtype": "Int",
+			"width":"200"
+		},
+		{
+			"fieldname": "actual_early",
 			"label":_("Early"),
 			"fieldtype": "Int",
 			"width":"100"
 		},
 		{
+			"fieldname": "net_early",
+			"label":_("Net Early"),
+			"fieldtype": "Int",
+			"width":"200"
+		},
+		{
 			"fieldname": "extra_hours",
 			"label":_("Extra Hours"),
-			"fieldtype": "Float",
+			"fieldtype": "Int",
+			"width":"200"
+		},
+		{
+			"fieldname": "net_extra_hours",
+			"label":_("Net Extra Hours"),
+			"fieldtype": "Int",
 			"width":"200"
 		},
 		{
 			"fieldname": "no_of_hours",
 			"label":_("No of Hours"),
+			"fieldtype": "Float",
+			"width":"200"
+		},
+		{
+			"fieldname": "net_no_of_hours",
+			"label":_("Net No of Hours"),
 			"fieldtype": "Float",
 			"width":"200"
 		},
@@ -80,12 +110,17 @@ def get_attendance_data(filters):
 					employee,
 					employee_name,
 					attendance_date as date, 
-					late_entry as delay,
-					early_exit as early,
+					late_entry as actual_delay,
+					early_exit as actual_early,
 					custom_extra_hours as extra_hours,
 					in_time,
 					out_time,
-					working_hours as no_of_hours
+					working_hours as no_of_hours,
+					custom_net_working_hours as net_no_of_hours,
+					custom_net_delay as net_delay,
+					custom_net_early as net_early,
+					custom_net_extra_hours as net_extra_hours,
+					status
 				from
 					`tabAttendance`
 				where {0}
