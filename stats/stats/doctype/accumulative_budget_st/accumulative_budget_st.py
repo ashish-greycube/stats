@@ -22,6 +22,8 @@ class AccumulativeBudgetST(Document):
 
 	def set_approved_amount_in_department_budget(self):
 		if len(self.department_wise_budget_allocation_details) > 0:
+
+			department_budget = []
 			for row in self.department_wise_budget_allocation_details:
 				# db_doc = frappe.get_doc('Accounts Details ST', row.department_acct_details_name)
 				# # print(db_doc.approved_amount,'-----before----')
@@ -31,13 +33,18 @@ class AccumulativeBudgetST(Document):
 				# db_doc.save(ignore_permissions=True)
 				# print(db_doc.approved_amount, '----after----')
 				frappe.db.set_value('Accounts Details ST', row.department_acct_details_name, 'approved_amount', row.approved_amount)
-
-				doc = frappe.get_doc('Department Budget ST', row.department_budget_name)
+				department_budget.append(row.department_budget_name)
+				# doc = frappe.get_doc('Department Budget ST', row.department_budget_name)
 				# doc.allocated_amount = row.approved_amount
-				doc.save(ignore_permissions=True)
+				# doc.save(ignore_permissions=True)
 				# frappe.db.set_value('Department Budget ST', row.department_budget_name, 'allocated_amount', row.approved_amount)
 				frappe.msgprint(_("In Department Budget {0} approved amount set.")
 					.format(row.department_budget_name), alert=1)
+				
+			if len(department_budget) > 0:
+				for dep in department_budget:
+					doc = frappe.get_doc('Department Budget ST', dep)
+					doc.save(ignore_permissions=True)
 				
 	def validate_approved_amount_in_budget_allocation(self):
 		if len(self.account_details) > 0:
