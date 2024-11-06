@@ -25,8 +25,8 @@ class ScholarshipRequestST(Document):
 		if exists_scholarship != None and exists_scholarship != self.name:
 			frappe.throw(_("You cannot create Scholarship Request for same employee, scholarship no and specification type."))
 		
-	def on_update_after_submit(self):
-		self.create_future_attendance_for_scholarship_time()
+	# def on_update_after_submit(self):
+	# 	self.create_future_attendance_for_scholarship_time()
 
 	def create_future_attendance_for_scholarship_time(self):
 		if self.acceptance_status == "Accepted":

@@ -7,11 +7,9 @@ from frappe.utils import date_diff, add_to_date, get_datetime, get_date_str, cst
 from stats.hr_utils import check_if_holiday_between_applied_dates
 
 class TrainingRequestST(Document):
-	def validate(self):
-		print("++++++++++++++++++++++++++++++=")
-	def on_update_after_submit(self):
-		print("--------------------------------")
-		self.create_future_attendance_for_business_trip_time()
+
+	# def on_update_after_submit(self):
+	# 	self.create_future_attendance_for_business_trip_time()
 
 	def create_future_attendance_for_business_trip_time(self):
 		if self.status == "Accepted":

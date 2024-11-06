@@ -88,8 +88,8 @@ class BusinessTripRequestST(Document):
 				else:
 					frappe.throw(_('No Budget Found.'))
 
-	def on_update_after_submit(self):
-		self.create_future_attendance_for_business_trip_time()
+	# def on_update_after_submit(self):
+	# 	self.create_future_attendance_for_business_trip_time()
 
 	def create_future_attendance_for_business_trip_time(self):
 		if self.status == "Approved":

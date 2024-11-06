@@ -109,8 +109,6 @@ def validate_dates(employee, from_date, to_date):
 	)
 	if getdate(from_date) > getdate(to_date):
 		frappe.throw(_("To date can not be less than from date"))
-	elif getdate(from_date) > getdate(nowdate()):
-		frappe.throw(_("Future dates not allowed"))
 	elif date_of_joining and getdate(from_date) < getdate(date_of_joining):
 		frappe.throw(_("From date can not be less than employee's joining date"))
 	elif relieving_date and getdate(to_date) > getdate(relieving_date):
