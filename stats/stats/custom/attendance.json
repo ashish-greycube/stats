@@ -234,7 +234,7 @@
    "name": "Attendance-custom_attendance_type",
    "no_copy": 1,
    "non_negative": 0,
-   "options": "\nPresent\nAbsent\nOn Leave\nHalf Day\nWork From Home\nIn Training\nBusiness Trip\nScholarship\nPresent Due To Reconciliation",
+   "options": "\nPresent\nAbsent\nOn Leave\nIn Training\nBusiness Trip\nScholarship\nPresent Due To Reconciliation",
    "owner": "Administrator",
    "permlevel": 0,
    "precision": "",
