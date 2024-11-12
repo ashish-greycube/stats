@@ -47,6 +47,7 @@ class EmployeeContractST(Document):
 					earning.amount = ear.amount
 					earning.amount_based_on_formula = 0
 					earning.is_tax_applicable = 0
+					earning.depends_on_payment_days = 0
 			
 			if len(self.deduction):
 				for ded in self.deduction:
@@ -55,6 +56,7 @@ class EmployeeContractST(Document):
 					deduction.amount = ded.amount
 					deduction.amount_based_on_formula = 0
 					deduction.is_tax_applicable = 0
+					deduction.depends_on_payment_days = 0
 			
 			salary_structure.save(ignore_permissions=True)
 

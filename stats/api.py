@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from frappe.utils import getdate,nowdate,format_duration,cint,get_link_to_form,flt,add_years,time_diff_in_hours,now,rounded,flt,get_time,time_diff_in_seconds
+from frappe.utils import add_to_date,get_datetime,getdate,nowdate,format_duration,cint,get_link_to_form,flt,add_years,time_diff_in_hours,now,rounded,flt,get_time,time_diff_in_seconds
 from dateutil import relativedelta
 
 @frappe.whitelist()
@@ -209,12 +209,17 @@ def check_monthly_salary_component_offer_term(self,method):
 
 def create_salary_structure_assignment(self, method):
 	if self.custom_employee_contract_ref:
-		amount = frappe.db.get_value("Employee Contract ST", self.custom_employee_contract_ref, "total_monthly_salary")
+		total_monthly_salary = 0
+		if len(self.earnings)>0:
+			for ear in self.earnings:
+				total_monthly_salary = total_monthly_salary + ear.amount
+
+		# amount = frappe.db.get_value("Employee Contract ST", self.custom_employee_contract_ref, "total_monthly_salary")
 		assignment = frappe.new_doc("Salary Structure Assignment")
 		assignment.employee = self.custom_employee_no
 		assignment.salary_structure = self.name
 		assignment.from_date = self.custom_contract_start_date
-		assignment.base = amount
+		assignment.base = total_monthly_salary
 
 		assignment.save(ignore_permissions=True)
 		frappe.msgprint(_("Salary Structure Assignment {0} created." .format(get_link_to_form('Salary Structure Assignment', assignment.name))), alert=True)
@@ -437,37 +442,39 @@ def create_employee_evaluation_based_on_employee_contract():
 				employee_evaluation_doc.add_comment("Comment",text="Created by system on {0}".format(nowdate()))
 
 def calculate_extra_working_hours(self,method):
-	print('--'*10,'from stas validate',self.get('working_hours'))
-	shift_start_time = frappe.db.get_value("Shift Type",self.shift,"start_time")
-	shift_end_time = frappe.db.get_value("Shift Type",self.shift,"end_time")
+    shift_start_time = frappe.db.get_value("Shift Type",self.shift,"start_time")
+    shift_end_time = frappe.db.get_value("Shift Type",self.shift,"end_time")
 
-	actual_working_hours = time_diff_in_hours(shift_end_time, shift_start_time)
-	employee_working_hours = self.working_hours
+    actual_working_hours = time_diff_in_hours(shift_end_time, shift_start_time)
+    employee_working_hours = self.working_hours
 
-	# rounded_employee_working_hours = rounded(employee_working_hours - actual_working_hours, 0)
-	print(employee_working_hours,"employee_working_hours",actual_working_hours,"actual_working_hours")
-	if employee_working_hours and (employee_working_hours > 0):
-		if employee_working_hours > actual_working_hours:
-			print(employee_working_hours,"employee_working_hours",actual_working_hours,"actual_working_hours")
-			int_hours, dec_min = divmod(employee_working_hours - actual_working_hours, 1)
-			print(int_hours, dec_min,"int_hours, dec_min",rounded(int_hours, 0))
-			extra_min = cint(rounded(dec_min * 60,0)) 
-			int_hours = cint(int_hours)
-			total_extra_min = (int_hours*60) + extra_min
-			self.custom_extra_hours = total_extra_min
-	if self.late_entry == 1:
-		late_entry_duration = time_diff_in_seconds(str((self.in_time).time()),str(get_time(str(shift_start_time))))
-		self.custom_actual_delay = cint(rounded(late_entry_duration/60,0))
-	
-	if self.early_exit == 1:
-		early_exit_duration = time_diff_in_seconds(str(get_time(str(shift_end_time))),str((self.out_time).time()))
-		self.custom_actual_early = cint(rounded(early_exit_duration/60,0))
-	
-	if not self.custom_attendance_type:
-		if self.status:
-			self.custom_attendance_type = self.status
-	if self.custom_net_early and self.custom_net_delay:
-		self.custom_net_extra_hours = (self.custom_net_early or 0) - (self.custom_net_delay or 0)
+    # rounded_employee_working_hours = rounded(employee_working_hours - actual_working_hours, 0)
+    if employee_working_hours and (employee_working_hours > 0):
+        employee_working_hours_in_minutes = employee_working_hours * 60
+        self.custom_actual_working_hours = employee_working_hours_in_minutes
+        if self.custom_net_working_hours == 0:
+            self.custom_net_working_hours = self.custom_actual_working_hours
+
+        if employee_working_hours > actual_working_hours:
+            int_hours, dec_min = divmod(employee_working_hours - actual_working_hours, 1)
+            extra_min = cint(rounded(dec_min * 60,0)) 
+            int_hours = cint(int_hours)
+            total_extra_min = (int_hours*60) + extra_min
+            self.custom_extra_hours = total_extra_min
+    if self.late_entry == 1:
+        late_entry_duration = time_diff_in_seconds(str((self.in_time).time()),str(get_time(str(shift_start_time))))
+        self.custom_actual_delay = cint(rounded(late_entry_duration/60,0))
+    
+    if self.early_exit == 1:
+        early_exit_duration = time_diff_in_seconds(str(get_time(str(shift_end_time))),str((self.out_time).time()))
+        self.custom_actual_early = cint(rounded(early_exit_duration/60,0))
+    
+    if not self.custom_attendance_type:
+        if self.status:
+            self.custom_attendance_type = self.status
+        
+    if self.custom_net_working_hours:
+        self.custom_difference_in_working_hours = self.custom_net_working_hours - self.custom_actual_working_hours
 
 def validate_duplicate_record_for_employee_checkin(self):
 		# employee_checkin = frappe.db.get_all("Employee Checkin",
@@ -505,3 +512,79 @@ def create_employee_checkin_checkout_for_training():
 	# 									   filters={"employee_checkin_required":"Yes","employee_checkout_required":"Yes"},
 	# 									   or_filters={'training_start_date':['between',[filter__from_date,filter__to_date]],
     #                                           'all_line_cast_off':['between',[filter__from_date,filter__to_date]] },)
+
+
+
+def get_non_working_days(employee, payroll_end_date) -> float:
+	filters = {
+		"docstatus": 1,
+		"status": "On Leave",
+		"employee": employee,
+		"attendance_date": ("<=", get_datetime(payroll_end_date)),
+	}
+
+	# if status == "On Leave":
+	lwp_leave_types = frappe.get_all("Leave Type", filters={"is_lwp": 1}, pluck="name")
+	filters["leave_type"] = ("IN", lwp_leave_types)
+
+	record = frappe.get_all("Attendance", filters=filters, fields=["COUNT(*) as total_lwp"])
+	return record[0].total_lwp if len(record) else 0
+
+@frappe.whitelist()
+def calculate_lwp_dedution(payroll_entry):
+	payroll_entry = frappe.get_doc("Payroll Entry", payroll_entry)
+	previous_month_last_date = add_to_date(payroll_entry.start_date,days=-1)
+
+	print(previous_month_last_date, '----------previous_month_last_date-----------')
+
+	emp_dedution_list = []
+	for emp in payroll_entry.employees:
+		total_lwp = get_non_working_days(emp.employee, previous_month_last_date)
+		print(total_lwp, '--total_lwp')
+	
+		emp_dedution_details = {}
+		
+		if total_lwp > 0:
+			salary_assignment = frappe.db.get_all("Salary Structure Assignment", 
+								  fields=["name", "salary_structure"], filters={"from_date": ["<=", nowdate()], "employee":emp.employee}, 
+								  order_by = "from_date desc", limit=1)
+			print(salary_assignment[0].name, '--salary_assignment')
+			if len(salary_assignment) > 0:
+				ss = frappe.get_doc("Salary Structure", salary_assignment[0].salary_structure)
+				
+				total_lwp_deduction = 0
+				for ear in ss.earnings:
+					deduction_component = frappe.db.get_value("Salary Component", ear.salary_component, 'custom_consider_for_deduction_calculation')
+					if deduction_component == 1:
+						total_lwp_deduction = total_lwp_deduction + ((ear.amount)/30) * total_lwp
+
+				emp_dedution_details['employee'] = emp.employee
+				emp_dedution_details['deduction'] = total_lwp_deduction
+				print(total_lwp_deduction, '---total_lwp_deduction')
+
+				emp_dedution_list.append(emp_dedution_details)
+
+		else:	
+			emp_dedution_details['employee'] = emp.employee
+			emp_dedution_details['deduction'] = 0
+
+			emp_dedution_list.append(emp_dedution_details)
+				
+	return emp_dedution_list
+
+
+def create_additonal_salary_for_deduction(self, method):
+
+	lwp_deduction_component = frappe.db.get_single_value('Stats Settings ST', 'lwpabsent_deduction_component')
+
+	for emp in self.employees:
+		if emp.custom_lwp_deduction > 0:
+			additional_salary = frappe.new_doc("Additional Salary")
+			additional_salary.employee = emp.employee
+			additional_salary.payroll_date = self.start_date
+			additional_salary.salary_component =  lwp_deduction_component
+			additional_salary.overwrite_salary_structure_amount = 1
+			additional_salary.amount = emp.custom_lwp_deduction
+			additional_salary.save(ignore_permissions=True)
+			frappe.msgprint(_("Additional Salary {0} Created for Employee {1}.").format(additional_salary.name, emp.employee), alert=1)
+			additional_salary.submit()

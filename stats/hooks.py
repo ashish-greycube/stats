@@ -31,7 +31,8 @@ doctype_js = {"ToDo" : "public/js/todo.js",
               "Employee":"public/js/employee.js",
               "Company":"public/js/company.js",
               "Department":"public/js/department.js",
-              "Designation":"public/js/designation.js"
+              "Designation":"public/js/designation.js",
+              "Payroll Entry": "public/js/payroll_entry.js",
               }
 
 # include js in doctype views
@@ -155,7 +156,10 @@ doc_events = {
     },
     "Employee Checkin": {
         "after_insert":"stats.api.set_last_sync_of_checkin_on_save_of_employee_checkin"
-    }    
+    },
+    "Payroll Entry": {
+        "before_submit": "stats.api.create_additonal_salary_for_deduction"
+    } 
 }
 
 # doc_events = {
