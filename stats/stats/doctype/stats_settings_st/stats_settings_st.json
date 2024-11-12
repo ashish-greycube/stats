@@ -38,15 +38,14 @@
   "half_yearly_evaluation_to",
   "section_break_etcm",
   "default_evaluation_template_for_test_period",
-  "attendance_tab",
-  "civil_contract_section",
-  "cc_min_hours_in_month",
-  "column_break_erro",
-  "cc_permission_balance_per_month",
-  "direct_contract_section",
-  "dc_min_hours_in_month",
-  "column_break_sedn",
-  "dc_permission_balance_per_year"
+  "salary_component_tab",
+  "earnings_section",
+  "basic_salary_component",
+  "deductions_section",
+  "lwpabsent_deduction_component",
+  "penalty_deduction_component",
+  "column_break_pejt",
+  "hourly_deduction_component"
  ],
  "fields": [
   {
@@ -229,61 +228,57 @@
    "label": "Evaluation"
   },
   {
-   "fieldname": "attendance_tab",
+   "fieldname": "salary_component_tab",
    "fieldtype": "Tab Break",
-   "label": "Attendance"
+   "label": "Salary Component"
   },
   {
-   "fieldname": "civil_contract_section",
+   "fieldname": "basic_salary_component",
+   "fieldtype": "Link",
+   "label": "Basic Salary Component",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Earning\"]]",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "earnings_section",
    "fieldtype": "Section Break",
-   "label": "Civil Contract"
+   "label": "Earnings"
   },
   {
-   "description": "(in hours)",
-   "fieldname": "cc_min_hours_in_month",
-   "fieldtype": "Int",
-   "label": "Minimum Hours Per Month",
-   "reqd": 1
+   "fieldname": "deductions_section",
+   "fieldtype": "Section Break",
+   "label": "Deductions"
   },
   {
-   "description": "(in mins)",
-   "fieldname": "cc_permission_balance_per_month",
-   "fieldtype": "Int",
-   "label": "Permission Balance Per Month",
-   "reqd": 1
+   "fieldname": "lwpabsent_deduction_component",
+   "fieldtype": "Link",
+   "label": "LWP/Absent Deduction Component",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
+   "options": "Salary Component"
   },
   {
-   "fieldname": "column_break_erro",
+   "fieldname": "penalty_deduction_component",
+   "fieldtype": "Link",
+   "label": "Penalty Deduction Component",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "column_break_pejt",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "direct_contract_section",
-   "fieldtype": "Section Break",
-   "label": "Direct Contract"
-  },
-  {
-   "description": "(in hours)",
-   "fieldname": "dc_min_hours_in_month",
-   "fieldtype": "Int",
-   "label": "Minimum Hours Per Month",
-   "reqd": 1
-  },
-  {
-   "description": "(in mins)",
-   "fieldname": "dc_permission_balance_per_year",
-   "fieldtype": "Int",
-   "label": "Permission Balance Per Year",
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_sedn",
-   "fieldtype": "Column Break"
+   "fieldname": "hourly_deduction_component",
+   "fieldtype": "Link",
+   "label": "Hourly Deduction Component",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
+   "options": "Salary Component"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-10-29 15:28:10.727251",
+ "modified": "2024-11-12 08:38:30.682812",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats Settings ST",

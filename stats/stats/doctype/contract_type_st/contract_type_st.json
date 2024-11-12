@@ -7,13 +7,19 @@
  "engine": "InnoDB",
  "field_order": [
   "contract_type",
-  "no_of_allowed_business_trip_days",
   "column_break_wehs",
   "help",
   "section_break_yyew",
   "earning",
   "column_break_ssot",
-  "deduction"
+  "deduction",
+  "section_break_fjwx",
+  "total_hours_per_month",
+  "total_hours_per_day",
+  "column_break_jeuv",
+  "permission_balance_per_month",
+  "section_break_emci",
+  "no_of_allowed_business_trip_days"
  ],
  "fields": [
   {
@@ -63,11 +69,42 @@
    "fieldtype": "HTML",
    "label": "Help",
    "options": "<h3>Help</h3>\n\n<p>Notes:</p>\n\n<ol>\n<li>Use field <code>total_monthly_salary</code> for using total monthly salary of the Employee <br>\ni.e. salary component in offer term having 'Is Monthly Salary Component' : checked</li>\n</ol>\n\n<h4>Examples</h4>\n<ol>\n<li>Calculating Basic Salary based on  <code>total_monthly_salary</code>\n<pre><code>Formula: total_monthly_salary * .65</code></pre>\nPS: donot use any other abbreviation when using total_monthly_salary</li>\n\n<li>Calculating GOSI based on Basic <code>(BS)</code> and Housing Allowance <code>(HA)</code> \n<pre><code>Formula: (BS+HA) * .0.09</code></pre></li>\n</ol>"
+  },
+  {
+   "fieldname": "section_break_emci",
+   "fieldtype": "Section Break",
+   "label": "Business Trip"
+  },
+  {
+   "fieldname": "section_break_fjwx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "(in hours)",
+   "fieldname": "total_hours_per_month",
+   "fieldtype": "Int",
+   "label": "Total Hours Per Month"
+  },
+  {
+   "description": "(in hours)",
+   "fieldname": "total_hours_per_day",
+   "fieldtype": "Int",
+   "label": "Total Hours Per Day"
+  },
+  {
+   "fieldname": "column_break_jeuv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "(in mins)",
+   "fieldname": "permission_balance_per_month",
+   "fieldtype": "Int",
+   "label": "Permission Balance Per Month"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-18 12:50:08.839676",
+ "modified": "2024-11-12 08:31:17.842920",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Contract Type ST",
