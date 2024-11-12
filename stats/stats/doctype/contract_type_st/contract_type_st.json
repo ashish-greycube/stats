@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "contract_type",
+  "contract",
   "column_break_wehs",
   "help",
   "section_break_yyew",
@@ -18,6 +19,7 @@
   "total_hours_per_day",
   "column_break_jeuv",
   "permission_balance_per_month",
+  "permission_balance_per_year",
   "section_break_emci",
   "no_of_allowed_business_trip_days"
  ],
@@ -83,28 +85,46 @@
    "description": "(in hours)",
    "fieldname": "total_hours_per_month",
    "fieldtype": "Int",
-   "label": "Total Hours Per Month"
+   "label": "Total Hours Per Month",
+   "reqd": 1
   },
   {
    "description": "(in hours)",
    "fieldname": "total_hours_per_day",
    "fieldtype": "Int",
-   "label": "Total Hours Per Day"
+   "label": "Total Hours Per Day",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_jeuv",
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.contract==\"Civil\"",
    "description": "(in mins)",
    "fieldname": "permission_balance_per_month",
    "fieldtype": "Int",
-   "label": "Permission Balance Per Month"
+   "label": "Permission Balance Per Month",
+   "mandatory_depends_on": "eval:doc.contract==\"Civil\""
+  },
+  {
+   "fieldname": "contract",
+   "fieldtype": "Select",
+   "label": "Contract",
+   "options": "\nCivil\nDirect"
+  },
+  {
+   "depends_on": "eval:doc.contract==\"Direct\"",
+   "description": "(in mins)",
+   "fieldname": "permission_balance_per_year",
+   "fieldtype": "Int",
+   "label": "Permission Balance Per Year",
+   "mandatory_depends_on": "eval:doc.contract==\"Direct\""
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-12 08:31:17.842920",
+ "modified": "2024-11-12 12:19:06.100217",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Contract Type ST",

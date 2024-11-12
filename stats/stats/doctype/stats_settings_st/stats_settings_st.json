@@ -237,7 +237,8 @@
    "fieldtype": "Link",
    "label": "Basic Salary Component",
    "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Earning\"]]",
-   "options": "Salary Component"
+   "options": "Salary Component",
+   "reqd": 1
   },
   {
    "fieldname": "earnings_section",
@@ -254,14 +255,16 @@
    "fieldtype": "Link",
    "label": "LWP/Absent Deduction Component",
    "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
-   "options": "Salary Component"
+   "options": "Salary Component",
+   "reqd": 1
   },
   {
    "fieldname": "penalty_deduction_component",
    "fieldtype": "Link",
    "label": "Penalty Deduction Component",
    "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
-   "options": "Salary Component"
+   "options": "Salary Component",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_pejt",
@@ -272,13 +275,14 @@
    "fieldtype": "Link",
    "label": "Hourly Deduction Component",
    "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
-   "options": "Salary Component"
+   "options": "Salary Component",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-11-12 08:38:30.682812",
+ "modified": "2024-11-12 10:59:21.861091",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats Settings ST",
