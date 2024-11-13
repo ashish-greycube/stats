@@ -4,7 +4,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import nowdate
+from frappe.utils import nowdate, get_link_to_form, flt
 from stats.api import get_base_amount_from_salary_structure_assignment
 
 class EmployeePenaltyST(Document):
@@ -29,7 +29,7 @@ class EmployeePenaltyST(Document):
 				for pen in violation.penalty:
 					if pen.recurrence_type == "First Time":
 						self.action_type = pen.action_type
-						self.deduction = (base/30)*(pen.deduction/100)
+						self.deduction = flt(((base/30)*(pen.deduction/100)),2)
 						break
 					# else:
 					# 	frappe.throw(_("In Violation type: {0} First Time Penalty is not define.").format( self.violation_type))
@@ -39,7 +39,7 @@ class EmployeePenaltyST(Document):
 				for pen in violation.penalty:
 					if pen.recurrence_type == "Second Time":
 						self.action_type = pen.action_type
-						self.deduction = ((base/30)*(pen.deduction/100)) / 100
+						self.deduction = flt((((base/30)*(pen.deduction/100)) / 100),2)
 						break
 					# else:
 					# 	frappe.throw(_("In Violation type: {0} Second Time Penalty is not define.").format( self.violation_type))
@@ -49,7 +49,7 @@ class EmployeePenaltyST(Document):
 				for pen in violation.penalty:
 					if pen.recurrence_type == "Third Time":
 						self.action_type = pen.action_type
-						self.deduction = ((base/30)*(pen.deduction/100)) / 100
+						self.deduction = flt((((base/30)*(pen.deduction/100)) / 100),2)
 						break
 					# else:
 					# 	frappe.throw(_("In Violation type: {0} Third Time Penalty is not define.").format( self.violation_type))
@@ -61,7 +61,7 @@ class EmployeePenaltyST(Document):
 					print(pen.recurrence_type, '---pen.recurrence_type')
 					if pen.recurrence_type == "Fourth Time":
 						self.action_type = pen.action_type
-						self.deduction = ((base/30)*(pen.deduction/100)) / 100
+						self.deduction = flt((((base/30)*(pen.deduction/100)) / 100),2)
 						break
 					# else:
 					# 	frappe.throw(_("In Violation type: {0} Fourth Time Penalty is not define.").format( self.violation_type))
@@ -82,9 +82,15 @@ class EmployeePenaltyST(Document):
 
 	def create_additional_salary(self):
 		base = get_base_amount_from_salary_structure_assignment(self.employee)
+		penalty_deduction_component = frappe.db.get_single_value('Stats Settings ST', 'penalty_deduction_component')
 		additional_salary = frappe.new_doc("Additional Salary")
 		additional_salary.employee = self.employee
-		additional_salary.payroll_date = ""
-		additional_salary.salary_component = ""
-		additional_salary.amount = base
+		additional_salary.payroll_date = self.penalty_date
+		additional_salary.salary_component = penalty_deduction_component
+		additional_salary.amount = base * (self.deduction / 100)
+		print(self.deduction, '----self.deduction', base, '======base')
+		print(additional_salary.amount, '========== additional_salary.amount ===============')
 		additional_salary.overwrite_salary_structure_amount = 0
+		additional_salary.save(ignore_permissions = True)
+		frappe.msgprint(_("Additional Salary {0} created." .format(get_link_to_form('Additional Salary', additional_salary.name))), alert=True)
+		additional_salary.submit()

@@ -108,6 +108,7 @@
    "fieldname": "deduction",
    "fieldtype": "Percent",
    "label": "Deduction %",
+   "precision": "2",
    "read_only": 1
   },
   {
@@ -132,7 +133,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-17 08:11:53.632396",
+ "modified": "2024-11-13 10:36:23.595340",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Penalty ST",

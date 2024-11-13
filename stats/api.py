@@ -1,6 +1,9 @@
 import frappe
 from frappe import _
-from frappe.utils import add_to_date,get_datetime,getdate,nowdate,format_duration,cint,get_link_to_form,flt,add_years,time_diff_in_hours,now,rounded,flt,get_time,time_diff_in_seconds
+from frappe.utils import (add_to_date,get_datetime,
+						  getdate,nowdate,format_duration,cint,
+						  get_link_to_form,flt,add_years,time_diff_in_hours,
+						  now,rounded,flt,get_time,time_diff_in_seconds)
 from dateutil import relativedelta
 
 @frappe.whitelist()
@@ -520,13 +523,14 @@ def create_employee_checkin_checkout_for_training():
     #                                           'all_line_cast_off':['between',[filter__from_date,filter__to_date]] },)
 
 
+########### LWP Deduction ###########
 
-def get_non_working_days(employee, payroll_end_date) -> float:
+def get_non_working_days(employee, payroll_start_date, payroll_end_date) -> float:
 	filters = {
 		"docstatus": 1,
 		"status": "On Leave",
 		"employee": employee,
-		"attendance_date": ("<=", get_datetime(payroll_end_date)),
+		"attendance_date": ("between", [get_datetime(payroll_start_date), get_datetime(payroll_end_date)]),
 	}
 
 	# if status == "On Leave":
@@ -539,13 +543,14 @@ def get_non_working_days(employee, payroll_end_date) -> float:
 @frappe.whitelist()
 def calculate_lwp_dedution(payroll_entry):
 	payroll_entry = frappe.get_doc("Payroll Entry", payroll_entry)
+	previous_month_start_date = add_to_date(payroll_entry.start_date,months=-1)
 	previous_month_last_date = add_to_date(payroll_entry.start_date,days=-1)
 
-	print(previous_month_last_date, '----------previous_month_last_date-----------')
+	print(previous_month_last_date, previous_month_start_date,'----------previous_month_last_date-----------')
 
 	emp_dedution_list = []
 	for emp in payroll_entry.employees:
-		total_lwp = get_non_working_days(emp.employee, previous_month_last_date)
+		total_lwp = get_non_working_days(emp.employee,previous_month_start_date, previous_month_last_date)
 		print(total_lwp, '--total_lwp')
 	
 		emp_dedution_details = {}
@@ -565,23 +570,82 @@ def calculate_lwp_dedution(payroll_entry):
 						total_lwp_deduction = total_lwp_deduction + ((ear.amount)/30) * total_lwp
 
 				emp_dedution_details['employee'] = emp.employee
-				emp_dedution_details['deduction'] = total_lwp_deduction
+				emp_dedution_details['lwp_deduction'] = total_lwp_deduction
 				print(total_lwp_deduction, '---total_lwp_deduction')
 
 				emp_dedution_list.append(emp_dedution_details)
 
 		else:	
 			emp_dedution_details['employee'] = emp.employee
-			emp_dedution_details['deduction'] = 0
+			emp_dedution_details['lwp_deduction'] = 0
 
 			emp_dedution_list.append(emp_dedution_details)
 				
 	return emp_dedution_list
 
+########### Absent Deduction ###########
+
+def get_absent_days(employee, payroll_start_date, payroll_end_date) -> float:
+	filters = {
+		"docstatus": 1,
+		"status": "Absent",
+		"employee": employee,
+		"attendance_date": ("between", [get_datetime(payroll_start_date), get_datetime(payroll_end_date)]),
+	}
+
+	record = frappe.get_all("Attendance", filters=filters, fields=["COUNT(*) as total_absent"])
+	return record[0].total_absent if len(record) else 0
+
+
+@frappe.whitelist()
+def calculate_absent_dedution(payroll_entry):
+	payroll_entry = frappe.get_doc("Payroll Entry", payroll_entry)
+	previous_month_start_date = add_to_date(payroll_entry.start_date,months=-1)
+	previous_month_last_date = add_to_date(payroll_entry.start_date,days=-1)
+
+	print(previous_month_last_date, previous_month_start_date,'----------previous_month_last_date-----------')
+
+	emp_dedution_list = []
+	for emp in payroll_entry.employees:
+		total_absent = get_absent_days(emp.employee, previous_month_start_date, previous_month_last_date)
+		print(total_absent, '--total_absent')
+	
+		emp_dedution_details = {}
+		
+		if total_absent > 0:
+			salary_assignment = frappe.db.get_all("Salary Structure Assignment", 
+								  fields=["name", "salary_structure"], filters={"from_date": ["<=", nowdate()], "employee":emp.employee}, 
+								  order_by = "from_date desc", limit=1)
+			print(salary_assignment[0].name, '--salary_assignment')
+			if len(salary_assignment) > 0:
+				ss = frappe.get_doc("Salary Structure", salary_assignment[0].salary_structure)
+				
+				total_absent_deduction = 0
+				for ear in ss.earnings:
+					deduction_component = frappe.db.get_value("Salary Component", ear.salary_component, 'custom_consider_for_deduction_calculation')
+					if deduction_component == 1:
+						total_absent_deduction = total_absent_deduction + ((ear.amount)/30) * total_absent
+
+				emp_dedution_details['employee'] = emp.employee
+				emp_dedution_details['absent_deduction'] = total_absent_deduction
+				print(total_absent_deduction, '---total_absent_deduction')
+
+				emp_dedution_list.append(emp_dedution_details)
+
+		else:	
+			emp_dedution_details['employee'] = emp.employee
+			emp_dedution_details['absent_deduction'] = 0
+
+			emp_dedution_list.append(emp_dedution_details)
+				
+	return emp_dedution_list
+
+########### Deduction Additional Salary ###########
 
 def create_additonal_salary_for_deduction(self, method):
 
 	lwp_deduction_component = frappe.db.get_single_value('Stats Settings ST', 'lwpabsent_deduction_component')
+	absent_deduction_component = frappe.db.get_single_value('Stats Settings ST', 'absent_deduction_component')
 
 	for emp in self.employees:
 		if emp.custom_lwp_deduction > 0:
@@ -589,8 +653,19 @@ def create_additonal_salary_for_deduction(self, method):
 			additional_salary.employee = emp.employee
 			additional_salary.payroll_date = self.start_date
 			additional_salary.salary_component =  lwp_deduction_component
-			additional_salary.overwrite_salary_structure_amount = 1
+			additional_salary.overwrite_salary_structure_amount = 0
 			additional_salary.amount = emp.custom_lwp_deduction
+			additional_salary.save(ignore_permissions=True)
+			frappe.msgprint(_("Additional Salary {0} Created for Employee {1}.").format(additional_salary.name, emp.employee), alert=1)
+			additional_salary.submit()
+
+		if emp.custom_absent_deduction > 0:
+			additional_salary = frappe.new_doc("Additional Salary")
+			additional_salary.employee = emp.employee
+			additional_salary.payroll_date = self.start_date
+			additional_salary.salary_component =  absent_deduction_component
+			additional_salary.overwrite_salary_structure_amount = 0
+			additional_salary.amount = emp.custom_absent_deduction
 			additional_salary.save(ignore_permissions=True)
 			frappe.msgprint(_("Additional Salary {0} Created for Employee {1}.").format(additional_salary.name, emp.employee), alert=1)
 			additional_salary.submit()
