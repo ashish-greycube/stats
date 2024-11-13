@@ -153,6 +153,7 @@ doc_events = {
     },
     "Attendance": {
         "validate":"stats.api.calculate_extra_working_hours",
+        # "on_update_after_submit":"stats.api.calculate_extra_working_hours",
         "on_submit":"stats.api.set_custom_attendance_type",
     },
     "Employee Checkin": {

@@ -35,7 +35,7 @@ class AttendanceReconciliationST(Document):
 						frappe.throw(_("# Row{0}: You cannot select reason <b>{1}</b>".format(row.idx,row.reason)))
 
 				if row.reason == "Deduct from Extra Balance":
-					if (row.delay_in > 0 and row.early_out > 0) or (row.delay_in == 0 and row.early_out > 0 and row.extra_hours == 0):
+					if (row.delay_in > 0 and row.early_out > 0) or (row.delay_in == 0 and row.early_out > 0 and row.extra_minutes == 0):
 						frappe.throw(_("# Row{0}: You cannot select reason <b>{1}</b> because you do not have extra balance".format(row.idx,row.reason)))
 
 				if row.reason == "Deduct From Permission Balance":
@@ -45,37 +45,42 @@ class AttendanceReconciliationST(Document):
 						frappe.throw(_("# Row{0}: You cannot select reason <b>{1}</b>".format(row.idx,row.reason)))
 
 	def calculate_and_update_attendance(self):
+		print('-'*10)
 		if len(self.attendance_reconciliation_details)>0:
 			for row in self.attendance_reconciliation_details:
 				if row.reason == "Personal Permission":
 					if row.delay_in > 0 or row.early_out > 0:
+						print('e-'*10)
 						attendance_doc = frappe.get_doc("Attendance",row.attendance_reference)
-						attendance_doc.custom_net_working_hours = row.actual_working_hours + (row.delay_in or 0) + (row.early_out or 0)
+						attendance_doc.custom_net_working_minutes = row.actual_working_minutes + (row.delay_in or 0) + (row.early_out or 0)
 						attendance_doc.custom_reconciliation_method = row.reason
 						attendance_doc.custom_attendance_type = "Present Due To Reconciliation"
-						attendance_doc.custom_difference_in_working_hours = attendance_doc.custom_net_working_hours - row.actual_working_hours
+						attendance_doc.custom_difference_in_working_minutes = attendance_doc.custom_net_working_minutes - row.actual_working_minutes
+						if attendance_doc.custom_difference_in_working_minutes >= 0:
+							attendance_doc.status = "Present"
 						attendance_doc.add_comment("Comment",text="Net Working Hours are calculated based on Attendance Reconciliation {0}".format(get_link_to_form("Attendance Reconciliation ST",self.name)))
+						print('8-'*10)
 						attendance_doc.save(ignore_permissions=True)
 			
 			for row in self.attendance_reconciliation_details:
 				if row.reason == "Deduct from Extra Balance":
 					if row.delay_in == 0 and row.early_out > 0:
-						if row.extra_hours > 0:
-							working_hours_per_day = None
+						if row.extra_minutes > 0:
+							working_minutes_per_day = None
 							contract_type = frappe.db.get_value("Employee",self.employee_no,"custom_contract_type")
 							if contract_type:
-								working_hours_per_day = frappe.db.get_value("Contract Type ST",contract_type,"total_hours_per_day")
+								working_minutes_per_day = frappe.db.get_value("Contract Type ST",contract_type,"total_mins_per_day")
 							else :
 								frappe.throw(_("Please set contract type in Employee Profile {0}".format(get_link_to_form("Employee",self.employee_no))))
 
-							if working_hours_per_day:
-								total_working_hour = row.actual_working_hours + row.extra_hours
-								if total_working_hour >= working_hours_per_day:
+							if working_minutes_per_day:
+								total_working_minutes = row.actual_working_minutes + row.extra_minutes
+								if total_working_minutes >= working_minutes_per_day:
 									attendance_doc = frappe.get_doc("Attendance",row.attendance_reference)
-									attendance_doc.custom_net_working_hours = total_working_hour
+									attendance_doc.custom_net_working_minutes = total_working_minutes
 									attendance_doc.custom_reconciliation_method = row.reason
 									attendance_doc.custom_attendance_type = "Present Due To Reconciliation"
-									attendance_doc.custom_difference_in_working_hours = attendance_doc.custom_net_working_hours - row.actual_working_hours
+									attendance_doc.custom_difference_in_working_minutes = attendance_doc.custom_net_working_minutes - row.actual_working_minutes
 									attendance_doc.add_comment("Comment",text="Net Working Hours are calculated based on Attendance Reconciliation {0}".format(get_link_to_form("Attendance Reconciliation ST",self.name)))
 									attendance_doc.save(ignore_permissions=True)
 
@@ -130,7 +135,7 @@ class AttendanceReconciliationST(Document):
 
 		get_attendance = frappe.db.get_all("Attendance",
 									 filters={"employee":self.employee_no,"attendance_date":["between",[month_start_date,month_end_date]]},
-									 fields=["name","attendance_date","custom_attendance_type","custom_actual_delay","custom_actual_early","status","late_entry","early_exit"])
+									 fields=["name","attendance_date","custom_attendance_type","custom_actual_delay_minutes","custom_actual_early_minutes","status","late_entry","early_exit"])
 		
 		for row in reconciliation_data:
 			for day in weekly_off_days:
@@ -142,8 +147,8 @@ class AttendanceReconciliationST(Document):
 					for attendance in get_attendance:
 						if row.get("date") == attendance.attendance_date:
 							row["type"]=attendance.status
-							row["delay_in"]=attendance.custom_actual_delay
-							row["early_out"]=attendance.custom_actual_early
+							row["delay_in"]=attendance.custom_actual_delay_minutes
+							row["early_out"]=attendance.custom_actual_early_minutes
 							row["attendance_reference"]=attendance.name
 		return reconciliation_data
 

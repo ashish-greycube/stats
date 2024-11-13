@@ -442,40 +442,39 @@ def create_employee_evaluation_based_on_employee_contract():
 				employee_evaluation_doc.add_comment("Comment",text="Created by system on {0}".format(nowdate()))
 
 def calculate_extra_working_hours(self,method):
+    print('-'*10)
     print('calculate_extra_working_hours'*10)
     shift_start_time = frappe.db.get_value("Shift Type",self.shift,"start_time")
     shift_end_time = frappe.db.get_value("Shift Type",self.shift,"end_time")
 
-    actual_working_hours = time_diff_in_hours(shift_end_time, shift_start_time)
+    actual_working_minutes = self.custom_working_minutes_per_day
     employee_working_hours = self.working_hours
 
     # rounded_employee_working_hours = rounded(employee_working_hours - actual_working_hours, 0)
     if employee_working_hours and (employee_working_hours > 0):
-        employee_working_hours_in_minutes = employee_working_hours * 60
-        self.custom_actual_working_hours = employee_working_hours_in_minutes
-        if self.custom_net_working_hours == 0:
-            self.custom_net_working_hours = self.custom_actual_working_hours
+        employee_working_minutes = employee_working_hours * 60
+        self.custom_actual_working_minutes = employee_working_minutes
+        if self.custom_net_working_minutes == 0:
+            self.custom_net_working_minutes = self.custom_actual_working_minutes
 
-        if employee_working_hours > actual_working_hours:
-            int_hours, dec_min = divmod(employee_working_hours - actual_working_hours, 1)
-            extra_min = cint(rounded(dec_min * 60,0)) 
-            int_hours = cint(int_hours)
-            total_extra_min = (int_hours*60) + extra_min
-            self.custom_extra_hours = total_extra_min
+        if employee_working_minutes > actual_working_minutes:
+            total_extra_min = employee_working_minutes - actual_working_minutes
+            self.custom_extra_minutes = total_extra_min
+
     if self.late_entry == 1:
         late_entry_duration = time_diff_in_seconds(str((self.in_time).time()),str(get_time(str(shift_start_time))))
-        self.custom_actual_delay = cint(rounded(late_entry_duration/60,0))
+        self.custom_actual_delay_minutes = cint(rounded(late_entry_duration/60,0))
     
     if self.early_exit == 1:
         early_exit_duration = time_diff_in_seconds(str(get_time(str(shift_end_time))),str((self.out_time).time()))
-        self.custom_actual_early = cint(rounded(early_exit_duration/60,0))
+        self.custom_actual_early_minutes = cint(rounded(early_exit_duration/60,0))
     
     if not self.custom_attendance_type:
         if self.status:
             self.custom_attendance_type = self.status
         
-    if self.custom_net_working_hours:
-        self.custom_difference_in_working_hours = self.custom_net_working_hours - self.custom_actual_working_hours
+    if self.custom_net_working_minutes:
+        self.custom_difference_in_working_minutes = self.custom_net_working_minutes - self.custom_actual_working_minutes
 
 def set_custom_attendance_type(self,method):
 	# required to do as on leave application, attendance is created by passing the validate hook
