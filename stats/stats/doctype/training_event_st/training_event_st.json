@@ -174,8 +174,7 @@
    "fieldtype": "Select",
    "label": "Training Status",
    "no_copy": 1,
-   "options": "\nOpen\nOn Going\nClosed\nFinished",
-   "read_only": 1
+   "options": "\nOpen\nOn Going\nClosed\nFinished"
   },
   {
    "fieldname": "section_break_duaf",
@@ -203,7 +202,7 @@
    "link_fieldname": "training_event"
   }
  ],
- "modified": "2024-11-04 08:03:57.837454",
+ "modified": "2024-11-13 10:45:49.065254",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Training Event ST",
