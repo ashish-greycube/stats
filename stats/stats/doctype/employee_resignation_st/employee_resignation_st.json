@@ -7,7 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "section_break_kmth",
-  "creation_date",
+  "resignation_date",
   "employee_no",
   "employee_name",
   "main_department",
@@ -16,8 +16,11 @@
   "branch",
   "column_break_vdqz",
   "resignation_type",
-  "resignation_reason",
+  "separation_reason",
   "last_working_days",
+  "employee_evacuation_status",
+  "exit_interview_status",
+  "due_amount_status",
   "amended_from"
  ],
  "fields": [
@@ -42,12 +45,6 @@
    "label": "Resignation Type",
    "options": "Resignation Type ST",
    "reqd": 1
-  },
-  {
-   "default": "Today",
-   "fieldname": "creation_date",
-   "fieldtype": "Date",
-   "label": "Creation Date"
   },
   {
    "fieldname": "employee_no",
@@ -94,20 +91,52 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "resignation_reason",
-   "fieldtype": "Data",
-   "label": "Resignation Reason"
-  },
-  {
    "fieldname": "last_working_days",
    "fieldtype": "Date",
    "label": "Last Working Days"
+  },
+  {
+   "default": "Today",
+   "fieldname": "resignation_date",
+   "fieldtype": "Date",
+   "label": "Resignation Date"
+  },
+  {
+   "depends_on": "eval:doc.resignation_type == \"Separation\"",
+   "fieldname": "separation_reason",
+   "fieldtype": "Link",
+   "label": "Separation Reason",
+   "options": "Separation Reason ST"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "employee_evacuation_status",
+   "fieldtype": "Select",
+   "label": "Employee Evacuation Status",
+   "options": "\nPending\nProcessed",
+   "read_only": 1
+  },
+  {
+   "default": "Pending",
+   "fieldname": "exit_interview_status",
+   "fieldtype": "Select",
+   "label": "Exit Interview Status",
+   "options": "\nPending\nProcessed",
+   "read_only": 1
+  },
+  {
+   "default": "Pending",
+   "fieldname": "due_amount_status",
+   "fieldtype": "Select",
+   "label": "Due Amount Status",
+   "options": "\nPending\nProcessed",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-04 13:31:36.374874",
+ "modified": "2024-11-11 14:37:35.778170",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Resignation ST",

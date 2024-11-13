@@ -2,35 +2,148 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
-from frappe.utils import get_first_day, get_last_day, add_to_date
+from frappe.utils import get_first_day, get_last_day, add_to_date,get_weekday, getdate, get_link_to_form
+from datetime import date
 
 
 class AttendanceReconciliationST(Document):
 	
+	def validate(self):
+		self.validate_reason_for_reconciliation()
+		self.calculate_and_update_attendance()
+	
+	# def on_submit(self):
+	# 	self.calculate_and_update_attendance()
+
+	def validate_reason_for_reconciliation(self):
+		if len(self.attendance_reconciliation_details)>0:
+			for row in self.attendance_reconciliation_details:
+				if row.type == "Weekly Off":
+					if row.reason != "":
+						frappe.throw(_("# Row {0}: You cannot select any reason for weekly off.".format(row.idx)))
+
+				if row.type == "Present":
+					if (row.delay_in == 0 and row.early_out == 0) and row.reason != "":
+						frappe.throw(_("# Row {0}: You cannot select any reason as there is no need of reconciliation".format(row.idx)))
+
+				if row.reason == "Personal Permission":
+					if row.delay_in > 0 or row.early_out > 0:
+						pass
+					else:
+						frappe.throw(_("# Row{0}: You cannot select reason <b>{1}</b>".format(row.idx,row.reason)))
+
+				if row.reason == "Deduct from Extra Balance":
+					if (row.delay_in > 0 and row.early_out > 0) or (row.delay_in == 0 and row.early_out > 0 and row.extra_hours == 0):
+						frappe.throw(_("# Row{0}: You cannot select reason <b>{1}</b> because you do not have extra balance".format(row.idx,row.reason)))
+
+				if row.reason == "Deduct From Permission Balance":
+					if row.delay_in > 0 or row.early_out > 0:
+						pass
+					else:
+						frappe.throw(_("# Row{0}: You cannot select reason <b>{1}</b>".format(row.idx,row.reason)))
+
+	def calculate_and_update_attendance(self):
+		if len(self.attendance_reconciliation_details)>0:
+			for row in self.attendance_reconciliation_details:
+				if row.reason == "Personal Permission":
+					if row.delay_in > 0 or row.early_out > 0:
+						attendance_doc = frappe.get_doc("Attendance",row.attendance_reference)
+						attendance_doc.custom_net_working_hours = row.actual_working_hours + (row.delay_in or 0) + (row.early_out or 0)
+						attendance_doc.custom_reconciliation_method = row.reason
+						attendance_doc.custom_attendance_type = "Present Due To Reconciliation"
+						attendance_doc.custom_difference_in_working_hours = attendance_doc.custom_net_working_hours - row.actual_working_hours
+						attendance_doc.add_comment("Comment",text="Net Working Hours are calculated based on Attendance Reconciliation {0}".format(get_link_to_form("Attendance Reconciliation ST",self.name)))
+						attendance_doc.save(ignore_permissions=True)
+			
+			for row in self.attendance_reconciliation_details:
+				if row.reason == "Deduct from Extra Balance":
+					if row.delay_in == 0 and row.early_out > 0:
+						if row.extra_hours > 0:
+							working_hours_per_day = None
+							contract_type = frappe.db.get_value("Employee",self.employee_no,"custom_contract_type")
+							if contract_type:
+								working_hours_per_day = frappe.db.get_value("Contract Type ST",contract_type,"total_hours_per_day")
+							else :
+								frappe.throw(_("Please set contract type in Employee Profile {0}".format(get_link_to_form("Employee",self.employee_no))))
+
+							if working_hours_per_day:
+								total_working_hour = row.actual_working_hours + row.extra_hours
+								if total_working_hour >= working_hours_per_day:
+									attendance_doc = frappe.get_doc("Attendance",row.attendance_reference)
+									attendance_doc.custom_net_working_hours = total_working_hour
+									attendance_doc.custom_reconciliation_method = row.reason
+									attendance_doc.custom_attendance_type = "Present Due To Reconciliation"
+									attendance_doc.custom_difference_in_working_hours = attendance_doc.custom_net_working_hours - row.actual_working_hours
+									attendance_doc.add_comment("Comment",text="Net Working Hours are calculated based on Attendance Reconciliation {0}".format(get_link_to_form("Attendance Reconciliation ST",self.name)))
+									attendance_doc.save(ignore_permissions=True)
+
 	@frappe.whitelist()
 	def fetch_attendance_details(self):
-		reconciliation_data = []
-		month_start_date, month_end_date = get_first_day(self.date), get_last_day(self.date)
-		print(month_end_date,month_end_date.day)
+		
+		month_number_mapping = {
+        "January": 1,
+        "February": 2,
+        "March": 3,
+        "April": 4,
+        "May": 5,
+        "June": 6,
+        "July": 7,
+        "August": 8,
+        "September": 9,
+        "October": 10,
+        "November": 11,
+        "December": 12,
+		}
+		
+		from datetime import date
+
+		current_month_no = month_number_mapping.get(self.current_year_month)
+		month_start_date = date(year=getdate(self.date).year, month=current_month_no, day=1)
+		month_end_date = get_last_day(month_start_date)
 		current_date = month_start_date
+
+		reconciliation_data = []
 		for date in range(month_start_date.day, month_end_date.day+1):
 			reconciliation_details = {}
 			reconciliation_details["date"]=current_date
+			reconciliation_details["day"]=get_weekday(current_date)
 			current_date = add_to_date(current_date, days=1)
-			print(reconciliation_details,"************")
 			reconciliation_data.append(reconciliation_details)
+
+		holiday_list = frappe.db.get_all("Holiday List",
+								   filters={"from_date":["<=",self.date],"to_date":[">=",self.date]},
+								   fields=["name"])
 		
+		weekly_off_days = []
+		if len(holiday_list)>0:
+			get_weekly_off_list = frappe.db.get_all("Holiday",
+											parent_doctype="Holiday List",
+											filters={"parent":holiday_list[0].name,"weekly_off":1},
+											fields=["description"],
+											group_by="description",debug=1)
+
+			if len(get_weekly_off_list)>0:
+				for row in get_weekly_off_list:
+					weekly_off_days.append(row.description)
+
 		get_attendance = frappe.db.get_all("Attendance",
 									 filters={"employee":self.employee_no,"attendance_date":["between",[month_start_date,month_end_date]]},
 									 fields=["name","attendance_date","custom_attendance_type","custom_actual_delay","custom_actual_early","status","late_entry","early_exit"])
-		if len(get_attendance)>0:
-			for row in reconciliation_data:
-				print(row)
-				for attendance in get_attendance:
-					if row.get("date") == attendance.attendance_date:
-						row["type"]=attendance.status
-						row["delay_in"]=attendance.custom_actual_delay
-						row["early_out"]=attendance.custom_actual_early
+		
+		for row in reconciliation_data:
+			for day in weekly_off_days:
+				if row.get("day") == day:
+					row["type"]="Weekly Off"
+
+			if row.get("day") not in weekly_off_days:
+				if len(get_attendance)>0:
+					for attendance in get_attendance:
+						if row.get("date") == attendance.attendance_date:
+							row["type"]=attendance.status
+							row["delay_in"]=attendance.custom_actual_delay
+							row["early_out"]=attendance.custom_actual_early
+							row["attendance_reference"]=attendance.name
 		return reconciliation_data
 

@@ -7,11 +7,13 @@
  "engine": "InnoDB",
  "field_order": [
   "date",
-  "month",
+  "current_year_month",
+  "total_available_permission_balance",
   "fetch",
   "column_break_pxfv",
   "employee_no",
   "employee_name",
+  "monthly_consume_permission_balance",
   "section_break_vaig",
   "attendance_reconciliation_details"
  ],
@@ -38,12 +40,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "month",
-   "fieldtype": "Select",
-   "label": "Month",
-   "options": "\nJanuary\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember"
-  },
-  {
    "fieldname": "column_break_pxfv",
    "fieldtype": "Column Break"
   },
@@ -61,11 +57,28 @@
    "fieldtype": "Table",
    "label": "Attendance Reconciliation Details",
    "options": "Attendance Reconciliation Details ST"
+  },
+  {
+   "fieldname": "current_year_month",
+   "fieldtype": "Select",
+   "label": "Current Year Month",
+   "options": "\nJanuary\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember"
+  },
+  {
+   "fetch_from": "employee_no.custom_permission_balance_per_year",
+   "fieldname": "total_available_permission_balance",
+   "fieldtype": "Int",
+   "label": "Total Available Permission Balance"
+  },
+  {
+   "fieldname": "monthly_consume_permission_balance",
+   "fieldtype": "Int",
+   "label": "Monthly Consume Permission Balance"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-25 13:27:13.613699",
+ "modified": "2024-11-12 12:25:45.235693",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Attendance Reconciliation ST",

@@ -1,36 +1,36 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:resignation_type",
- "creation": "2024-11-04 13:27:22.272098",
+ "autoname": "field:separation_reason",
+ "creation": "2024-11-11 14:30:22.667324",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "resignation_type",
-  "is_it_separation"
+  "separation_reason",
+  "ignore_end_of_service_calculation"
  ],
  "fields": [
   {
-   "fieldname": "resignation_type",
+   "fieldname": "separation_reason",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Resignation Type",
+   "label": "Separation Reason",
    "reqd": 1,
    "unique": 1
   },
   {
    "default": "0",
-   "fieldname": "is_it_separation",
+   "fieldname": "ignore_end_of_service_calculation",
    "fieldtype": "Check",
-   "label": "Is it separation "
+   "label": "Ignore end of service calculation?"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-11 14:27:12.909389",
+ "modified": "2024-11-11 14:31:13.086164",
  "modified_by": "Administrator",
  "module": "Stats",
- "name": "Resignation Type ST",
+ "name": "Separation Reason ST",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

@@ -4,7 +4,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import date_diff, add_to_date, get_datetime, get_date_str, cstr, get_first_day, get_last_day, getdate
+from frappe.utils import date_diff, add_to_date, get_datetime, get_date_str, cstr, get_first_day, get_last_day, getdate, time_diff_in_hours
 from stats.hr_utils import check_if_holiday_between_applied_dates
 
 class ScholarshipRequestST(Document):
@@ -19,42 +19,71 @@ class ScholarshipRequestST(Document):
 		self.create_salary_structure_for_start_date_of_month()
 		self.create_salary_structure_for_other_than_start_date_of_month()
 		# self.create_additional_salary_structure()
+		self.create_future_attendance_for_scholarship_time()
 
 	def validate_duplicate_entry_based_on_employee_scholarship_and_specialisation_type(self):
 		exists_scholarship = frappe.db.exists("Scholarship Request ST", {"employee_no": self.employee_no,"scholarship_no": self.scholarship_no,"specialisation_type": self.specialisation_type})
 		print(exists_scholarship,self.employee_no,self.scholarship_no,self.specialisation_type,self.name,"--------------------")
 		if exists_scholarship != None and exists_scholarship != self.name:
 			frappe.throw(_("You cannot create Scholarship Request for same employee, scholarship no and specification type."))
-		
-	# def on_update_after_submit(self):
-	# 	self.create_future_attendance_for_scholarship_time()
 
 	def create_future_attendance_for_scholarship_time(self):
 		if self.acceptance_status == "Accepted":
 			days = date_diff(self.scholarship_end_date,self.scholarship_start_date)
-			print(days)
+			
+			different_years_list = []
+			for fiscal_year in range ((self.scholarship_start_date).year, (self.scholarship_end_date).year+1):
+				if fiscal_year not in different_years_list:
+					different_years_list.append(fiscal_year)
+
+			yearly_holiday_list = []
+
+			for year in different_years_list:
+				holiday = {}
+				fiscal_year_doc = frappe.get_doc("Fiscal Year",year)
+				exist_holiday_list = frappe.db.get_all("Holiday List",
+											filters={"to_date":fiscal_year_doc.year_end_date,"from_date":fiscal_year_doc.year_start_date},
+											fields=["name"])
+				if len(exist_holiday_list)<1:
+					frappe.throw(_("Holiday list for year <b>{0}</b> does not exists. Hence we cannot create future attendance.").format(year))
+				else :
+					holiday["year"]=year
+					holiday["holiday_list"]=exist_holiday_list[0].name
+					yearly_holiday_list.append(holiday)
+
 			for day in range (days+1):
 				attendance_date = add_to_date(self.scholarship_start_date,days=day)
-				check_holiday = check_if_holiday_between_applied_dates(self.employee_no,attendance_date,attendance_date)
-				print(check_holiday,"------")
+
+				check_holiday = None
+				for ele in yearly_holiday_list:
+					if attendance_date.year == ele.get("year"):
+						check_holiday = check_if_holiday_between_applied_dates(self.employee_no,attendance_date,attendance_date,holiday_list=ele.get("holiday_list"))
+
 				if check_holiday == False:
-					print("****************")
 					attendance_doc = frappe.new_doc("Attendance")
 					attendance_doc.employee = self.employee_no
 					attendance_doc.attendance_date = attendance_date
 					attendance_doc.custom_attendance_type = "Scholarship"
+
 					employee_shift = frappe.db.get_value("Employee",self.employee_no,"default_shift")
 					shift_start_time = frappe.db.get_value("Shift Type",employee_shift,"start_time")
 					shift_end_time = frappe.db.get_value("Shift Type",employee_shift,"end_time")
+
+					in_time = get_datetime(get_date_str(attendance_date) + " " + cstr(shift_start_time))
+					out_time = get_datetime(get_date_str(attendance_date) + " " + cstr(shift_end_time))
+					total_working_hours = time_diff_in_hours(in_time, out_time)
+
 					attendance_doc.shift = employee_shift
-					attendance_doc.in_time = get_datetime(get_date_str(attendance_date) + " " + cstr(shift_start_time))
-					attendance_doc.out_time = get_datetime(get_date_str(attendance_date) + " " + cstr(shift_end_time))
+					attendance_doc.in_time = in_time
+					attendance_doc.out_time = out_time
+					attendance_doc.working_hours = total_working_hours
 					attendance_doc.status = "Present"
 					attendance_doc.save(ignore_permissions=True)
-					print(attendance_doc.name,"---")
 					attendance_doc.submit()
-				else:
+				else :
 					pass
+
+			frappe.msgprint(_("Attendance from {0} to {1} is created.").format(self.scholarship_start_date,self.scholarship_end_date),alert=True)
 
 	def validate_maximum_applications(self):
 		if self.scholarship_no and self.specialisation_type:

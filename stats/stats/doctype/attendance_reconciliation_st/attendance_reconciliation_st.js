@@ -8,6 +8,24 @@ frappe.ui.form.on("Attendance Reconciliation ST", {
         console.log(month,"-=-")
     },
 
+    setup: function (frm) {
+        frm.trigger("hide_grid_add_row");
+    },
+
+    hide_grid_add_row: function (frm) {
+        setTimeout(() => {
+            frm.fields_dict.attendance_reconciliation_details.grid.wrapper
+                .find(".grid-add-row")
+                .remove();
+        }, 100);
+
+        setTimeout(() => {
+            frm.fields_dict.attendance_reconciliation_details.grid.wrapper
+                .find(".grid-remove-rows")
+                .remove();
+        }, 100);
+    },
+
     fetch(frm) {
         if (frm.is_dirty() == true) {
             frappe.throw({
@@ -26,6 +44,8 @@ frappe.ui.form.on("Attendance Reconciliation ST", {
                     frappe.model.set_value(d.doctype, d.name, "type", ele.type)
                     frappe.model.set_value(d.doctype, d.name, "delay_in", ele.delay_in)
                     frappe.model.set_value(d.doctype, d.name, "early_out", ele.early_out)
+                    frappe.model.set_value(d.doctype, d.name, "day", ele.day)
+                    frappe.model.set_value(d.doctype, d.name, "attendance_reference", ele.attendance_reference)
                 })
                 frm.refresh_field('attendance_reconciliation_details')
                 frm.save()
