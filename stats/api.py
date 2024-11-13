@@ -442,6 +442,7 @@ def create_employee_evaluation_based_on_employee_contract():
 				employee_evaluation_doc.add_comment("Comment",text="Created by system on {0}".format(nowdate()))
 
 def calculate_extra_working_hours(self,method):
+    print('calculate_extra_working_hours'*10)
     shift_start_time = frappe.db.get_value("Shift Type",self.shift,"start_time")
     shift_end_time = frappe.db.get_value("Shift Type",self.shift,"end_time")
 
@@ -475,6 +476,12 @@ def calculate_extra_working_hours(self,method):
         
     if self.custom_net_working_hours:
         self.custom_difference_in_working_hours = self.custom_net_working_hours - self.custom_actual_working_hours
+
+def set_custom_attendance_type(self,method):
+	# required to do as on leave application, attendance is created by passing the validate hook
+    if not self.custom_attendance_type:
+        if self.status:
+            frappe.db.set_value('Attendance', self.name, 'custom_attendance_type', self.status)
 
 def validate_duplicate_record_for_employee_checkin(self):
 		# employee_checkin = frappe.db.get_all("Employee Checkin",

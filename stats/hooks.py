@@ -152,7 +152,8 @@ doc_events = {
         "validate":"stats.api.validate_weight_and_set_degree_based_on_weight"
     },
     "Attendance": {
-        "validate":"stats.api.calculate_extra_working_hours"
+        "validate":"stats.api.calculate_extra_working_hours",
+        "on_submit":"stats.api.set_custom_attendance_type",
     },
     "Employee Checkin": {
         "after_insert":"stats.api.set_last_sync_of_checkin_on_save_of_employee_checkin"
