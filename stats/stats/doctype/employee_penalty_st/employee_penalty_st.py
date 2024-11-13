@@ -4,7 +4,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import nowdate, get_link_to_form, flt
+from frappe.utils import nowdate, get_link_to_form, flt, get_first_day, add_to_date
 from stats.api import get_base_amount_from_salary_structure_assignment
 
 class EmployeePenaltyST(Document):
@@ -89,13 +89,14 @@ class EmployeePenaltyST(Document):
 		if self.deduction > 0:
 			base = get_base_amount_from_salary_structure_assignment(self.employee)
 			penalty_deduction_component = frappe.db.get_single_value('Stats Settings ST', 'penalty_deduction_component')
+			next_month_date = add_to_date(self.penalty_date, months=1)
 			additional_salary = frappe.new_doc("Additional Salary")
 			additional_salary.employee = self.employee
-			additional_salary.payroll_date = self.penalty_date
+			additional_salary.payroll_date = get_first_day(next_month_date)
 			additional_salary.salary_component = penalty_deduction_component
 			additional_salary.amount = (base/30) * (self.deduction / 100)
-			print(self.deduction, '----self.deduction', base, '======base')
-			print(additional_salary.amount, '========== additional_salary.amount ===============')
+			# print(self.deduction, '----self.deduction', base, '======base')
+			# print(additional_salary.amount, '========== additional_salary.amount ===============')
 			additional_salary.overwrite_salary_structure_amount = 0
 			additional_salary.save(ignore_permissions = True)
 			frappe.msgprint(_("Additional Salary {0} created." .format(get_link_to_form('Additional Salary', additional_salary.name))), alert=True)

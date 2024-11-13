@@ -1,6 +1,6 @@
 frappe.ui.form.on("Payroll Entry", {
     refresh(frm) {
-        if (frm.is_new() || frm.doc.employees.length == 0) {
+        if (frm.is_new() || frm.doc.employees.length == 0 || frm.doc.docstatus == 1) {
             frm.set_df_property('custom_generate_deductions', 'hidden', 1)
         }
         else {
