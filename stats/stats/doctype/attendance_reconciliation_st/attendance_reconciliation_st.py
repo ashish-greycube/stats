@@ -66,23 +66,15 @@ class AttendanceReconciliationST(Document):
 				if row.reason == "Deduct from Extra Balance":
 					if row.delay_in == 0 and row.early_out > 0:
 						if row.extra_minutes > 0:
-							working_minutes_per_day = None
-							contract_type = frappe.db.get_value("Employee",self.employee_no,"custom_contract_type")
-							if contract_type:
-								working_minutes_per_day = frappe.db.get_value("Contract Type ST",contract_type,"total_mins_per_day")
-							else :
-								frappe.throw(_("Please set contract type in Employee Profile {0}".format(get_link_to_form("Employee",self.employee_no))))
-
-							if working_minutes_per_day:
-								total_working_minutes = row.actual_working_minutes + row.extra_minutes
-								if total_working_minutes >= working_minutes_per_day:
-									attendance_doc = frappe.get_doc("Attendance",row.attendance_reference)
-									attendance_doc.custom_net_working_minutes = total_working_minutes
-									attendance_doc.custom_reconciliation_method = row.reason
-									attendance_doc.custom_attendance_type = "Present Due To Reconciliation"
-									attendance_doc.custom_difference_in_working_minutes = attendance_doc.custom_net_working_minutes - row.actual_working_minutes
-									attendance_doc.add_comment("Comment",text="Net Working Hours are calculated based on Attendance Reconciliation {0}".format(get_link_to_form("Attendance Reconciliation ST",self.name)))
-									attendance_doc.save(ignore_permissions=True)
+								attendance_doc = frappe.get_doc("Attendance",row.attendance_reference)
+								attendance_doc.custom_net_working_minutes = row.actual_working_minutes
+								attendance_doc.custom_reconciliation_method = row.reason
+								attendance_doc.custom_attendance_type = "Present Due To Reconciliation"
+								attendance_doc.custom_difference_in_working_minutes = attendance_doc.custom_net_working_minutes - row.actual_working_minutes
+								if attendance_doc.custom_difference_in_working_minutes >= 0:
+									attendance_doc.status = "Present"								
+								attendance_doc.add_comment("Comment",text="Net Working Hours are calculated based on Attendance Reconciliation {0}".format(get_link_to_form("Attendance Reconciliation ST",self.name)))
+								attendance_doc.save(ignore_permissions=True)
 
 	@frappe.whitelist()
 	def fetch_attendance_details(self):
