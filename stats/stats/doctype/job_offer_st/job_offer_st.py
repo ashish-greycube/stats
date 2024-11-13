@@ -147,6 +147,14 @@ class JobOfferST(Document):
 				frappe.throw(_("Total of earnings amount must be {0} not {1}.").format(monthly_salary, total_monthly_salary))
 
 	@frappe.whitelist()
+	def get_salary_amount_from_man_power_planning(self):
+		salary = 0
+		if self.job_title:
+			salary = frappe.db.get_value('MP Jobs Details ST', self.job_title , 'salary')
+		print(salary, '----salary')
+		return salary
+
+	@frappe.whitelist()
 	def fill_salary_tables(self):
 		print("Inside Salary")
 		# if self.contract_type and self.is_new():
