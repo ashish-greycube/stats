@@ -20,6 +20,9 @@
   "column_break_jeuv",
   "permission_balance_per_month",
   "permission_balance_per_year",
+  "column_break_sdww",
+  "total_mins_per_month",
+  "total_mins_per_day",
   "section_break_emci",
   "no_of_allowed_business_trip_days"
  ],
@@ -120,11 +123,29 @@
    "fieldtype": "Int",
    "label": "Permission Balance Per Year",
    "mandatory_depends_on": "eval:doc.contract==\"Direct\""
+  },
+  {
+   "fieldname": "column_break_sdww",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "(in mins)",
+   "fieldname": "total_mins_per_month",
+   "fieldtype": "Int",
+   "label": "Total Mins Per Month",
+   "read_only": 1
+  },
+  {
+   "description": "(in mins)",
+   "fieldname": "total_mins_per_day",
+   "fieldtype": "Int",
+   "label": "Total Mins Per Day",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-12 12:19:06.100217",
+ "modified": "2024-11-13 07:47:49.779669",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Contract Type ST",

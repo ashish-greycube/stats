@@ -8,8 +8,13 @@ from frappe.model.document import Document
 
 class ContractTypeST(Document):
 	def validate(self):
+		self.set_in_mins()
 		self.validate_salary_structure_percentage()
 
+	def set_in_mins(self):
+		self.total_mins_per_month=self.total_hours_per_month*60
+		self.total_mins_per_day=self.total_hours_per_day*60
+		
 	def validate_salary_structure_percentage(self):
 		field_name_of_total_monthly_salary='total_monthly_salary'
 		if len(self.earning) > 0:
