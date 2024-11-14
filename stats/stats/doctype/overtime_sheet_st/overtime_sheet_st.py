@@ -19,7 +19,8 @@ class OvertimeSheetST(Document):
 			for row in self.overtime_sheet_employee_details:
 				if row.actual_extra_hours > 0:
 					monthly_salary = get_latest_total_monthly_salary_of_employee(row.employee_no)
-					amount = row.actual_extra_hours * ((monthly_salary or 0)/30)
+					per_day_salary = ((monthly_salary or 0)/30)
+					amount = row.actual_extra_hours * per_day_salary
 					row.amount = amount
 					total_amount = total_amount + amount
 

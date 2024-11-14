@@ -32,7 +32,8 @@ class OvertimeRequestST(Document):
 			if percentage_for_overtime:
 				for row in self.employee_overtime_request:	
 					monthly_salary = get_latest_total_monthly_salary_of_employee(row.employee_no)
-					row.due_amount = (row.no_of_hours_per_day or 0) * (no_of_day or 0) * ((monthly_salary or 0)/30)
+					per_day_salary = ((monthly_salary or 0)/30)
+					row.due_amount = (row.no_of_hours_per_day or 0) * (no_of_day or 0) * per_day_salary
 					row.rate_per_hour = ((monthly_salary or 0)/(30 * 8)) 
 					row.overtime_rate_per_hour = (row.rate_per_hour * (percentage_for_overtime/100)) + row.rate_per_hour
 					total_due_amt = total_due_amt + (row.due_amount or 0)

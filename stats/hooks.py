@@ -137,7 +137,8 @@ doc_events = {
 	},
     "Employee": {
         "validate":["stats.api.calculate_years_of_experience",
-                    "stats.api.set_employee_in_man_power_planning_for_job_no"]
+                    "stats.api.set_employee_in_man_power_planning_for_job_no",
+                    "stats.salary.create_resignation_addition_salary_for_employee"]
 	},
     "Leave Application": {
         "validate":"stats.api.check_leave_is_not_in_business_days"
@@ -160,7 +161,7 @@ doc_events = {
         "after_insert":"stats.api.set_last_sync_of_checkin_on_save_of_employee_checkin"
     },
     "Payroll Entry": {
-        "before_submit": "stats.api.create_additonal_salary_for_deduction"
+        "before_submit": "stats.salary.create_additonal_salary_for_deduction"
     } 
 }
 

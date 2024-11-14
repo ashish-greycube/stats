@@ -17,7 +17,7 @@ frappe.ui.form.on("Payroll Entry", {
         else {
             // lwp deduction
             frappe.call({
-                method: "stats.api.calculate_lwp_dedution",
+                method: "stats.salary.calculate_lwp_dedution",
                 args: {
                     payroll_entry: frm.doc.name
                 },
@@ -39,7 +39,7 @@ frappe.ui.form.on("Payroll Entry", {
 
             // absent Deduction
             frappe.call({
-                method: "stats.api.calculate_absent_dedution",
+                method: "stats.salary.calculate_absent_dedution",
                 args: {
                     payroll_entry: frm.doc.name
                 },

@@ -94,10 +94,12 @@ class EmployeePenaltyST(Document):
 			additional_salary.employee = self.employee
 			additional_salary.payroll_date = get_first_day(next_month_date)
 			additional_salary.salary_component = penalty_deduction_component
-			additional_salary.amount = (base/30) * (self.deduction / 100)
+			per_day_salary = (base/30)
+			additional_salary.amount = per_day_salary * (self.deduction / 100)
 			# print(self.deduction, '----self.deduction', base, '======base')
 			# print(additional_salary.amount, '========== additional_salary.amount ===============')
 			additional_salary.overwrite_salary_structure_amount = 0
 			additional_salary.save(ignore_permissions = True)
 			frappe.msgprint(_("Additional Salary {0} created." .format(get_link_to_form('Additional Salary', additional_salary.name))), alert=True)
+			additional_salary.add_comment('Comment', 'This Additonal Salary is created on {0} for Penalty Deduction'.format(nowdate()))
 			additional_salary.submit()
