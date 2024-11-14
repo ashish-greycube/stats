@@ -12,10 +12,10 @@ class AttendanceReconciliationST(Document):
 	
 	def validate(self):
 		self.validate_reason_for_reconciliation()
-		self.calculate_and_update_attendance()
+		# self.calculate_and_update_attendance()
 	
-	# def on_submit(self):
-	# 	self.calculate_and_update_attendance()
+	def on_submit(self):
+		self.calculate_and_update_attendance()
 
 	def validate_reason_for_reconciliation(self):
 		print("------------")
@@ -75,6 +75,8 @@ class AttendanceReconciliationST(Document):
 				if row.reason == "Deduct from Extra Balance":
 					if row.delay_in == 0 and row.early_out > 0:
 						if row.extra_minutes > 0:
+								# if row.early_out > row.extra_minutes:
+								# 	frappe.throw(_("You have extra balance is <b>{0}</b> and you required <b>{1}</b>. Hence you cannot select <b>Deduct from Extra Balance</b>".format(row.extra_minutes,row.early_out)))
 								attendance_doc = frappe.get_doc("Attendance",row.attendance_reference)
 								attendance_doc.custom_net_working_minutes = row.actual_working_minutes
 								attendance_doc.custom_reconciliation_method = row.reason
@@ -166,10 +168,14 @@ class AttendanceReconciliationST(Document):
 			if row.get("day") not in weekly_off_days:
 				if len(get_attendance)>0:
 					for attendance in get_attendance:
-						if row.get("date") == attendance.attendance_date:
-							row["type"]=attendance.attendance_type
-							row["delay_in"]=attendance.custom_actual_delay_minutes
-							row["early_out"]=attendance.custom_actual_early_minutes
-							row["attendance_reference"]=attendance.name
+						employee_checkins = frappe.db.get_all("Employee Checkin",
+											filters={"attendance":attendance.name},
+											fields=["name"])
+						if len(employee_checkins)>=2:
+							if row.get("date") == attendance.attendance_date:
+								row["type"]=attendance.attendance_type
+								row["delay_in"]=attendance.custom_actual_delay_minutes
+								row["early_out"]=attendance.custom_actual_early_minutes
+								row["attendance_reference"]=attendance.name
 		return reconciliation_data
 
