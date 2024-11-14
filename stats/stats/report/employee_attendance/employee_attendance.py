@@ -22,11 +22,18 @@ def execute(filters=None):
 def get_columns(filters):
 	return [
 		{
+			"fieldname": "attendance",
+			"label":_("Attendance"),
+			"fieldtype": "Link",
+			"options": "Attendance",
+			"width":"200"
+		},
+		{
 			"fieldname": "employee",
 			"label":_("Employee"),
 			"fieldtype": "Link",
 			"options": "Employee",
-			"width":"300"
+			"width":"200"
 		},
 		{
 			"fieldname": "in_time",
@@ -47,58 +54,52 @@ def get_columns(filters):
 			"width":"200"
 		},
 		{
+			"fieldname": "working_minutes_per_day",
+			"label":_("Working Minutes Per Day"),
+			"fieldtype": "Int",
+			"width":"100"
+		},
+		{
+			"fieldname": "actual_working_minutes",
+			"label":_("Actual Working Minutes"),
+			"fieldtype": "Int",
+			"width":"100"
+		},
+		{
+			"fieldname": "net_working_minutes",
+			"label":_("Net Working Minutes"),
+			"fieldtype": "Int",
+			"width":"100"
+		},
+		{
+			"fieldname": "difference_in_working_minutes",
+			"label":_("Difference in Working Minutes"),
+			"fieldtype": "Int",
+			"width":"100"
+		},
+		{
+			"fieldname": "reconciliation_method",
+			"label":_("Reconciliation Method"),
+			"fieldtype": "Data",
+			"width":"200"
+		},
+		{
+			"fieldname": "extra_minutes",
+			"label":_("Extra Minutes"),
+			"fieldtype": "Int",
+			"width":"100"
+		},
+		{
 			"fieldname": "actual_delay",
 			"label":_("Actual Delay"),
 			"fieldtype": "Int",
 			"width":"100"
 		},
 		{
-			"fieldname": "net_delay",
-			"label":_("Net Delay"),
-			"fieldtype": "Int",
-			"width":"200"
-		},
-		{
 			"fieldname": "actual_early",
-			"label":_("Early"),
+			"label":_("Actual Early"),
 			"fieldtype": "Int",
 			"width":"100"
-		},
-		{
-			"fieldname": "net_early",
-			"label":_("Net Early"),
-			"fieldtype": "Int",
-			"width":"200"
-		},
-		{
-			"fieldname": "extra_hours",
-			"label":_("Extra Hours"),
-			"fieldtype": "Int",
-			"width":"200"
-		},
-		{
-			"fieldname": "net_extra_hours",
-			"label":_("Net Extra Hours"),
-			"fieldtype": "Int",
-			"width":"200"
-		},
-		{
-			"fieldname": "no_of_hours",
-			"label":_("No of Hours"),
-			"fieldtype": "Float",
-			"width":"200"
-		},
-		{
-			"fieldname": "net_no_of_hours",
-			"label":_("Net No of Hours"),
-			"fieldtype": "Float",
-			"width":"200"
-		},
-		{
-			"fieldname": "date",
-			"label":_("Date"),
-			"fieldtype": "Date",
-			"width":"300"
 		}
 	]
 
@@ -107,24 +108,37 @@ def get_attendance_data(filters):
 
 	attendance_data = frappe.db.sql("""
 				SELECT
+					name as attendance,
 					employee,
 					employee_name,
-					attendance_date as date, 
-					late_entry as actual_delay,
-					early_exit as actual_early,
-					custom_extra_minutes as extra_hours,
 					in_time,
 					out_time,
-					working_hours as no_of_hours,
-					custom_net_working_minutes as net_no_of_hours,
-					custom_net_delay as net_delay,
-					custom_net_early as net_early,
-					custom_net_extra_hours as net_extra_hours,
-					status
+					custom_attendance_type as status,
+					custom_working_minutes_per_day as working_minutes_per_day,
+					custom_actual_working_minutes as actual_working_minutes,
+					custom_net_working_minutes as net_working_minutes,
+					custom_difference_in_working_minutes as difference_in_working_minutes,
+					custom_reconciliation_method as reconciliation_method,
+					custom_actual_delay_minutes as actual_delay,
+					custom_actual_early_minutes as actual_early,
+					custom_extra_minutes as extra_minutes
 				from
 					`tabAttendance`
 				where {0}
 		 """.format(conditions),filters,as_dict=1,debug=1)
+	
+	present_total_monthly_mins = frappe.db.sql("""
+				SELECT
+					sum(custom_net_working_minutes) as present_total_monthly_mins
+				from
+					`tabAttendance`
+				where {0} 
+					and custom_attendance_type in ('Present', 'On LWP', 'In Training', 'Business Trip', 'Scholarship', 'Present Due To Reconciliation')
+		""".format(conditions),filters,as_dict=1,debug=1)
+	
+	print(present_total_monthly_mins)
+	x = get_company_holiday_count(filters.employee,filters.from_date,filters.to_date)
+	print(x)
 	return attendance_data
 
 def get_conditions(filters):
@@ -140,3 +154,19 @@ def get_conditions(filters):
 		conditions += "and employee = %(employee)s "
 
 	return conditions
+
+def get_company_holiday_count(employee, from_date, to_date):
+
+	company_holiday_count = 0
+	current_holiday_list = frappe.db.get_all("Holiday List",
+										filters={"from_date":["<=",from_date],"to_date":[">=",to_date]},
+										fields=["name"])
+	if len(current_holiday_list)>0:
+		company_holidays = frappe.db.get_all("Holiday",
+										parent_doctype="Holiday List",
+										filters={"parent":current_holiday_list[0].name,"weekly_off":0},
+										fields=["description"])
+		print(company_holidays,"----company_holidays")
+		if len(company_holidays)>0:
+			company_holiday_count = company_holiday_count + len(company_holidays)
+	return company_holiday_count

@@ -15,7 +15,8 @@
   "reason",
   "actual_working_minutes",
   "extra_minutes",
-  "attendance_reference"
+  "attendance_reference",
+  "balance_to_be_consumed_in_minutes"
  ],
  "fields": [
   {
@@ -98,12 +99,18 @@
    "in_list_view": 1,
    "label": "Extra Minutes",
    "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.reason == \"Deduct From Permission Balance\"",
+   "fieldname": "balance_to_be_consumed_in_minutes",
+   "fieldtype": "Int",
+   "label": "Balance To Be Consumed In Minutes"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-11-13 08:41:57.094982",
+ "modified": "2024-11-13 09:22:11.449904",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Attendance Reconciliation Details ST",

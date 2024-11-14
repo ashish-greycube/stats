@@ -4,7 +4,6 @@
 frappe.ui.form.on("Attendance Reconciliation ST", {
     onload(frm) {
         let month = frappe.datetime.str_to_obj(frappe.datetime.get_today()).getMonth()
-        // let name = frappe.utils.get_datetime(frappe.datetime.get_today()).strftime("%B %Y")
         console.log(month,"-=-")
     },
 
@@ -24,6 +23,32 @@ frappe.ui.form.on("Attendance Reconciliation ST", {
                 .find(".grid-remove-rows")
                 .remove();
         }, 100);
+    },
+
+    employee_no(frm){
+        let employee = frm.doc.employee_no
+        frappe.db.get_value('Employee', employee, 'custom_contract_type')
+            .then(r => {
+            let contract_type = r.message.custom_contract_type
+            frappe.db.get_value("Contract Type ST",contract_type,"contract")
+                .then(response=> {
+                    let contract = response.message.contract
+                    if (contract == "Civil"){
+                        frappe.db.get_value("Contract Type ST",contract_type,"permission_balance_per_month")
+                            .then(r => {
+                                let permission_balance_per_month = r.message.permission_balance_per_month
+                                frm.set_value("total_available_permission_balance",permission_balance_per_month)
+                            })
+                    }
+                    else if (contract == "Direct"){
+                        frappe.db.get_value('Employee', employee, 'custom_permission_balance_per_year')
+                            .then(r => {
+                                let permission_balance_per_year = r.message.custom_permission_balance_per_year
+                                frm.set_value("total_available_permission_balance",permission_balance_per_year)
+                            })
+                    }
+                })
+            })
     },
 
     fetch(frm) {
@@ -53,3 +78,17 @@ frappe.ui.form.on("Attendance Reconciliation ST", {
         })
     }
 });
+
+
+frappe.ui.form.on("Attendance Reconciliation Details ST", {
+    reason (frm, cdt, cdn) {
+        let row = locals[cdt][cdn]
+        if (row.reason == "Deduct From Permission Balance") {
+            if (row.extra_minutes >= 0){
+                frappe.model.set_value(cdt, cdn, "balance_to_be_consumed_in_minutes",row.extra_minutes)
+            }else{
+                frappe.model.set_value(cdt, cdn, "balance_to_be_consumed_in_minutes",-(row.extra_minutes))
+            }
+        }
+    }
+})

@@ -8,18 +8,19 @@ frappe.query_reports["Employee Attendance"] = {
 			"label":__("Employee"),
 			"fieldtype": "Link",
 			"options": "Employee",
+			"reqd":1
 		},
 		{
 			"fieldname": "from_date",
 			"label":__("From Date"),
 			"fieldtype": "Date",
-			"default":frappe.datetime.add_days(frappe.datetime.get_today(), -1)
+			"default":frappe.datetime.month_start()
 		},
 		{
 			"fieldname": "to_date",
 			"label":__("To Date"),
 			"fieldtype": "Date",
-			"default":frappe.datetime.get_today()
+			"default":frappe.datetime.month_end()
 		},
 	]
 };

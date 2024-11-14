@@ -13,7 +13,7 @@
   "column_break_pxfv",
   "employee_no",
   "employee_name",
-  "monthly_consume_permission_balance",
+  "total_to_be_consumed_balance",
   "section_break_vaig",
   "attendance_reconciliation_details"
  ],
@@ -62,23 +62,25 @@
    "fieldname": "current_year_month",
    "fieldtype": "Select",
    "label": "Current Year Month",
-   "options": "\nJanuary\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember"
+   "options": "\nJanuary\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember",
+   "reqd": 1
   },
   {
-   "fetch_from": "employee_no.custom_permission_balance_per_year",
    "fieldname": "total_available_permission_balance",
    "fieldtype": "Int",
-   "label": "Total Available Permission Balance"
+   "label": "Total Available Permission Balance",
+   "read_only": 1
   },
   {
-   "fieldname": "monthly_consume_permission_balance",
+   "fieldname": "total_to_be_consumed_balance",
    "fieldtype": "Int",
-   "label": "Monthly Consume Permission Balance"
+   "label": "Total To Be Consumed Balance",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-12 12:25:45.235693",
+ "modified": "2024-11-13 11:53:08.226355",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Attendance Reconciliation ST",

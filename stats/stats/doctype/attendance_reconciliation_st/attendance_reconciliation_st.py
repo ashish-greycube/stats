@@ -18,7 +18,9 @@ class AttendanceReconciliationST(Document):
 	# 	self.calculate_and_update_attendance()
 
 	def validate_reason_for_reconciliation(self):
+		print("------------")
 		if len(self.attendance_reconciliation_details)>0:
+			balance_to_consume = 0
 			for row in self.attendance_reconciliation_details:
 				if row.type == "Weekly Off":
 					if row.reason != "":
@@ -35,14 +37,21 @@ class AttendanceReconciliationST(Document):
 						frappe.throw(_("# Row{0}: You cannot select reason <b>{1}</b>".format(row.idx,row.reason)))
 
 				if row.reason == "Deduct from Extra Balance":
-					if (row.delay_in > 0 and row.early_out > 0) or (row.delay_in == 0 and row.early_out > 0 and row.extra_minutes == 0):
+					if row.delay_in == 0 and row.early_out > 0:
+						pass
+					else :
 						frappe.throw(_("# Row{0}: You cannot select reason <b>{1}</b> because you do not have extra balance".format(row.idx,row.reason)))
 
 				if row.reason == "Deduct From Permission Balance":
+					print("++++++++++++")
 					if row.delay_in > 0 or row.early_out > 0:
-						pass
+						balance_to_consume = balance_to_consume + row.balance_to_be_consumed_in_minutes
 					else:
 						frappe.throw(_("# Row{0}: You cannot select reason <b>{1}</b>".format(row.idx,row.reason)))
+			print(balance_to_consume)
+			self.total_to_be_consumed_balance = balance_to_consume
+			if balance_to_consume > self.total_available_permission_balance :
+				frappe.throw(_("You do not have enough permission balance. Please readuse Balance To Be Consumed from any row <br>Your available balance is <b>{0}</b> and your consumed balance is <b>{1}</b>".format(self.total_available_permission_balance,self.total_to_be_consumed_balance)))
 
 	def calculate_and_update_attendance(self):
 		print('-'*10)
@@ -75,6 +84,26 @@ class AttendanceReconciliationST(Document):
 									attendance_doc.status = "Present"								
 								attendance_doc.add_comment("Comment",text="Net Working Hours are calculated based on Attendance Reconciliation {0}".format(get_link_to_form("Attendance Reconciliation ST",self.name)))
 								attendance_doc.save(ignore_permissions=True)
+
+			for row in self.attendance_reconciliation_details:
+				if row.reason == "Deduct From Permission Balance":
+					if row.delay_in > 0 or row.early_out > 0:
+						attendance_doc = frappe.get_doc("Attendance",row.attendance_reference)
+						attendance_doc.custom_net_working_minutes = row.actual_working_minutes + row.balance_to_be_consumed_in_minutes
+						attendance_doc.custom_reconciliation_method = row.reason
+						attendance_doc.custom_attendance_type = "Present Due To Reconciliation"
+						attendance_doc.custom_difference_in_working_minutes = attendance_doc.custom_net_working_minutes - row.actual_working_minutes
+						if attendance_doc.custom_difference_in_working_minutes >= 0:
+							attendance_doc.status = "Present"								
+						attendance_doc.add_comment("Comment",text="Net Working Hours are calculated based on Attendance Reconciliation {0}".format(get_link_to_form("Attendance Reconciliation ST",self.name)))
+						attendance_doc.save(ignore_permissions=True)
+
+						contract_type_name = attendance_doc.custom_contract_type
+						contract_type = frappe.db.get_value("Contract Type ST",contract_type_name,"contract")
+
+						if contract_type == "Direct":
+							new_available_balance = self.total_available_permission_balance - self.total_to_be_consumed_balance
+							frappe.db.set_value("Employee",self.employee_no,"custom_permission_balance_per_year",new_available_balance)
 
 	@frappe.whitelist()
 	def fetch_attendance_details(self):
@@ -138,7 +167,7 @@ class AttendanceReconciliationST(Document):
 				if len(get_attendance)>0:
 					for attendance in get_attendance:
 						if row.get("date") == attendance.attendance_date:
-							row["type"]=attendance.status
+							row["type"]=attendance.attendance_type
 							row["delay_in"]=attendance.custom_actual_delay_minutes
 							row["early_out"]=attendance.custom_actual_early_minutes
 							row["attendance_reference"]=attendance.name
