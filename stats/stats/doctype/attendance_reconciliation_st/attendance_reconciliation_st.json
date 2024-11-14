@@ -15,7 +15,8 @@
   "employee_name",
   "total_to_be_consumed_balance",
   "section_break_vaig",
-  "attendance_reconciliation_details"
+  "attendance_reconciliation_details",
+  "amended_from"
  ],
  "fields": [
   {
@@ -76,11 +77,22 @@
    "fieldtype": "Int",
    "label": "Total To Be Consumed Balance",
    "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Attendance Reconciliation ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-11-13 11:53:08.226355",
+ "modified": "2024-11-14 14:49:04.520938",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Attendance Reconciliation ST",

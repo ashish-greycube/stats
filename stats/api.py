@@ -482,9 +482,12 @@ def calculate_extra_working_hours(self,method):
 
 def set_custom_attendance_type(self,method):
 	print("==="*10)
+	print(self.name,self.employee)
 	# required to do as on leave application, attendance is created by passing the validate hook
 	print(self.custom_working_minutes_per_day,"==========",self.custom_net_working_minutes)
-	if self.custom_net_working_minutes==None or self.custom_net_working_minutes == 0:
+	employee_contract_type = frappe.db.get_value("Employee",self.employee,"custom_contract_type")
+	if employee_contract_type:
+		if self.custom_net_working_minutes==None or self.custom_net_working_minutes == 0:
 			frappe.db.set_value('Attendance', self.name, 'custom_net_working_minutes', self.custom_working_minutes_per_day)
 	if not self.custom_attendance_type:
 		if self.status:
