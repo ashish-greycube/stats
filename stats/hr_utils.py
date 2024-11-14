@@ -122,3 +122,16 @@ def get_employee_emails(details):
 
     combine_email_id = ",".join((ele if ele!=None else '') for ele in email_id_list)
     return combine_email_id  
+
+@frappe.whitelist()
+def set_yearly_permission_balance_in_employee_profile():
+    employees=frappe.db.get_list('Employee', filters={'status': ['=', 'Active']})
+    for employee in employees:
+        emp_doc=frappe.get_doc("Employee",employee)
+        custom_contract_type=emp_doc.custom_contract_type
+        contract = frappe.db.get_value('Contract Type ST', custom_contract_type, 'contract')
+        if contract == "Direct":
+            yearly_permission_balance = frappe.db.get_value('Contract Type ST', custom_contract_type, 'permission_balance_per_year')
+            emp_doc.custom_permission_balance_per_year=yearly_permission_balance
+            emp_doc.add_comment("Comment", text='Permission Balance Per Yearis set to {0} on {1} by system.'.format(yearly_permission_balance,nowdate()))
+            emp_doc.save(ignore_permissions=True)
