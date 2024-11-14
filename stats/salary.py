@@ -188,7 +188,7 @@ def create_resignation_addition_salary_for_employee(self, method):
 					additional_salary = frappe.new_doc("Additional Salary")
 					additional_salary.employee = self.name
 					# additional_salary.payroll_date =  get_first_day(next_month_date)
-					additional_salary.payroll_date = self.relieving_date
+					additional_salary.payroll_date = get_first_day(self.relieving_date)
 					print(self.relieving_date, additional_salary.payroll_date, '--------')
 					additional_salary.salary_component =  resignation_deduction_component
 					additional_salary.overwrite_salary_structure_amount = 0
