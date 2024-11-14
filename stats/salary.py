@@ -1,6 +1,7 @@
 import frappe
 from frappe import _
 from frappe.utils import (add_to_date, get_datetime, getdate, nowdate, get_first_day)
+from stats.stats.report.employee_attendance.employee_attendance import calculate_incomplete_total_monthly_minutes
 
 ########### LWP Deduction ###########
 
@@ -120,6 +121,13 @@ def calculate_absent_dedution(payroll_entry):
 			emp_dedution_list.append(emp_dedution_details)
 				
 	return emp_dedution_list
+
+########### Incomplete Monthly Mins Deduction ###########
+def calculate_incomlete_monthly_mins_deduction(self, method):
+	for emp in self.employees:
+		total_incomplete_mins = calculate_incomplete_total_monthly_minutes(emp.employee, self.start_date, self.end_date)
+		pass
+
 
 ########### Deduction Additional Salary ###########
 

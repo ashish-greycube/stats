@@ -50,13 +50,15 @@
    "fieldname": "employee_no",
    "fieldtype": "Link",
    "label": "Employee No",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "fetch_from": "employee_no.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
-   "label": "Employee Name"
+   "label": "Employee Name",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.department",
@@ -93,7 +95,8 @@
   {
    "fieldname": "last_working_days",
    "fieldtype": "Date",
-   "label": "Last Working Days"
+   "label": "Last Working Days",
+   "reqd": 1
   },
   {
    "default": "Today",
@@ -136,7 +139,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-11 14:37:35.778170",
+ "modified": "2024-11-14 13:02:03.835804",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Resignation ST",

@@ -1,12 +1,14 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "ESF-.#####",
  "creation": "2024-09-06 14:33:07.340224",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "section_break_6iaq",
   "employee_no",
+  "creation_date",
   "employee_name",
   "main_department",
   "sub_department",
@@ -37,8 +39,10 @@
   {
    "fieldname": "employee_no",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Employee No",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "fetch_from": "employee_no.employee_name",
@@ -64,12 +68,16 @@
   {
    "fieldname": "salary_freezing_start_date",
    "fieldtype": "Date",
-   "label": "Salary Freezing Start Date"
+   "in_list_view": 1,
+   "label": "Salary Freezing Start Date",
+   "reqd": 1
   },
   {
    "fieldname": "salary_freezing_end_date",
    "fieldtype": "Date",
-   "label": "Salary Freezing End Date"
+   "in_list_view": 1,
+   "label": "Salary Freezing End Date",
+   "reqd": 1
   },
   {
    "fieldname": "decision_number",
@@ -95,15 +103,22 @@
   {
    "fieldname": "column_break_dpbo",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "creation_date",
+   "fieldtype": "Date",
+   "label": "Creation Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-06 14:44:18.710559",
+ "modified": "2024-11-14 13:38:45.693341",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Salary Freezing ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

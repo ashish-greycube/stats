@@ -11,13 +11,13 @@ class EmployeeResignationST(Document):
 		self.validate_resignation_date()
 
 	def validate_resignation_date(self):
-		if self.resignation_date:
+		if self.last_working_days:
 			today_month = getdate(nowdate()).month
-			resignation_month = getdate(self.resignation_date).month
+			resignation_month = getdate(self.last_working_days).month
 
 			if today_month == resignation_month:
 				# today_date = nowdate().day
-				resignation_date = getdate(self.resignation_date).day
+				last_working_days = getdate(self.last_working_days).day
 
-				if resignation_date >= 11:
+				if last_working_days >= 11:
 					frappe.throw(_("For this Month, Payroll is generated so you cann't apply for resignation"))
