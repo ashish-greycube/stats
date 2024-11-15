@@ -57,12 +57,34 @@ frappe.ui.form.on("Payroll Entry", {
                         // frm.save()
                     }
                 }
+            }),
+
+            // Incomplete Monthly Mins Deduction
+            frappe.call({
+                method: "stats.salary.calculate_incomplete_monthly_mins_deduction",
+                args: {
+                    payroll_entry: frm.doc.name
+                },
+                callback: function (r) {
+                    console.log(r.message, '--r.message')
+                    let monthly_incomplete_mins_list = r.message
+                    if (monthly_incomplete_mins_list.length > 0) {
+                        monthly_incomplete_mins_list.forEach((ele) => {
+                            frm.doc.employees.forEach((row) => {
+                                if (ele.employee == row.employee)
+                                    frappe.model.set_value(row.doctype, row.name, "custom_incomplete_monthly_mins_deduction", ele.incomplete_mins_deduction)
+                            })
+                        })
+                        // frm.refresh_field('employees')
+                        // frm.save()
+                    }
+                }
             })
 
             setTimeout(() => {
                 frm.refresh_field('employees')
                 frm.save()
-            }, 1000);
+            }, 2000);
 
             
         }

@@ -30,7 +30,7 @@ class SalaryFreezingST(Document):
 
 		for freezing in freezing_month_dates:
 			salary_assignment = frappe.db.get_all("Salary Structure Assignment", 
-								  fields=["name", "salary_structure"], filters={"from_date": ["<=", nowdate()], "employee":self.employee_no}, 
+								  fields=["name", "salary_structure"], filters={"from_date": ["<=", freezing], "employee":self.employee_no}, 
 								  order_by = "from_date desc", limit=1)
 			
 			print
@@ -70,7 +70,7 @@ class SalaryFreezingST(Document):
 						additional_salary = frappe.new_doc("Additional Salary")
 						additional_salary.employee = self.employee_no
 						additional_salary.payroll_date = freezing
-						additional_salary.salary_component = total_freezing_deduction
+						additional_salary.salary_component = salary_freezing_deduction_component
 						additional_salary.overwrite_salary_structure_amount = 0
 						additional_salary.amount = total_freezing_deduction
 						additional_salary.save(ignore_permissions=True)
