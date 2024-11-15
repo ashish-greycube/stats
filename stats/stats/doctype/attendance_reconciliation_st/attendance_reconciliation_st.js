@@ -87,10 +87,10 @@ frappe.ui.form.on("Attendance Reconciliation Details ST", {
     reason (frm, cdt, cdn) {
         let row = locals[cdt][cdn]
         if (row.reason == "Deduct From Permission Balance") {
-            if (row.extra_minutes >= 0){
-                frappe.model.set_value(cdt, cdn, "balance_to_be_consumed_in_minutes",row.extra_minutes)
+            if (row.shortfall_in_working_minutes >= 0){
+                frappe.model.set_value(cdt, cdn, "balance_to_be_consumed_in_minutes",row.shortfall_in_working_minutes)
             }else{
-                frappe.model.set_value(cdt, cdn, "balance_to_be_consumed_in_minutes",-(row.extra_minutes))
+                frappe.model.set_value(cdt, cdn, "balance_to_be_consumed_in_minutes",-(row.shortfall_in_working_minutes))
             }
         }
     }

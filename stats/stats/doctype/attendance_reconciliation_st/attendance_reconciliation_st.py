@@ -182,7 +182,17 @@ class AttendanceReconciliationST(Document):
 											fields=["name"])
 						if len(employee_checkins)>=2:
 							if row.get("date") == attendance.attendance_date:
-								row["type"]=attendance.attendance_type
+								row["type"]=attendance.custom_attendance_type
+								row["delay_in"]=attendance.custom_actual_delay_minutes
+								row["early_out"]=attendance.custom_actual_early_minutes
+								row["expected_working_minutes"]=attendance.custom_working_minutes_per_day
+								row["actual_working_minutes"]=attendance.custom_actual_working_minutes
+								row["shortfall_in_working_minutes"]=attendance.custom_working_minutes_per_day-attendance.custom_actual_working_minutes
+								row["attendance_reference"]=attendance.name
+
+						elif len(employee_checkins)==0:
+							if row.get("date") == attendance.attendance_date:
+								row["type"]=attendance.custom_attendance_type
 								row["delay_in"]=attendance.custom_actual_delay_minutes
 								row["early_out"]=attendance.custom_actual_early_minutes
 								row["expected_working_minutes"]=attendance.custom_working_minutes_per_day

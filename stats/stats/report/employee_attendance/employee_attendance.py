@@ -3,6 +3,7 @@
 
 import frappe
 from frappe import msgprint, _
+from frappe.utils import cstr,flt
 
 
 def execute(filters=None):
@@ -15,8 +16,15 @@ def execute(filters=None):
 	if not data:
 		msgprint(_("No records found"))
 		return columns, data
-	
-	return columns, data, None, None, report_summary
+	note = """<ol>
+<li>for weeklyoff (fri/sat) and company holiday,there is NO  attendance record</li>
+<li>for On Leave(Paid),In Training,Business Trip,Scholarship, auto attendance is created with Net Working Minutes</li>
+<li>irrespective of month, expected total monthly hours is fixed ex 160 or 170 hours</li>
+<li>for absent and LWP, attendance record is created. In salary there is additional salary deduction component for both</li>
+<li>He has come for 2 hours only, so he is absent and that 2 hours will NOT be counted to cover shortage</li>
+<li>Shortfall = Expected(w/o weekoff) ex 160 -- Company Holidays -- LWP+Absent(as already deducted) -- sum(Net Working Minutes for Present+Paid Leaves)  </li>
+</ol>"""
+	return columns, data, note, None, report_summary
 
 
 def get_columns(filters):
@@ -55,25 +63,25 @@ def get_columns(filters):
 		},
 		{
 			"fieldname": "working_minutes_per_day",
-			"label":_("Working Minutes Per Day"),
+			"label":_("Expected"),
 			"fieldtype": "Int",
 			"width":"100"
 		},
 		{
 			"fieldname": "actual_working_minutes",
-			"label":_("Actual Working Minutes"),
+			"label":_("Actual"),
 			"fieldtype": "Int",
 			"width":"100"
 		},
 		{
 			"fieldname": "net_working_minutes",
-			"label":_("Net Working Minutes"),
+			"label":_("Net"),
 			"fieldtype": "Int",
 			"width":"100"
 		},
 		{
 			"fieldname": "difference_in_working_minutes",
-			"label":_("Difference in Working Minutes"),
+			"label":_("Diff"),
 			"fieldtype": "Int",
 			"width":"100"
 		},
@@ -126,21 +134,29 @@ def get_attendance_data(filters):
 					`tabAttendance`
 				where {0}
 		 """.format(conditions),filters,as_dict=1,debug=1)
-	
+
+	employee_contract_name = frappe.db.get_value("Employee",filters.employee,"custom_contract_type")
+	if employee_contract_name:
+		total_hours_per_day = frappe.db.get_value("Contract Type ST",employee_contract_name,["total_hours_per_day"])
+		convert_mins_days=60*total_hours_per_day
 	expected_total_monthly_minutes= get_expected_total_monthly_minutes_and_total_minutes_per_day(filters.employee)
-	present_total_monthly_mins = get_total_present_minutes_per_month(filters)
+	value_expected_total_monthly_minutes=cstr(expected_total_monthly_minutes) +'m '+ cstr(flt(expected_total_monthly_minutes/(convert_mins_days),1))+'d'
 	company_holiday_total_monthly_mins = get_company_holiday_count(filters.employee, filters.from_date, filters.to_date)
+	value_company_holiday_total_monthly_mins=cstr(company_holiday_total_monthly_mins) +'m '+ cstr(flt(company_holiday_total_monthly_mins/(convert_mins_days),1))+'d'	
 	lwp_absent_total_monthly_mins=get_lwp_absent_total_monthly_mins(filters)
-	incomplete_total_monthly_minutes= calculate_incomplete_total_monthly_minutes(filters.employee, filters.from_date, filters.to_date)
+	value_lwp_absent_total_monthly_mins=cstr(lwp_absent_total_monthly_mins) +'m '+ cstr(flt(lwp_absent_total_monthly_mins/(convert_mins_days),1))+'d'
+	present_total_monthly_mins = get_total_present_minutes_per_month(filters)
+	value_present_total_monthly_mins=cstr(present_total_monthly_mins) +'m '+ cstr(flt(present_total_monthly_mins/(convert_mins_days),1))+'d'
+	incomplete_total_monthly_minutes= cstr(calculate_incomplete_total_monthly_minutes(filters.employee, filters.from_date, filters.to_date))+'m'
 
 	report_summary=[
-		{'label':'Exp Month Mins(W/O Week Off,Fixed)','value':expected_total_monthly_minutes},
+		{'label':'Exp Month Mins(W/O Week Off,Fixed)','value':value_expected_total_monthly_minutes},
 		{'type':'separator','value':'-'},
-		{'label':'Holiday Mins(Paid)','value':company_holiday_total_monthly_mins},		
+		{'label':'Holiday Mins(Paid)','value':value_company_holiday_total_monthly_mins},		
 		{'type':'separator','value':'-'},
-		{'label':'LWP+Absent Mins(Deducted)','value':lwp_absent_total_monthly_mins},		
+		{'label':'LWP+Absent Mins(Deducted)','value':value_lwp_absent_total_monthly_mins},		
 		{'type':'separator','value':'-'},		
-		{'label':'Present Mins(Present+Paid Leaves)','value':present_total_monthly_mins},
+		{'label':'Present Mins(Present+Paid Leaves)','value':value_present_total_monthly_mins},
 		{'type':'separator','value':'='},
 		{'label':'Shortfall Working Mins(will cut in salary)','value':incomplete_total_monthly_minutes}		
 	]
@@ -183,17 +199,22 @@ def get_company_holiday_count(employee, from_date, to_date):
 @frappe.whitelist()
 def get_lwp_absent_total_monthly_mins(filters):
 	conditions = get_conditions(filters)
+	employee_contract_name = frappe.db.get_value("Employee",filters.employee,"custom_contract_type")
+	if employee_contract_name:
+		total_mins_per_day = frappe.db.get_value("Contract Type ST",employee_contract_name,["total_mins_per_day"])
+		
+
 	lwp_absent_total_monthly_min = frappe.db.sql("""
 				SELECT
-					sum(custom_net_working_minutes) as mins
+					count(name) as mins
 				from
 					`tabAttendance`
 				where {0} 
-					and custom_attendance_type in ('Absent','On LWP')
-					and status in ('Absent','On Leave')
+					and ((custom_attendance_type ='On LWP' and status = 'On Leave')
+					or (custom_attendance_type ='Absent' and status ='Absent'))										  
 		""".format(conditions),filters,as_dict=1,debug=1)
 	if len(lwp_absent_total_monthly_min)>0:
-		lwp_absent_total_monthly_min = lwp_absent_total_monthly_min[0].mins
+		lwp_absent_total_monthly_min = lwp_absent_total_monthly_min[0].mins * total_mins_per_day
 	return lwp_absent_total_monthly_min
 
 @frappe.whitelist()

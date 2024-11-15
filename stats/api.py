@@ -525,7 +525,7 @@ def set_last_sync_of_checkin_on_save_of_employee_checkin(self,method):
 		print(latest_checkin.time,"latest_checkin.time-------",type(latest_checkin.time),current_last_sync_of_checkin_in_shift,"current_last_sync_of_checkin_in_shift",type(current_last_sync_of_checkin_in_shift))
 		if current_last_sync_of_checkin_in_shift == None:
 			frappe.db.set_value("Shift Type", self.shift, "last_sync_of_checkin", latest_checkin.time)
-		elif current_last_sync_of_checkin_in_shift and latest_checkin.time > current_last_sync_of_checkin_in_shift:
+		if current_last_sync_of_checkin_in_shift and latest_checkin.time > current_last_sync_of_checkin_in_shift:
 			print("Valid -----")
 			frappe.db.set_value("Shift Type", self.shift, "last_sync_of_checkin", latest_checkin.time)
 
