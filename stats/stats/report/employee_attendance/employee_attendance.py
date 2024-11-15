@@ -167,7 +167,7 @@ def get_company_holiday_count(employee, from_date, to_date):
 	if len(current_holiday_list)>0:
 		company_holidays = frappe.db.get_all("Holiday",
 										parent_doctype="Holiday List",
-										filters={"parent":current_holiday_list[0].name,"weekly_off":0},
+										filters={"parent":current_holiday_list[0].name,"weekly_off":0,"holiday_date":["between",[from_date,to_date]]},
 										fields=["description"])
 		if len(company_holidays)>0:
 			company_holiday_count = company_holiday_count + len(company_holidays)
