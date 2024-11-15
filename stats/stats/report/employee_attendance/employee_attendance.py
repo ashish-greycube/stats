@@ -159,7 +159,6 @@ def get_conditions(filters):
 
 @frappe.whitelist()
 def get_company_holiday_count(employee, from_date, to_date):
-
 	company_holiday_count = 0
 	current_holiday_list = frappe.db.get_all("Holiday List",
 										filters={"from_date":["<=",from_date],"to_date":[">=",to_date]},
@@ -168,7 +167,7 @@ def get_company_holiday_count(employee, from_date, to_date):
 		company_holidays = frappe.db.get_all("Holiday",
 										parent_doctype="Holiday List",
 										filters={"parent":current_holiday_list[0].name,"weekly_off":0,"holiday_date":["between",[from_date,to_date]]},
-										fields=["description"])
+										fields=["name"])
 		if len(company_holidays)>0:
 			company_holiday_count = company_holiday_count + len(company_holidays)
 
@@ -188,7 +187,7 @@ def get_total_present_minutes_per_month(filters):
 				from
 					`tabAttendance`
 				where {0} 
-					and custom_attendance_type in ('Present', 'On LWP', 'In Training', 'Business Trip', 'Scholarship', 'Present Due To Reconciliation')
+					and custom_attendance_type in ('Present', 'On Leave', 'In Training', 'Business Trip', 'Scholarship', 'Present Due To Reconciliation')
 		""".format(conditions),filters,as_dict=1,debug=1)
 	if len(total_monthly_mins)>0:
 		present_total_monthly_mins = total_monthly_mins[0].mins
@@ -203,12 +202,14 @@ def get_expected_total_monthly_minutes_and_total_minutes_per_day(employee):
 
 @frappe.whitelist()	
 def calculate_incomplete_total_monthly_minutes(employee, from_date, to_date):
+	actual_total_monthly_mins=None
+	incomplete_total_monthly_mins=None
 	filters=frappe._dict({"employee":employee, "from_date":from_date, "to_date":to_date})
 	present_total_minutes_per_month = get_total_present_minutes_per_month(filters)
 	expected_monthly_minutes= get_expected_total_monthly_minutes_and_total_minutes_per_day(employee)
 	company_holiday_total_monthly_mins = get_company_holiday_count(employee,from_date,to_date)
-
-	actual_total_monthly_mins = present_total_minutes_per_month + company_holiday_total_monthly_mins
-
-	incomplete_total_monthly_mins = expected_monthly_minutes - actual_total_monthly_mins
+	if present_total_minutes_per_month:
+		actual_total_monthly_mins = present_total_minutes_per_month + company_holiday_total_monthly_mins
+	if actual_total_monthly_mins:
+		incomplete_total_monthly_mins = expected_monthly_minutes - actual_total_monthly_mins
 	return incomplete_total_monthly_mins

@@ -14,6 +14,8 @@
   "employee_no",
   "employee_name",
   "total_to_be_consumed_balance",
+  "section_break_doqi",
+  "html_xzbd",
   "section_break_vaig",
   "attendance_reconciliation_details",
   "amended_from"
@@ -87,12 +89,21 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "section_break_doqi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "html_xzbd",
+   "fieldtype": "HTML",
+   "options": "<ol>\n  <li>purpose :(a)to cover less working hours in present (b) to convert attendance status from absent to present</li>\n  <li>This works only if there are both in and out records and attendance status is either present/absent</li>\n  <li>PP : Personal Permission : Rule--Depends on manager, there is no rule.Shortfall In Working Minutes&gt;0 <br>Impact--attendance[absent/present] changes to attendance[present] and attendance[Net Working Minutes] = Expected Working Minutes per Day</li>\n  <li>EB : Extra Balance : Rule--attendance[absent and Extra Minutes and Early Exit]. <br>Impact-- attendance[absent] changes to attendance[present] and attendance[Net Working Minutes] = Actual Working Minutes</li>\n   <li>PB : Permission Balance : Rule--Depends on available balance,Shortfall In Working Minutes&gt;0 <br>Impact--attendance[absent/present] may change to attendance[present] and attendance[Net Working Minutes] = Actual Working Minutes + Balance To Be Consumed In Minutes</li>\n</ol>\n"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-14 14:49:04.520938",
+ "modified": "2024-11-15 07:53:38.519064",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Attendance Reconciliation ST",

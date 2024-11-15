@@ -9,14 +9,16 @@
   "date",
   "day",
   "type",
-  "delay_in",
-  "early_out",
+  "expected_working_minutes",
+  "actual_working_minutes",
+  "shortfall_in_working_minutes",
   "column_break_pshu",
   "reason",
-  "actual_working_minutes",
-  "extra_minutes",
+  "balance_to_be_consumed_in_minutes",
   "attendance_reference",
-  "balance_to_be_consumed_in_minutes"
+  "early_out",
+  "extra_minutes",
+  "delay_in"
  ],
  "fields": [
   {
@@ -41,7 +43,6 @@
    "fetch_from": "attendance_reference.custom_actual_delay_minutes",
    "fieldname": "delay_in",
    "fieldtype": "Int",
-   "in_list_view": 1,
    "label": "Delay in",
    "read_only": 1
   },
@@ -50,7 +51,6 @@
    "fetch_from": "attendance_reference.custom_actual_early_minutes",
    "fieldname": "early_out",
    "fieldtype": "Int",
-   "in_list_view": 1,
    "label": "Early Out",
    "read_only": 1
   },
@@ -84,7 +84,6 @@
   },
   {
    "columns": 1,
-   "fetch_from": "attendance_reference.custom_actual_working_minutes",
    "fieldname": "actual_working_minutes",
    "fieldtype": "Int",
    "in_list_view": 1,
@@ -105,12 +104,24 @@
    "fieldname": "balance_to_be_consumed_in_minutes",
    "fieldtype": "Int",
    "label": "Balance To Be Consumed In Minutes"
+  },
+  {
+   "fieldname": "expected_working_minutes",
+   "fieldtype": "Int",
+   "label": "Expected Working Minutes"
+  },
+  {
+   "columns": 2,
+   "fieldname": "shortfall_in_working_minutes",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Shortfall In Working Minutes"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-11-13 09:22:11.449904",
+ "modified": "2024-11-15 07:55:29.056664",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Attendance Reconciliation Details ST",
