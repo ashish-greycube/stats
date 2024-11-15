@@ -45,6 +45,10 @@ class AttendanceReconciliationST(Document):
 				if row.reason == "Deduct From Permission Balance":
 					print("++++++++++++")
 					if row.delay_in > 0 or row.early_out > 0:
+						if row.balance_to_be_consumed_in_minutes >= row.shortfall_in_working_minutes:
+							pass
+						else:
+							frappe.throw(_("# Row{0}: You cannot select reason <b>{1}</b> because you do not have balance to cover shortfall".format(row.idx,row.reason)))
 						balance_to_consume = balance_to_consume + row.balance_to_be_consumed_in_minutes
 					else:
 						frappe.throw(_("# Row{0}: You cannot select reason <b>{1}</b>".format(row.idx,row.reason)))
