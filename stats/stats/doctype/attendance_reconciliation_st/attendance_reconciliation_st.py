@@ -201,6 +201,9 @@ class AttendanceReconciliationST(Document):
 								row["attendance_reference"]=attendance.name
 				else:
 					row["type"]="No Attendance"
+			print(row.get("type"),row.get("attendance_reference"))
+			if (row.get("type") == "" or  row.get("type")==None) and (row.get("attendance_reference")=="" or row.get("attendance_reference")==None):
+				row["type"]="No Attendance"
 
 		return reconciliation_data
 

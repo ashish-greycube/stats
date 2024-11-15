@@ -135,10 +135,15 @@ def get_attendance_data(filters):
 				where {0}
 		 """.format(conditions),filters,as_dict=1,debug=1)
 
+	convert_mins_days=0
 	employee_contract_name = frappe.db.get_value("Employee",filters.employee,"custom_contract_type")
 	if employee_contract_name:
 		total_hours_per_day = frappe.db.get_value("Contract Type ST",employee_contract_name,["total_hours_per_day"])
-		convert_mins_days=60*total_hours_per_day
+		if total_hours_per_day:
+			convert_mins_days=60*total_hours_per_day
+				
+	if convert_mins_days==0:
+		frappe.throw(_("Please set total_hours_per_day for contract type {0}".format(employee_contract_name)))
 	expected_total_monthly_minutes= get_expected_total_monthly_minutes_and_total_minutes_per_day(filters.employee)
 	value_expected_total_monthly_minutes=cstr(expected_total_monthly_minutes) +'m '+ cstr(flt(expected_total_monthly_minutes/(convert_mins_days),1))+'d'
 	company_holiday_total_monthly_mins = get_company_holiday_count(filters.employee, filters.from_date, filters.to_date)
@@ -146,7 +151,10 @@ def get_attendance_data(filters):
 	lwp_absent_total_monthly_mins=get_lwp_absent_total_monthly_mins(filters)
 	value_lwp_absent_total_monthly_mins=cstr(lwp_absent_total_monthly_mins) +'m '+ cstr(flt(lwp_absent_total_monthly_mins/(convert_mins_days),1))+'d'
 	present_total_monthly_mins = get_total_present_minutes_per_month(filters)
-	value_present_total_monthly_mins=cstr(present_total_monthly_mins) +'m '+ cstr(flt(present_total_monthly_mins/(convert_mins_days),1))+'d'
+	if present_total_monthly_mins:
+		value_present_total_monthly_mins=cstr(present_total_monthly_mins) +'m '+ cstr(flt(present_total_monthly_mins/(convert_mins_days),1))+'d'
+	else:
+		value_present_total_monthly_mins=0
 	incomplete_total_monthly_minutes= cstr(calculate_incomplete_total_monthly_minutes(filters.employee, filters.from_date, filters.to_date))+'m'
 
 	report_summary=[
