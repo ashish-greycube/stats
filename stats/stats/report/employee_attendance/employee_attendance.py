@@ -130,16 +130,19 @@ def get_attendance_data(filters):
 	expected_total_monthly_minutes= get_expected_total_monthly_minutes_and_total_minutes_per_day(filters.employee)
 	present_total_monthly_mins = get_total_present_minutes_per_month(filters)
 	company_holiday_total_monthly_mins = get_company_holiday_count(filters.employee, filters.from_date, filters.to_date)
+	lwp_absent_total_monthly_mins=get_lwp_absent_total_monthly_mins(filters)
 	incomplete_total_monthly_minutes= calculate_incomplete_total_monthly_minutes(filters.employee, filters.from_date, filters.to_date)
 
 	report_summary=[
-		{'label':'Expected Monthly Mins.(No Week Off) <br> irrespective of month days','value':expected_total_monthly_minutes},
+		{'label':'Exp Month Mins(W/O Week Off,Fixed)','value':expected_total_monthly_minutes},
 		{'type':'separator','value':'-'},
-		{'label':'Present Mins Per Month(Present+Paid Leaves)','value':present_total_monthly_mins},
+		{'label':'Holiday Mins(Paid)','value':company_holiday_total_monthly_mins},		
 		{'type':'separator','value':'-'},
-		{'label':'Company Holiday Mins (Paid)','value':company_holiday_total_monthly_mins},
+		{'label':'LWP+Absent Mins(Deducted)','value':lwp_absent_total_monthly_mins},		
+		{'type':'separator','value':'-'},		
+		{'label':'Present Mins(Present+Paid Leaves)','value':present_total_monthly_mins},
 		{'type':'separator','value':'='},
-		{'label':'Incomplete Working Mins (to be cut in salary)','value':incomplete_total_monthly_minutes}		
+		{'label':'Shortfall Working Mins(will cut in salary)','value':incomplete_total_monthly_minutes}		
 	]
 	return attendance_data,report_summary
 
@@ -178,6 +181,22 @@ def get_company_holiday_count(employee, from_date, to_date):
 	return company_holiday_minutes
 
 @frappe.whitelist()
+def get_lwp_absent_total_monthly_mins(filters):
+	conditions = get_conditions(filters)
+	lwp_absent_total_monthly_min = frappe.db.sql("""
+				SELECT
+					sum(custom_net_working_minutes) as mins
+				from
+					`tabAttendance`
+				where {0} 
+					and custom_attendance_type in ('Absent','On LWP')
+					and status in ('Absent','On Leave')
+		""".format(conditions),filters,as_dict=1,debug=1)
+	if len(lwp_absent_total_monthly_min)>0:
+		lwp_absent_total_monthly_min = lwp_absent_total_monthly_min[0].mins
+	return lwp_absent_total_monthly_min
+
+@frappe.whitelist()
 def get_total_present_minutes_per_month(filters):
 	
 	conditions = get_conditions(filters)
@@ -188,6 +207,7 @@ def get_total_present_minutes_per_month(filters):
 					`tabAttendance`
 				where {0} 
 					and custom_attendance_type in ('Present', 'On Leave', 'In Training', 'Business Trip', 'Scholarship', 'Present Due To Reconciliation')
+					and status in ('Present','On Leave')
 		""".format(conditions),filters,as_dict=1,debug=1)
 	if len(total_monthly_mins)>0:
 		present_total_monthly_mins = total_monthly_mins[0].mins
@@ -202,14 +222,20 @@ def get_expected_total_monthly_minutes_and_total_minutes_per_day(employee):
 
 @frappe.whitelist()	
 def calculate_incomplete_total_monthly_minutes(employee, from_date, to_date):
-	actual_total_monthly_mins=None
-	incomplete_total_monthly_mins=None
+	actual_total_monthly_mins=0
+	incomplete_total_monthly_mins=0
 	filters=frappe._dict({"employee":employee, "from_date":from_date, "to_date":to_date})
-	present_total_minutes_per_month = get_total_present_minutes_per_month(filters)
 	expected_monthly_minutes= get_expected_total_monthly_minutes_and_total_minutes_per_day(employee)
+
 	company_holiday_total_monthly_mins = get_company_holiday_count(employee,from_date,to_date)
+	if company_holiday_total_monthly_mins:
+		actual_total_monthly_mins=actual_total_monthly_mins+company_holiday_total_monthly_mins
+	lwp_absent_total_monthly_mins=get_lwp_absent_total_monthly_mins(filters)
+	if lwp_absent_total_monthly_mins:
+		actual_total_monthly_mins=actual_total_monthly_mins+lwp_absent_total_monthly_mins
+	present_total_minutes_per_month = get_total_present_minutes_per_month(filters)
 	if present_total_minutes_per_month:
-		actual_total_monthly_mins = present_total_minutes_per_month + company_holiday_total_monthly_mins
-	if actual_total_monthly_mins:
-		incomplete_total_monthly_mins = expected_monthly_minutes - actual_total_monthly_mins
+		actual_total_monthly_mins =actual_total_monthly_mins+ present_total_minutes_per_month
+
+	incomplete_total_monthly_mins = expected_monthly_minutes - actual_total_monthly_mins
 	return incomplete_total_monthly_mins
