@@ -19,4 +19,17 @@ frappe.ui.form.on("Employee Resignation ST", {
             }
         })
     },
+
+    resignation_type(frm) {
+        frappe.db.get_value('Resignation Type ST', frm.doc.resignation_type, 'is_it_separation')
+            .then(r => {
+                console.log(r.message.is_it_separation)
+                if(r.message.is_it_separation == 1){
+                    frm.set_df_property('separation_reason', 'hidden', 0);
+                }
+                else{
+                    frm.set_df_property('separation_reason', 'hidden', 1);   
+                }
+            })
+    }
 });
