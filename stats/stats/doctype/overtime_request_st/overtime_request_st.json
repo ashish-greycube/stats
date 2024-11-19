@@ -14,7 +14,7 @@
   "column_break_itlz",
   "overtime_start_date",
   "overtime_end_date",
-  "status_overtime_request_processing",
+  "status",
   "created_by",
   "employee",
   "amended_from",
@@ -111,16 +111,16 @@
   },
   {
    "default": "Pending",
-   "fieldname": "status_overtime_request_processing",
+   "fieldname": "status",
    "fieldtype": "Select",
-   "label": "Status: Overtime Request Processing",
+   "label": "Status",
    "options": "\nPending\nApproved\nRejected"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-18 14:56:40.726424",
+ "modified": "2024-11-19 10:21:29.666441",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Overtime Request ST",

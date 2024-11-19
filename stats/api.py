@@ -546,11 +546,7 @@ def create_payment_journal_entry_from_payment_procedure(doc,debit_account,credit
 	payment_je_doc = frappe.new_doc("Journal Entry")
 	payment_je_doc.voucher_type = "Journal Entry"
 	payment_je_doc.posting_date = je_date
-
-	if doc.doctype == "Payment Request ST":
-		payment_je_doc.custom_payment_request_reference = doc.name
-	elif doc.doctype == "Payment Procedure ST":
-		payment_je_doc.custom_payment_procedure_reference = doc.name
+	payment_je_doc.custom_payment_procedure_reference = doc.name
 
 	accounts = []
 
@@ -575,7 +571,4 @@ def create_payment_journal_entry_from_payment_procedure(doc,debit_account,credit
 	payment_je_doc.save(ignore_permissions=True)
 	payment_je_doc.submit()
 
-	if doc.doctype == "Payment Procedure ST":
-		frappe.msgprint(_("Payment Journal Entry is created from Payment Procedure {0}").format(get_link_to_form("Journal Entry",payment_je_doc.name)),alert=1)
-	elif doc.doctype == "Payment Request ST":
-		frappe.msgprint(_("Journal Entry Due Expense is created from Payment Request {0}").format(get_link_to_form("Journal Entry",payment_je_doc.name)),alert=1)
+	frappe.msgprint(_("Payment Journal Entry is created from Payment Procedure {0}").format(get_link_to_form("Journal Entry",payment_je_doc.name)),alert=1)

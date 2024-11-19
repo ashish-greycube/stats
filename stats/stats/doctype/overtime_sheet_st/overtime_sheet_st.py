@@ -60,7 +60,7 @@ class OvertimeSheetST(Document):
 	@frappe.whitelist()
 	def fetch_employees_from_overtime_request(self):
 		final_overtime_employee_list = []
-		filters = {"docstatus":1,"overtime_start_date":["between",[self.from_date,self.to_date]],"overtime_end_date":["between",[self.from_date,self.to_date]]}
+		filters = {"docstatus":1,"status":"Approved","overtime_start_date":["between",[self.from_date,self.to_date]],"overtime_end_date":["between",[self.from_date,self.to_date]]}
 
 		if self.main_department:
 			filters["main_department"]=self.main_department
@@ -70,9 +70,22 @@ class OvertimeSheetST(Document):
 		overtime_employee_list = frappe.db.get_all("Overtime Request ST",
 											 filters=filters,
 											 fields=["name"])
-		if len(overtime_employee_list)>0:
-			for overtime in overtime_employee_list:
-				print(overtime_employee_list,"overtime_employee_list ==============")
+
+		overtime_sheet_list = frappe.db.get_all("Overtime Sheet Employee Details ST",fields=["overtime_request_reference"])
+		final_overtime_request_list = []
+		for overtime_request in overtime_employee_list:
+			found=False
+			if len(overtime_sheet_list)>0:
+				for ele in overtime_sheet_list:
+					if ele.overtime_request_reference == overtime_request.name:
+						found=True
+						break
+			if found==False:
+				final_overtime_request_list.append(overtime_request)
+
+		if len(final_overtime_request_list)>0:
+			for overtime in final_overtime_request_list:
+				print(final_overtime_request_list,"final_overtime_request_list ==============")
 				overtime_request_doc = frappe.get_doc("Overtime Request ST",overtime.name)
 				if len(overtime_request_doc.employee_overtime_request)>0:
 					overtime_days = date_diff(overtime_request_doc.overtime_end_date,overtime_request_doc.overtime_start_date) + 1

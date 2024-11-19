@@ -24,7 +24,6 @@ class PaymentProcedureST(Document):
 		if self.party_type and self.party_type == "Employee":
 			self.party_name_employee = "Multiple Payment"
 
-	# def validate(self):
 	def on_submit(self):
 		if not self.payment_type:
 			frappe.throw(_("Please select payment type"))
@@ -40,17 +39,17 @@ class PaymentProcedureST(Document):
 			company_default_debit_account_mof = frappe.db.get_value("Company",company,"custom_default_debit_account_mof")
 			
 
-			if self.bank_enhancement_date:
+			if self.payment_type == "Indirect":
 				je_date = self.bank_enhancement_date
 			else :
-				je_date = today()
+				je_date = self.transaction_date
 			create_payment_journal_entry_from_payment_procedure(self,company_default_payment_order_account,company_default_debit_account_mof,total_employee_amount,je_date)
 
 			reference_type = frappe.db.get_value("Payment Request ST",self.payment_request_reference,"reference_name")
 			if reference_type == "Business Trip Sheet ST":
 				company_business_trip_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_chargeable_account")
 				if self.payment_type == "Direct":
-					create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_payment_order_account,total_employee_amount,je_date=today())
+					create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_payment_order_account,total_employee_amount,je_date=self.transaction_date)
 					create_payment_journal_entry_from_payment_procedure(self,company_business_trip_budget_chargeable_account,company_default_central_bank_account,total_employee_amount,je_date=today())
 
 				elif self.payment_type == "Indirect":
@@ -61,7 +60,7 @@ class PaymentProcedureST(Document):
 			elif reference_type == "Employee Reallocation Sheet ST":
 				company_reallocation_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_reallocation_budget_chargeable_account")
 				if self.payment_type == "Direct":
-					create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_payment_order_account,total_employee_amount,je_date=today())
+					create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_payment_order_account,total_employee_amount,je_date=self.transaction_date)
 					create_payment_journal_entry_from_payment_procedure(self,company_reallocation_budget_chargeable_account,company_default_central_bank_account,total_employee_amount,je_date=today())
 				elif self.payment_type == "Indirect":
 					if self.middle_bank_account:
@@ -71,7 +70,7 @@ class PaymentProcedureST(Document):
 			elif reference_type == "Overtime Sheet ST":
 				company_overtime_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_overtime_budget_chargeable_account")
 				if self.payment_type == "Direct":
-					create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_payment_order_account,total_employee_amount,je_date=today())
+					create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_payment_order_account,total_employee_amount,je_date=self.transaction_date)
 					create_payment_journal_entry_from_payment_procedure(self,company_overtime_budget_chargeable_account,company_default_central_bank_account,total_employee_amount,je_date=today())
 				elif self.payment_type == "Indirect":
 					if self.middle_bank_account:

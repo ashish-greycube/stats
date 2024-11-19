@@ -14,7 +14,6 @@
   "required_extra_hours",
   "actual_extra_hours",
   "amount",
-  "payment_status",
   "overtime_rate_per_hour"
  ],
  "fields": [
@@ -72,16 +71,6 @@
    "precision": "2"
   },
   {
-   "columns": 2,
-   "default": "Pending",
-   "fieldname": "payment_status",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Payment Status",
-   "options": "\nPending\nDone",
-   "read_only": 1
-  },
-  {
    "fieldname": "column_break_zgak",
    "fieldtype": "Column Break"
   },
@@ -96,7 +85,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-10-18 15:24:07.278847",
+ "modified": "2024-11-19 09:59:07.916378",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Overtime Sheet Employee Details ST",

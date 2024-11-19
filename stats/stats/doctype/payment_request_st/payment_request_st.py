@@ -6,7 +6,6 @@ import erpnext
 from frappe import _
 from frappe.utils import get_link_to_form,today
 from frappe.model.document import Document
-from stats.api import create_payment_journal_entry_from_payment_procedure
 
 
 class PaymentRequestST(Document):
@@ -25,7 +24,6 @@ class PaymentRequestST(Document):
 			self.party_name_employee = "Multiple Payment"
 
 	def on_submit(self):
-	# def validate(self):
 		company = erpnext.get_default_company()
 		self.create_payment_procedure_on_submit_of_payment_request()
 		if self.reference_name == "Business Trip Sheet ST":
@@ -98,7 +96,54 @@ class PaymentRequestST(Document):
 		# Second JV from PR
 		company_default_debit_account_mof = frappe.db.get_value("Company",company,"custom_default_debit_account_mof")
 		company_default_revenue_account = frappe.db.get_value("Company",company,"custom_default_revenue_account")
-		create_payment_journal_entry_from_payment_procedure(self,company_default_debit_account_mof,company_default_revenue_account,employee_total_amount,je_date=self.transaction_date)
+
+		payment_je_doc = frappe.new_doc("Journal Entry")
+		payment_je_doc.voucher_type = "Journal Entry"
+		payment_je_doc.posting_date = self.transaction_date
+		payment_je_doc.custom_payment_request_reference = self.name
+
+		jv_accounts = []
+
+		company = erpnext.get_default_company()
+		company_default_cost_center = frappe.db.get_value("Company",company,"cost_center")
+
+		employee_info = frappe.db.sql("""
+				SELECT
+				main_department,
+				SUM(amount) as amount
+			FROM
+				`tabEmployee Details For Payment ST`
+			WHERE
+				parent = %s
+			GROUP By
+				main_department
+		""",self.name,as_dict=1,debug=1)
+		print(employee_info,"employee_info")
+
+		accounts_row = {
+					"account":company_default_debit_account_mof,
+					"cost_center":company_default_cost_center,
+					"debit_in_account_currency":employee_total_amount,
+				}
+		jv_accounts.append(accounts_row)
+
+		if len(employee_detais)>0:
+			for row in employee_info:
+				department_cost_center = frappe.db.get_value("Department",row.main_department,"custom_department_cost_center")
+				accounts_row_2 = {
+					"account":company_default_revenue_account,
+					"cost_center":department_cost_center,
+					"department":row.main_department,
+					"credit_in_account_currency":row.amount,
+				}
+				jv_accounts.append(accounts_row_2)
+
+		payment_je_doc.set("accounts",jv_accounts)
+		payment_je_doc.run_method('set_missing_values')
+		payment_je_doc.save(ignore_permissions=True)
+		payment_je_doc.submit()
+
+		frappe.msgprint(_("Journal Entry Due Expense is created from Payment Request {0}").format(get_link_to_form("Journal Entry",payment_je_doc.name)),alert=1)
 		
 	def create_payment_procedure_on_submit_of_payment_request(self):
 		pp_doc = frappe.new_doc("Payment Procedure ST")
