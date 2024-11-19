@@ -8,6 +8,7 @@ from frappe import _
 class ManPowerPlanningST(Document):
 	def validate(self):
 		self.set_job_no_in_employee()
+		self.change_position_status_in_job_details()
 
 	def set_job_no_in_employee(self):
 		if len(self.job_details) > 0:
@@ -20,3 +21,9 @@ class ManPowerPlanningST(Document):
 						frappe.msgprint(_("In Employee {0} Job No set to {1}").format(employee.name, job.job_no), alert=True)
 				else:
 					pass
+
+	def change_position_status_in_job_details(self):
+		if len(self.job_details):
+			for job in self.job_details:
+				if job.employee_no:
+					job.position_status = "Filled"

@@ -2,6 +2,18 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Man Power Planning ST", {
+    refresh(frm) {
+        if (frm.doc.job_details.length > 0) {
+            console.log("Refreshhh")
+            frm.doc.job_details.forEach(job => {
+                if (job.position_status == "Filled") {
+                    console.log(job.name, "--------")
+                    frm.set_df_property('job_details', 'read_only', 1, frm.docname, 'position_status', job.name)
+                }
+            });
+        }
+    },
+
 	setup(frm) {
         frm.set_query("main_department", function (doc) {
 			return {
@@ -63,3 +75,12 @@ frappe.ui.form.on("Man Power Planning ST", {
         }
     }
 });
+
+// frappe.ui.form.on("MP Jobs Details ST", {
+//     position_status(frm, cdt, cdn){
+//         let row = locals[cdt][cdn]
+//         if (row.employee_no && row.position_status == "Filled"){
+//             frappe.throw(__("You Cann't Change Position Status Value."))
+//         }
+//     }
+// })

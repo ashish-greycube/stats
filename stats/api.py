@@ -93,6 +93,8 @@ def set_employee_in_man_power_planning_for_job_no(self, method):
 		job_no = frappe.get_doc("MP Jobs Details ST",{"job_no":self.custom_job_no})
 		if not job_no.employee_no:
 			frappe.db.set_value(job_no.doctype, job_no.name, "employee_no", self.name)
+			man_power_planing = frappe.get_doc("Man Power Planning ST", job_no.parent)
+			man_power_planing.save(ignore_permissions=True)
 			frappe.msgprint(_("set Employee {0} in Job No {1}").format(self.name, self.custom_job_no), alert=True)
 
 @frappe.whitelist()

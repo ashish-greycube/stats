@@ -12,9 +12,9 @@
   "department_manager",
   "column_break_ewqa",
   "request_type",
+  "new_job_no",
   "man_power_planning_reference",
   "job_no",
-  "new_job_no",
   "previous_job_details_section",
   "previous_job_details_column",
   "designation",
@@ -48,6 +48,7 @@
  ],
  "fields": [
   {
+   "default": "Today",
    "fieldname": "request_date",
    "fieldtype": "Date",
    "label": "Request Date"
@@ -246,10 +247,9 @@
   {
    "depends_on": "eval: doc.request_type=='New Job'",
    "fieldname": "new_job_no",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "New Job No",
-   "mandatory_depends_on": "eval: doc.request_type=='New Job'",
-   "options": "Job No ST"
+   "mandatory_depends_on": "eval: doc.request_type=='New Job'"
   },
   {
    "fieldname": "previous_job_details_column",
@@ -277,7 +277,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-22 10:59:56.402950",
+ "modified": "2024-11-19 14:41:35.493035",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Man Power Plan Change Request ST",
