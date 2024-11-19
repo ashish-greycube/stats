@@ -206,6 +206,7 @@ def get_company_holiday_count(employee, from_date, to_date):
 
 @frappe.whitelist()
 def get_lwp_absent_total_monthly_mins(filters):
+	# if any change in logic, please compare it with payroll entry deduction logic
 	conditions = get_conditions(filters)
 	employee_contract_name = frappe.db.get_value("Employee",filters.employee,"custom_contract_type")
 	if employee_contract_name:

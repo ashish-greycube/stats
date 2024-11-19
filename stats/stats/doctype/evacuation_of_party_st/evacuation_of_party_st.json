@@ -86,8 +86,10 @@
   {
    "fieldname": "resignation_reference",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Resignation Reference",
-   "options": "Employee Resignation ST"
+   "options": "Employee Resignation ST",
+   "reqd": 1
   },
   {
    "fieldname": "evacuate_attachment",
@@ -98,7 +100,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-04 13:34:58.211392",
+ "modified": "2024-11-18 10:44:37.194477",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Evacuation of Party ST",

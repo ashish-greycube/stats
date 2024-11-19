@@ -29,6 +29,16 @@ class AttendanceReconciliationST(Document):
 				if row.type == "Present":
 					if (row.delay_in == 0 and row.early_out == 0) and row.reason != "":
 						frappe.throw(_("# Row {0}: You cannot select any reason as there is no need of reconciliation".format(row.idx)))
+				
+				if row.type == "Absent":
+					if row.reason != "":
+						employee_checkins = frappe.db.get_all("Employee Checkin",
+						filters={"attendance":row.attendance_reference},
+						fields=["name"])
+						if len(employee_checkins)>=2:
+							pass
+						else :
+							frappe.throw(_("#Row {0}: You cannot select any reason".format(row.idx)))
 
 				if row.reason == "Personal Permission":
 					if row.delay_in > 0 or row.early_out > 0:
@@ -177,6 +187,7 @@ class AttendanceReconciliationST(Document):
 			if row.get("day") not in weekly_off_days:
 				if len(get_attendance)>0:
 					for attendance in get_attendance:
+						# fetch only those attendance which have both employee checkin and checkout
 						employee_checkins = frappe.db.get_all("Employee Checkin",
 											filters={"attendance":attendance.name},
 											fields=["name"])
@@ -190,6 +201,7 @@ class AttendanceReconciliationST(Document):
 								row["shortfall_in_working_minutes"]=attendance.custom_working_minutes_per_day-attendance.custom_actual_working_minutes
 								row["attendance_reference"]=attendance.name
 
+						# if checkin-checkout not exists andabsent attendance is created
 						elif len(employee_checkins)==0:
 							if row.get("date") == attendance.attendance_date:
 								row["type"]=attendance.custom_attendance_type

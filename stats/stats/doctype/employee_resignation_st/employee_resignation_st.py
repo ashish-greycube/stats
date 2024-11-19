@@ -31,7 +31,7 @@ class EmployeeResignationST(Document):
 			test_period = add_to_date(getdate(joining_date), months=6)
 
 			if not notice_period_days:
-				frappe.throw(_("Please Set Notice Period Days in Employee Doctype."))
+				frappe.throw(_("Please Set Notice Period Days in Employee Profile."))
 			elif test_period > getdate(self.last_working_days): 
 				frappe.msgprint(_("Employee is in test period"), alert=1)
 			else:
@@ -41,6 +41,14 @@ class EmployeeResignationST(Document):
 				if getdate(self.last_working_days) <= getdate(notice_period_end_date):
 					frappe.throw(_("Last Working Day must be after Notice Period"))
 
+			if self.resignation_type == "Not Renew-Contract":
+				resignation_date = self.last_working_days
+				resignation_to_be_allow_date = add_to_date(getdate(resignation_date), days=notice_period_days)
+				employee_contract_end_date = frappe.db.get_value("Employee", self.employee_no, 'contract_end_date')
+				print(resignation_to_be_allow_date,"resignation_to_be_allow_date")
+				if resignation_to_be_allow_date < getdate(employee_contract_end_date):
+					print(resignation_to_be_allow_date, getdate(employee_contract_end_date))
+					frappe.throw(_("You cannot resign before {0}".format(employee_contract_end_date)))
 	
 	def set_relieving_date_in_employee(self):
 		emp =  frappe.get_doc("Employee", self.employee_no)

@@ -10,8 +10,11 @@ from stats.hr_utils import get_latest_total_monthly_salary_of_employee
 
 class OvertimeSheetST(Document):
 	
-	# def validate(self):
-	# 	self.calculate_amount_based_on_actual_extra_hours_and_set_total_amount()
+	def validate(self):
+		self.calculate_amount_based_on_actual_extra_hours_and_set_total_amount()
+	
+	def on_submit(self):
+		self.create_payment_request_on_submit_of_ot_sheet()
 
 	def calculate_amount_based_on_actual_extra_hours_and_set_total_amount(self):
 		if len(self.overtime_sheet_employee_details)>0:
@@ -26,7 +29,9 @@ class OvertimeSheetST(Document):
 
 			self.total_amount = total_amount
 
-
+	def create_payment_request_on_submit_of_ot_sheet(self):
+		pass
+	
 	@frappe.whitelist()
 	def fetch_employees_from_overtime_request(self):
 		final_overtime_employee_list = []

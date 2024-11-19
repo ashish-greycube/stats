@@ -1,10 +1,11 @@
 import frappe
 from frappe import _
-from frappe.utils import (add_to_date,get_datetime,
+from frappe.utils import (add_to_date,get_datetime,today,
 						  getdate,nowdate,format_duration,cint,
 						  get_link_to_form,flt,add_years,time_diff_in_hours,
 						  now,rounded,flt,get_time,time_diff_in_seconds)
 from dateutil import relativedelta
+import erpnext
 
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
@@ -536,3 +537,45 @@ def create_employee_checkin_checkout_for_training():
 	# 									   or_filters={'training_start_date':['between',[filter__from_date,filter__to_date]],
     #                                           'all_line_cast_off':['between',[filter__from_date,filter__to_date]] },)
 	
+
+@frappe.whitelist()
+def create_payment_journal_entry_from_payment_procedure(doc,debit_account,credit_account,amount,je_date=None):
+	if je_date == None:
+		je_date = today()
+
+	payment_je_doc = frappe.new_doc("Journal Entry")
+	payment_je_doc.voucher_type = "Journal Entry"
+	payment_je_doc.posting_date = je_date
+
+	if doc.doctype == "Payment Request ST":
+		payment_je_doc.custom_payment_request_reference = doc.name
+	elif doc.doctype == "Payment Procedure ST":
+		payment_je_doc.custom_payment_procedure_reference = doc.name
+
+	accounts = []
+
+	company = erpnext.get_default_company()
+	company_default_cost_center = frappe.db.get_value("Company",company,"cost_center")
+
+	accounts_row = {
+		"account":debit_account,
+		"cost_center":company_default_cost_center,
+		"debit_in_account_currency":amount,
+	}
+	accounts.append(accounts_row)
+	accounts_row_2 = {
+		"account":credit_account,
+		"cost_center":company_default_cost_center,
+		"credit_in_account_currency":amount,
+	}
+	accounts.append(accounts_row_2)
+
+	payment_je_doc.set("accounts",accounts)
+	payment_je_doc.run_method('set_missing_values')
+	payment_je_doc.save(ignore_permissions=True)
+	payment_je_doc.submit()
+
+	if doc.doctype == "Payment Procedure ST":
+		frappe.msgprint(_("Payment Journal Entry is created from Payment Procedure {0}").format(get_link_to_form("Journal Entry",payment_je_doc.name)),alert=1)
+	elif doc.doctype == "Payment Request ST":
+		frappe.msgprint(_("Journal Entry Due Expense is created from Payment Request {0}").format(get_link_to_form("Journal Entry",payment_je_doc.name)),alert=1)

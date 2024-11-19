@@ -55,5 +55,37 @@ frappe.ui.form.on("Company", {
                 }
             };
         })
+        frm.set_query("custom_default_debit_account_mof", function (doc) {
+            return {
+                filters: {
+                    "company": frm.doc.name,
+                    "is_group": 0
+                }
+            };
+        })
+        frm.set_query("custom_default_revenue_account", function (doc) {
+            return {
+                filters: {
+                    "company": frm.doc.name,
+                    "is_group": 0
+                }
+            };
+        })
+        frm.set_query("custom_default_central_bank_account", function (doc) {
+            return {
+                filters: {
+                    "company": frm.doc.name,
+                    "is_group": 0
+                }
+            };
+        })
+        frm.set_query("custom_default_payment_order_account", function (doc) {
+            return {
+                filters: {
+                    "company": frm.doc.name,
+                    "is_group": 0
+                }
+            };
+        })
     }
 })

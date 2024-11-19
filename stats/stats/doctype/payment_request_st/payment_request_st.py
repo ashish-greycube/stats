@@ -6,6 +6,7 @@ import erpnext
 from frappe import _
 from frappe.utils import get_link_to_form,today
 from frappe.model.document import Document
+from stats.api import create_payment_journal_entry_from_payment_procedure
 
 
 class PaymentRequestST(Document):
@@ -40,7 +41,7 @@ class PaymentRequestST(Document):
 	def create_journal_entry_on_submit_of_payment_request(self,company_budget_expense_account,company_budget_chargeable_account):
 		je = frappe.new_doc("Journal Entry")
 		je.voucher_type = "Journal Entry"
-		je.posting_date = today()
+		je.posting_date = self.transaction_date
 		je.custom_payment_request_reference = self.name
 		
 		accounts = []
@@ -86,7 +87,12 @@ class PaymentRequestST(Document):
 		je.save(ignore_permissions=True)
 		je.submit()
 		frappe.msgprint(_("Journal Entry Due Expense is created from Payment Request {0}").format(get_link_to_form("Journal Entry",je.name)),alert=1)
-
+		
+		# Second JV from PR
+		company_default_debit_account_mof = frappe.db.get_value("Company",company,"custom_default_debit_account_mof")
+		company_default_revenue_account = frappe.db.get_value("Company",company,"custom_default_revenue_account")
+		create_payment_journal_entry_from_payment_procedure(self,company_default_debit_account_mof,company_default_revenue_account,employee_total_amount,je_date=self.transaction_date)
+		
 	def create_payment_procedure_on_submit_of_payment_request(self):
 		pp_doc = frappe.new_doc("Payment Procedure ST")
 		pp_doc.payment_request_reference = self.name

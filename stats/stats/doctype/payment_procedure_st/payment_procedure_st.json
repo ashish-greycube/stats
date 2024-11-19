@@ -22,6 +22,7 @@
   "payment_type",
   "middle_bank_account",
   "total_amount",
+  "bank_enhancement_date",
   "employee_details_section",
   "employees"
  ],
@@ -137,6 +138,13 @@
    "fieldtype": "Dynamic Link",
    "label": "Reference No",
    "options": "reference_name"
+  },
+  {
+   "depends_on": "eval:doc.payment_type==\"Indirect\"",
+   "fieldname": "bank_enhancement_date",
+   "fieldtype": "Date",
+   "label": "Bank Enhancement Date",
+   "mandatory_depends_on": "eval:doc.payment_type==\"Indirect\""
   }
  ],
  "index_web_pages_for_search": 1,
@@ -147,7 +155,7 @@
    "link_fieldname": "custom_payment_procedure_reference"
   }
  ],
- "modified": "2024-09-18 14:16:38.428557",
+ "modified": "2024-11-18 14:57:35.772774",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Payment Procedure ST",

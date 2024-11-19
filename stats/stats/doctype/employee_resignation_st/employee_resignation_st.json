@@ -105,7 +105,6 @@
    "label": "Resignation Date"
   },
   {
-   "depends_on": "eval:doc.resignation_type == \"Separation\"",
    "fieldname": "separation_reason",
    "fieldtype": "Link",
    "hidden": 1,
@@ -140,7 +139,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-15 15:03:34.813770",
+ "modified": "2024-11-18 11:25:51.168809",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Resignation ST",
