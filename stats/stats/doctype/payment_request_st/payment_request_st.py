@@ -25,17 +25,24 @@ class PaymentRequestST(Document):
 			self.party_name_employee = "Multiple Payment"
 
 	def on_submit(self):
+	# def validate(self):
 		company = erpnext.get_default_company()
+		self.create_payment_procedure_on_submit_of_payment_request()
 		if self.reference_name == "Business Trip Sheet ST":
 			company_business_trip_budget_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
 			company_business_trip_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_chargeable_account")
 			self.create_journal_entry_on_submit_of_payment_request(company_business_trip_budget_expense_account,company_business_trip_budget_chargeable_account)
-			self.create_payment_procedure_on_submit_of_payment_request()
+
 		elif self.reference_name == "Employee Reallocation Sheet ST":
 			company_reallocation_budget_expense_account = frappe.db.get_value("Company",company,"custom_reallocation_budget_expense_account")
 			company_reallocation_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_reallocation_budget_chargeable_account")
 			self.create_journal_entry_on_submit_of_payment_request(company_reallocation_budget_expense_account,company_reallocation_budget_chargeable_account)
-			self.create_payment_procedure_on_submit_of_payment_request()
+
+		elif self.reference_name == "Overtime Sheet ST":
+			company_overtime_budget_expense_account = frappe.db.get_value("Company",company,"custom_overtime_budget_expense_account")
+			company_overtime_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_overtime_budget_chargeable_account")
+			self.create_journal_entry_on_submit_of_payment_request(company_overtime_budget_expense_account,company_overtime_budget_chargeable_account)
+
 	
 	
 	def create_journal_entry_on_submit_of_payment_request(self,company_budget_expense_account,company_budget_chargeable_account):

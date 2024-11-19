@@ -2,8 +2,10 @@
 # For license information, please see license.txt
 
 import frappe
+import erpnext
+from frappe import _
 from frappe.model.document import Document
-from frappe.utils import date_diff
+from frappe.utils import date_diff,today,get_link_to_form
 from stats.stats.report.employee_attendance.employee_attendance import execute
 from stats.hr_utils import get_latest_total_monthly_salary_of_employee
 
@@ -12,6 +14,8 @@ class OvertimeSheetST(Document):
 	
 	def validate(self):
 		self.calculate_amount_based_on_actual_extra_hours_and_set_total_amount()
+		self.validate_start_date_and_end_date()
+		# self.create_payment_request_on_submit_of_ot_sheet()
 	
 	def on_submit(self):
 		self.create_payment_request_on_submit_of_ot_sheet()
@@ -28,10 +32,31 @@ class OvertimeSheetST(Document):
 					total_amount = total_amount + amount
 
 			self.total_amount = total_amount
+	
+	def validate_start_date_and_end_date(self):
+		if self.from_date and self.to_date:
+			if self.to_date < self.from_date:
+				frappe.throw(_("End date can not be less than Start date"))
 
 	def create_payment_request_on_submit_of_ot_sheet(self):
-		pass
-	
+
+		company = erpnext.get_default_company()
+		company_default_overtime_budget_expense_account = frappe.db.get_value("Company",company,"custom_overtime_budget_expense_account")
+		pr_doc = frappe.new_doc("Payment Request ST")
+		pr_doc.date = today()
+		pr_doc.reference_name = "Overtime Sheet ST"
+		pr_doc.reference_no = self.name
+		pr_doc.budget_account = company_default_overtime_budget_expense_account
+		
+		if len(self.overtime_sheet_employee_details)>0:
+			for row in self.overtime_sheet_employee_details:
+				pr_row = pr_doc.append("employees",{})
+				pr_row.employee_no = row.employee_no
+				pr_row.amount = row.amount
+
+		pr_doc.save(ignore_permissions=True)
+		frappe.msgprint(_("Payment Request {0} is created").format(get_link_to_form("Payment Request ST", pr_doc.name)),alert=1)
+
 	@frappe.whitelist()
 	def fetch_employees_from_overtime_request(self):
 		final_overtime_employee_list = []
@@ -64,10 +89,12 @@ class OvertimeSheetST(Document):
 						print(filters_for_report,"filters_for_report +++++++++++++++++++")
 						data_from_report = execute(filters_for_report)
 						print(data_from_report[1],"-----------------------------------")
-						total_actual_extra_hours = 0
+						total_actual_extra_mins = 0
 						for record in data_from_report[1]:
-							if record.extra_hours:
-								total_actual_extra_hours = total_actual_extra_hours + record.extra_hours
+							if record.extra_minutes and record.extra_minutes >= 0:
+								print(record.extra_minutes,"=============record.extra_minutes")
+								total_actual_extra_mins = total_actual_extra_mins + record.extra_minutes
+						total_actual_extra_hours = total_actual_extra_mins / 60
 						overtime_employee_details["actual_extra_hours"]=total_actual_extra_hours
 						monthly_salary = get_latest_total_monthly_salary_of_employee(row.employee_no)
 						print(monthly_salary,"*  "*10)
