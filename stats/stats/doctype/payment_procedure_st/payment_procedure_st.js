@@ -14,4 +14,14 @@ frappe.ui.form.on("Payment Procedure ST", {
             frm.set_value("party_name_employee","Multiple Payment")
         }
     },
+    payment_type(frm){
+        if (frm.doc.payment_type == "Indirect"){
+            const default_company = frappe.defaults.get_default("company");
+            frappe.db.get_value('Company', default_company, 'default_bank_account')
+                .then(r => {
+                let default_bank_account = r.message.default_bank_account
+                frm.set_value("middle_bank_account",default_bank_account)
+            })
+        }
+    }
 });

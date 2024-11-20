@@ -18,6 +18,7 @@ class OvertimeRequestST(Document):
 		# self.validate_budget_for_overtime()
 
 	def on_submit(self):
+		self.validate_status()
 		self.validate_budget_for_overtime()
 
 	def validate_overtime_dates(self):
@@ -27,21 +28,32 @@ class OvertimeRequestST(Document):
 	def calculate_employee_due_amount(self):
 		if len(self.employee_overtime_request) > 0:
 			total_due_amt = 0
-			no_of_day = date_diff(self.overtime_end_date, self.overtime_start_date)
+			no_of_day = date_diff(self.overtime_end_date, self.overtime_start_date)+1
 			percentage_for_overtime = frappe.db.get_single_value("Stats Settings ST","percentage_for_overtime")
 			if percentage_for_overtime:
 				for row in self.employee_overtime_request:	
 					monthly_salary = get_latest_total_monthly_salary_of_employee(row.employee_no)
-					per_day_salary = ((monthly_salary or 0)/30)
-					row.due_amount = (row.no_of_hours_per_day or 0) * (no_of_day or 0) * per_day_salary
-					row.rate_per_hour = ((monthly_salary or 0)/(30 * 8)) 
-					row.overtime_rate_per_hour = (row.rate_per_hour * (percentage_for_overtime/100)) + row.rate_per_hour
+					# per_day_salary = ((monthly_salary or 0)/30)
+					employee_contract_type = frappe.db.get_value("Employee",row.employee_no,"custom_contract_type")
+					per_day_hour = None
+					if employee_contract_type:
+						per_day_hour = frappe.db.get_value("Contract Type ST",employee_contract_type,"total_hours_per_day")
+
+					row.rate_per_hour = ((monthly_salary or 0)/(30 * per_day_hour)) 
+					overtime_rate_per_hour = (row.rate_per_hour * (percentage_for_overtime/100)) + row.rate_per_hour
+					row.overtime_rate_per_hour = overtime_rate_per_hour
+					row.due_amount = (row.no_of_hours_per_day or 0) * (no_of_day or 0) * overtime_rate_per_hour
+					print(row.rate_per_hour,row.overtime_rate_per_hour,row.due_amount,row.no_of_hours_per_day,no_of_day,"============")
 					total_due_amt = total_due_amt + (row.due_amount or 0)
 					print(row.due_amount, '---row.due_amount')
 			else :
 				frappe.throw(_("Please set percentage for overtime in stats setiings."))
 
 			self.total_due_amount = total_due_amt
+	def validate_status(self):
+		if self.status:
+			if self.status == None or self.status == "Pending":
+				frappe.throw(_("Please Approve or Reject overtime request before submit"))
 
 	def validate_budget_for_overtime(self):
 		if self.total_due_amount:
@@ -51,8 +63,11 @@ class OvertimeRequestST(Document):
 
 			budget = check_available_amount_for_budget(budget_account,cost_center)
 			print(budget, '--busget')
-			if self.total_due_amount > budget:
-				frappe.throw(_("Total Due amount {0} can't be greater than Budget Amount: {1}").format(self.total_due_amount, budget))
+			if budget:
+				if self.total_due_amount > budget:
+					frappe.throw(_("Total Due amount {0} can't be greater than Budget Amount: {1}").format(self.total_due_amount, budget))
+			else:
+				frappe.throw(_("No budget found for your department"))
 
 	@frappe.whitelist()
 	def get_employee(self):

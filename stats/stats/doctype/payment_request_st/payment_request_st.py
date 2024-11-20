@@ -148,11 +148,8 @@ class PaymentRequestST(Document):
 	def create_payment_procedure_on_submit_of_payment_request(self):
 		pp_doc = frappe.new_doc("Payment Procedure ST")
 		pp_doc.payment_request_reference = self.name
-		pp_doc.mode_of_payment = self.mode_of_payment
-		pp_doc.mode_of_payment_type = self.payment_type
 		pp_doc.budget_account = self.budget_account
-		if self.reference_name == "Employee Reallocation Sheet ST":
-			pp_doc.party_type = self.party_type
+		pp_doc.party_type = self.party_type
 		pp_doc.reference_name = self.reference_name
 		pp_doc.reference_no = self.reference_no
 

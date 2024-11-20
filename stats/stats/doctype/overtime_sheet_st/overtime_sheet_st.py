@@ -25,9 +25,7 @@ class OvertimeSheetST(Document):
 			total_amount = 0
 			for row in self.overtime_sheet_employee_details:
 				if row.actual_extra_hours > 0:
-					monthly_salary = get_latest_total_monthly_salary_of_employee(row.employee_no)
-					per_day_salary = ((monthly_salary or 0)/30)
-					amount = row.actual_extra_hours * per_day_salary
+					amount = row.actual_extra_hours * row.overtime_rate_per_hour
 					row.amount = amount
 					total_amount = total_amount + amount
 
@@ -47,6 +45,7 @@ class OvertimeSheetST(Document):
 		pr_doc.reference_name = "Overtime Sheet ST"
 		pr_doc.reference_no = self.name
 		pr_doc.budget_account = company_default_overtime_budget_expense_account
+		pr_doc.party_type = "Employee"
 		
 		if len(self.overtime_sheet_employee_details)>0:
 			for row in self.overtime_sheet_employee_details:
@@ -109,8 +108,6 @@ class OvertimeSheetST(Document):
 								total_actual_extra_mins = total_actual_extra_mins + record.extra_minutes
 						total_actual_extra_hours = total_actual_extra_mins / 60
 						overtime_employee_details["actual_extra_hours"]=total_actual_extra_hours
-						monthly_salary = get_latest_total_monthly_salary_of_employee(row.employee_no)
-						print(monthly_salary,"*  "*10)
 						amount = (total_actual_extra_hours or 0) * (row.overtime_rate_per_hour or 0)
 						overtime_employee_details["amount"]=amount
 						overtime_employee_details["overtime_rate_per_hour"]=row.overtime_rate_per_hour

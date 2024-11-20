@@ -58,6 +58,7 @@ class BusinessTripSheetST(Document):
 		pr_doc.reference_name = "Business Trip Sheet ST"
 		pr_doc.reference_no = self.name
 		pr_doc.budget_account = company_default_business_trip_budget_expense_account
+		pr_doc.party_type = "Employee"
 		
 		if len(self.employee_detail)>0:
 			for row in self.employee_detail:
