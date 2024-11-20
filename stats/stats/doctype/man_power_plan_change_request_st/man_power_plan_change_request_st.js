@@ -89,7 +89,7 @@ frappe.ui.form.on("Man Power Plan Change Request ST", {
                         grade: r.message.grade,
                         designation: r.message.designation,
                         pre_main_department: r.message.main_job_department,
-                        pre_sub_department: r.message.sub_job_department,  
+                        pre_sub_department: r.message.sub_department,  
                     })
                 }
             })
