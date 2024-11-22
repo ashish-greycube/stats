@@ -76,3 +76,23 @@ class PaymentProcedureST(Document):
 					if self.middle_bank_account:
 						create_payment_journal_entry_from_payment_procedure(self,self.middle_bank_account,company_default_payment_order_account,total_employee_amount,je_date=self.bank_enhancement_date)
 						create_payment_journal_entry_from_payment_procedure(self,company_overtime_budget_chargeable_account,self.middle_bank_account,total_employee_amount,je_date=today())
+
+			if reference_type == "Petty Cash Request ST":
+				company_default_employee_petty_cash_account = frappe.db.get_value("Company",company,"custom_default_employee_petty_cash_account")
+				if self.payment_type == "Direct":
+					create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_payment_order_account,total_employee_amount,je_date=self.transaction_date)
+					if len(self.employees)>0:
+						for row in self.employees:
+							create_payment_journal_entry_from_payment_procedure(self,company_default_employee_petty_cash_account,company_default_central_bank_account,total_employee_amount,je_date=today(),party_type=self.party_type,party_name=row.employee_no)
+				elif self.payment_type == "Indirect":
+					if self.middle_bank_account:
+						create_payment_journal_entry_from_payment_procedure(self,self.middle_bank_account,company_default_payment_order_account,total_employee_amount,je_date=self.bank_enhancement_date)
+						if len(self.employees)>0:
+							for row in self.employees:
+								create_payment_journal_entry_from_payment_procedure(self,company_default_employee_petty_cash_account,self.middle_bank_account,total_employee_amount,je_date=today(),party_type=self.party_type,party_name=row.employee_no)
+				pc_request_doc = frappe.get_doc("Petty Cash Request ST",self.reference_no)
+				pc_request_doc.payment_status = "Paid"
+				pc_request_doc.add_comment("Comment", text="Payment Status changed to Paid due to {0}".format(get_link_to_form("Payment Procedure ST",self.name)))
+				pc_request_doc.save(ignore_permissions=True)
+				frappe.msgprint(_("PC Request {0} payment status changed to <b>Paid</b>".format(get_link_to_form("Petty Cash Request ST",self.reference_no))),alert=True)
+				

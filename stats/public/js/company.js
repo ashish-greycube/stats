@@ -87,5 +87,14 @@ frappe.ui.form.on("Company", {
                 }
             };
         })
+        frm.set_query("custom_default_employee_petty_cash_account", function (doc) {
+            return {
+                filters: {
+                    "account_type": "Payable",
+                    "company": frm.doc.name,
+                    "is_group": 0
+                }
+            };
+        })
     }
 })

@@ -40,7 +40,9 @@ class PaymentRequestST(Document):
 			company_overtime_budget_expense_account = frappe.db.get_value("Company",company,"custom_overtime_budget_expense_account")
 			company_overtime_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_overtime_budget_chargeable_account")
 			self.create_journal_entry_on_submit_of_payment_request(company_overtime_budget_expense_account,company_overtime_budget_chargeable_account)
-
+		
+		elif self.reference_name == "Petty Cash Request ST":
+			self.create_journal_entry_for_petty_cash()
 	
 	
 	def create_journal_entry_on_submit_of_payment_request(self,company_budget_expense_account,company_budget_chargeable_account):
@@ -161,3 +163,79 @@ class PaymentRequestST(Document):
 
 		pp_doc.save(ignore_permissions=True)
 		frappe.msgprint(_("Payment Procedure {0} is created").format(get_link_to_form("Payment Procedure ST", pp_doc.name)),alert=1)
+
+	def create_journal_entry_for_petty_cash(self):
+
+		pc_request_doc = frappe.get_doc("Petty Cash Request ST",self.reference_no)
+		department_cost_center = frappe.db.get_value("Department",pc_request_doc.main_department,"custom_department_cost_center")
+
+		je = frappe.new_doc("Journal Entry")
+		je.voucher_type = "Journal Entry"
+		je.posting_date = self.transaction_date
+		je.custom_payment_request_reference = self.name
+		
+		accounts = []
+		company = erpnext.get_default_company()
+		company_default_cost_center = frappe.db.get_value("Company",company,"cost_center")
+		company_default_employee_petty_cash_account = frappe.db.get_value("Company",company,"custom_default_employee_petty_cash_account")
+		
+		if len(pc_request_doc.pc_request_account_details)>0:
+			for row in pc_request_doc.pc_request_account_details:
+				accounts_row = {
+					"account":row.account_name,
+					"cost_center":department_cost_center,
+					"department":pc_request_doc.main_department,
+					"debit_in_account_currency":row.amount,
+				}
+				accounts.append(accounts_row)
+		if len(self.employees)>0:
+			for row in self.employees:
+				accounts_row_2 = {
+						"account":company_default_employee_petty_cash_account,
+						"cost_center":company_default_cost_center,
+						"credit_in_account_currency":self.total_amount,
+						"party_type":self.party_type,
+						"party":row.employee_no
+				}
+				accounts.append(accounts_row_2)
+
+		je.set("accounts",accounts)
+		je.run_method('set_missing_values')
+		je.save(ignore_permissions=True)
+		je.submit()
+		frappe.msgprint(_("Journal Entry for Petty Cash Request is created from Payment Request {0}").format(get_link_to_form("Journal Entry",je.name)),alert=1)
+
+		# 2nd JV for Petty Cash Request
+
+		company_default_debit_account_mof = frappe.db.get_value("Company",company,"custom_default_debit_account_mof")
+		company_default_revenue_account = frappe.db.get_value("Company",company,"custom_default_revenue_account")
+
+		payment_je_doc = frappe.new_doc("Journal Entry")
+		payment_je_doc.voucher_type = "Journal Entry"
+		payment_je_doc.posting_date = self.transaction_date
+		payment_je_doc.custom_payment_request_reference = self.name
+
+		jv_accounts = []
+		accounts_row = {
+					"account":company_default_debit_account_mof,
+					"cost_center":company_default_cost_center,
+					"debit_in_account_currency":self.total_amount,
+				}
+		jv_accounts.append(accounts_row)
+
+		if len(self.employees)>0:
+			for row in self.employees:
+				accounts_row_2 = {
+					"account":company_default_revenue_account,
+					"cost_center":department_cost_center,
+					"department":pc_request_doc.main_department,
+					"credit_in_account_currency":self.total_amount,
+				}
+				jv_accounts.append(accounts_row_2)
+
+		payment_je_doc.set("accounts",jv_accounts)
+		payment_je_doc.run_method('set_missing_values')
+		payment_je_doc.save(ignore_permissions=True)
+		payment_je_doc.submit()
+
+		frappe.msgprint(_("Journal Entry for Petty Cash Request is created from Payment Request {0}").format(get_link_to_form("Journal Entry",payment_je_doc.name)),alert=1)

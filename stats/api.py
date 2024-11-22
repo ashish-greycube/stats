@@ -532,16 +532,9 @@ def set_last_sync_of_checkin_on_save_of_employee_checkin(self,method):
 			print("Valid -----")
 			frappe.db.set_value("Shift Type", self.shift, "last_sync_of_checkin", latest_checkin.time)
 
-def create_employee_checkin_checkout_for_training():
-	today = nowdate()
-	# training_request_list = frappe.db.get_all("Training Request ST",
-	# 									   filters={"employee_checkin_required":"Yes","employee_checkout_required":"Yes"},
-	# 									   or_filters={'training_start_date':['between',[filter__from_date,filter__to_date]],
-    #                                           'all_line_cast_off':['between',[filter__from_date,filter__to_date]] },)
 	
-
 @frappe.whitelist()
-def create_payment_journal_entry_from_payment_procedure(doc,debit_account,credit_account,amount,je_date=None):
+def create_payment_journal_entry_from_payment_procedure(doc,debit_account,credit_account,amount,je_date=None,party_type=None,party_name=None):
 	if je_date == None:
 		je_date = today()
 
@@ -560,12 +553,22 @@ def create_payment_journal_entry_from_payment_procedure(doc,debit_account,credit
 		"cost_center":company_default_cost_center,
 		"debit_in_account_currency":amount,
 	}
+
+	account_type = frappe.get_cached_value("Account",debit_account, "account_type")
+	if account_type in ["Receivable", "Payable"]:
+		accounts_row["party_type"]=party_type
+		accounts_row["party"]=party_name
+
 	accounts.append(accounts_row)
 	accounts_row_2 = {
 		"account":credit_account,
 		"cost_center":company_default_cost_center,
 		"credit_in_account_currency":amount,
 	}
+	account_type = frappe.get_cached_value("Account",credit_account, "account_type")
+	if account_type in ["Receivable", "Payable"]:
+		accounts_row_2["party_type"]=party_type
+		accounts_row_2["party"]=party_name
 	accounts.append(accounts_row_2)
 
 	payment_je_doc.set("accounts",accounts)
