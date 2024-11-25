@@ -16,7 +16,9 @@ class PaymentProcedureST(Document):
 		if len(self.employees)>0:
 			for row in self.employees:
 				total_amount = total_amount + (row.amount or 0)
-		self.total_amount = total_amount
+			
+		if not self.total_amount:
+			self.total_amount = total_amount
 
 		self.set_party_name_based_on_party_type()
 
@@ -43,7 +45,7 @@ class PaymentProcedureST(Document):
 				je_date = self.bank_enhancement_date
 			else :
 				je_date = self.transaction_date
-			create_payment_journal_entry_from_payment_procedure(self,company_default_payment_order_account,company_default_debit_account_mof,total_employee_amount,je_date)
+			create_payment_journal_entry_from_payment_procedure(self,company_default_payment_order_account,company_default_debit_account_mof,self.total_amount,je_date)
 
 			reference_type = frappe.db.get_value("Payment Request ST",self.payment_request_reference,"reference_name")
 			if reference_type == "Business Trip Sheet ST":
@@ -96,3 +98,12 @@ class PaymentProcedureST(Document):
 				pc_request_doc.save(ignore_permissions=True)
 				frappe.msgprint(_("PC Request {0} payment status changed to <b>Paid</b>".format(get_link_to_form("Petty Cash Request ST",self.reference_no))),alert=True)
 				
+			elif reference_type == "Achievement Certificate ST":
+				company_default_international_subscription_chargeable_account = frappe.db.get_value("Company",company,"custom_default_international_subscription_chargeable_account")
+				if self.payment_type == "Direct":
+					create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_payment_order_account,self.total_amount,je_date=self.transaction_date)
+					create_payment_journal_entry_from_payment_procedure(self,company_default_international_subscription_chargeable_account,company_default_central_bank_account,self.total_amount,je_date=today())
+				elif self.payment_type == "Indirect":
+					if self.middle_bank_account:
+						create_payment_journal_entry_from_payment_procedure(self,self.middle_bank_account,company_default_payment_order_account,self.total_amount,je_date=self.bank_enhancement_date)
+						create_payment_journal_entry_from_payment_procedure(self,company_default_international_subscription_chargeable_account,self.middle_bank_account,self.total_amount,je_date=today())

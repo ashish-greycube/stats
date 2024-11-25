@@ -105,5 +105,23 @@ frappe.ui.form.on("Company", {
                 }
             };
         })
+        frm.set_query("custom_default_international_subscription_expense_account", function (doc) {
+            return {
+                filters: {
+                    "account_type": ["in",["Expense Account", "Indirect Expense"]],
+                    "company": frm.doc.name,
+                    "is_group": 0
+                }
+            };
+        })
+        frm.set_query("custom_default_international_subscription_chargeable_account", function (doc) {
+            return {
+                filters: {
+                   "account_type": "Chargeable",
+                   "company": frm.doc.name,
+                   "is_group": 0
+                }
+            };
+        })
     }
 })

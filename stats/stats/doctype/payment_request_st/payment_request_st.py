@@ -15,7 +15,8 @@ class PaymentRequestST(Document):
 		if len(self.employees)>0:
 			for row in self.employees:
 				total_amount = total_amount + (row.amount or 0)
-		self.total_amount = total_amount
+		if not self.total_amount:
+			self.total_amount = total_amount
 
 		self.set_party_name_based_on_party_type()
 
@@ -43,6 +44,9 @@ class PaymentRequestST(Document):
 		
 		elif self.reference_name == "Petty Cash Request ST":
 			self.create_journal_entry_for_petty_cash()
+
+		elif self.reference_name == "Achievement Certificate ST":
+			self.create_jv_for_achievement_certificate()
 	
 	
 	def create_journal_entry_on_submit_of_payment_request(self,company_budget_expense_account,company_budget_chargeable_account):
@@ -154,6 +158,10 @@ class PaymentRequestST(Document):
 		pp_doc.party_type = self.party_type
 		pp_doc.reference_name = self.reference_name
 		pp_doc.reference_no = self.reference_no
+		pp_doc.total_amount = self.total_amount
+
+		if self.party_type == "Supplier":
+			pp_doc.party_name_supplier = self.party_name_supplier
 
 		if len(self.employees)>0:
 			for row in self.employees:
@@ -239,3 +247,72 @@ class PaymentRequestST(Document):
 		payment_je_doc.submit()
 
 		frappe.msgprint(_("Journal Entry for Petty Cash Request is created from Payment Request {0}").format(get_link_to_form("Journal Entry",payment_je_doc.name)),alert=1)
+	
+	def create_jv_for_achievement_certificate(self):
+		certificate_doc = frappe.get_doc("Achievement Certificate ST",self.reference_no)
+		department_cost_center = frappe.db.get_value("Department",certificate_doc.department_request,"custom_department_cost_center")
+
+		je = frappe.new_doc("Journal Entry")
+		je.voucher_type = "Journal Entry"
+		je.posting_date = self.transaction_date
+		je.custom_payment_request_reference = self.name
+		
+		accounts = []
+		company = erpnext.get_default_company()
+		company_default_cost_center = frappe.db.get_value("Company",company,"cost_center")
+		custom_default_international_subscription_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
+		custom_default_international_subscription_chargeable_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_chargeable_account")
+
+		accounts_row = {
+			"account":custom_default_international_subscription_expense_account,
+			"cost_center":department_cost_center,
+			"department":certificate_doc.department_request,
+			"debit_in_account_currency":self.total_amount,
+		}
+		accounts.append(accounts_row)
+
+		accounts_row_2 = {
+						"account":custom_default_international_subscription_chargeable_account,
+						"cost_center":company_default_cost_center,
+						"credit_in_account_currency":self.total_amount
+				}
+		accounts.append(accounts_row_2)
+
+		je.set("accounts",accounts)
+		je.run_method('set_missing_values')
+		je.save(ignore_permissions=True)
+		je.submit()
+		frappe.msgprint(_("Journal Entry for Achievement Certificate is created from Payment Request {0}").format(get_link_to_form("Journal Entry",je.name)),alert=1)
+
+		# 2nd JV for Achievement Certificate
+
+		je_doc = frappe.new_doc("Journal Entry")
+		je_doc.voucher_type = "Journal Entry"
+		je_doc.posting_date = self.transaction_date
+		je_doc.custom_payment_request_reference = self.name
+		
+		jv_accounts = []
+		company = erpnext.get_default_company()
+		company_default_cost_center = frappe.db.get_value("Company",company,"cost_center")
+		company_default_debit_account_mof = frappe.db.get_value("Company",company,"custom_default_debit_account_mof")
+		company_default_revenue_account = frappe.db.get_value("Company",company,"custom_default_revenue_account")
+
+		accounts_row = {
+					"account":company_default_debit_account_mof,
+					"cost_center":company_default_cost_center,
+					"debit_in_account_currency":self.total_amount,
+				}
+		jv_accounts.append(accounts_row)
+
+		accounts_row_2 = {
+						"account":company_default_revenue_account,
+						"cost_center":department_cost_center,
+						"credit_in_account_currency":self.total_amount
+				}
+		jv_accounts.append(accounts_row_2)
+
+		je_doc.set("accounts",jv_accounts)
+		je_doc.run_method('set_missing_values')
+		je_doc.save(ignore_permissions=True)
+		je_doc.submit()
+		frappe.msgprint(_("Journal Entry for Achievement Certificate is created from Payment Request {0}").format(get_link_to_form("Journal Entry",je.name)),alert=1)

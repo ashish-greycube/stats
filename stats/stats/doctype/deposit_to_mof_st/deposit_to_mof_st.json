@@ -88,14 +88,18 @@
    "fieldname": "payment_proof_attachment",
    "fieldtype": "Attach",
    "in_list_view": 1,
-   "label": "Payment Proof Attachment",
-   "reqd": 1
+   "label": "Payment Proof Attachment"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2024-11-22 15:48:37.977590",
+ "links": [
+  {
+   "link_doctype": "Journal Entry",
+   "link_fieldname": "custom_deposit_to_mof_reference"
+  }
+ ],
+ "modified": "2024-11-25 07:47:18.638135",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Deposit To MOF ST",

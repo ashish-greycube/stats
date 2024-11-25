@@ -25,7 +25,7 @@ class PettyCashRePaymentST(Document):
 		je = frappe.new_doc("Journal Entry")
 		je.voucher_type = "Journal Entry"
 		je.posting_date = self.creation_date
-		# je.custom_petty_cash_repayment_reference = self.name
+		je.custom_petty_cash_re_payment_reference = self.name
 		
 		accounts = []
 		company = erpnext.get_default_company()
@@ -56,4 +56,13 @@ class PettyCashRePaymentST(Document):
 
 	@frappe.whitelist()
 	def create_deposit_to_mof(self):
-		pass
+		mof_doc = frappe.new_doc("Deposit To MOF ST")
+		mof_doc.total_unpaid = self.total_unpaid
+		mof_doc.petty_cash_request_reference = self.petty_cash_request_reference
+		mof_doc.petty_cash_closing_reference = self.petty_cash_closing_reference
+		mof_doc.petty_cash_repayment_reference = self.name
+
+		mof_doc.run_method('set_missing_values')
+		mof_doc.save(ignore_permissions=True)
+		frappe.msgprint(_("Deposit to MOF is created {0}").format(get_link_to_form("Deposit To MOF ST",mof_doc.name)),alert=1)
+		return mof_doc.name

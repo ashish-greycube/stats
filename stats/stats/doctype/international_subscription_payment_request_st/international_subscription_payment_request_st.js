@@ -1,7 +1,8 @@
 // Copyright (c) 2024, GreyCube Technologies and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on("Petty Cash Re-Payment ST", {
+frappe.ui.form.on("International Subscription Payment Request ST", {
+
     setup(frm) {
         frm.set_query("main_department", function (doc) {
             return {
@@ -31,18 +32,18 @@ frappe.ui.form.on("Petty Cash Re-Payment ST", {
                 })
         }
     },
-
+    
     refresh(frm) {
-        if (frm.doc.deposit_to_mof == "Pending" && frm.doc.docstatus == 1) {
-            frm.add_custom_button(__('Deposit to MOF'), () => create_deposit_to_mof_from_pc_repayment(frm));
+        if (frm.doc.certificate_status == "Pending" && frm.doc.docstatus == 1) {
+            frm.add_custom_button(__('Achievment Certificate'), () => create_achievement_certificate_from_isp(frm));
         }
     },
 });
 
-let create_deposit_to_mof_from_pc_repayment = function (frm) {
-    frm.call("create_deposit_to_mof").then(r => {
-        let deposit_to_mof = r.message
+let create_achievement_certificate_from_isp = function (frm) {
+    frm.call("create_achievement_certificate").then(r => {
+        let certificate_name = r.message
         frappe.open_in_new_tab = true;
-        frappe.set_route("Form", "Deposit To MOF ST", deposit_to_mof);
+        frappe.set_route("Form", "Achievement Certificate ST", certificate_name);
     })
 }
