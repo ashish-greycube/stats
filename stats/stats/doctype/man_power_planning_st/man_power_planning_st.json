@@ -18,7 +18,13 @@
   "section_break_zsts",
   "job_details",
   "section_break_rgiz",
-  "budget_details"
+  "year",
+  "column_break_gays",
+  "planned_budget",
+  "column_break_eswo",
+  "consumed_budget",
+  "column_break_pcnc",
+  "remaining_budget"
  ],
  "fields": [
   {
@@ -29,12 +35,16 @@
   {
    "fieldname": "from_date",
    "fieldtype": "Date",
-   "label": "From Date"
+   "in_list_view": 1,
+   "label": "From Date",
+   "reqd": 1
   },
   {
    "fieldname": "to_date",
    "fieldtype": "Date",
-   "label": "To Date"
+   "in_list_view": 1,
+   "label": "To Date",
+   "reqd": 1
   },
   {
    "fieldname": "company_name",
@@ -59,7 +69,8 @@
    "fieldname": "main_department",
    "fieldtype": "Link",
    "label": "Main Department",
-   "options": "Department"
+   "options": "Department",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_pjxo",
@@ -77,24 +88,55 @@
   },
   {
    "fieldname": "section_break_rgiz",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "budget_details",
-   "fieldtype": "Table",
-   "label": "Budget Details",
-   "options": "Budget Details ST"
+   "fieldtype": "Section Break",
+   "label": "Budget Details"
   },
   {
    "fieldname": "supplier",
    "fieldtype": "Link",
    "label": "Supplier",
    "options": "Supplier"
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Link",
+   "label": "Year",
+   "options": "Fiscal Year"
+  },
+  {
+   "fieldname": "column_break_gays",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "planned_budget",
+   "fieldtype": "Currency",
+   "label": "Planned Budget",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_eswo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "consumed_budget",
+   "fieldtype": "Currency",
+   "label": "Consumed Budget",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_pcnc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "remaining_budget",
+   "fieldtype": "Currency",
+   "label": "Remaining Budget",
+   "precision": "2"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-20 07:33:58.743681",
+ "modified": "2024-11-25 10:26:47.421422",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Man Power Planning ST",

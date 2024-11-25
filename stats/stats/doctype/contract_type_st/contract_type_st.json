@@ -23,6 +23,8 @@
   "column_break_sdww",
   "total_mins_per_month",
   "total_mins_per_day",
+  "section_break_wupo",
+  "considered_vacation_days",
   "section_break_emci",
   "no_of_allowed_business_trip_days"
  ],
@@ -108,7 +110,8 @@
    "fieldname": "permission_balance_per_month",
    "fieldtype": "Int",
    "label": "Permission Balance Per Month",
-   "mandatory_depends_on": "eval:doc.contract==\"Civil\""
+   "mandatory_depends_on": "eval:doc.contract==\"Civil\"",
+   "reqd": 1
   },
   {
    "fieldname": "contract",
@@ -123,7 +126,8 @@
    "fieldname": "permission_balance_per_year",
    "fieldtype": "Int",
    "label": "Permission Balance Per Year",
-   "mandatory_depends_on": "eval:doc.contract==\"Direct\""
+   "mandatory_depends_on": "eval:doc.contract==\"Direct\"",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_sdww",
@@ -134,19 +138,32 @@
    "fieldname": "total_mins_per_month",
    "fieldtype": "Int",
    "label": "Total Mins Per Month",
-   "read_only": 1
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "description": "(in mins)",
    "fieldname": "total_mins_per_day",
    "fieldtype": "Int",
    "label": "Total Mins Per Day",
-   "read_only": 1
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_wupo",
+   "fieldtype": "Section Break",
+   "label": "Vacation Balance"
+  },
+  {
+   "fieldname": "considered_vacation_days",
+   "fieldtype": "Int",
+   "label": "Considered Vacation Days",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-14 14:22:10.256737",
+ "modified": "2024-11-25 08:21:25.492456",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Contract Type ST",

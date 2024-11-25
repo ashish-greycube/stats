@@ -2,13 +2,16 @@
 # For license information, please see license.txt
 
 import frappe
+import erpnext
 from frappe.model.document import Document
 from frappe import _
+from frappe.utils import getdate
 
 class ManPowerPlanningST(Document):
 	def validate(self):
 		self.set_job_no_in_employee()
 		self.change_position_status_in_job_details()
+		self.set_budget_details()
 
 	def set_job_no_in_employee(self):
 		if len(self.job_details) > 0:
@@ -27,3 +30,41 @@ class ManPowerPlanningST(Document):
 			for job in self.job_details:
 				if job.employee_no:
 					job.position_status = "Filled"
+
+	def set_budget_details(self):
+		self.year = getdate(self.from_date).year
+
+		if not self.is_new() and len(self.job_details) > 0:
+
+			############ planned_budget #########
+			company = erpnext.get_default_company()
+			salary_expense_account = frappe.db.get_value("Company", company, "custom_default_salary_expense_account")
+			department_budget_list = frappe.db.get_list("Department Budget ST", filters={"fiscal_year":self.year, "main_department":self.main_department},
+											   fields=["name"])
+	
+			planned_budget = 0
+			if len(department_budget_list) > 0:
+				for db in department_budget_list:
+					db_doc = frappe.get_doc("Department Budget ST", db.name)
+					for account in db_doc.account_table:
+						if account.budget_expense_account == salary_expense_account:
+							planned_budget = planned_budget + account.approved_amount
+							break
+			else:
+				frappe.throw(_("For {0} No Buget Found for {1} Main department").format(self.year, self.main_department))
+			
+			self.planned_budget = planned_budget
+
+			########### consumed_budget ##########
+
+			consumed_budget = 0
+			for job in self.job_details:
+				if job.position_status == "Filled":
+					consumed_budget = consumed_budget + job.salary
+
+			self.consumed_budget = consumed_budget * 12
+
+			if self.planned_budget > 0:
+				self.remaining_budget = self.planned_budget - self.consumed_budget
+
+

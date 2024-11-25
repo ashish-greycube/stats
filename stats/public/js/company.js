@@ -55,6 +55,15 @@ frappe.ui.form.on("Company", {
                 }
             };
         })
+        frm.set_query("custom_default_salary_expense_account", function (doc) {
+            return {
+                filters: {
+                    "company": frm.doc.name,
+                    "is_group": 0,
+                    "account_type": ["in",["Expense Account", "Indirect Expense"]]
+                }
+            };
+        })
         frm.set_query("custom_default_debit_account_mof", function (doc) {
             return {
                 filters: {

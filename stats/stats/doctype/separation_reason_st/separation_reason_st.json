@@ -7,7 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "separation_reason",
-  "ignore_end_of_service_calculation"
+  "incude_end_of_service"
  ],
  "fields": [
   {
@@ -19,15 +19,16 @@
    "unique": 1
   },
   {
-   "default": "0",
-   "fieldname": "ignore_end_of_service_calculation",
-   "fieldtype": "Check",
-   "label": "Ignore end of service calculation?"
+   "fieldname": "incude_end_of_service",
+   "fieldtype": "Select",
+   "label": "Incude End of Service",
+   "options": "\nYes\nNo",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-11 14:31:13.086164",
+ "modified": "2024-11-25 08:35:29.318395",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Separation Reason ST",

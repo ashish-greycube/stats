@@ -37,11 +37,9 @@
   "column_break_aipy",
   "salary_nj",
   "finance_impact_section",
-  "budget",
+  "original_budget_amount",
   "column_break_opie",
-  "available",
-  "column_break_ixgc",
-  "difference",
+  "new_budgeted_amount",
   "column_break_cgiv",
   "finance_impact",
   "amended_from"
@@ -141,31 +139,13 @@
    "label": "Finance Impact"
   },
   {
-   "fieldname": "budget",
-   "fieldtype": "Float",
-   "label": "Budget"
-  },
-  {
-   "fieldname": "available",
-   "fieldtype": "Float",
-   "label": "Available"
-  },
-  {
-   "fieldname": "difference",
-   "fieldtype": "Float",
-   "label": "Difference"
-  },
-  {
    "fieldname": "finance_impact",
-   "fieldtype": "Float",
-   "label": "Finance Impact"
+   "fieldtype": "Currency",
+   "label": "Finance Impact",
+   "precision": "2"
   },
   {
    "fieldname": "column_break_opie",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_ixgc",
    "fieldtype": "Column Break"
   },
   {
@@ -272,12 +252,23 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "original_budget_amount",
+   "fieldtype": "Currency",
+   "label": "Original Budget Amount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "new_budgeted_amount",
+   "fieldtype": "Currency",
+   "label": "New Budgeted Amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-19 14:41:35.493035",
+ "modified": "2024-11-25 11:04:03.333725",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Man Power Plan Change Request ST",
