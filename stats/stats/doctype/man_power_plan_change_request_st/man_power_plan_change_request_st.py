@@ -32,7 +32,7 @@ class ManPowerPlanChangeRequestST(Document):
 				self.new_budgeted_amount = self.original_budget_amount - old_salary + new_salary
 
 			if self.request_type == "New Job":
-				self.new_budgeted_amount = self.original_budget_amount + self.salary_nj
+				self.new_budgeted_amount = self.original_budget_amount + self.salary_nj * 12
 
 			self.finance_impact = self.original_budget_amount - self.new_budgeted_amount
 
