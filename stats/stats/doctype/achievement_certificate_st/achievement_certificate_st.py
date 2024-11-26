@@ -10,8 +10,7 @@ from frappe.model.document import Document
 
 class AchievementCertificateST(Document):
 	
-	def validate(self):
-	# def on_submit(self):
+	def on_submit(self):
 		self.create_payment_request_from_achievement_certificate()
 		self.change_status_of_isp_request()
 
