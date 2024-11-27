@@ -95,15 +95,13 @@ let create_exit_interview = function (frm) {
             indicator: "red",
         });
     }
-
-    frappe.call({
-        method: "",
-        args: {},
-        callback: function (r) {
-            if (r.message) {
-                console.log("Helloo")
-                // window.open(`/app/ticket-request-st/` + r.message);
-            }
+    
+    frm.call("create_exit_interview").then((r)=>{
+        if (r.message) {
+            console.log(r.message, "r.message")
+            frappe.open_in_new_tab = true;
+            frappe.set_route("Form", "Exit Interview ST", r.message);
+            // window.open(`app/end-of-service-calculation-st/` + r.message);
         }
-    })      
+    })
 }

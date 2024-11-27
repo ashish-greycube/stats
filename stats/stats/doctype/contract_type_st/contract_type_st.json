@@ -25,6 +25,8 @@
   "total_mins_per_day",
   "section_break_wupo",
   "considered_vacation_days",
+  "section_break_kbdr",
+  "normal_years_of_retirement",
   "section_break_emci",
   "no_of_allowed_business_trip_days"
  ],
@@ -155,16 +157,29 @@
    "label": "Vacation Balance"
   },
   {
+   "description": "Civil Contract: Applicable For End OF Service And Retirement <br>\nDirect Contract: Applicable only for End Of Service",
    "fieldname": "considered_vacation_days",
    "fieldtype": "Int",
-   "label": "Considered Vacation Days",
+   "label": "Considered Vacation Days(Max)",
    "non_negative": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "section_break_kbdr",
+   "fieldtype": "Section Break",
+   "label": "Years Of Retirement"
+  },
+  {
+   "depends_on": "eval:doc.contract==\"Civil\"",
+   "fieldname": "normal_years_of_retirement",
+   "fieldtype": "Int",
+   "label": "Normal Years Of Retirement",
+   "mandatory_depends_on": "eval:doc.contract==\"Civil\""
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-25 13:19:56.344610",
+ "modified": "2024-11-27 15:50:36.083858",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Contract Type ST",

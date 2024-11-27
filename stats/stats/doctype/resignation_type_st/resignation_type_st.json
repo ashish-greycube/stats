@@ -25,26 +25,26 @@
    "description": "No amount is paid",
    "fieldname": "is_it_separation",
    "fieldtype": "Check",
-   "label": "Is it separation "
+   "label": "Is it : Separation Type?"
   },
   {
    "default": "0",
    "description": "service years are less than 2: (half monthly salary) X (no of service years) <br>\nservice years &gt; 2 and &lt; 5 : (half monthly salary/3) X (no of service years) <br>\nservice years &gt; 5: (full monthly salary) X (no of service years)",
    "fieldname": "is_it_not_renewal_of_contract",
    "fieldtype": "Check",
-   "label": "Is It Not Renewal of Contract"
+   "label": "Is It:  Not Renewal of Contract?"
   },
   {
    "default": "0",
    "description": "service years are less than 2: No amount is paid <br>\nservice years &gt; 2 and &lt; 5 : (half monthly salary/3) X (no of service years)  <br>\nservice years &gt; 5: (full monthly salary) X (no of service years)",
    "fieldname": "is_it_resignation",
    "fieldtype": "Check",
-   "label": "Is It Resignation"
+   "label": "Is It: Resignation?"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-26 10:29:56.739852",
+ "modified": "2024-11-27 15:51:43.315418",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Resignation Type ST",

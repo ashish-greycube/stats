@@ -8,9 +8,10 @@ from frappe.model.document import Document
 
 class ExitInterviewST(Document):
 	def validate(self):
-		self.check_atleast_one_leaving_reason_exists()
-		self.not_allow_to_select_multiple_evaluation_option()
-		self.check_if_questions_answer_given_or_not()
+		if not self.is_new():
+			self.check_atleast_one_leaving_reason_exists()
+			self.not_allow_to_select_multiple_evaluation_option()
+			self.check_if_questions_answer_given_or_not()
 
 	def check_atleast_one_leaving_reason_exists(self):
 		leaving_reason_exists = False

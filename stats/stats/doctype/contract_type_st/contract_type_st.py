@@ -10,6 +10,7 @@ class ContractTypeST(Document):
 	def validate(self):
 		self.set_in_mins()
 		self.validate_salary_structure_percentage()
+		self.validate_considered_vacation_days()
 
 	def set_in_mins(self):
 		self.total_mins_per_month=self.total_hours_per_month*60
@@ -31,3 +32,9 @@ class ContractTypeST(Document):
 
 			if calculate_amount != total_monthly_salary:
 				frappe.throw(_("Total of earnings must be 100%"))
+
+	def validate_considered_vacation_days(self):
+		if self.contract == "Civil" and self.considered_vacation_days > 180:
+			frappe.throw(_("For Civil Contract: Vacation Days Cann't be Greater Than 180."))
+		if self.contract == "Direct" and self.considered_vacation_days > 35:
+			frappe.throw(_("For Direct Contract: Vacation Days Cann't be Greater Than 35."))

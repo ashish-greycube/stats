@@ -80,6 +80,14 @@ class EmployeeResignationST(Document):
 		eop.save(ignore_permissions=True)
 
 		return eop.name
+	
+	@frappe.whitelist()
+	def create_exit_interview(self):
+		ei = frappe.new_doc("Exit Interview ST")
+		ei.resignation_reference = self.name
+		ei.employee_no = self.employee_no
 
+		ei.save(ignore_permissions=True)
 
+		return ei.name
 				

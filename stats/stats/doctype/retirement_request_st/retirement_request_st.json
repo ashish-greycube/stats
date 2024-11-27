@@ -41,6 +41,7 @@
   "considered_vacation_days",
   "section_break_zsdy",
   "retirement_due_amount",
+  "new_retirement_due_amount",
   "column_break_yzju",
   "vacation_due_amount",
   "column_break_yufc",
@@ -155,7 +156,7 @@
   {
    "fieldname": "retirement_due_amount",
    "fieldtype": "Currency",
-   "label": "<b>Retirement Due Amount</b>"
+   "label": "Retirement Due Amount"
   },
   {
    "fieldname": "due_vacation_balance",
@@ -276,7 +277,8 @@
   },
   {
    "fieldname": "section_break_zsdy",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Due Amount"
   },
   {
    "fieldname": "column_break_yzju",
@@ -320,11 +322,16 @@
    "label": "Retirement Date Gregorian",
    "read_only": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "new_retirement_due_amount",
+   "fieldtype": "Currency",
+   "label": "<b>New Retirement Due Amount</b>"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-27 13:45:57.889858",
+ "modified": "2024-11-27 14:52:16.939559",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Retirement Request ST",

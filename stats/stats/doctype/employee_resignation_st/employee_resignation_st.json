@@ -95,7 +95,7 @@
   {
    "fieldname": "last_working_days",
    "fieldtype": "Date",
-   "label": "Last Working Days",
+   "label": "Last Working Date",
    "reqd": 1
   },
   {
@@ -146,9 +146,13 @@
   {
    "link_doctype": "Evacuation of Party ST",
    "link_fieldname": "resignation_reference"
+  },
+  {
+   "link_doctype": "Exit Interview ST",
+   "link_fieldname": "resignation_reference"
   }
  ],
- "modified": "2024-11-26 07:03:18.400629",
+ "modified": "2024-11-27 14:32:41.137688",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Resignation ST",

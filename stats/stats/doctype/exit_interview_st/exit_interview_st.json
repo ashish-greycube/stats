@@ -133,15 +133,18 @@
   },
   {
    "fieldname": "resignation_reference",
-   "fieldtype": "Data",
-   "label": "Resignation Reference"
+   "fieldtype": "Link",
+   "label": "Resignation Reference",
+   "options": "Employee Resignation ST"
   },
   {
+   "fetch_from": "resignation_reference.last_working_days",
    "fieldname": "resignation_date",
    "fieldtype": "Date",
    "label": "Resignation Date"
   },
   {
+   "fetch_from": "resignation_reference.employee_no",
    "fieldname": "employee_no",
    "fieldtype": "Link",
    "label": "Employee No",
@@ -175,7 +178,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "fetch_from": "employee_no.custom_id__igama_no",
+   "fetch_from": "employee_no.custom_idresidency_number",
    "fieldname": "id_no",
    "fieldtype": "Data",
    "label": "ID No",
@@ -670,7 +673,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-05 12:55:27.495260",
+ "modified": "2024-11-27 14:32:23.877830",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Exit Interview ST",
