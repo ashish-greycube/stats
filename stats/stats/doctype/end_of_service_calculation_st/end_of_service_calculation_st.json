@@ -38,6 +38,7 @@
   "vacation_due_amount",
   "section_break_hdbx",
   "earning",
+  "salary_structure_assignment_reference",
   "total_monthly_salary",
   "net_salary",
   "column_break_ugte",
@@ -58,11 +59,13 @@
    "options": "\nRetirement\nResignation"
   },
   {
-   "fetch_from": "resignation__reference.employee_no",
+   "fetch_from": "resignation_reference.employee_no",
    "fieldname": "employee",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Employee",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "fetch_from": "employee.employee_name",
@@ -99,14 +102,14 @@
    "options": "Branch"
   },
   {
-   "fetch_from": "resignation__reference.resignation_type",
+   "fetch_from": "resignation_reference.resignation_type",
    "fieldname": "resignation_type",
    "fieldtype": "Link",
    "label": "Resignation Type",
    "options": "Resignation Type ST"
   },
   {
-   "fetch_from": "resignation__reference.separation_reason",
+   "fetch_from": "resignation_reference.separation_reason",
    "fieldname": "seperation_reason",
    "fieldtype": "Link",
    "label": "Seperation Reason",
@@ -116,7 +119,7 @@
    "fieldname": "retirment_type",
    "fieldtype": "Select",
    "label": "Retirment Type",
-   "options": "Normal\nEarly Retirement"
+   "options": "\nNormal\nEarly Retirement"
   },
   {
    "fieldname": "column_break_dibr",
@@ -132,7 +135,9 @@
    "fetch_from": "employee.relieving_date",
    "fieldname": "last_working_date",
    "fieldtype": "Date",
-   "label": "Last Working Date"
+   "in_list_view": 1,
+   "label": "Last Working Date",
+   "reqd": 1
   },
   {
    "fieldname": "total_no_of_working_days",
@@ -251,7 +256,8 @@
    "fieldname": "resignation_reference",
    "fieldtype": "Link",
    "label": "Resignation Reference",
-   "options": "Employee Resignation ST"
+   "options": "Employee Resignation ST",
+   "reqd": 1
   },
   {
    "default": "0",
@@ -266,11 +272,18 @@
    "fieldtype": "Currency",
    "label": "Per Year EOS Due Amount",
    "precision": "2"
+  },
+  {
+   "fieldname": "salary_structure_assignment_reference",
+   "fieldtype": "Link",
+   "label": "Salary Structure Assignment Reference",
+   "options": "Salary Structure Assignment",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-26 11:05:41.565334",
+ "modified": "2024-11-27 11:45:18.396738",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "End of Service Calculation ST",

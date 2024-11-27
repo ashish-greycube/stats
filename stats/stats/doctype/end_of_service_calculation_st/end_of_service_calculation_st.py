@@ -6,7 +6,6 @@ import erpnext
 from frappe.model.document import Document
 from frappe.utils import add_to_date, date_diff
 from stats.salary import get_latest_salary_structure_assignment
-from hrms.hr.report.employee_leave_balance_summary.employee_leave_balance_summary import execute
 from hrms.hr.doctype.leave_application.leave_application import get_leave_details
 
 class EndofServiceCalculationST(Document):
@@ -18,6 +17,7 @@ class EndofServiceCalculationST(Document):
 	def get_salary_details(self):
 		salary_assignment = get_latest_salary_structure_assignment(self.employee, self.last_working_date)
 		if len(salary_assignment) > 0:
+			self.salary_structure_assignment_reference = salary_assignment
 			salary_structure = frappe.db.get_value("Salary Structure Assignment", salary_assignment, "salary_structure")
 			ss = frappe.get_doc("Salary Structure", salary_structure)
 
@@ -120,7 +120,7 @@ class EndofServiceCalculationST(Document):
 		per_day_salary = total_monthly_salary / 30
 		
 		if considered_vacation_days:
-			self.vacation_balance = considered_vacation_days
+			self.considered_vacation_days = considered_vacation_days
 
 			leave_types = frappe.db.sql_list("select name from `tabLeave Type` where custom_allow_encasement_end_of_service = 1 order by name asc")
 
@@ -137,8 +137,12 @@ class EndofServiceCalculationST(Document):
 					print(leave_type, "===leave_type",remaining, "====remaining")
 					print(total_considered_vacation_days, "==total_considered_vacation_days")
 
-				self.considered_vacation_days = total_considered_vacation_days
-				self.vacation_due_amount = per_day_salary * total_considered_vacation_days
+				self.vacation_balance = total_considered_vacation_days
+
+				if self.considered_vacation_days < self.vacation_balance:
+					self.vacation_due_amount = per_day_salary * total_considered_vacation_days
+				else:
+					self.vacation_due_amount = per_day_salary * total_considered_vacation_days
 
 			else:
 				frappe.throw(_("Leave Allocation is not found for {0} employee for {1} date.").format(self.employee, self.last_working_date))

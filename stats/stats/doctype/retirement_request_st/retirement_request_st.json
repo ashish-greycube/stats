@@ -1,38 +1,53 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "ERR-.#####",
  "creation": "2024-11-27 07:50:55.635723",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "transaction_date",
+  "creation_date",
+  "column_break_lnqe",
+  "retirement_type",
+  "section_break_wivo",
   "employee_no",
   "employee_name",
-  "designation",
   "contract_type",
   "job_no",
+  "designation",
+  "column_break_zagd",
+  "main_department",
+  "sub_department",
+  "branch",
+  "section",
   "grade",
   "step",
-  "sub_department",
-  "main_department",
-  "section",
-  "branch",
-  "column_break_lnqe",
+  "column_break_dcpb",
   "birth_date_hijri",
-  "birth_date",
+  "birth_date_gregorian",
   "retirment_date_hijri",
-  "retirement_date",
-  "retirement_type",
-  "retirement_due_amount",
-  "vacation_balance",
-  "due_vacation_balance",
-  "vacation_due_amount",
-  "total_due_amount",
+  "retirement_date_gregorian",
+  "age_duration_days",
+  "age_duration_years",
+  "section_break_jbns",
   "social_dev_bank_deduction",
-  "real_stat_dev_bank_deduction",
+  "column_break_mfnz",
   "agricalture_dev_bank_deduction",
+  "column_break_ldbh",
+  "real_stat_dev_bank_deduction",
+  "section_break_kedk",
+  "due_vacation_balance",
+  "column_break_tcxw",
+  "considered_vacation_days",
+  "section_break_zsdy",
+  "retirement_due_amount",
+  "column_break_yzju",
+  "vacation_due_amount",
+  "column_break_yufc",
+  "total_due_amount",
   "section_break_ikzh",
   "earning",
+  "salary_structure_assignment_reference",
   "total_monthly_salary",
   "net_salary",
   "column_break_dcoh",
@@ -41,40 +56,41 @@
  ],
  "fields": [
   {
-   "fieldname": "transaction_date",
-   "fieldtype": "Date",
-   "label": "Transaction Date"
-  },
-  {
    "fieldname": "employee_no",
    "fieldtype": "Link",
    "label": "Employee No",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
+   "fetch_from": "employee_no.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
    "label": "Employee Name"
   },
   {
+   "fetch_from": "employee_no.designation",
    "fieldname": "designation",
    "fieldtype": "Link",
    "label": "Designation",
    "options": "Designation"
   },
   {
+   "fetch_from": "employee_no.custom_contract_type",
    "fieldname": "contract_type",
    "fieldtype": "Link",
    "label": "Contract Type",
    "options": "Contract Type ST"
   },
   {
+   "fetch_from": "employee_no.custom_job_no",
    "fieldname": "job_no",
    "fieldtype": "Link",
    "label": "Job No",
    "options": "Job No ST"
   },
   {
+   "fetch_from": "employee_no.grade",
    "fieldname": "grade",
    "fieldtype": "Link",
    "label": "Grade",
@@ -82,28 +98,33 @@
   },
   {
    "fieldname": "step",
-   "fieldtype": "Data",
-   "label": "Step"
+   "fieldtype": "Link",
+   "label": "Step",
+   "options": "Step ST"
   },
   {
+   "fetch_from": "employee_no.custom_sub_department",
    "fieldname": "sub_department",
    "fieldtype": "Link",
    "label": "Sub Department",
    "options": "Department"
   },
   {
+   "fetch_from": "employee_no.department",
    "fieldname": "main_department",
    "fieldtype": "Link",
    "label": "Main Department",
    "options": "Department"
   },
   {
+   "fetch_from": "employee_no.custom_section",
    "fieldname": "section",
    "fieldtype": "Link",
    "label": "Section",
    "options": "Section ST"
   },
   {
+   "fetch_from": "employee_no.branch",
    "fieldname": "branch",
    "fieldtype": "Link",
    "label": "Branch",
@@ -115,40 +136,26 @@
   },
   {
    "fieldname": "birth_date_hijri",
-   "fieldtype": "Date",
+   "fieldtype": "Data",
    "label": "Birth Date Hijri"
   },
   {
-   "fieldname": "birth_date",
-   "fieldtype": "Date",
-   "label": "Birth Date"
-  },
-  {
    "fieldname": "retirment_date_hijri",
-   "fieldtype": "Date",
+   "fieldtype": "Data",
    "label": "Retirment Date Hijri"
-  },
-  {
-   "fieldname": "retirement_date",
-   "fieldtype": "Date",
-   "label": "Retirement Date"
   },
   {
    "fieldname": "retirement_type",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Retirement Type",
-   "options": "\nNormal Retirement\nEarly Retirement"
+   "options": "\nNormal Retirement\nEarly Retirement",
+   "reqd": 1
   },
   {
    "fieldname": "retirement_due_amount",
    "fieldtype": "Currency",
-   "label": "Retirement Due Amount"
-  },
-  {
-   "fieldname": "vacation_balance",
-   "fieldtype": "Currency",
-   "label": "Vacation Balance",
-   "precision": "2"
+   "label": "<b>Retirement Due Amount</b>"
   },
   {
    "fieldname": "due_vacation_balance",
@@ -157,28 +164,23 @@
    "precision": "2"
   },
   {
-   "fieldname": "vacation_due_amount",
-   "fieldtype": "Currency",
-   "label": "Vacation Due Amount"
-  },
-  {
    "fieldname": "total_due_amount",
    "fieldtype": "Currency",
    "label": "Total Due Amount"
   },
   {
    "fieldname": "social_dev_bank_deduction",
-   "fieldtype": "Data",
+   "fieldtype": "Currency",
    "label": "Social Dev Bank Deduction"
   },
   {
    "fieldname": "real_stat_dev_bank_deduction",
-   "fieldtype": "Data",
+   "fieldtype": "Currency",
    "label": "Real Stat Dev Bank Deduction"
   },
   {
    "fieldname": "agricalture_dev_bank_deduction",
-   "fieldtype": "Data",
+   "fieldtype": "Currency",
    "label": "Agricalture Dev Bank Deduction"
   },
   {
@@ -208,27 +210,125 @@
    "fieldname": "total_monthly_salary",
    "fieldtype": "Currency",
    "label": "Total Monthly Salary",
-   "precision": "2"
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "net_salary",
    "fieldtype": "Currency",
    "label": "Net Salary",
-   "precision": "2"
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "total_monthly_deduction",
    "fieldtype": "Currency",
    "label": "Total Monthly Deduction",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "creation_date",
+   "fieldtype": "Date",
+   "label": "Creation Date"
+  },
+  {
+   "fieldname": "section_break_wivo",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "column_break_dcpb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_zagd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_jbns",
+   "fieldtype": "Section Break",
+   "label": "Retirement Deduction"
+  },
+  {
+   "fieldname": "section_break_kedk",
+   "fieldtype": "Section Break",
+   "label": "Vacation  Balance"
+  },
+  {
+   "fieldname": "column_break_ldbh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "considered_vacation_days",
+   "fieldtype": "Currency",
+   "label": "Considered Vacation Days",
    "precision": "2"
+  },
+  {
+   "fieldname": "column_break_mfnz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_tcxw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_zsdy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_yzju",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_yufc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "salary_structure_assignment_reference",
+   "fieldtype": "Link",
+   "label": "Salary  Structure  Assignment Reference",
+   "options": "Salary Structure Assignment",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vacation_due_amount",
+   "fieldtype": "Currency",
+   "label": "<b>Vacation Due Amount</b>"
+  },
+  {
+   "fieldname": "age_duration_days",
+   "fieldtype": "Int",
+   "label": "Age Duration (In Days)"
+  },
+  {
+   "fieldname": "age_duration_years",
+   "fieldtype": "Int",
+   "label": "Age Duration (In Years)"
+  },
+  {
+   "fieldname": "birth_date_gregorian",
+   "fieldtype": "Date",
+   "label": "Birth Date Gregorian",
+   "read_only": 1
+  },
+  {
+   "fieldname": "retirement_date_gregorian",
+   "fieldtype": "Date",
+   "label": "Retirement Date Gregorian",
+   "read_only": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-27 08:16:03.654942",
+ "modified": "2024-11-27 13:45:57.889858",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Retirement Request ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
