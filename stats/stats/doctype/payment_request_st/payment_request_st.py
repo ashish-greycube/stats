@@ -47,6 +47,11 @@ class PaymentRequestST(Document):
 
 		elif self.reference_name == "Achievement Certificate ST":
 			self.create_jv_for_achievement_certificate()
+		
+		elif self.reference_name == "End Of Service Sheet ST":
+			company_end_of_service_budget_expense_account = frappe.db.get_value("Company",company,"custom_end_of_service_budget_expense_account")
+			company_end_of_service_chargeable_account = frappe.db.get_value("Company",company,"custom_end_of_service_chargeable_account")
+			self.create_journal_entry_on_submit_of_payment_request(company_end_of_service_budget_expense_account,company_end_of_service_chargeable_account)
 	
 	
 	def create_journal_entry_on_submit_of_payment_request(self,company_budget_expense_account,company_budget_chargeable_account):

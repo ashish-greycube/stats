@@ -9,7 +9,7 @@ from stats.hr_utils import (check_if_holiday_between_applied_dates,
 							check_employee_in_scholarship, check_employee_in_training, 
 							check_available_amount_for_budget,
 							get_latest_total_monthly_salary_of_employee)
-from frappe.utils import date_diff, flt
+from frappe.utils import date_diff, flt, get_link_to_form
 
 class OvertimeRequestST(Document):
 	def validate(self):
@@ -38,14 +38,15 @@ class OvertimeRequestST(Document):
 					per_day_hour = None
 					if employee_contract_type:
 						per_day_hour = frappe.db.get_value("Contract Type ST",employee_contract_type,"total_hours_per_day")
-
-					row.rate_per_hour = ((monthly_salary or 0)/(30 * per_day_hour)) 
-					overtime_rate_per_hour = (row.rate_per_hour * (percentage_for_overtime/100)) + row.rate_per_hour
-					row.overtime_rate_per_hour = overtime_rate_per_hour
-					row.due_amount = (row.no_of_hours_per_day or 0) * (no_of_day or 0) * overtime_rate_per_hour
-					print(row.rate_per_hour,row.overtime_rate_per_hour,row.due_amount,row.no_of_hours_per_day,no_of_day,"============")
-					total_due_amt = total_due_amt + (row.due_amount or 0)
-					print(row.due_amount, '---row.due_amount')
+						row.rate_per_hour = ((monthly_salary or 0)/(30 * per_day_hour)) 
+						overtime_rate_per_hour = (row.rate_per_hour * (percentage_for_overtime/100)) + row.rate_per_hour
+						row.overtime_rate_per_hour = overtime_rate_per_hour
+						row.due_amount = (row.no_of_hours_per_day or 0) * (no_of_day or 0) * overtime_rate_per_hour
+						print(row.rate_per_hour,row.overtime_rate_per_hour,row.due_amount,row.no_of_hours_per_day,no_of_day,"============")
+						total_due_amt = total_due_amt + (row.due_amount or 0)
+						print(row.due_amount, '---row.due_amount')
+					else:
+						frappe.throw(_("Please set contract type in Employee {0}".format(get_link_to_form("Employee",row.employee_no))))
 			else :
 				frappe.throw(_("Please set percentage for overtime in stats setiings."))
 
@@ -73,7 +74,7 @@ class OvertimeRequestST(Document):
 	def get_employee(self):
 		emp = {}
 		emp_list=[]
-		employee_list = frappe.db.get_all("Employee", filters={"status":"Active", "department":self.main_department}, fields=["name"])
+		employee_list = frappe.db.get_all("Employee", filters={"status":"Active", "department":self.main_department}, fields=["name","employee_name"])
 		if len(employee_list) > 0:
 			for employee in employee_list:
 				scholarship = check_employee_in_scholarship(employee.name,self.overtime_start_date, self.overtime_end_date)
@@ -96,6 +97,7 @@ class OvertimeRequestST(Document):
 					continue
 
 				emp["employee_no"]=employee.name
+				emp["employee_name"]=employee.employee_name
 				emp_list.append(emp.copy())
 					# print(emp, '--for dict')
 

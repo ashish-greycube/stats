@@ -48,6 +48,7 @@ frappe.ui.form.on("Overtime Sheet ST", {
                     frappe.model.set_value(d.doctype, d.name, "overtime_request_reference", ele.overtime_request_reference)
                     frappe.model.set_value(d.doctype, d.name, "request_date", ele.requested_date)
                     frappe.model.set_value(d.doctype, d.name, "employee_no", ele.employee_no)
+                    frappe.model.set_value(d.doctype, d.name, "employee_name", ele.employee_name)
                     frappe.model.set_value(d.doctype, d.name, "required_extra_hours", ele.required_extra_hours)
                     frappe.model.set_value(d.doctype, d.name, "actual_extra_hours", ele.actual_extra_hours)
                     frappe.model.set_value(d.doctype, d.name, "amount", ele.amount)

@@ -48,9 +48,10 @@ frappe.ui.form.on("Overtime Request ST", {
                     employee_list.forEach((e) => {
                         var d = frm.add_child("employee_overtime_request");
                         frappe.model.set_value(d.doctype, d.name, "employee_no", e.employee_no)
+                        frappe.model.set_value(d.doctype, d.name, "employee_name", e.employee_name)
                     });
                     refresh_field("employee_overtime_request");
-                    frm.save()
+                    // frm.save()
                 }
             },
         });

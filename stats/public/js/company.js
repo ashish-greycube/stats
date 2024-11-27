@@ -123,5 +123,43 @@ frappe.ui.form.on("Company", {
                 }
             };
         })
+        frm.set_query("custom_end_of_service_budget_expense_account", function (doc) {
+            return {
+                filters: {
+                    "account_type": ["in",["Expense Account", "Indirect Expense"]],
+                    "company": frm.doc.name,
+                    "is_group": 0
+                }
+            };
+        })
+        frm.set_query("custom_end_of_service_chargeable_account", function (doc) {
+            return {
+                filters: {
+                   "account_type": "Chargeable",
+                   "company": frm.doc.name,
+                   "is_group": 0
+                }
+            };
+        })
+        frm.set_query("custom_vacation_reimbursement_expense_account", function (doc) {
+            return {
+                filters: {
+                    "account_type": ["in",["Expense Account", "Indirect Expense"]],
+                    "company": frm.doc.name,
+                    "is_group": 0
+                }
+            };
+        }) 
+        frm.set_query("custom_vacation_reimbursement_chargeable_account", function (doc) {
+            return {
+                filters: {
+                   "account_type": "Chargeable",
+                   "company": frm.doc.name,
+                   "is_group": 0
+                }
+            };
+        })
+        
+        
     }
 })

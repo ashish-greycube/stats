@@ -23,9 +23,10 @@ class PettyCashClosingST(Document):
 		if len(self.pc_closing_account_details)>0:
 			for row in self.pc_closing_account_details:
 				total_loan_amount = total_loan_amount + row.amount
-				total_paid_amount = total_paid_amount + row.paid_amount
-				row.unpaid_amount = row.amount - row.paid_amount
-				total_unpaid_amount = total_unpaid_amount + row.unpaid_amount
+				if row.paid_amount:
+					total_paid_amount = total_paid_amount + row.paid_amount
+					row.unpaid_amount = row.amount - row.paid_amount
+					total_unpaid_amount = total_unpaid_amount + row.unpaid_amount
 
 		self.total_loan_amount = total_loan_amount
 		self.total_paid_amount = total_paid_amount

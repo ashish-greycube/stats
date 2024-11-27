@@ -92,6 +92,7 @@ class OvertimeSheetST(Document):
 						overtime_employee_details = {}
 						print(overtime_request_doc.name,"---------- overtime_request_doc ---------------")
 						overtime_employee_details["employee_no"]=row.employee_no
+						overtime_employee_details["employee_name"]=row.employee_name
 						overtime_employee_details["requested_date"]=overtime_request_doc.creation_date
 						overtime_employee_details["overtime_request_reference"]=overtime_request_doc.name
 						required_extra_hours = row.no_of_hours_per_day * overtime_days

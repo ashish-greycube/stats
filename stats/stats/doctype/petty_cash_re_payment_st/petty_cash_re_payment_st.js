@@ -21,7 +21,7 @@ frappe.ui.form.on("Petty Cash Re-Payment ST", {
     },
 
     onload(frm) {
-        if (frm.is_new()) {
+        // if (frm.is_new()) {
             frappe.db.get_value('Employee', { user_id: frappe.session.user }, ['employee_name', 'department', 'custom_sub_department'])
                 .then(r => {
                     let values = r.message;
@@ -29,7 +29,7 @@ frappe.ui.form.on("Petty Cash Re-Payment ST", {
                     frm.set_value('main_department', values.department)
                     frm.set_value('sub_department', values.custom_sub_department)
                 })
-        }
+        // }
     },
 
     refresh(frm) {

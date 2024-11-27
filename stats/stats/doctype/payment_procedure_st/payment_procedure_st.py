@@ -107,3 +107,13 @@ class PaymentProcedureST(Document):
 					if self.middle_bank_account:
 						create_payment_journal_entry_from_payment_procedure(self,self.middle_bank_account,company_default_payment_order_account,self.total_amount,je_date=self.bank_enhancement_date)
 						create_payment_journal_entry_from_payment_procedure(self,company_default_international_subscription_chargeable_account,self.middle_bank_account,self.total_amount,je_date=today())
+
+			elif reference_type == "End Of Service Sheet ST":
+				custom_end_of_service_chargeable_account = frappe.db.get_value("Company",company,"custom_end_of_service_chargeable_account")
+				if self.payment_type == "Direct":
+					create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_payment_order_account,self.total_amount,je_date=self.transaction_date)
+					create_payment_journal_entry_from_payment_procedure(self,custom_end_of_service_chargeable_account,company_default_central_bank_account,self.total_amount,je_date=today())
+				elif self.payment_type == "Indirect":
+					if self.middle_bank_account:
+						create_payment_journal_entry_from_payment_procedure(self,self.middle_bank_account,company_default_payment_order_account,self.total_amount,je_date=self.bank_enhancement_date)
+						create_payment_journal_entry_from_payment_procedure(self,custom_end_of_service_chargeable_account,self.middle_bank_account,self.total_amount,je_date=today())

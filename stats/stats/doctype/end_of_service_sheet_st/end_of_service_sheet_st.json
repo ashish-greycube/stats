@@ -13,7 +13,8 @@
   "to_date",
   "section_break_rkie",
   "get_employee",
-  "employee_details"
+  "employee_details",
+  "amended_from"
  ],
  "fields": [
   {
@@ -59,11 +60,27 @@
    "fieldtype": "Table",
    "label": "Employee Details",
    "options": "EOS Employee Details ST"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "End Of Service Sheet ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-11-26 15:26:04.076925",
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Payment Request ST",
+   "link_fieldname": "reference_no"
+  }
+ ],
+ "modified": "2024-11-27 11:37:44.078799",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "End Of Service Sheet ST",
