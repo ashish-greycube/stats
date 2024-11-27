@@ -25,7 +25,7 @@
   "column_break_dcpb",
   "birth_date_hijri",
   "birth_date_gregorian",
-  "retirment_date_hijri",
+  "retirement_date_hijri",
   "retirement_date_gregorian",
   "age_duration_days",
   "age_duration_years",
@@ -136,14 +136,10 @@
    "fieldtype": "Column Break"
   },
   {
+   "description": "ex: 31-3-1403 i.e. (Hijri Day)-(Hijri Month)-(Hijri Year)",
    "fieldname": "birth_date_hijri",
    "fieldtype": "Data",
    "label": "Birth Date Hijri"
-  },
-  {
-   "fieldname": "retirment_date_hijri",
-   "fieldtype": "Data",
-   "label": "Retirment Date Hijri"
   },
   {
    "fieldname": "retirement_type",
@@ -320,18 +316,24 @@
    "fieldname": "retirement_date_gregorian",
    "fieldtype": "Date",
    "label": "Retirement Date Gregorian",
-   "read_only": 1,
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "new_retirement_due_amount",
    "fieldtype": "Currency",
    "label": "<b>New Retirement Due Amount</b>"
+  },
+  {
+   "description": "ex: 31-3-1403 i.e. (Hijri Day)-(Hijri Month)-(Hijri Year)",
+   "fieldname": "retirement_date_hijri",
+   "fieldtype": "Data",
+   "label": "Retirement Date Hijri",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-27 14:52:16.939559",
+ "modified": "2024-11-27 17:35:46.936170",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Retirement Request ST",

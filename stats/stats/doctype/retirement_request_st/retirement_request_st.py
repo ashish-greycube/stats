@@ -4,13 +4,27 @@
 import frappe
 from frappe.model.document import Document
 from stats.salary import get_latest_salary_structure_assignment
+from hijridate import Hijri, Gregorian
+from frappe.utils import cstr,getdate,cint
 
 class RetirementRequestST(Document):
 	def validate(self):
+		self.birth_date_gregorian=self.set_date_in_gregorian(self.birth_date_hijri)
+		self.retirement_date_gregorian=self.set_date_in_gregorian(self.retirement_date_hijri)
 		self.get_salary_details()
 
+	def set_date_in_gregorian(self,date_hijri) :
+		date_hijri=cstr(date_hijri)
+		print('dob_hijri',date_hijri)
+		hijri_splits=date_hijri.split('-')
+		print('hijri_splits',hijri_splits)
+		g_date = Hijri(cint(hijri_splits[2]), cint(hijri_splits[1]), cint(hijri_splits[0])).to_gregorian().dmyformat(separator='/')
+		return getdate(g_date)
+
+
+	
 	def get_salary_details(self):
-		salary_assignment = get_latest_salary_structure_assignment(self.employee_no, self.retirement_date)
+		salary_assignment = get_latest_salary_structure_assignment(self.employee_no, self.retirement_date_gregorian)
 		if len(salary_assignment) > 0:
 			self.salary_structure_assignment_reference = salary_assignment
 			salary_structure = frappe.db.get_value("Salary Structure Assignment", salary_assignment, "salary_structure")
