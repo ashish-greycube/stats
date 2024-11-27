@@ -138,8 +138,17 @@
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2024-11-18 11:25:51.168809",
+ "links": [
+  {
+   "link_doctype": "End of Service Calculation ST",
+   "link_fieldname": "resignation_reference"
+  },
+  {
+   "link_doctype": "Evacuation of Party ST",
+   "link_fieldname": "resignation_reference"
+  }
+ ],
+ "modified": "2024-11-26 07:03:18.400629",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Resignation ST",

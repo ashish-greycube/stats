@@ -158,12 +158,13 @@
    "fieldname": "considered_vacation_days",
    "fieldtype": "Int",
    "label": "Considered Vacation Days",
+   "non_negative": 1,
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-25 08:21:25.492456",
+ "modified": "2024-11-25 13:19:56.344610",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Contract Type ST",

@@ -1,0 +1,250 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-11-27 07:50:55.635723",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "transaction_date",
+  "employee_no",
+  "employee_name",
+  "designation",
+  "contract_type",
+  "job_no",
+  "grade",
+  "step",
+  "sub_department",
+  "main_department",
+  "section",
+  "branch",
+  "column_break_lnqe",
+  "birth_date_hijri",
+  "birth_date",
+  "retirment_date_hijri",
+  "retirement_date",
+  "retirement_type",
+  "retirement_due_amount",
+  "vacation_balance",
+  "due_vacation_balance",
+  "vacation_due_amount",
+  "total_due_amount",
+  "social_dev_bank_deduction",
+  "real_stat_dev_bank_deduction",
+  "agricalture_dev_bank_deduction",
+  "section_break_ikzh",
+  "earning",
+  "total_monthly_salary",
+  "net_salary",
+  "column_break_dcoh",
+  "deduction",
+  "total_monthly_deduction"
+ ],
+ "fields": [
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "label": "Transaction Date"
+  },
+  {
+   "fieldname": "employee_no",
+   "fieldtype": "Link",
+   "label": "Employee No",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "contract_type",
+   "fieldtype": "Link",
+   "label": "Contract Type",
+   "options": "Contract Type ST"
+  },
+  {
+   "fieldname": "job_no",
+   "fieldtype": "Link",
+   "label": "Job No",
+   "options": "Job No ST"
+  },
+  {
+   "fieldname": "grade",
+   "fieldtype": "Link",
+   "label": "Grade",
+   "options": "Employee Grade"
+  },
+  {
+   "fieldname": "step",
+   "fieldtype": "Data",
+   "label": "Step"
+  },
+  {
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "section",
+   "fieldtype": "Link",
+   "label": "Section",
+   "options": "Section ST"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "column_break_lnqe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "birth_date_hijri",
+   "fieldtype": "Date",
+   "label": "Birth Date Hijri"
+  },
+  {
+   "fieldname": "birth_date",
+   "fieldtype": "Date",
+   "label": "Birth Date"
+  },
+  {
+   "fieldname": "retirment_date_hijri",
+   "fieldtype": "Date",
+   "label": "Retirment Date Hijri"
+  },
+  {
+   "fieldname": "retirement_date",
+   "fieldtype": "Date",
+   "label": "Retirement Date"
+  },
+  {
+   "fieldname": "retirement_type",
+   "fieldtype": "Select",
+   "label": "Retirement Type",
+   "options": "\nNormal Retirement\nEarly Retirement"
+  },
+  {
+   "fieldname": "retirement_due_amount",
+   "fieldtype": "Currency",
+   "label": "Retirement Due Amount"
+  },
+  {
+   "fieldname": "vacation_balance",
+   "fieldtype": "Currency",
+   "label": "Vacation Balance",
+   "precision": "2"
+  },
+  {
+   "fieldname": "due_vacation_balance",
+   "fieldtype": "Currency",
+   "label": "Due Vacation Balance",
+   "precision": "2"
+  },
+  {
+   "fieldname": "vacation_due_amount",
+   "fieldtype": "Currency",
+   "label": "Vacation Due Amount"
+  },
+  {
+   "fieldname": "total_due_amount",
+   "fieldtype": "Currency",
+   "label": "Total Due Amount"
+  },
+  {
+   "fieldname": "social_dev_bank_deduction",
+   "fieldtype": "Data",
+   "label": "Social Dev Bank Deduction"
+  },
+  {
+   "fieldname": "real_stat_dev_bank_deduction",
+   "fieldtype": "Data",
+   "label": "Real Stat Dev Bank Deduction"
+  },
+  {
+   "fieldname": "agricalture_dev_bank_deduction",
+   "fieldtype": "Data",
+   "label": "Agricalture Dev Bank Deduction"
+  },
+  {
+   "fieldname": "section_break_ikzh",
+   "fieldtype": "Section Break",
+   "label": "Salary Details"
+  },
+  {
+   "fieldname": "earning",
+   "fieldtype": "Table",
+   "label": "Earning",
+   "options": "EOS Earnings ST",
+   "read_only": 1
+  },
+  {
+   "fieldname": "deduction",
+   "fieldtype": "Table",
+   "label": "Deduction",
+   "options": "EOS Deductions ST",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_dcoh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_monthly_salary",
+   "fieldtype": "Currency",
+   "label": "Total Monthly Salary",
+   "precision": "2"
+  },
+  {
+   "fieldname": "net_salary",
+   "fieldtype": "Currency",
+   "label": "Net Salary",
+   "precision": "2"
+  },
+  {
+   "fieldname": "total_monthly_deduction",
+   "fieldtype": "Currency",
+   "label": "Total Monthly Deduction",
+   "precision": "2"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-27 08:16:03.654942",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Retirement Request ST",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

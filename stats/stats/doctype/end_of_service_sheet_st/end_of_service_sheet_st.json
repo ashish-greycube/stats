@@ -1,0 +1,89 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "EOSS-.#####",
+ "creation": "2024-11-26 13:32:25.039791",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "transaction_date",
+  "created_by",
+  "column_break_pjzw",
+  "from_date",
+  "to_date",
+  "section_break_rkie",
+  "get_employee",
+  "employee_details"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "label": "Transaction Date"
+  },
+  {
+   "fieldname": "created_by",
+   "fieldtype": "Data",
+   "label": "Created By"
+  },
+  {
+   "fieldname": "column_break_pjzw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "From Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "To Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_rkie",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "get_employee",
+   "fieldtype": "Button",
+   "label": "Get Employee"
+  },
+  {
+   "fieldname": "employee_details",
+   "fieldtype": "Table",
+   "label": "Employee Details",
+   "options": "EOS Employee Details ST"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-26 15:26:04.076925",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "End Of Service Sheet ST",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

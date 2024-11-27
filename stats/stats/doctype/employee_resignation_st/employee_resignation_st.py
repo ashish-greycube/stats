@@ -5,6 +5,7 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import getdate, nowdate, add_to_date
+from stats.salary import get_latest_salary_structure_assignment
 
 class EmployeeResignationST(Document):
 	def validate(self):
@@ -54,4 +55,31 @@ class EmployeeResignationST(Document):
 		emp =  frappe.get_doc("Employee", self.employee_no)
 		emp.relieving_date = self.last_working_days
 		emp.save(ignore_permissions=True)
-		frappe.msgprint(_("In {0} Employee Relieving Date Set to {1}").format(self.employee_no, self.last_working_days))
+		frappe.msgprint(_("In {0} Employee Relieving Date Set to {1}").format(self.employee_no, self.last_working_days), alert=1)
+
+	@frappe.whitelist()
+	def create_end_of_service(self):
+		eos = frappe.new_doc("End of Service Calculation ST")
+
+		eos.resignation_reference = self.name
+		eos.employee = self.employee_no
+		eos.resignation_type = self.resignation_type
+		eos.seperation_reason = self.separation_reason
+		eos.end_of_service_type = "Resignation"
+
+		eos.save(ignore_permissions=True)
+
+		return eos.name
+	
+	@frappe.whitelist()
+	def create_evacuation_of_party(self):
+		eop = frappe.new_doc("Evacuation of Party ST")
+
+		eop.resignation_reference = self.name
+		eop.employee_no = self.employee_no
+		eop.save(ignore_permissions=True)
+
+		return eop.name
+
+
+				

@@ -262,3 +262,13 @@ def create_resignation_addition_salary_for_employee(self, method):
 					additional_salary.add_comment('Comment', 'This Additonal Salary is created on {0} for Resignation Deduction'.format(nowdate()))
 					frappe.msgprint(_("Additional Salary {0} Created for Employee {1}.").format(additional_salary.name, self.name), alert=1)
 					additional_salary.submit()
+
+
+def get_latest_salary_structure_assignment(employee, from_date):
+	salary_assignment = frappe.db.get_all("Salary Structure Assignment", 
+								  fields=["name", "salary_structure", "base"], filters={"from_date": ["<=", from_date], "employee":employee}, 
+								  order_by = "from_date desc", limit=1)
+	if len(salary_assignment) > 0:
+		return salary_assignment[0].name
+	else:
+		frappe.throw(_("For {0} date No Salary Structure Assignment Found for {1} Employee").format(from_date, employee))
