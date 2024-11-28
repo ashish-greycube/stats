@@ -10,7 +10,7 @@ class HighPerformanceEmployeeST(Document):
 	pass
 	@frappe.whitelist()
 	def fetch_employees_from_employee_evaluation(self):
-		filters = {"evaluation_classification":["in",[ele.name for ele in self.employee_evaluation]],"docstatus":1}
+		filters = {"evaluation_classification":["in",[ele.evaluation_classification for ele in self.employee_evaluation]],"docstatus":1}
 		
 		if self.main_department:
 			filters["main_department"]=self.main_department
