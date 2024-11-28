@@ -1,0 +1,113 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-11-28 12:14:18.607938",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "creation_date",
+  "created_by",
+  "main_department",
+  "sub_department",
+  "column_break_xhhj",
+  "material_request_reference",
+  "reference_in_eatimad",
+  "initial_cost",
+  "request_type",
+  "selected_supplier",
+  "section_break_wduw",
+  "committee_decision"
+ ],
+ "fields": [
+  {
+   "fieldname": "created_by",
+   "fieldtype": "Data",
+   "label": "Created By"
+  },
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "material_request_reference",
+   "fieldtype": "Link",
+   "label": "Material Request Reference",
+   "options": "Material Request"
+  },
+  {
+   "fieldname": "column_break_xhhj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "material_request_reference.custom_reference_in_eatimad",
+   "fieldname": "reference_in_eatimad",
+   "fieldtype": "Data",
+   "label": "Reference in Eatimad"
+  },
+  {
+   "fetch_from": "material_request_reference.custom_initial_cost",
+   "fieldname": "initial_cost",
+   "fieldtype": "Currency",
+   "label": "Initial Cost"
+  },
+  {
+   "fetch_from": "material_request_reference.custom_request_type",
+   "fieldname": "request_type",
+   "fieldtype": "Select",
+   "label": "Request Type",
+   "options": "\nTechnical\nMedia\nStatistical\nFacilities"
+  },
+  {
+   "fieldname": "selected_supplier",
+   "fieldtype": "Link",
+   "label": "Selected Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "section_break_wduw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "committee_decision",
+   "fieldtype": "Small Text",
+   "label": "Committee Decision"
+  },
+  {
+   "fieldname": "creation_date",
+   "fieldtype": "Date",
+   "label": "Creation Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-28 12:37:03.070373",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Purchasing Committee ST",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

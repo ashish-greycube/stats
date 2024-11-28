@@ -146,9 +146,11 @@
   },
   {
    "description": "ex: 30-3-1403 i.e. (Hijri Day)-(Hijri Month)-(Hijri Year)",
+   "fetch_from": "employee_no.custom_hijri_birth_date",
    "fieldname": "birth_date_hijri",
    "fieldtype": "Data",
-   "label": "Birth Date Hijri"
+   "label": "Birth Date Hijri",
+   "reqd": 1
   },
   {
    "fieldname": "retirement_type",
@@ -358,7 +360,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-28 08:11:28.081733",
+ "modified": "2024-11-28 12:12:59.304404",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Retirement Request ST",
