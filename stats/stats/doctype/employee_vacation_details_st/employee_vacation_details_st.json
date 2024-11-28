@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-11-26 14:23:08.173303",
+ "creation": "2024-11-28 10:02:07.485295",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -11,9 +11,10 @@
   "main_department",
   "sub_department",
   "reference",
+  "vacation_encasement_type",
   "column_break_ltmt",
-  "eos_type",
   "total_salary",
+  "vacation_days",
   "due_amount",
   "bank_name",
   "iban_no"
@@ -52,18 +53,22 @@
    "options": "Department"
   },
   {
-   "columns": 2,
+   "columns": 1,
    "fieldname": "reference",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Reference"
   },
   {
+   "fieldname": "column_break_ltmt",
+   "fieldtype": "Column Break"
+  },
+  {
    "columns": 1,
    "fieldname": "total_salary",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Total Salary",
+   "label": "Month Salary",
    "precision": "2"
   },
   {
@@ -71,7 +76,7 @@
    "fieldname": "due_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Due Amount",
+   "label": "Vacation Due Amount",
    "precision": "2"
   },
   {
@@ -87,26 +92,29 @@
    "label": "IBAN No"
   },
   {
-   "fieldname": "column_break_ltmt",
-   "fieldtype": "Column Break"
+   "columns": 1,
+   "fieldname": "vacation_encasement_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Vacation Encasement type",
+   "options": "\nResignation\nRetirement",
+   "read_only": 1
   },
   {
    "columns": 1,
-   "fieldname": "eos_type",
-   "fieldtype": "Select",
+   "fieldname": "vacation_days",
+   "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "EOS type",
-   "options": "\nResignation\nRetirement",
-   "read_only": 1
+   "label": "Vacation Days"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-11-28 08:46:40.096614",
+ "modified": "2024-11-28 10:08:36.769296",
  "modified_by": "Administrator",
  "module": "Stats",
- "name": "EOS Employee Details ST",
+ "name": "Employee Vacation Details ST",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

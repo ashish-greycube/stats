@@ -1,20 +1,19 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "EOSS-.#####",
- "creation": "2024-11-26 13:32:25.039791",
+ "autoname": "VES-.#####",
+ "creation": "2024-11-28 09:47:10.040964",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "transaction_date",
   "created_by",
-  "column_break_pjzw",
+  "column_break_xaud",
   "from_date",
   "to_date",
-  "section_break_rkie",
+  "section_break_ptnv",
   "get_employee",
-  "employee_details",
-  "amended_from"
+  "employee_details"
  ],
  "fields": [
   {
@@ -29,7 +28,7 @@
    "label": "Created By"
   },
   {
-   "fieldname": "column_break_pjzw",
+   "fieldname": "column_break_xaud",
    "fieldtype": "Column Break"
   },
   {
@@ -47,7 +46,7 @@
    "reqd": 1
   },
   {
-   "fieldname": "section_break_rkie",
+   "fieldname": "section_break_ptnv",
    "fieldtype": "Section Break"
   },
   {
@@ -59,32 +58,16 @@
    "fieldname": "employee_details",
    "fieldtype": "Table",
    "label": "Employee Details",
-   "options": "EOS Employee Details ST",
+   "options": "Employee Vacation Details ST",
    "read_only": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "End Of Service Sheet ST",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
- "links": [
-  {
-   "link_doctype": "Payment Request ST",
-   "link_fieldname": "reference_no"
-  }
- ],
- "modified": "2024-11-28 09:42:03.636121",
+ "links": [],
+ "modified": "2024-11-28 11:20:00.177461",
  "modified_by": "Administrator",
  "module": "Stats",
- "name": "End Of Service Sheet ST",
+ "name": "Vacation Encasement Sheet",
  "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [

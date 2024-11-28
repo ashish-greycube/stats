@@ -67,35 +67,40 @@
    "fetch_from": "employee_no.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
-   "label": "Employee Name"
+   "label": "Employee Name",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.designation",
    "fieldname": "designation",
    "fieldtype": "Link",
    "label": "Designation",
-   "options": "Designation"
+   "options": "Designation",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.custom_contract_type",
    "fieldname": "contract_type",
    "fieldtype": "Link",
    "label": "Contract Type",
-   "options": "Contract Type ST"
+   "options": "Contract Type ST",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.custom_job_no",
    "fieldname": "job_no",
    "fieldtype": "Link",
    "label": "Job No",
-   "options": "Job No ST"
+   "options": "Job No ST",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.grade",
    "fieldname": "grade",
    "fieldtype": "Link",
    "label": "Grade",
-   "options": "Employee Grade"
+   "options": "Employee Grade",
+   "read_only": 1
   },
   {
    "fieldname": "step",
@@ -108,35 +113,39 @@
    "fieldname": "sub_department",
    "fieldtype": "Link",
    "label": "Sub Department",
-   "options": "Department"
+   "options": "Department",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.department",
    "fieldname": "main_department",
    "fieldtype": "Link",
    "label": "Main Department",
-   "options": "Department"
+   "options": "Department",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.custom_section",
    "fieldname": "section",
    "fieldtype": "Link",
    "label": "Section",
-   "options": "Section ST"
+   "options": "Section ST",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.branch",
    "fieldname": "branch",
    "fieldtype": "Link",
    "label": "Branch",
-   "options": "Branch"
+   "options": "Branch",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_lnqe",
    "fieldtype": "Column Break"
   },
   {
-   "description": "ex: 31-3-1403 i.e. (Hijri Day)-(Hijri Month)-(Hijri Year)",
+   "description": "ex: 30-3-1403 i.e. (Hijri Day)-(Hijri Month)-(Hijri Year)",
    "fieldname": "birth_date_hijri",
    "fieldtype": "Data",
    "label": "Birth Date Hijri"
@@ -147,38 +156,46 @@
    "in_list_view": 1,
    "label": "Retirement Type",
    "options": "\nNormal Retirement\nEarly Retirement",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "retirement_due_amount",
    "fieldtype": "Currency",
-   "label": "Retirement Due Amount"
+   "label": "Retirement Due Amount",
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "due_vacation_balance",
-   "fieldtype": "Currency",
+   "fieldtype": "Int",
    "label": "Due Vacation Balance",
-   "precision": "2"
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "total_due_amount",
    "fieldtype": "Currency",
-   "label": "Total Due Amount"
+   "label": "Total Due Amount",
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "social_dev_bank_deduction",
    "fieldtype": "Currency",
-   "label": "Social Dev Bank Deduction"
+   "label": "Social Dev Bank Deduction",
+   "precision": "2"
   },
   {
    "fieldname": "real_stat_dev_bank_deduction",
    "fieldtype": "Currency",
-   "label": "Real Stat Dev Bank Deduction"
+   "label": "Real Stat Dev Bank Deduction",
+   "precision": "2"
   },
   {
    "fieldname": "agricalture_dev_bank_deduction",
    "fieldtype": "Currency",
-   "label": "Agricalture Dev Bank Deduction"
+   "label": "Agricalture Dev Bank Deduction",
+   "precision": "2"
   },
   {
    "fieldname": "section_break_ikzh",
@@ -228,7 +245,8 @@
    "default": "Today",
    "fieldname": "creation_date",
    "fieldtype": "Date",
-   "label": "Creation Date"
+   "label": "Creation Date",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_wivo",
@@ -259,9 +277,10 @@
   },
   {
    "fieldname": "considered_vacation_days",
-   "fieldtype": "Currency",
+   "fieldtype": "Int",
    "label": "Considered Vacation Days",
-   "precision": "2"
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_mfnz",
@@ -294,17 +313,21 @@
   {
    "fieldname": "vacation_due_amount",
    "fieldtype": "Currency",
-   "label": "<b>Vacation Due Amount</b>"
+   "label": "<b>Vacation Due Amount</b>",
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "age_duration_days",
    "fieldtype": "Int",
-   "label": "Age Duration (In Days)"
+   "label": "Age Duration (In Days)",
+   "read_only": 1
   },
   {
    "fieldname": "age_duration_years",
    "fieldtype": "Int",
-   "label": "Age Duration (In Years)"
+   "label": "Age Duration (In Years)",
+   "read_only": 1
   },
   {
    "fieldname": "birth_date_gregorian",
@@ -321,10 +344,12 @@
   {
    "fieldname": "new_retirement_due_amount",
    "fieldtype": "Currency",
-   "label": "<b>New Retirement Due Amount</b>"
+   "label": "<b>New Retirement Due Amount</b>",
+   "precision": "2",
+   "read_only": 1
   },
   {
-   "description": "ex: 31-3-1403 i.e. (Hijri Day)-(Hijri Month)-(Hijri Year)",
+   "description": "ex: 30-3-1403 i.e. (Hijri Day)-(Hijri Month)-(Hijri Year)",
    "fieldname": "retirement_date_hijri",
    "fieldtype": "Data",
    "label": "Retirement Date Hijri",
@@ -333,7 +358,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-27 17:35:46.936170",
+ "modified": "2024-11-28 08:11:28.081733",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Retirement Request ST",

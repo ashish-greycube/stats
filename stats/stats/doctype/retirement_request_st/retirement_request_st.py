@@ -2,16 +2,20 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
 from stats.salary import get_latest_salary_structure_assignment
 from hijridate import Hijri, Gregorian
-from frappe.utils import cstr,getdate,cint
+from frappe.utils import cstr, getdate, cint, date_diff
+from hrms.hr.doctype.leave_application.leave_application import get_leave_details
 
 class RetirementRequestST(Document):
 	def validate(self):
 		self.birth_date_gregorian=self.set_date_in_gregorian(self.birth_date_hijri)
 		self.retirement_date_gregorian=self.set_date_in_gregorian(self.retirement_date_hijri)
-		self.get_salary_details()
+		self.get_salary_details_and_due_amount_calculation()
+		self.calculate_vacation_due_amount()
+		self.calculate_total_due_amount()
 
 	def set_date_in_gregorian(self,date_hijri) :
 		date_hijri=cstr(date_hijri)
@@ -21,9 +25,8 @@ class RetirementRequestST(Document):
 		g_date = Hijri(cint(hijri_splits[2]), cint(hijri_splits[1]), cint(hijri_splits[0])).to_gregorian().dmyformat(separator='/')
 		return getdate(g_date)
 
-
 	
-	def get_salary_details(self):
+	def get_salary_details_and_due_amount_calculation(self):
 		salary_assignment = get_latest_salary_structure_assignment(self.employee_no, self.retirement_date_gregorian)
 		if len(salary_assignment) > 0:
 			self.salary_structure_assignment_reference = salary_assignment
@@ -35,26 +38,90 @@ class RetirementRequestST(Document):
 
 			self.earning = []
 			self.deduction = []
+
+			retirement_due_amount = 0
 			for ear in ss.earnings:
 				eos_ear = self.append("earning", {})
 				eos_ear.earning = ear.salary_component
 				eos_ear.amount = ear.amount
 				total_earnings = total_earnings + eos_ear.amount
+				include_in_retirement_calculation = frappe.db.get_value("Salary Component", ear.salary_component, "custom_include_in_retirement_calculation")
+				if include_in_retirement_calculation == 1:
+					retirement_due_amount = retirement_due_amount + ear.amount
 
 			for ded in ss.deductions:
 				eos_ded = self.append("deduction", {})
 				eos_ded.deduction = ded.salary_component
 				eos_ded.amount = ded.amount
 				total_deductions = total_deductions + eos_ded.amount
-
-			
+	
 			self.total_monthly_salary = total_earnings
 			self.total_monthly_deduction = total_deductions
 			self.net_salary = self.total_monthly_salary - self.total_monthly_deduction
+			# self.retirement_due_amount = retirement_due_amount
+			# self.new_retirement_due_amount = (self.retirement_due_amount - (self.social_dev_bank_deduction or 0)
+			# 							 - (self.agricalture_dev_bank_deduction or 0)- (self.real_stat_dev_bank_deduction or 0))
+			
+			######### retirement due amount #########
 
-			salary_structure = frappe.db.get_value("Salary Structure Assignment", salary_assignment, "salary_structure")
-			ss = frappe.get_doc("Salary Structure", salary_structure)
+			age_diff_in_days = date_diff(self.retirement_date_gregorian, self.birth_date_gregorian)
+			age_diff_in_years = age_diff_in_days / 360
+			self.age_duration_days = age_diff_in_days
+			self.age_duration_years = age_diff_in_years
 
+			normal_years_of_retirement = frappe.db.get_value("Contract Type ST", self.contract_type, "normal_years_of_retirement")
+			if normal_years_of_retirement and self.age_duration_years >= normal_years_of_retirement:
+				self.retirement_type = "Normal Retirement"
+				self.retirement_due_amount = retirement_due_amount * 6
+			else:
+				self.retirement_type = "Early Retirement"
+				self.retirement_due_amount = retirement_due_amount * 4
+
+										
+
+	def calculate_vacation_due_amount(self):
+		########## vacation days calculation #########
+
+		contract_type = frappe.db.get_value("Employee", self.employee_no, "custom_contract_type")
+		considered_vacation_days = frappe.db.get_value("Contract Type ST", contract_type, "considered_vacation_days")
+		salary_assignment = get_latest_salary_structure_assignment(self.employee_no, self.retirement_date_gregorian)
+		total_monthly_salary = frappe.db.get_value("Salary Structure Assignment", salary_assignment, "base")
+		per_day_salary = total_monthly_salary / 360
+		
+		if considered_vacation_days:
+			self.considered_vacation_days = considered_vacation_days
+
+			leave_types = frappe.db.sql_list("select name from `tabLeave Type` where custom_allow_encasement_end_of_service = 1 order by name asc")
+
+			# available_leave = get_leave_details(self.employee, "2024-11-26")
+			available_leave = get_leave_details(self.employee_no, self.retirement_date_gregorian)
+			if len(available_leave["leave_allocation"]) > 0:
+				total_considered_vacation_days = 0
+				for leave_type in leave_types:
+					remaining = 0
+					if leave_type in available_leave["leave_allocation"]:
+						remaining = available_leave["leave_allocation"][leave_type]["remaining_leaves"]
+					total_considered_vacation_days = total_considered_vacation_days + remaining
+
+					print(leave_type, "===leave_type",remaining, "====remaining")
+					print(total_considered_vacation_days, "==total_considered_vacation_days")
+
+				self.due_vacation_balance = total_considered_vacation_days
+
+				if self.considered_vacation_days < self.due_vacation_balance:
+					self.vacation_due_amount = per_day_salary * self.considered_vacation_days
+				else:
+					self.vacation_due_amount = per_day_salary * self.due_vacation_balance
+
+			else:
+				frappe.throw(_("Leave Allocation is not found for {0} employee for {1} date.").format(self.employee_no, self.retirement_date_gregorian))
+
+	def calculate_total_due_amount(self):
+		self.new_retirement_due_amount = (self.retirement_due_amount - (self.social_dev_bank_deduction or 0)
+										 - (self.agricalture_dev_bank_deduction or 0)- (self.real_stat_dev_bank_deduction or 0))
+		
+		self.total_due_amount = self.new_retirement_due_amount + self.vacation_due_amount
+ 
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
 def get_civil_employee(doctype, txt, searchfield, start, page_len, filters):

@@ -15,10 +15,51 @@ class EndOfServiceSheetST(Document):
 	
 	@frappe.whitelist()
 	def get_employee_details_for_end_of_service(self):
-		list_emp = frappe.db.get_all("End of Service Calculation ST", filters={"creation_date":["Between", [self.from_date, self.to_date]]},
+
+		eos_list = []
+		resignation_list = frappe.db.get_all("End of Service Calculation ST", filters={"creation_date":["Between", [self.from_date, self.to_date]]},
 							   fields=["name", "employee", "total_monthly_salary", "end_of_service_due_amount"])
 		
-		return list_emp
+		eos_details = {}
+		for res in resignation_list:
+			eos_details["employee_no"] = res.employee
+			eos_details["reference"] = res.name
+			eos_details["total_salary"] = res.total_monthly_salary
+			eos_details["due_amount"] = res.end_of_service_due_amount
+			eos_details["eos_type"] = "Resignation"
+			eos_list.append(eos_details)
+			eos_details = {}
+		
+		retriement_list = frappe.db.get_all("Retirement Request ST", filters={"creation_date": ["Between", [self.from_date, self.to_date]]},
+									  fields=["name", "employee_no", "total_monthly_salary", "new_retirement_due_amount"])
+		
+		for ret in retriement_list:
+			eos_details["employee_no"] = ret.employee_no
+			eos_details["reference"] = ret.name
+			eos_details["total_salary"] = ret.total_monthly_salary
+			eos_details["due_amount"] = ret.new_retirement_due_amount
+			eos_details["eos_type"] = "Retirement"
+
+			print(ret.new_retirement_due_amount, "$$$$$$$ret.new_retirement_due_amount")
+			eos_list.append(eos_details)
+			eos_details = {}
+
+		print(eos_list, "===breforeee eos_list")
+
+		eos_sheet_list = frappe.db.get_all("End Of Service Sheet ST", filters={"docstatus":1, "name":["!=", self.name]}, fields=["name"])
+
+		for sheet in eos_sheet_list:
+			eos_sheet = frappe.get_doc("End Of Service Sheet ST", sheet.name)
+			for emp in eos_sheet.employee_details:
+				for a in eos_list:
+					if emp.reference == a.get('reference'):
+						eos_list.remove(a)
+				else:
+					continue
+
+		print(eos_list, "===afterrrr eos_list")
+		
+		return eos_list
 
 	def create_payment_request_on_submit_of_sheet(self):
 		company = erpnext.get_default_company()

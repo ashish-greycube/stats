@@ -1,7 +1,7 @@
 // Copyright (c) 2024, GreyCube Technologies and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on("End Of Service Sheet ST", {
+frappe.ui.form.on("Vacation Encasement Sheet", {
 	onload(frm) {
         if (frm.is_new()) {
             frappe.db.get_value('Employee', { user_id: frappe.session.user }, 'employee_name')
@@ -19,7 +19,7 @@ frappe.ui.form.on("End Of Service Sheet ST", {
             });
         }
         frm.set_value("employee_details", "");
-        frm.call("get_employee_details_for_end_of_service").then((r) => {
+        frm.call("get_employee_details_for_vacation_encasement").then((r) => {
             let employee_list = r.message
             if (employee_list.length > 0) {
                 employee_list.forEach((ele) => {
@@ -28,8 +28,10 @@ frappe.ui.form.on("End Of Service Sheet ST", {
                     frappe.model.set_value(d.doctype, d.name, "reference", ele.reference)
                     frappe.model.set_value(d.doctype, d.name, "total_salary", ele.total_salary)
                     frappe.model.set_value(d.doctype, d.name, "due_amount", ele.due_amount)
-                    frappe.model.set_value(d.doctype, d.name, "eos_type", ele.eos_type)
+                    frappe.model.set_value(d.doctype, d.name, "vacation_days", ele.vacation_days)
+                    frappe.model.set_value(d.doctype, d.name, "vacation_encasement_type", ele.vacation_encasement_type)
                 })
+
                 frm.refresh_field('employee_details')
                 frm.save()
             }
