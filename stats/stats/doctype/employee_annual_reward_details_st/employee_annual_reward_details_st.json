@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-11-27 14:32:28.060226",
+ "creation": "2024-11-28 10:17:23.137873",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -11,13 +11,13 @@
   "main_department",
   "sub_department",
   "grade",
-  "column_break_owfm",
-  "current_designation",
-  "suggested_designation",
-  "previous_year_evaluation",
-  "current_year_evaluation",
-  "technical_evaluation",
-  "behaviour_evaluation"
+  "column_break_tjji",
+  "evaluation_classification",
+  "final_evaluation",
+  "reward_value",
+  "notes",
+  "bank_name",
+  "iban_no"
  ],
  "fields": [
   {
@@ -32,87 +32,78 @@
    "fieldname": "employee_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Employee Name",
-   "read_only": 1
+   "label": "Employee Name"
   },
   {
    "fetch_from": "employee_no.department",
    "fieldname": "main_department",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Main Department",
-   "options": "Department",
-   "read_only": 1
+   "options": "Department"
   },
   {
    "fetch_from": "employee_no.custom_sub_department",
    "fieldname": "sub_department",
    "fieldtype": "Link",
    "label": "Sub Department",
-   "options": "Department",
-   "read_only": 1
+   "options": "Department"
   },
   {
    "fetch_from": "employee_no.grade",
    "fieldname": "grade",
    "fieldtype": "Link",
    "label": "Grade",
-   "options": "Employee Grade",
-   "read_only": 1
+   "options": "Employee Grade"
   },
   {
-   "fieldname": "column_break_owfm",
+   "fieldname": "column_break_tjji",
    "fieldtype": "Column Break"
   },
   {
-   "fetch_from": "employee_no.designation",
-   "fieldname": "current_designation",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Current Designation",
-   "options": "Designation",
-   "read_only": 1
-  },
-  {
-   "fieldname": "suggested_designation",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Suggested Designation",
-   "options": "Designation"
-  },
-  {
-   "fieldname": "technical_evaluation",
-   "fieldtype": "Percent",
-   "in_list_view": 1,
-   "label": "Technical Evaluation"
-  },
-  {
-   "fieldname": "behaviour_evaluation",
-   "fieldtype": "Percent",
-   "in_list_view": 1,
-   "label": "Behaviour Evaluation"
-  },
-  {
-   "fieldname": "previous_year_evaluation",
+   "fieldname": "evaluation_classification",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Previous Year Evaluation",
+   "label": "Evaluation Classification",
    "read_only": 1
   },
   {
-   "fieldname": "current_year_evaluation",
+   "fieldname": "final_evaluation",
    "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Current Year Evaluation",
+   "label": "Final Evaluation",
    "read_only": 1
+  },
+  {
+   "fieldname": "reward_value",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Reward Value"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Data",
+   "label": "Notes"
+  },
+  {
+   "fetch_from": "employee_no.bank_name",
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name"
+  },
+  {
+   "fetch_from": "employee_no.iban",
+   "fieldname": "iban_no",
+   "fieldtype": "Data",
+   "label": "IBAN No"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-11-28 07:47:47.249015",
+ "modified": "2024-11-28 10:47:09.408298",
  "modified_by": "Administrator",
  "module": "Stats",
- "name": "Employee Alternatives Details ST",
+ "name": "Employee Annual Reward Details ST",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

@@ -14,8 +14,28 @@ frappe.ui.form.on("Employee Alternatives ST", {
     },
 
     fetch_employees(frm){
+
+        if (frm.is_dirty() == true) {
+            frappe.throw({
+                message: __("Please save the form to proceed..."),
+                indicator: "red",
+            });
+        }
+
+        frm.set_value("employee_alternatives_details", "");
         frm.call("fetch_employees_based_on_filters").then(r => {
-            console.log("r", r)
+            let employee_list = r.message
+            console.log(employee_list,"--------------")
+            if (employee_list.length > 0) {
+                employee_list.forEach((ele) => {
+                    var d = frm.add_child("employee_alternatives_details");
+                    frappe.model.set_value(d.doctype, d.name, "employee_no", ele.employee_no)
+                    frappe.model.set_value(d.doctype, d.name, "previous_year_evaluation", ele.previous_year_evaluation)
+                    frappe.model.set_value(d.doctype, d.name, "current_year_evaluation", ele.current_year_evaluation)
+                })
+                frm.refresh_field('employee_alternatives_details')
+                frm.save()
+            }
         })
     },
 });
