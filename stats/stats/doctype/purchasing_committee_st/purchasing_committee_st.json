@@ -22,7 +22,8 @@
   {
    "fieldname": "created_by",
    "fieldtype": "Data",
-   "label": "Created By"
+   "label": "Created By",
+   "reqd": 1
   },
   {
    "fieldname": "main_department",
@@ -69,7 +70,8 @@
    "fieldname": "selected_supplier",
    "fieldtype": "Link",
    "label": "Selected Supplier",
-   "options": "Supplier"
+   "options": "Supplier",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_wduw",
@@ -81,14 +83,17 @@
    "label": "Committee Decision"
   },
   {
+   "default": "Today",
    "fieldname": "creation_date",
    "fieldtype": "Date",
-   "label": "Creation Date"
+   "in_list_view": 1,
+   "label": "Creation Date",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-28 12:37:03.070373",
+ "modified": "2024-11-28 13:14:14.317809",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Purchasing Committee ST",

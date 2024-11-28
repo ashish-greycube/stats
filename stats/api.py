@@ -5,6 +5,7 @@ from frappe.utils import (add_to_date,get_datetime,today,
 						  get_link_to_form,flt,add_years,time_diff_in_hours,
 						  now,rounded,flt,get_time,time_diff_in_seconds)
 from dateutil import relativedelta
+from frappe.model.mapper import get_mapped_doc
 import erpnext
 
 @frappe.whitelist()
@@ -577,3 +578,33 @@ def create_payment_journal_entry_from_payment_procedure(doc,debit_account,credit
 	payment_je_doc.submit()
 
 	frappe.msgprint(_("Payment Journal Entry is created from Payment Procedure {0}").format(get_link_to_form("Journal Entry",payment_je_doc.name)),alert=1)
+
+
+@frappe.whitelist()
+def create_purchase_comittee(source_name, target_doc=None):
+	doc = frappe.get_doc("Material Request", source_name)
+
+	def set_missing_values(source, target):
+		target.material_request_reference = source.name
+		target.created_by = source.custom_created_by
+		target.main_department = source.custom_main_department
+		target.sub_department = source.custom_sub_department
+		target.reference_in_eatimad = source.custom_reference_in_eatimad
+		target.initial_cost = source.custom_initial_cost
+		target.request_type = source.custom_request_type
+
+	doc = get_mapped_doc(
+		"Material Request",
+		source_name,
+		{
+			"Material Request": {
+				"doctype": "Purchasing Committee ST",
+				"field_map": {
+					"material_request_reference": "name",
+				},
+			}
+		},
+		target_doc,
+		set_missing_values,
+	)
+	return doc
