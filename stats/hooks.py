@@ -163,6 +163,12 @@ doc_events = {
     },
     "Payroll Entry": {
         "before_submit": "stats.salary.create_additonal_salary_for_deduction"
+    },
+    "Material Request": {
+        "validate":"stats.api.validate_request_classification"
+    },
+    "Purchase Order": {
+        "validate":"stats.api.fetch_values_from_material_request"
     } 
 }
 

@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "PC-.#####",
  "creation": "2024-11-28 12:14:18.607938",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -16,7 +17,8 @@
   "request_type",
   "selected_supplier",
   "section_break_wduw",
-  "committee_decision"
+  "committee_decision",
+  "amended_from"
  ],
  "fields": [
   {
@@ -89,17 +91,30 @@
    "in_list_view": 1,
    "label": "Creation Date",
    "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Purchasing Committee ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-11-28 13:14:14.317809",
+ "modified": "2024-11-28 14:05:01.792173",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Purchasing Committee ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -109,6 +124,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

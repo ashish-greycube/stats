@@ -608,3 +608,28 @@ def create_purchase_comittee(source_name, target_doc=None):
 		set_missing_values,
 	)
 	return doc
+
+def validate_request_classification(self, method):
+	if self.custom_initial_cost:
+		if self.custom_request_classification == "General Competition":
+			if self.custom_initial_cost <= 100000:
+				frappe.throw(_("Your initial cost is less then 100000. <br>Hence You cannot select Request classification as <b>{0}</b>".format(self.custom_request_classification)))
+		else :
+			if self.custom_initial_cost > 100000:
+				frappe.throw(_("Your initial cost is greater then 100000. <br>Hence You cannot select Request classification as <b>{0}</b>".format(self.custom_request_classification)))
+
+def fetch_values_from_material_request(self, method):
+	if len(self.items)>0:
+		for row in self.items:
+			if row.material_request:
+				material_request_doc = frappe.get_doc("Material Request",row.material_request)
+				self.custom_request_classification = material_request_doc.custom_request_classification
+				self.custom_reference_in_eatimad = material_request_doc.custom_reference_in_eatimad
+				self.custom_initial_cost = material_request_doc.custom_initial_cost
+				self.custom_request_type = material_request_doc.custom_request_type
+				purchase_committee = frappe.db.get_all("Purchasing Committee ST",
+										   filters={"material_request_reference":row.material_request},
+										   fields=["name"])
+				if len(purchase_committee)>0:
+					self.custom_purchasing_committee_ref = purchase_committee[0].name
+				break
