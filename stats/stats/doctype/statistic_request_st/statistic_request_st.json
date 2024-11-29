@@ -219,7 +219,7 @@
    "fieldname": "statistics_method",
    "fieldtype": "Select",
    "label": "Statistics Method",
-   "options": "\nBy phone\nBy Field\nBy Record\nBy Mail"
+   "options": "\nBy Phone\nBy Field\nBy Record\nBy Mail"
   },
   {
    "fieldname": "quality_department",
@@ -272,7 +272,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-29 14:59:38.502547",
+ "modified": "2024-11-29 15:26:22.998089",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Request ST",
