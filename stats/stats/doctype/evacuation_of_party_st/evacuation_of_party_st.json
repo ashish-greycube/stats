@@ -7,7 +7,6 @@
  "engine": "InnoDB",
  "field_order": [
   "section_break_lqvw",
-  "amended_from",
   "date",
   "employee_no",
   "employee_name",
@@ -17,7 +16,9 @@
   "branch",
   "column_break_sxzw",
   "resignation_reference",
-  "evacuate_attachment"
+  "retirement_reference",
+  "evacuate_attachment",
+  "amended_from"
  ],
  "fields": [
   {
@@ -41,11 +42,11 @@
    "label": "Date"
   },
   {
-   "fetch_from": "resignation_reference.employee_no",
    "fieldname": "employee_no",
    "fieldtype": "Link",
    "label": "Employee No",
-   "options": "Employee"
+   "options": "Employee",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.employee_name",
@@ -91,18 +92,25 @@
    "in_list_view": 1,
    "label": "Resignation Reference",
    "options": "Employee Resignation ST",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "evacuate_attachment",
    "fieldtype": "Attach",
    "label": "Evacuate Attachment"
+  },
+  {
+   "fieldname": "retirement_reference",
+   "fieldtype": "Link",
+   "label": "Retirement Reference",
+   "options": "Retirement Request ST",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-26 15:36:54.797929",
+ "modified": "2024-11-29 10:43:03.447963",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Evacuation of Party ST",

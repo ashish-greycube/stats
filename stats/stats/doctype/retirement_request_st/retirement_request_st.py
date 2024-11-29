@@ -120,18 +120,38 @@ class RetirementRequestST(Document):
 		self.new_retirement_due_amount = (self.retirement_due_amount - (self.social_dev_bank_deduction or 0)
 										 - (self.agricalture_dev_bank_deduction or 0)- (self.real_stat_dev_bank_deduction or 0))
 		
-		self.total_due_amount = self.new_retirement_due_amount + self.vacation_due_amount
+		self.total_due_amount = (self.new_retirement_due_amount or 0) +( self.vacation_due_amount or 0)
+
+	@frappe.whitelist()
+	def create_evacuation_of_party(self):
+		eop = frappe.new_doc("Evacuation of Party ST")
+
+		eop.retirement_reference = self.name
+		eop.employee_no = self.employee_no
+		eop.save(ignore_permissions=True)
+
+		return eop.name
+	
+	@frappe.whitelist()
+	def create_exit_interview(self):
+		ei = frappe.new_doc("Exit Interview ST")
+		ei.retirement_reference = self.name
+		ei.employee_no = self.employee_no
+
+		ei.save(ignore_permissions=True)
+
+		return ei.name
  
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
 def get_civil_employee(doctype, txt, searchfield, start, page_len, filters):
-	employee = frappe.db.get_all("Employee", filters={"status":"Active"}, fields=["name", "custom_contract_type"])
+	employee = frappe.db.get_all("Employee", filters={"status":"Active"}, fields=["name", "custom_contract_type", "employee_name"])
 
 	civil_employees = []
 	for emp in employee:
 		contract_type = frappe.db.get_value("Contract Type ST", emp.custom_contract_type, "contract")
 		if contract_type == "Civil":
-			employee_name = (emp.get('name'),)
+			employee_name = (emp.get('name'),emp.get('employee_name'),)
 			civil_employees.append(employee_name)
 		else:
 			continue

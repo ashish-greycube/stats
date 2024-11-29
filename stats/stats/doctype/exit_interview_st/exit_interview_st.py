@@ -4,7 +4,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-
+from frappe.utils import get_link_to_form
 
 class ExitInterviewST(Document):
 	def validate(self):
@@ -12,6 +12,13 @@ class ExitInterviewST(Document):
 			self.check_atleast_one_leaving_reason_exists()
 			self.not_allow_to_select_multiple_evaluation_option()
 			self.check_if_questions_answer_given_or_not()
+	
+	def on_submit(self):
+		resignation_doc = frappe.get_doc("Employee Resignation ST", self.resignation_reference)
+		resignation_doc.exit_interview_status = "Processed"
+		frappe.msgprint(_("In Employee Resignation: {0} Exit Interview Status Set to 'Processed'.").format(self.resignation_reference), alert=1)
+		resignation_doc.add_comment("Comment",text="Exit Interview Status Set to <b>Processed</b> due to {0}".format(get_link_to_form(self.doctype,self.name)))
+		resignation_doc.save(ignore_permissions=True)
 
 	def check_atleast_one_leaving_reason_exists(self):
 		leaving_reason_exists = False

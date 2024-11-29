@@ -9,7 +9,9 @@
   "section_break_axmy",
   "interview_done_by",
   "resignation_reference",
+  "retirement_reference",
   "resignation_date",
+  "retirement_date",
   "amended_from",
   "column_break_hxiu",
   "employee_no",
@@ -135,16 +137,17 @@
    "fieldname": "resignation_reference",
    "fieldtype": "Link",
    "label": "Resignation Reference",
-   "options": "Employee Resignation ST"
+   "options": "Employee Resignation ST",
+   "read_only": 1
   },
   {
-   "fetch_from": "resignation_reference.last_working_days",
+   "depends_on": "eval:doc.resignation_reference",
+   "fetch_from": "resignation_reference.resignation_date",
    "fieldname": "resignation_date",
    "fieldtype": "Date",
    "label": "Resignation Date"
   },
   {
-   "fetch_from": "resignation_reference.employee_no",
    "fieldname": "employee_no",
    "fieldtype": "Link",
    "label": "Employee No",
@@ -668,12 +671,26 @@
    "label": "Country",
    "options": "Country",
    "read_only": 1
+  },
+  {
+   "fieldname": "retirement_reference",
+   "fieldtype": "Link",
+   "label": "Retirement Reference",
+   "options": "Retirement Request ST",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.retirement_reference",
+   "fetch_from": "retirement_reference.creation_date",
+   "fieldname": "retirement_date",
+   "fieldtype": "Date",
+   "label": "Retirement Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-27 14:32:23.877830",
+ "modified": "2024-11-29 12:45:33.870051",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Exit Interview ST",

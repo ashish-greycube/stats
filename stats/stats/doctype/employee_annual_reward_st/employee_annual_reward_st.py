@@ -2,7 +2,8 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe.utils import cint
+from frappe import _
+from frappe.utils import cint, get_link_to_form
 from frappe.model.document import Document
 from stats.salary import get_latest_salary_structure_assignment
 
@@ -22,13 +23,16 @@ class EmployeeAnnualRewardST(Document):
 					include_in_reward = frappe.db.get_value("Salary Component", ear.salary_component, "custom_include_in_reward")
 					if include_in_reward == 1:
 						reward_amount = reward_amount + ear.amount
-				
-				if reward.evaluation_classification == "Meet Expectation":
+
+				evaluation_classification = frappe.get_doc("Evaluation Classification ST", reward.evaluation_classification)
+				if evaluation_classification.meet_expectation == 1:
 					reward.reward_value = reward_amount * 3
-				elif reward.evaluation_classification == "Exceed Expectation":
+				elif evaluation_classification.exceed_expectation == 1:
 					reward.reward_value = reward_amount * 4
-				elif reward.evaluation_classification == "Highly Exceed Expectation":
+				elif evaluation_classification.highly_exceed_expectation == 1:
 					reward.reward_value = reward_amount * 6
+				else:
+					frappe.msgprint(_("In {0} :Please Set Evaluation Classification Expectation Type.").format(get_link_to_form(evaluation_classification.doctype,evaluation_classification.name)))
 	
 	@frappe.whitelist()
 	def fetch_employee_based_on_classification(self):

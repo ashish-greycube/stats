@@ -14,3 +14,12 @@ class ResignationTypeST(Document):
 			(self.is_it_resignation == 1 and (self.is_it_separation == 1 or self.is_it_not_renewal_of_contract == 1)) or 
 			(self.is_it_not_renewal_of_contract == 1 and (self.is_it_resignation == 1 or self.is_it_separation))):
 			frappe.throw(_("You Cann't Check Multiple Resignation Type"))
+
+		if frappe.db.exists("Resignation Type ST", {"is_it_separation": 1, "name":["!=", self.name]}) and self.is_it_separation == 1:
+			frappe.throw(_("Separation Resignation Type is Already Exist."))
+		elif frappe.db.exists("Resignation Type ST", {"is_it_not_renewal_of_contract": 1, "name":["!=", self.name]}) and self.is_it_not_renewal_of_contract == 1:
+			frappe.throw(_("It is not Renewal of contract Resignation Type is Already Exist."))
+		elif frappe.db.exists("Resignation Type ST", {"is_it_resignation": 1, "name":["!=", self.name]}) and self.is_it_resignation == 1:
+			frappe.throw(_("It is Resignation Type is Already Exist."))
+		else:
+			pass

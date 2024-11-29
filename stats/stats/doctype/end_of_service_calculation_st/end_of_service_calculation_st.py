@@ -5,7 +5,7 @@ import frappe
 import erpnext
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import add_to_date, date_diff
+from frappe.utils import add_to_date, date_diff, get_link_to_form
 from stats.salary import get_latest_salary_structure_assignment
 from hrms.hr.doctype.leave_application.leave_application import get_leave_details
 
@@ -14,6 +14,13 @@ class EndofServiceCalculationST(Document):
 		self.get_salary_details()
 		self.calculate_end_of_service_due_amount()
 		self.calculate_vacation_due_amount()
+
+	def on_submit(self):
+		resignation_doc = frappe.get_doc("Employee Resignation ST", self.resignation_reference)
+		resignation_doc.end_of_service_calculation_status = "Processed"
+		frappe.msgprint(_("In Employee Resignation: {0} End OF Service Calculation Status Set to 'Processed'.").format(self.resignation_reference), alert=1)
+		resignation_doc.add_comment("Comment",text="End OF Service Calculation Status Set to <b>Processed</b> due to {0}".format(get_link_to_form(self.doctype,self.name)))
+		resignation_doc.save(ignore_permissions=True)
 
 	def get_salary_details(self):
 		salary_assignment = get_latest_salary_structure_assignment(self.employee, self.last_working_date)
