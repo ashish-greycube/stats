@@ -1,0 +1,196 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "UNS-.#####",
+ "creation": "2024-11-29 15:11:30.851821",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_lkri",
+  "amended_from",
+  "creation_date",
+  "statistic_name",
+  "statistic_type",
+  "created_by",
+  "approval_status",
+  "execution_status",
+  "planned_start_date",
+  "planned_end_date",
+  "no_of_days",
+  "request_type",
+  "column_break_vmfm",
+  "main_department",
+  "sub_department",
+  "total_no_team",
+  "total_estimated_cost",
+  "actual_cost",
+  "statistics_method",
+  "quality_department",
+  "data_collection_department",
+  "statistics_priority",
+  "request_attachment"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_lkri",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Unplanned Statistic Request ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "creation_date",
+   "fieldtype": "Date",
+   "label": "Creation Date"
+  },
+  {
+   "fieldname": "statistic_name",
+   "fieldtype": "Data",
+   "label": "Statistic Name"
+  },
+  {
+   "fieldname": "statistic_type",
+   "fieldtype": "Link",
+   "label": "Statistic Type",
+   "options": "Statistic Type ST"
+  },
+  {
+   "fieldname": "created_by",
+   "fieldtype": "Data",
+   "label": "Created By"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Pending",
+   "fieldname": "approval_status",
+   "fieldtype": "Select",
+   "label": "Approval Status",
+   "options": "\nPending\nApproved\nRejected"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Not Started",
+   "fieldname": "execution_status",
+   "fieldtype": "Select",
+   "label": "Execution Status",
+   "options": "\nNot Started\nOn-Going\nOverdue\nCompleted"
+  },
+  {
+   "fieldname": "planned_start_date",
+   "fieldtype": "Date",
+   "label": "Planned Start date"
+  },
+  {
+   "fieldname": "no_of_days",
+   "fieldtype": "Int",
+   "label": "No of Days"
+  },
+  {
+   "default": "Unplanned",
+   "fieldname": "request_type",
+   "fieldtype": "Select",
+   "label": "Request Type",
+   "options": "\nPlanned\nUnplanned"
+  },
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "column_break_vmfm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_no_team",
+   "fieldtype": "Data",
+   "label": "Total No Team"
+  },
+  {
+   "fieldname": "total_estimated_cost",
+   "fieldtype": "Currency",
+   "label": "Total Estimated Cost"
+  },
+  {
+   "fieldname": "actual_cost",
+   "fieldtype": "Currency",
+   "label": "Actual Cost"
+  },
+  {
+   "fieldname": "statistics_method",
+   "fieldtype": "Select",
+   "label": "Statistics Method",
+   "options": "\nBy phone\nBy Field\nBy Record\nBy Mail"
+  },
+  {
+   "fieldname": "quality_department",
+   "fieldtype": "Link",
+   "label": "Quality Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "data_collection_department",
+   "fieldtype": "Link",
+   "label": "Data Collection Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "statistics_priority",
+   "fieldtype": "Select",
+   "label": "Statistics Priority",
+   "options": "\nNormal\nEmergency\nMedium"
+  },
+  {
+   "fieldname": "request_attachment",
+   "fieldtype": "Attach",
+   "label": "Request Attachment"
+  },
+  {
+   "fieldname": "planned_end_date",
+   "fieldtype": "Date",
+   "label": "Planned End Date"
+  },
+  {
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-11-29 15:26:04.448823",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Unplanned Statistic Request ST",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
