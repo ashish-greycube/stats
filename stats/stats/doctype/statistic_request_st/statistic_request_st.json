@@ -8,6 +8,41 @@
  "field_order": [
   "section_break_jvde",
   "creation_date",
+  "created_by",
+  "statistic_name",
+  "statistic_type",
+  "approval_status",
+  "execution_status",
+  "planned_start_date",
+  "planned_end_date",
+  "no_of_days",
+  "request_type",
+  "column_break_rjax",
+  "main_department",
+  "sub_department",
+  "number_of_researchers",
+  "number_of_inspectors",
+  "no_of_support_team",
+  "no_of_workers",
+  "no_of_supervisor",
+  "total_no_team",
+  "workers_cost",
+  "estimated_cost",
+  "total_estimated_cost",
+  "reservation_value",
+  "final_cost",
+  "actual_cost",
+  "column_break_piws",
+  "statistics_method",
+  "quality_department",
+  "data_collection_department",
+  "statistics_priority",
+  "no_of_sample",
+  "no_of_devices",
+  "no_of_visits",
+  "statistics_period",
+  "number_of_reserve_workers",
+  "section_break_kcke",
   "amended_from"
  ],
  "fields": [
@@ -30,12 +65,214 @@
    "fieldname": "creation_date",
    "fieldtype": "Date",
    "label": "Creation Date"
+  },
+  {
+   "fieldname": "statistic_name",
+   "fieldtype": "Data",
+   "label": "Statistic Name"
+  },
+  {
+   "fieldname": "statistic_type",
+   "fieldtype": "Link",
+   "label": "Statistic Type",
+   "options": "Statistic Type ST"
+  },
+  {
+   "fieldname": "column_break_rjax",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "created_by",
+   "fieldtype": "Data",
+   "label": "Created By"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Pending",
+   "fieldname": "approval_status",
+   "fieldtype": "Select",
+   "label": "Approval Status",
+   "options": "Pending\nInitial Approval\nFinal Approval\nRejected"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Not Started",
+   "fieldname": "execution_status",
+   "fieldtype": "Select",
+   "label": "Execution Status",
+   "options": "Not Started\nOn-Going\nOverdue\nCompleted"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "planned_start_date",
+   "fieldtype": "Date",
+   "label": "Planned Start Date"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "planned_end_date",
+   "fieldtype": "Date",
+   "label": "Planned End Date"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "no_of_days",
+   "fieldtype": "Int",
+   "label": "No of Days"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Planned",
+   "fieldname": "request_type",
+   "fieldtype": "Select",
+   "label": "Request Type",
+   "options": "Planned\nNot Planned"
+  },
+  {
+   "fieldname": "section_break_kcke",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "number_of_researchers",
+   "fieldtype": "Int",
+   "label": "Number of Researchers"
+  },
+  {
+   "fieldname": "number_of_inspectors",
+   "fieldtype": "Int",
+   "label": "Number of Inspectors"
+  },
+  {
+   "fieldname": "no_of_support_team",
+   "fieldtype": "Int",
+   "label": "No of Support Team"
+  },
+  {
+   "fieldname": "no_of_workers",
+   "fieldtype": "Int",
+   "label": "No of Workers"
+  },
+  {
+   "fieldname": "no_of_supervisor",
+   "fieldtype": "Int",
+   "label": "No of Supervisor"
+  },
+  {
+   "fieldname": "total_no_team",
+   "fieldtype": "Int",
+   "label": "Total No Team"
+  },
+  {
+   "fieldname": "workers_cost",
+   "fieldtype": "Currency",
+   "label": "Workers Cost",
+   "precision": "2"
+  },
+  {
+   "fieldname": "estimated_cost",
+   "fieldtype": "Currency",
+   "label": "Estimated Cost",
+   "precision": "2"
+  },
+  {
+   "fieldname": "total_estimated_cost",
+   "fieldtype": "Currency",
+   "label": "Total Estimated Cost",
+   "precision": "2"
+  },
+  {
+   "fieldname": "reservation_value",
+   "fieldtype": "Currency",
+   "label": "Reservation Value",
+   "precision": "2"
+  },
+  {
+   "fieldname": "final_cost",
+   "fieldtype": "Currency",
+   "label": "Final Cost",
+   "precision": "2"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "actual_cost",
+   "fieldtype": "Currency",
+   "label": "Actual Cost",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_piws",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "statistics_method",
+   "fieldtype": "Select",
+   "label": "Statistics Method",
+   "options": "\nBy phone\nBy Field\nBy Record\nBy Mail"
+  },
+  {
+   "fieldname": "quality_department",
+   "fieldtype": "Link",
+   "label": "Quality Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "data_collection_department",
+   "fieldtype": "Link",
+   "label": "Data Collection Department",
+   "options": "Department"
+  },
+  {
+   "default": "Normal",
+   "fieldname": "statistics_priority",
+   "fieldtype": "Select",
+   "label": "Statistics Priority",
+   "options": "Normal\nEmergency\nMedium"
+  },
+  {
+   "fieldname": "no_of_sample",
+   "fieldtype": "Int",
+   "label": "No of Sample"
+  },
+  {
+   "fieldname": "no_of_devices",
+   "fieldtype": "Int",
+   "label": "No of Devices"
+  },
+  {
+   "fieldname": "no_of_visits",
+   "fieldtype": "Int",
+   "label": "No of Visits"
+  },
+  {
+   "default": "Once",
+   "fieldname": "statistics_period",
+   "fieldtype": "Select",
+   "label": "Statistics Period",
+   "options": "Once\nMonthly\nQuarterly\nSemi-Annual\nYearly"
+  },
+  {
+   "fieldname": "number_of_reserve_workers",
+   "fieldtype": "Float",
+   "label": "Number of reserve workers",
+   "precision": "3"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-29 14:43:12.665713",
+ "modified": "2024-11-29 14:59:38.502547",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Request ST",

@@ -48,7 +48,15 @@
   "column_break_pejt",
   "incomplete_monthly_mins_deduction_component",
   "absent_deduction_component",
-  "salary_freezing_deduction_component"
+  "salary_freezing_deduction_component",
+  "statistics_management_tab",
+  "worker_cost_per_day",
+  "column_break_vzey",
+  "employee_cost_per_day",
+  "column_break_zgfj",
+  "reservation_cost",
+  "section_break_ytbw",
+  "default_budget_account"
  ],
  "fields": [
   {
@@ -304,12 +312,54 @@
    "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
    "options": "Salary Component",
    "reqd": 1
+  },
+  {
+   "fieldname": "statistics_management_tab",
+   "fieldtype": "Tab Break",
+   "label": "Statistics Management"
+  },
+  {
+   "fieldname": "worker_cost_per_day",
+   "fieldtype": "Currency",
+   "label": "Worker Cost Per Day",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vzey",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "employee_cost_per_day",
+   "fieldtype": "Currency",
+   "label": "Employee Cost Per Day",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_zgfj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reservation_cost",
+   "fieldtype": "Percent",
+   "label": "Reservation Cost %",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_ytbw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "default_budget_account",
+   "fieldtype": "Link",
+   "label": "Default Budget Account for Statistic Expense",
+   "options": "Account",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-11-14 13:58:21.159847",
+ "modified": "2024-11-29 15:03:29.691706",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats Settings ST",
