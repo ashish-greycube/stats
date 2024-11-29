@@ -43,7 +43,8 @@
   "net_salary",
   "column_break_ugte",
   "deduction",
-  "total_monthly_deduction"
+  "total_monthly_deduction",
+  "amended_from"
  ],
  "fields": [
   {
@@ -279,11 +280,22 @@
    "label": "Salary Structure Assignment Reference",
    "options": "Salary Structure Assignment",
    "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "End of Service Calculation ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-11-27 11:45:18.396738",
+ "modified": "2024-11-29 07:09:00.659672",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "End of Service Calculation ST",

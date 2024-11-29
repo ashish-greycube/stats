@@ -17,7 +17,7 @@ class EndOfServiceSheetST(Document):
 	def get_employee_details_for_end_of_service(self):
 
 		eos_list = []
-		resignation_list = frappe.db.get_all("End of Service Calculation ST", filters={"creation_date":["Between", [self.from_date, self.to_date]]},
+		resignation_list = frappe.db.get_all("End of Service Calculation ST", filters={"creation_date":["Between", [self.from_date, self.to_date]],"docstatus":1},
 							   fields=["name", "employee", "total_monthly_salary", "end_of_service_due_amount"])
 		
 		eos_details = {}
@@ -30,7 +30,7 @@ class EndOfServiceSheetST(Document):
 			eos_list.append(eos_details)
 			eos_details = {}
 		
-		retriement_list = frappe.db.get_all("Retirement Request ST", filters={"creation_date": ["Between", [self.from_date, self.to_date]]},
+		retriement_list = frappe.db.get_all("Retirement Request ST", filters={"creation_date": ["Between", [self.from_date, self.to_date]], "docstatus":1},
 									  fields=["name", "employee_no", "total_monthly_salary", "new_retirement_due_amount"])
 		
 		for ret in retriement_list:

@@ -11,7 +11,7 @@ class VacationEncasementSheet(Document):
 	def get_employee_details_for_vacation_encasement(self):
 		vacation_encasement_list = []
 
-		resignation_list = frappe.db.get_all("End of Service Calculation ST", filters={"creation_date":["Between", [self.from_date, self.to_date]]},
+		resignation_list = frappe.db.get_all("End of Service Calculation ST", filters={"creation_date":["Between", [self.from_date, self.to_date]],"docstatus":1},
 							   fields=["name", "employee", "vacation_balance","total_monthly_salary", "vacation_due_amount"])
 		
 		encasement_details={}
@@ -25,7 +25,7 @@ class VacationEncasementSheet(Document):
 			vacation_encasement_list.append(encasement_details)
 			encasement_details = {}
 
-		retriement_list = frappe.db.get_all("Retirement Request ST", filters={"creation_date": ["Between", [self.from_date, self.to_date]]},
+		retriement_list = frappe.db.get_all("Retirement Request ST", filters={"creation_date": ["Between", [self.from_date, self.to_date]], "docstatus":1},
 									  fields=["name", "employee_no","due_vacation_balance", "total_monthly_salary", "vacation_due_amount"])
 
 		for ret in retriement_list:

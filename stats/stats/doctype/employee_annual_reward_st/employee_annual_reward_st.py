@@ -4,9 +4,31 @@
 import frappe
 from frappe.utils import cint
 from frappe.model.document import Document
-
+from stats.salary import get_latest_salary_structure_assignment
 
 class EmployeeAnnualRewardST(Document):
+	def validate(self):
+		self.calcualte_reward_value()
+
+	def calcualte_reward_value(self):
+		if len(self.employee_annual_reward_details) > 0:
+			for reward in self.employee_annual_reward_details:
+				salary_assignment = get_latest_salary_structure_assignment(reward.employee_no, self.creation_date)
+				salary_structure = frappe.db.get_value("Salary Structure Assignment", salary_assignment, "salary_structure")
+				ss = frappe.get_doc("Salary Structure", salary_structure)
+
+				reward_amount = 0
+				for ear in ss.earnings:
+					include_in_reward = frappe.db.get_value("Salary Component", ear.salary_component, "custom_include_in_reward")
+					if include_in_reward == 1:
+						reward_amount = reward_amount + ear.amount
+				
+				if reward.evaluation_classification == "Meet Expectation":
+					reward.reward_value = reward_amount * 3
+				elif reward.evaluation_classification == "Exceed Expectation":
+					reward.reward_value = reward_amount * 4
+				elif reward.evaluation_classification == "Highly Exceed Expectation":
+					reward.reward_value = reward_amount * 6
 	
 	@frappe.whitelist()
 	def fetch_employee_based_on_classification(self):

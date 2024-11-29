@@ -53,7 +53,8 @@
   "net_salary",
   "column_break_dcoh",
   "deduction",
-  "total_monthly_deduction"
+  "total_monthly_deduction",
+  "amended_from"
  ],
  "fields": [
   {
@@ -356,11 +357,22 @@
    "fieldtype": "Data",
    "label": "Retirement Date Hijri",
    "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Retirement Request ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-11-28 12:12:59.304404",
+ "modified": "2024-11-29 07:07:33.684242",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Retirement Request ST",
