@@ -63,12 +63,12 @@ class EndOfServiceSheetST(Document):
 
 	def create_payment_request_on_submit_of_sheet(self):
 		company = erpnext.get_default_company()
-		custom_end_of_service_budget_expense_account = frappe.db.get_value("Company",company,"custom_overtime_budget_expense_account")
+		company_default_end_of_service_allocated_account = frappe.db.get_value("Company",company,"custom_default_end_of_service_allocated_account")
 		pr_doc = frappe.new_doc("Payment Request ST")
 		pr_doc.date = today()
 		pr_doc.reference_name = self.doctype
 		pr_doc.reference_no = self.name
-		pr_doc.budget_account = custom_end_of_service_budget_expense_account
+		pr_doc.budget_account = company_default_end_of_service_allocated_account
 		pr_doc.party_type = "Employee"
 		
 		if len(self.employee_details)>0:

@@ -3,13 +3,17 @@
 
 import frappe
 from frappe import _
-from frappe.utils import cint, get_link_to_form
+import erpnext
+from frappe.utils import cint, get_link_to_form, today
 from frappe.model.document import Document
 from stats.salary import get_latest_salary_structure_assignment
 
 class EmployeeAnnualRewardST(Document):
 	def validate(self):
 		self.calcualte_reward_value()
+	
+	def on_submit(self):
+		self.create_payment_request()
 
 	def calcualte_reward_value(self):
 		if len(self.employee_annual_reward_details) > 0:
@@ -53,3 +57,22 @@ class EmployeeAnnualRewardST(Document):
 						final_list.append(emp_details)
 		print(final_list,'---------')
 		return final_list
+	
+	def create_payment_request(self):
+		company = erpnext.get_default_company()
+		company_annual_reward_expense_account = frappe.db.get_value("Company",company,"custom_annual_reward_expense_account")
+		pr_doc = frappe.new_doc("Payment Request ST")
+		pr_doc.date = today()
+		pr_doc.reference_name = self.doctype
+		pr_doc.reference_no = self.name
+		pr_doc.budget_account = company_annual_reward_expense_account
+		pr_doc.party_type = "Employee"
+		
+		if len(self.employee_annual_reward_details)>0:
+			for row in self.employee_annual_reward_details:
+				pr_row = pr_doc.append("employees",{})
+				pr_row.employee_no = row.employee_no
+				pr_row.amount = row.reward_value
+
+		pr_doc.save(ignore_permissions=True)
+		frappe.msgprint(_("Payment Request {0} is created").format(get_link_to_form("Payment Request ST", pr_doc.name)),alert=1)

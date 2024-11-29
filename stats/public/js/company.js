@@ -123,7 +123,7 @@ frappe.ui.form.on("Company", {
                 }
             };
         })
-        frm.set_query("custom_end_of_service_budget_expense_account", function (doc) {
+        frm.set_query("custom_annual_reward_expense_account", function (doc) {
             return {
                 filters: {
                     "account_type": ["in",["Expense Account", "Indirect Expense"]],
@@ -132,7 +132,7 @@ frappe.ui.form.on("Company", {
                 }
             };
         })
-        frm.set_query("custom_end_of_service_chargeable_account", function (doc) {
+        frm.set_query("custom_annual_reward_chargeable_account", function (doc) {
             return {
                 filters: {
                    "account_type": "Chargeable",
@@ -141,16 +141,7 @@ frappe.ui.form.on("Company", {
                 }
             };
         })
-        frm.set_query("custom_vacation_reimbursement_expense_account", function (doc) {
-            return {
-                filters: {
-                    "account_type": ["in",["Expense Account", "Indirect Expense"]],
-                    "company": frm.doc.name,
-                    "is_group": 0
-                }
-            };
-        }) 
-        frm.set_query("custom_vacation_reimbursement_chargeable_account", function (doc) {
+        frm.set_query("custom_default_vacation_allocated_account", function (doc) {
             return {
                 filters: {
                    "account_type": "Chargeable",
@@ -159,7 +150,14 @@ frappe.ui.form.on("Company", {
                 }
             };
         })
-        
-        
+        frm.set_query("custom_default_end_of_service_allocated_account", function (doc) {
+            return {
+                filters: {
+                   "account_type": "Chargeable",
+                   "company": frm.doc.name,
+                   "is_group": 0
+                }
+            };
+        })
     }
 })
