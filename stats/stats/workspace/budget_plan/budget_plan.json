@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"AFK0B_lIQU\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Budget plan</span>\",\"col\":12}},{\"id\":\"iW10PEUP6g\",\"type\":\"card\",\"data\":{\"card_name\":\"Budget\",\"col\":4}},{\"id\":\"xlJ2fGYany\",\"type\":\"card\",\"data\":{\"card_name\":\"Core\",\"col\":4}}]",
+ "content": "[{\"id\":\"AFK0B_lIQU\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Budget plan</span>\",\"col\":12}},{\"id\":\"iW10PEUP6g\",\"type\":\"card\",\"data\":{\"card_name\":\"Budget\",\"col\":4}},{\"id\":\"xlJ2fGYany\",\"type\":\"card\",\"data\":{\"card_name\":\"Core\",\"col\":4}},{\"id\":\"0uS52Aq6Du\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0639\u0645\u0644\u064a\u0627\u062a\",\"col\":4}}]",
  "creation": "2024-09-04 09:30:17.428163",
  "custom_blocks": [],
  "docstatus": 0,
@@ -130,9 +130,38 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0627\u0644\u0639\u0645\u0644\u064a\u0627\u062a",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0623\u0645\u0631 \u0627\u0644\u0635\u0631\u0641",
+   "link_count": 0,
+   "link_to": "Payment Request ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0623\u0645\u0631 \u0627\u0644\u062f\u0641\u0639",
+   "link_count": 0,
+   "link_to": "Payment Procedure ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-09-04 09:34:32.403881",
+ "modified": "2024-11-29 18:25:52.228530",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Budget plan",
@@ -142,7 +171,7 @@
  "public": 1,
  "quick_lists": [],
  "roles": [],
- "sequence_id": 3.0,
+ "sequence_id": 7.0,
  "shortcuts": [],
  "title": "Budget plan"
 }
