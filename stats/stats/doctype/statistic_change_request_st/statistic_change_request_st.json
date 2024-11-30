@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "SCR-.##### ",
  "creation": "2024-11-29 14:46:05.937277",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -86,16 +87,19 @@
    "fieldtype": "Section Break"
   },
   {
+   "fetch_from": "statistic_request_reference.number_of_researchers",
    "fieldname": "current_number_of_researchers",
    "fieldtype": "Int",
    "label": "Current Number of Researchers"
   },
   {
+   "fetch_from": "statistic_request_reference.number_of_inspectors",
    "fieldname": "current_number_of_inspectors",
    "fieldtype": "Int",
    "label": "Current Number of Inspectors"
   },
   {
+   "fetch_from": "statistic_request_reference.no_of_support_team",
    "fieldname": "current_no_of_support_team",
    "fieldtype": "Int",
    "label": "Current No of Support Team"
@@ -120,6 +124,7 @@
    "label": "New No of Support Team"
   },
   {
+   "fetch_from": "statistic_request_reference.no_of_workers",
    "fieldname": "current_no_of_workers",
    "fieldtype": "Int",
    "label": "Current No of Workers"
@@ -130,6 +135,7 @@
    "label": "New No of Workers"
   },
   {
+   "fetch_from": "statistic_request_reference.no_of_supervisor",
    "fieldname": "current_no_of_supervisor",
    "fieldtype": "Int",
    "label": "Current No of Supervisor"
@@ -140,6 +146,7 @@
    "label": "New No of Supervisor"
   },
   {
+   "fetch_from": "statistic_request_reference.no_of_days",
    "fieldname": "current_no_of_days",
    "fieldtype": "Int",
    "label": "Current No of Days"
@@ -150,16 +157,19 @@
    "label": "New No of Days"
   },
   {
+   "fetch_from": "statistic_request_reference.statistics_method",
    "fieldname": "current_statistics_method",
    "fieldtype": "Select",
    "label": "Current Statistics Method"
   },
   {
+   "fetch_from": "statistic_request_reference.planned_start_date",
    "fieldname": "current_planned_start_date",
    "fieldtype": "Date",
    "label": "Current Planned Start Date"
   },
   {
+   "fetch_from": "statistic_request_reference.planned_end_date",
    "fieldname": "current_planned_end_date",
    "fieldtype": "Date",
    "label": "Current Planned End Date"
@@ -167,7 +177,8 @@
   {
    "fieldname": "new_statistics_method",
    "fieldtype": "Select",
-   "label": "New Statistics Method"
+   "label": "New Statistics Method",
+   "options": "\nBy Phone\nBy Field\nBy Record\nBy Mail"
   },
   {
    "fieldname": "new_planned_start_date",
@@ -183,10 +194,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-29 15:30:27.942976",
+ "modified": "2024-11-30 18:09:02.280738",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Change Request ST",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
