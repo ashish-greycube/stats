@@ -33,9 +33,9 @@ class StatisticRequestST(Document):
 							+ (self.no_of_support_team or 0) + (self.no_of_workers or 0)
 							+ (self.no_of_supervisor or 0))
 		
-		self.workers_cost = ((self.no_of_workers or 0) * (self.no_of_days or 0)) + worker_cost_per_day
+		self.workers_cost = ((self.no_of_workers or 0) * (self.no_of_days or 0)) * worker_cost_per_day
 
-		self.estimated_cost = self.total_no_team * (self.no_of_days or 0)
+		self.estimated_cost = self.total_no_team * employee_cost_per_day * (self.no_of_days or 0)
 
 		self.total_estimated_cost = self.workers_cost + self.estimated_cost
 
