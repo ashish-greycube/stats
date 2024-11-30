@@ -160,7 +160,8 @@
    "fetch_from": "statistic_request_reference.statistics_method",
    "fieldname": "current_statistics_method",
    "fieldtype": "Select",
-   "label": "Current Statistics Method"
+   "label": "Current Statistics Method",
+   "options": "\nBy Phone\nBy Field\nBy Record\nBy Mail"
   },
   {
    "fetch_from": "statistic_request_reference.planned_start_date",
@@ -194,7 +195,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-30 18:09:02.280738",
+ "modified": "2024-11-30 20:25:48.928396",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Change Request ST",
