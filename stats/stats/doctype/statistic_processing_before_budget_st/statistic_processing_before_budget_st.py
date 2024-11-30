@@ -4,7 +4,7 @@
 import frappe
 from frappe.model.document import Document
 from frappe.utils import cstr
-
+from frappe import _
 
 class StatisticProcessingBeforeBudgetST(Document):
 	def validate(self):
@@ -64,9 +64,13 @@ class StatisticProcessingBeforeBudgetST(Document):
 			self.set(child_table_percentage_name,None)
 
 
-		statistic_request_list = frappe.db.get_all("Statistic Request ST", filters={"approval_status":"Pending", "docstatus":0,"creation_date":["between",[self.from_date,self.to_date]]}, fields=["name", "sub_department"],
+		statistic_request_list = frappe.db.get_all("Statistic Request ST", filters={"approval_status":"Pending", "docstatus":1,"creation_date":["between",[self.from_date,self.to_date]]}, fields=["name", "sub_department"],
 											 order_by='sub_department')
 		
+		if len(statistic_request_list)<1:
+			frappe.msgprint(_("No matching records found"))
+			return
+
 		unique_sub_departments = []
 		for dep in statistic_request_list:
 			if dep.sub_department not in unique_sub_departments:

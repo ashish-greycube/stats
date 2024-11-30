@@ -134,7 +134,7 @@
    "label": "To Date"
   },
   {
-   "description": "Statistic Request ST filtered by Creation Date and Approval Status=Initial Approval and Status=Draft",
+   "description": "Statistic Request ST filtered by Creation Date and Approval Status=Initial Approval and Status=Submit",
    "fieldname": "fetch_statistic_request",
    "fieldtype": "Button",
    "label": "Fetch Statistic Request"
@@ -617,7 +617,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-30 16:43:45.027886",
+ "modified": "2024-11-30 17:48:49.760874",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Final Statistic Processing ST",
