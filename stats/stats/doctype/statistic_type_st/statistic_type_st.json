@@ -21,7 +21,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-29 14:45:56.255739",
+ "modified": "2024-11-30 11:16:28.300827",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Type ST",
@@ -41,6 +41,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

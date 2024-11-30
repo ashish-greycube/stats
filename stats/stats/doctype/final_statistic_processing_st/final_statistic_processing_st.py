@@ -5,13 +5,12 @@ import frappe
 from frappe.model.document import Document
 
 
-class StatisticProcessingBeforeBudgetST(Document):
+class FinalStatisticProcessingST(Document):
 	def validate(self):
 		self.calculate_total_cost_department_vise()
 
 	def on_submit(self):
 		self.set_approval_status_in_statistic_request()
-
 
 	def calculate_total_cost_department_vise(self):
 		total_request_cost = 0
@@ -96,7 +95,7 @@ class StatisticProcessingBeforeBudgetST(Document):
 			self.total_cost_10 = total_cost_10
 
 		self.total_request_cost = total_request_cost
-
+	
 		# calculate percentage
 		if total_request_cost > 0:
 			self.percentage_1 = ((self.total_cost_1  or 0)* 100) / total_request_cost
@@ -114,7 +113,7 @@ class StatisticProcessingBeforeBudgetST(Document):
 		if len(self.sub_department_1) > 0:
 			for dep1 in self.sub_department_1:
 				if dep1.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep1.statistic_request_reference, "Initial Approval")
+					frappe.db.set_value("Statistic Request ST", dep1.statistic_request_reference, "Final Approval")
 				elif dep1.action == "Reject":
 					frappe.db.set_value("Statistic Request ST", dep1.statistic_request_reference, "Rejected")
 				else:
@@ -123,7 +122,7 @@ class StatisticProcessingBeforeBudgetST(Document):
 		if len(self.sub_department_2) > 0:
 			for dep2 in self.sub_department_2:
 				if dep2.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep2.statistic_request_reference, "Initial Approval")
+					frappe.db.set_value("Statistic Request ST", dep2.statistic_request_reference, "Final Approval")
 				elif dep2.action == "Reject":
 					frappe.db.set_value("Statistic Request ST", dep2.statistic_request_reference, "Rejected")
 				else:
@@ -132,7 +131,7 @@ class StatisticProcessingBeforeBudgetST(Document):
 		if len(self.sub_department_3) > 0:
 			for dep3 in self.sub_department_3:
 				if dep3.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep3.statistic_request_reference, "Initial Approval")
+					frappe.db.set_value("Statistic Request ST", dep3.statistic_request_reference, "Final Approval")
 				elif dep3.action == "Reject":
 					frappe.db.set_value("Statistic Request ST", dep3.statistic_request_reference, "Rejected")
 				else:
@@ -141,7 +140,7 @@ class StatisticProcessingBeforeBudgetST(Document):
 		if len(self.sub_department_4) > 0:
 			for dep4 in self.sub_department_4:
 				if dep4.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep4.statistic_request_reference, "Initial Approval")
+					frappe.db.set_value("Statistic Request ST", dep4.statistic_request_reference, "Final Approval")
 				elif dep4.action == "Reject":
 					frappe.db.set_value("Statistic Request ST", dep4.statistic_request_reference, "Rejected")
 				else:
@@ -150,7 +149,7 @@ class StatisticProcessingBeforeBudgetST(Document):
 		if len(self.sub_department_5) > 0:
 			for dep5 in self.sub_department_5:
 				if dep5.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep5.statistic_request_reference, "Initial Approval")
+					frappe.db.set_value("Statistic Request ST", dep5.statistic_request_reference, "Final Approval")
 				elif dep5.action == "Reject":
 					frappe.db.set_value("Statistic Request ST", dep5.statistic_request_reference, "Rejected")
 				else:
@@ -159,7 +158,7 @@ class StatisticProcessingBeforeBudgetST(Document):
 		if len(self.sub_department_6) > 0:
 			for dep6 in self.sub_department_6:
 				if dep6.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep6.statistic_request_reference, "Initial Approval")
+					frappe.db.set_value("Statistic Request ST", dep6.statistic_request_reference, "Final Approval")
 				elif dep6.action == "Reject":
 					frappe.db.set_value("Statistic Request ST", dep6.statistic_request_reference, "Rejected")
 				else:
@@ -168,7 +167,7 @@ class StatisticProcessingBeforeBudgetST(Document):
 		if len(self.sub_department_7) > 0:
 			for dep7 in self.sub_department_7:
 				if dep7.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep7.statistic_request_reference, "Initial Approval")
+					frappe.db.set_value("Statistic Request ST", dep7.statistic_request_reference, "Final Approval")
 				elif dep7.action == "Reject":
 					frappe.db.set_value("Statistic Request ST", dep7.statistic_request_reference, "Rejected")
 				else:
@@ -177,7 +176,7 @@ class StatisticProcessingBeforeBudgetST(Document):
 		if len(self.sub_department_8) > 0:
 			for dep8 in self.sub_department_8:
 				if dep8.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep8.statistic_request_reference, "Initial Approval")
+					frappe.db.set_value("Statistic Request ST", dep8.statistic_request_reference, "Final Approval")
 				elif dep8.action == "Reject":
 					frappe.db.set_value("Statistic Request ST", dep8.statistic_request_reference, "Rejected")
 				else:
@@ -186,7 +185,7 @@ class StatisticProcessingBeforeBudgetST(Document):
 		if len(self.sub_department_9) > 0:
 			for dep9 in self.sub_department_9:
 				if dep9.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep9.statistic_request_reference, "Initial Approval")
+					frappe.db.set_value("Statistic Request ST", dep9.statistic_request_reference, "Final Approval")
 				elif dep9.action == "Reject":
 					frappe.db.set_value("Statistic Request ST", dep9.statistic_request_reference, "Rejected")
 				else:
@@ -195,29 +194,8 @@ class StatisticProcessingBeforeBudgetST(Document):
 		if len(self.sub_department_10) > 0:
 			for dep10 in self.sub_department_10:
 				if dep10.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep10.statistic_request_reference, "Initial Approval")
+					frappe.db.set_value("Statistic Request ST", dep10.statistic_request_reference, "Final Approval")
 				elif dep10.action == "Reject":
 					frappe.db.set_value("Statistic Request ST", dep10.statistic_request_reference, "Rejected")
 				else:
 					continue
-
-	@frappe.whitelist()
-	def fetch_department_vise_statistic_request(self):
-		statistic_request_list = frappe.db.get_all("Statistic Request ST", filters={"approval_status":"Pending", "docstatus":0}, fields=["name", "sub_department"],
-											 order_by='sub_department')
-		
-		unique_sub_departments = []
-		for dep in statistic_request_list:
-			if dep.sub_department not in unique_sub_departments:
-				unique_sub_departments.append(dep.sub_department)
-
-		self.no_of_department = len(unique_sub_departments)
-
-		for unique in unique_sub_departments:
-			for dep in statistic_request_list:
-				if unique == dep.sub_department:
-					dep1 = self.append("sub_department_1", {})
-					dep1.statistic_request_reference = dep.name
-
-		self.save(ignore_permissions=True)
-

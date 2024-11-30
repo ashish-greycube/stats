@@ -1,8 +1,8 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "SPB-.##### ",
- "creation": "2024-11-29 15:14:46.280594",
+ "autoname": "FSP-.##### ",
+ "creation": "2024-11-29 19:49:07.688613",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -10,6 +10,7 @@
   "creation_date",
   "created_by",
   "total_request_cost",
+  "available_budget",
   "column_break_ahqu",
   "from_date",
   "to_date",
@@ -104,17 +105,6 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Statistic Processing Before Budget ST",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "default": "Today",
    "fieldname": "creation_date",
    "fieldtype": "Date",
    "label": "Creation Date"
@@ -144,8 +134,14 @@
    "label": "To Date"
   },
   {
-   "fieldname": "section_break_gcej",
-   "fieldtype": "Section Break"
+   "fieldname": "fetch_statistic_request",
+   "fieldtype": "Button",
+   "label": "Fetch Statistic Request"
+  },
+  {
+   "fieldname": "no_of_department",
+   "fieldtype": "Int",
+   "label": "no of department"
   },
   {
    "depends_on": "eval:doc.no_of_department<11",
@@ -154,28 +150,15 @@
    "hide_border": 1
   },
   {
-   "fieldname": "fetch_statistic_request",
-   "fieldtype": "Button",
-   "label": "Fetch Statistic Request"
-  },
-  {
-   "fieldname": "sub_department_1",
-   "fieldtype": "Table",
-   "label": "Sub Department 1",
-   "options": "Statistic Sub Department Processing Details ST"
-  },
-  {
-   "fieldname": "no_of_department",
-   "fieldtype": "Int",
-   "label": "no of department"
-  },
-  {
    "depends_on": "eval:doc.no_of_department>0",
    "fieldname": "sub_department_name1",
    "fieldtype": "Link",
    "label": "Sub Department",
-   "link_filters": "[[\"Department\",\"is_group\",\"=\",0]]",
    "options": "Department"
+  },
+  {
+   "fieldname": "column_break_nkdj",
+   "fieldtype": "Column Break"
   },
   {
    "depends_on": "eval:doc.no_of_department>0",
@@ -184,24 +167,26 @@
    "label": "Total Cost"
   },
   {
+   "fieldname": "column_break_lyer",
+   "fieldtype": "Column Break"
+  },
+  {
    "depends_on": "eval:doc.no_of_department>0",
    "fieldname": "percentage_1",
    "fieldtype": "Percent",
    "label": "Percentage"
   },
   {
-   "fieldname": "column_break_nkdj",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_lyer",
-   "fieldtype": "Column Break"
-  },
-  {
    "depends_on": "eval:doc.no_of_department>0",
    "fieldname": "section_break_xxmz",
    "fieldtype": "Section Break",
    "hide_border": 1
+  },
+  {
+   "fieldname": "sub_department_1",
+   "fieldtype": "Table",
+   "label": "Sub Department 1",
+   "options": "Statistic Sub Department Processing Details ST"
   },
   {
    "fieldname": "section_break_oaea",
@@ -596,15 +581,44 @@
    "fieldtype": "Table",
    "label": "Sub Department 10",
    "options": "Statistic Sub Department Processing Details ST"
+  },
+  {
+   "fieldname": "section_break_gcej",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Final Statistic Processing ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Final Statistic Processing ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "available_budget",
+   "fieldtype": "Currency",
+   "label": "Available Budget"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-30 13:41:38.301966",
+ "modified": "2024-11-30 13:42:27.363449",
  "modified_by": "Administrator",
  "module": "Stats",
- "name": "Statistic Processing Before Budget ST",
+ "name": "Final Statistic Processing ST",
  "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
