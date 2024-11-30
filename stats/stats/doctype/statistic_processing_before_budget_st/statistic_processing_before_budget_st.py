@@ -3,6 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
+from frappe.utils import cstr
 
 
 class StatisticProcessingBeforeBudgetST(Document):
@@ -12,198 +13,58 @@ class StatisticProcessingBeforeBudgetST(Document):
 	def on_submit(self):
 		self.set_approval_status_in_statistic_request()
 
-
 	def calculate_total_cost_department_vise(self):
 		total_request_cost = 0
-		if len(self.sub_department_1) > 0:
-			total_cost_1 = 0
-			for dep1 in self.sub_department_1:
-				total_cost_1 = total_cost_1 + (dep1.final_cost or 0)
+		self.total_request_cost=0
+		#  set child table's total cost value
+		for idx in range(self.no_of_department or 0):
+			child_table_name="sub_department_"+cstr(idx+1)
+			child_talbe_total_cost_name="total_cost_"+cstr(idx+1)
+			total_cost_value=0
+			for dep in self.get(child_table_name):
+				total_cost_value = total_cost_value + (dep.final_cost or 0)
 			
-			total_request_cost = total_request_cost + total_cost_1
-			self.total_cost_1 = total_cost_1
-
-		if len(self.sub_department_2) > 0:
-			total_cost_2 = 0
-			for dep2 in self.sub_department_2:
-				total_cost_2 = total_cost_2 + (dep2.final_cost or 0)
-			
-			total_request_cost = total_request_cost + total_cost_2
-			self.total_cost_2 = total_cost_2
-
-		if len(self.sub_department_3) > 0:
-			total_cost_3 = 0
-			for dep3 in self.sub_department_3:
-				total_cost_3 = total_cost_3 + (dep3.final_cost or 0)
-			
-			total_request_cost = total_request_cost + total_cost_3
-			self.total_cost_3 = total_cost_3
-
-		if len(self.sub_department_4) > 0:
-			total_cost_4 = 0
-			for dep4 in self.sub_department_4:
-				total_cost_4 = total_cost_4 + (dep4.final_cost or 0)
-			
-			total_request_cost = total_request_cost + total_cost_4
-			self.total_cost_4 = total_cost_4
-
-		if len(self.sub_department_5) > 0:
-			total_cost_5 = 0
-			for dep5 in self.sub_department_5:
-				total_cost_5 = total_cost_5 + (dep5.final_cost or 0)
-			
-			total_request_cost = total_request_cost + total_cost_5
-			self.total_cost_5 = total_cost_5
+			total_request_cost = total_request_cost + total_cost_value
+			print('total_request_cost',total_request_cost)
+			self.set(child_talbe_total_cost_name,total_cost_value)
 		
-		if len(self.sub_department_6) > 0:
-			total_cost_6 = 0
-			for dep6 in self.sub_department_6:
-				total_cost_6 = total_cost_6 + (dep6.final_cost or 0)
-			
-			total_request_cost = total_request_cost + total_cost_6
-			self.total_cost_6 = total_cost_6
-		
-		if len(self.sub_department_7) > 0:
-			total_cost_7 = 0
-			for dep7 in self.sub_department_7:
-				total_cost_7 = total_cost_7 + (dep7.final_cost or 0)
-			
-			total_request_cost = total_request_cost + total_cost_7
-			self.total_cost_7 = total_cost_7
-		
-		if len(self.sub_department_8) > 0:
-			total_cost_8 = 0
-			for dep8 in self.sub_department_8:
-				total_cost_8 = total_cost_8 + (dep8.final_cost or 0)
-			
-			total_request_cost = total_request_cost + total_cost_8
-			self.total_cost_8 = total_cost_8
+		# set parent level total request cost
+		self.total_request_cost=total_request_cost
+		for idx in range(self.no_of_department or 0):
+			percentage_value=0
+			child_table_percentage_name="percentage_"+cstr(idx+1)
+			child_talbe_total_cost_name="total_cost_"+cstr(idx+1)
+			percentage_value=((self.get(child_talbe_total_cost_name)  or 0)* 100) / total_request_cost
+			self.set(child_table_percentage_name,percentage_value)		
 
-		if len(self.sub_department_9) > 0:
-			total_cost_9 = 0
-			for dep9 in self.sub_department_9:
-				total_cost_9 = total_cost_9 + (dep9.final_cost or 0)
-			
-			total_request_cost = total_request_cost + total_cost_9
-			self.total_cost_9 = total_cost_9
-		
-		if len(self.sub_department_10) > 0:
-			total_cost_10 = 0
-			for dep10 in self.sub_department_10:
-				total_cost_10 = total_cost_10 + (dep10.final_cost or 0)
-			
-			total_request_cost = total_request_cost + total_cost_10
-			self.total_cost_10 = total_cost_10
-
-		self.total_request_cost = total_request_cost
-
-		# calculate percentage
-		if total_request_cost > 0:
-			self.percentage_1 = ((self.total_cost_1  or 0)* 100) / total_request_cost
-			self.percentage_2 = ((self.total_cost_2  or 0)* 100) / total_request_cost
-			self.percentage_3 = ((self.total_cost_3  or 0)* 100) / total_request_cost
-			self.percentage_4 = ((self.total_cost_4  or 0)* 100) / total_request_cost
-			self.percentage_5 = ((self.total_cost_5  or 0)* 100) / total_request_cost
-			self.percentage_6 = ((self.total_cost_6  or 0)* 100) / total_request_cost
-			self.percentage_7 = ((self.total_cost_7  or 0)* 100) / total_request_cost
-			self.percentage_8 = ((self.total_cost_8  or 0)* 100) / total_request_cost
-			self.percentage_9 = ((self.total_cost_9  or 0)* 100) / total_request_cost
-			self.percentage_10 = ((self.total_cost_10 or 0) * 100) / total_request_cost
-
+	
 	def set_approval_status_in_statistic_request(self):
-		if len(self.sub_department_1) > 0:
-			for dep1 in self.sub_department_1:
-				if dep1.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep1.statistic_request_reference, "Initial Approval")
-				elif dep1.action == "Reject":
-					frappe.db.set_value("Statistic Request ST", dep1.statistic_request_reference, "Rejected")
+		for idx in range(self.no_of_department or 0):
+			child_table_name="sub_department_"+cstr(idx+1)
+			for dep in self.get(child_table_name):
+				if dep.action == "Approve":
+					frappe.db.set_value("Statistic Request ST", dep.statistic_request_reference, 'approval_status',"Initial Approval")
+				elif dep.action == "Reject":
+					frappe.db.set_value("Statistic Request ST", dep.statistic_request_reference, 'approval_status' ,"Rejected")
 				else:
-					continue
-
-		if len(self.sub_department_2) > 0:
-			for dep2 in self.sub_department_2:
-				if dep2.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep2.statistic_request_reference, "Initial Approval")
-				elif dep2.action == "Reject":
-					frappe.db.set_value("Statistic Request ST", dep2.statistic_request_reference, "Rejected")
-				else:
-					continue
-
-		if len(self.sub_department_3) > 0:
-			for dep3 in self.sub_department_3:
-				if dep3.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep3.statistic_request_reference, "Initial Approval")
-				elif dep3.action == "Reject":
-					frappe.db.set_value("Statistic Request ST", dep3.statistic_request_reference, "Rejected")
-				else:
-					continue
-					
-		if len(self.sub_department_4) > 0:
-			for dep4 in self.sub_department_4:
-				if dep4.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep4.statistic_request_reference, "Initial Approval")
-				elif dep4.action == "Reject":
-					frappe.db.set_value("Statistic Request ST", dep4.statistic_request_reference, "Rejected")
-				else:
-					continue
-		
-		if len(self.sub_department_5) > 0:
-			for dep5 in self.sub_department_5:
-				if dep5.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep5.statistic_request_reference, "Initial Approval")
-				elif dep5.action == "Reject":
-					frappe.db.set_value("Statistic Request ST", dep5.statistic_request_reference, "Rejected")
-				else:
-					continue
-		
-		if len(self.sub_department_6) > 0:
-			for dep6 in self.sub_department_6:
-				if dep6.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep6.statistic_request_reference, "Initial Approval")
-				elif dep6.action == "Reject":
-					frappe.db.set_value("Statistic Request ST", dep6.statistic_request_reference, "Rejected")
-				else:
-					continue
-		
-		if len(self.sub_department_7) > 0:
-			for dep7 in self.sub_department_7:
-				if dep7.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep7.statistic_request_reference, "Initial Approval")
-				elif dep7.action == "Reject":
-					frappe.db.set_value("Statistic Request ST", dep7.statistic_request_reference, "Rejected")
-				else:
-					continue
-		
-		if len(self.sub_department_8) > 0:
-			for dep8 in self.sub_department_8:
-				if dep8.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep8.statistic_request_reference, "Initial Approval")
-				elif dep8.action == "Reject":
-					frappe.db.set_value("Statistic Request ST", dep8.statistic_request_reference, "Rejected")
-				else:
-					continue
-
-		if len(self.sub_department_9) > 0:
-			for dep9 in self.sub_department_9:
-				if dep9.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep9.statistic_request_reference, "Initial Approval")
-				elif dep9.action == "Reject":
-					frappe.db.set_value("Statistic Request ST", dep9.statistic_request_reference, "Rejected")
-				else:
-					continue
-
-		if len(self.sub_department_10) > 0:
-			for dep10 in self.sub_department_10:
-				if dep10.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep10.statistic_request_reference, "Initial Approval")
-				elif dep10.action == "Reject":
-					frappe.db.set_value("Statistic Request ST", dep10.statistic_request_reference, "Rejected")
-				else:
-					continue
+					continue				
 
 	@frappe.whitelist()
 	def fetch_department_vise_statistic_request(self):
-		statistic_request_list = frappe.db.get_all("Statistic Request ST", filters={"approval_status":"Pending", "docstatus":0}, fields=["name", "sub_department"],
+		# empty child table values
+		total_no_of_child_table=10
+		for idx in range(total_no_of_child_table):
+			child_table_name="sub_department_"+cstr(idx+1)
+			child_table_sub_department_name="sub_department_name"+cstr(idx+1)
+			child_talbe_total_cost_name="total_cost_"+cstr(idx+1)
+			child_table_percentage_name="percentage_"+cstr(idx+1)
+			self.set(child_table_name,[])
+			self.set(child_table_sub_department_name,None)
+			self.set(child_talbe_total_cost_name,None)
+			self.set(child_table_percentage_name,None)
+
+
+		statistic_request_list = frappe.db.get_all("Statistic Request ST", filters={"approval_status":"Pending", "docstatus":0,"creation_date":["between",[self.from_date,self.to_date]]}, fields=["name", "sub_department"],
 											 order_by='sub_department')
 		
 		unique_sub_departments = []
@@ -213,10 +74,19 @@ class StatisticProcessingBeforeBudgetST(Document):
 
 		self.no_of_department = len(unique_sub_departments)
 
-		for unique in unique_sub_departments:
+		#  set sub department name
+		for idx,unique in enumerate(unique_sub_departments):
+			child_table_sub_department_name="sub_department_name"+cstr(idx+1)
+			for dep in statistic_request_list:
+				if unique == dep.sub_department:			
+					self.set(child_table_sub_department_name,dep.sub_department)
+					break
+
+		for idx,unique in enumerate(unique_sub_departments):
 			for dep in statistic_request_list:
 				if unique == dep.sub_department:
-					dep1 = self.append("sub_department_1", {})
+					child_table_name="sub_department_"+cstr(idx+1)
+					dep1 = self.append(child_table_name, {})
 					dep1.statistic_request_reference = dep.name
 
 		self.save(ignore_permissions=True)

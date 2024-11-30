@@ -89,6 +89,7 @@
   {
    "allow_on_submit": 1,
    "default": "Pending",
+   "description": "Pending : default\nInitial Approval : changed by Statistic Processing Before Budget\nFinal Approval :changed by Final Statistic Processing\nRejected : changed by Final Statistic Processing / Statistic Processing Before Budget",
    "fieldname": "approval_status",
    "fieldtype": "Select",
    "label": "Approval Status",
@@ -272,7 +273,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-29 15:26:22.998089",
+ "modified": "2024-11-30 16:12:39.573290",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Request ST",
@@ -295,5 +296,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }

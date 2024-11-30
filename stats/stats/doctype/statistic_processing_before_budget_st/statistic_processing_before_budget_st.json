@@ -154,6 +154,7 @@
    "hide_border": 1
   },
   {
+   "description": "Statistic Request ST filtered by Creation Date and Approval Status=Pending and Status=Draft",
    "fieldname": "fetch_statistic_request",
    "fieldtype": "Button",
    "label": "Fetch Statistic Request"
@@ -167,6 +168,7 @@
   {
    "fieldname": "no_of_department",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "no of department"
   },
   {
@@ -601,7 +603,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-30 13:41:38.301966",
+ "modified": "2024-11-30 16:05:51.130759",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Processing Before Budget ST",

@@ -11,4 +11,18 @@ frappe.ui.form.on("Final Statistic Processing ST", {
             })
         }  
     },
+    fetch_statistic_request: function(frm){
+        if (frm.is_dirty() == true) {
+            frappe.throw({
+                message: __("Please save the form to proceed..."),
+                indicator: "red",
+            });
+        }
+    
+        frm.call("fetch_department_vise_statistic_request").then((r) => {
+            if (r.message) {
+                console.log(r.message, "r.message")
+            }
+        })
+    }
 });
