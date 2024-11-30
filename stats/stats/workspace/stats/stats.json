@@ -762,7 +762,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Statistics Managment",
-   "link_count": 4,
+   "link_count": 5,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -790,6 +790,16 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Final Statistic Processing ST",
+   "link_count": 0,
+   "link_to": "Final Statistic Processing ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Statistic Change Request ST",
    "link_count": 0,
    "link_to": "Statistic Change Request ST",
@@ -808,7 +818,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-11-29 18:28:50.781170",
+ "modified": "2024-11-30 17:16:29.716659",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats",
