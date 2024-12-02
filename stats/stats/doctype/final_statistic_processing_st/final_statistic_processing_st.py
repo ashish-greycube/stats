@@ -3,7 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
-from frappe.utils import cstr
+from frappe.utils import cstr, get_link_to_form
 from frappe import _
 
 class FinalStatisticProcessingST(Document):
@@ -42,10 +42,15 @@ class FinalStatisticProcessingST(Document):
 		for idx in range(self.no_of_department or 0):
 			child_table_name="sub_department_"+cstr(idx+1)
 			for dep in self.get(child_table_name):
+				doc = frappe.get_doc("Statistic Request ST", dep.statistic_request_reference)
 				if dep.action == "Approve":
-					frappe.db.set_value("Statistic Request ST", dep.statistic_request_reference, 'approval_status',"Final Approval")
+					doc.approval_status = "Final Approval"
+					doc.add_comment("Comment",text="This Doc Updated Because Of Final Statistic Processing {0} doc.".format(get_link_to_form("Final Statistic Processing ST",self.name)))
+					doc.save(ignore_permissions=True)
 				elif dep.action == "Reject":
-					frappe.db.set_value("Statistic Request ST", dep.statistic_request_reference, 'approval_status' ,"Rejected")
+					doc.approval_status = "Rejected"
+					doc.add_comment("Comment",text="This Doc Updated Because Of Final Statistic Processing {0} doc.".format(get_link_to_form("Final Statistic Processing ST",self.name)))
+					doc.save(ignore_permissions=True)
 				else:
 					continue				
 

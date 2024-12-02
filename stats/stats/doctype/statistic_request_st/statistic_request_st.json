@@ -64,7 +64,9 @@
    "default": "Today",
    "fieldname": "creation_date",
    "fieldtype": "Date",
-   "label": "Creation Date"
+   "in_list_view": 1,
+   "label": "Creation Date",
+   "reqd": 1
   },
   {
    "fieldname": "statistic_name",
@@ -93,7 +95,8 @@
    "fieldname": "approval_status",
    "fieldtype": "Select",
    "label": "Approval Status",
-   "options": "Pending\nInitial Approval\nFinal Approval\nRejected"
+   "options": "Pending\nInitial Approval\nFinal Approval\nRejected",
+   "read_only": 1
   },
   {
    "allow_on_submit": 1,
@@ -136,36 +139,45 @@
   {
    "fieldname": "main_department",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Main Department",
-   "options": "Department"
+   "options": "Department",
+   "reqd": 1
   },
   {
    "fieldname": "sub_department",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Sub Department",
-   "options": "Department"
+   "options": "Department",
+   "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "number_of_researchers",
    "fieldtype": "Int",
    "label": "Number of Researchers"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "number_of_inspectors",
    "fieldtype": "Int",
    "label": "Number of Inspectors"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "no_of_support_team",
    "fieldtype": "Int",
    "label": "No of Support Team"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "no_of_workers",
    "fieldtype": "Int",
    "label": "No of Workers"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "no_of_supervisor",
    "fieldtype": "Int",
    "label": "No of Supervisor"
@@ -217,6 +229,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "statistics_method",
    "fieldtype": "Select",
    "label": "Statistics Method",
@@ -273,7 +286,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-30 16:12:39.573290",
+ "modified": "2024-12-02 09:26:49.831281",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Request ST",
