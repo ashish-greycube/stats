@@ -96,7 +96,7 @@
   },
   {
    "fieldname": "total_amount",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "Total Amount",
    "read_only": 1
   }
@@ -113,7 +113,7 @@
    "link_fieldname": "payment_request_reference"
   }
  ],
- "modified": "2024-11-20 13:22:56.081404",
+ "modified": "2024-12-02 12:52:10.205706",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Payment Request ST",
