@@ -23,7 +23,7 @@ class RetirementRequestST(Document):
 		print('dob_hijri',date_hijri)
 		hijri_splits=date_hijri.split('-')
 		print('hijri_splits',hijri_splits)
-		g_date = Hijri(cint(hijri_splits[0]),cint(hijri_splits[1]),cint(hijri_splits[2])).to_gregorian().dmyformat(separator='/')
+		g_date = Hijri(cint(hijri_splits[1]),cint(hijri_splits[0]),cint(hijri_splits[2])).to_gregorian().dmyformat(separator='/')
 		return getdate(g_date)
 
 	
