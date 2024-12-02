@@ -11,6 +11,8 @@ from hrms.hr.doctype.leave_application.leave_application import get_leave_detail
 
 class RetirementRequestST(Document):
 	def validate(self):
+		print('self.birth_date_hijri',self.birth_date_hijri)
+		
 		self.birth_date_gregorian=self.set_date_in_gregorian(self.birth_date_hijri)
 		self.retirement_date_gregorian=self.set_date_in_gregorian(self.retirement_date_hijri)
 		self.get_salary_details_and_due_amount_calculation()
@@ -23,8 +25,11 @@ class RetirementRequestST(Document):
 		print('dob_hijri',date_hijri)
 		hijri_splits=date_hijri.split('-')
 		print('hijri_splits',hijri_splits)
-		g_date = Hijri(cint(hijri_splits[1]),cint(hijri_splits[0]),cint(hijri_splits[2])).to_gregorian().dmyformat(separator='/')
-		return getdate(g_date)
+		g_date = Hijri(cint(hijri_splits[2]),cint(hijri_splits[1]),cint(hijri_splits[0])).to_gregorian()
+		print(g_date)
+		g_date_formatte=g_date.dmyformat(separator='/')
+		print(g_date_formatte)
+		return getdate(g_date_formatte)
 
 	
 	def get_salary_details_and_due_amount_calculation(self):
