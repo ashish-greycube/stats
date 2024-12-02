@@ -111,6 +111,7 @@
    "fieldname": "total_amount",
    "fieldtype": "Currency",
    "label": "Total Amount",
+   "precision": "2",
    "read_only": 1
   },
   {
@@ -141,7 +142,7 @@
    "link_fieldname": "custom_payment_procedure_reference"
   }
  ],
- "modified": "2024-12-02 12:52:01.101549",
+ "modified": "2024-12-02 13:51:16.542894",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Payment Procedure ST",
