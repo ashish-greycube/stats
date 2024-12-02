@@ -162,6 +162,7 @@
    "read_only": 1
   },
   {
+   "description": "Contract Type : Civil <br>\nType of Retirement : Normal (Age &gt;= Settings.Normal Years Of Retirement) <br>\nRetirement Due Amount :  (sum of Earning Components which are include in retirement calculation) * 6 <br>\nVacation Due Amount: (Total Earnings / 30) * Minimum Vacation Days <br>\n<br>\nType of Retirement : Early (Age &lt; Settings.Normal Years Of Retirement) <br>\nRetirement Due Amount : (sum of Earning Components which are include in retirement calculation) * 4",
    "fieldname": "retirement_due_amount",
    "fieldtype": "Currency",
    "label": "Retirement Due Amount",
@@ -314,6 +315,7 @@
    "read_only": 1
   },
   {
+   "description": "(Total Earnings / 30) * Minimum Vacation Days",
    "fieldname": "vacation_due_amount",
    "fieldtype": "Currency",
    "label": "<b>Vacation Due Amount</b>",
@@ -345,6 +347,7 @@
    "read_only": 1
   },
   {
+   "description": "Retirement Due Amount - Total Retirement Deduction",
    "fieldname": "new_retirement_due_amount",
    "fieldtype": "Currency",
    "label": "<b>New Retirement Due Amount</b>",
@@ -372,7 +375,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-29 07:07:33.684242",
+ "modified": "2024-12-02 15:12:05.285096",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Retirement Request ST",

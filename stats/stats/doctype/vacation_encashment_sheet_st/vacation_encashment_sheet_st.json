@@ -67,7 +67,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Vacation Encasement Sheet",
+   "options": "Vacation Encashment Sheet ST",
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
@@ -84,7 +84,7 @@
  "modified": "2024-12-02 12:45:07.143685",
  "modified_by": "Administrator",
  "module": "Stats",
- "name": "Vacation Encasement Sheet",
+ "name": "Vacation Encashment Sheet ST",
  "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [

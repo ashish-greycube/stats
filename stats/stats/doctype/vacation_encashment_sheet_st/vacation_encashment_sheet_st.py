@@ -8,12 +8,12 @@ from frappe import _
 from frappe.model.document import Document
 
 
-class VacationEncasementSheet(Document):
+class VacationEncashmentSheetST(Document):
 	
 	def on_submit(self):
-		self.create_payment_request_from_vacation_encasement_sheet()
+		self.create_payment_request_from_vacation_encashment_sheet_st()
 
-	def create_payment_request_from_vacation_encasement_sheet(self):
+	def create_payment_request_from_vacation_encashment_sheet_st(self):
 		company = erpnext.get_default_company()
 		company_default_vacation_allocated_account = frappe.db.get_value("Company",company,"custom_default_vacation_allocated_account")
 		pr_doc = frappe.new_doc("Payment Request ST")
@@ -63,10 +63,10 @@ class VacationEncasementSheet(Document):
 			vacation_encasement_list.append(encasement_details)
 			encasement_details = {}
 
-		vacation_sheet_list = frappe.db.get_all("Vacation Encasement Sheet", filters={"docstatus":0, "name":["!=", self.name]}, fields=["name"])
+		vacation_sheet_list = frappe.db.get_all("Vacation Encashment Sheet ST", filters={"docstatus":0, "name":["!=", self.name]}, fields=["name"])
 
 		for sheet in vacation_sheet_list:
-			vacation_sheet = frappe.get_doc("Vacation Encasement Sheet", sheet.name)
+			vacation_sheet = frappe.get_doc("Vacation Encashment Sheet ST", sheet.name)
 			for emp in vacation_sheet.employee_details:
 				for a in vacation_encasement_list:	
 					if emp.reference == a.get('reference'):

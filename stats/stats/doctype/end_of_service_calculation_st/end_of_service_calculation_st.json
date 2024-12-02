@@ -143,6 +143,7 @@
   },
   {
    "default": "0",
+   "description": "(Total Earnings / 30) * Minimum Vacation Days",
    "fieldname": "vacation_due_amount",
    "fieldtype": "Currency",
    "label": "<b>Vacation Due Amount</b>",
@@ -150,6 +151,7 @@
   },
   {
    "default": "0",
+   "description": "Contract Type : any <br>\nResignation Type: Seperation : no EOS <br>\nResignation Type: Not to renew Contract <br>\nDuration : &lt; 1 year , Per Day: (mothly sal)/2/360, Due Amt: (Per Day)*(No of days) <br>\n Duration : &lt; 2 year , Per Year:  (mothly sal)/2, Per Day: (mothly sal)/2/360, Due Amt: (Per Year)+[(Per Day)*(No of days)] <br>\n Duration : &gt; 2 and &lt;5 year, Per Year:  [(mothly sal)/2]*(no of years), Per Day: (mothly sal)/2/360, Due Amt: (Per Year)+[(Per Day)*(No of days)] <br>\n Duration : &gt;5 year, Per Year: (mothly sal)*(no of years), Per Day: (mothly sal)/360, Due Amt: (Per Year)+[(Per Day)*(No of days)] <br>\n<br>\nResignation Type: Resignation <br>\n Duration : &lt; 1 year , no EOS <br>\n Duration : &lt; 2 year , no EOS <br>\n Duration : &gt; 2 and &lt;5 year, Per Year:  [(mothly sal)/2/3]*(no of years), Per Day: (mothly sal)/2/3/360, Due Amt: (Per Year)+[(Per Day)*(No of days)] <br>\n Duration : &gt;5 year, Per Year: (mothly sal)*(no of years), Per Day: (mothly sal)/360, Due Amt: (Per Year)+[(Per Day)*(No of days)]",
    "fieldname": "end_of_service_due_amount",
    "fieldtype": "Currency",
    "label": "<b>End of Service Due Amount</b>",
@@ -281,7 +283,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-29 10:24:34.957260",
+ "modified": "2024-12-02 15:09:33.563817",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "End of Service Calculation ST",

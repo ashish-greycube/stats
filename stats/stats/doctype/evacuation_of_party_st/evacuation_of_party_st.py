@@ -9,6 +9,9 @@ from frappe.utils import get_link_to_form
 
 class EvacuationofPartyST(Document):
 	def on_submit(self):
+		if not self.evacuate_attachment:
+			frappe.throw(_("Please attach evacuate proof"))
+
 		resignation_doc = frappe.get_doc("Employee Resignation ST", self.resignation_reference)
 		resignation_doc.employee_evacuation_status = "Processed"
 		frappe.msgprint(_("In Employee Resignation: {0} Employee Evacuation Status Set to 'Processed'.").format(self.resignation_reference), alert=1)

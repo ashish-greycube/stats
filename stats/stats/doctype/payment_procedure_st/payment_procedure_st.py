@@ -30,7 +30,7 @@ class PaymentProcedureST(Document):
 		if not self.payment_type:
 			frappe.throw(_("Please select payment type"))
 
-		if self.reference_name in ["End Of Service Sheet ST","Vacation Encasement Sheet"]:
+		if self.reference_name in ["End Of Service Sheet ST","Vacation Encashment Sheet ST"]:
 			if self.payment_type == "Indirect":
 				frappe.throw(_("You cannot select payment type Indirect"))
 		
@@ -50,7 +50,7 @@ class PaymentProcedureST(Document):
 			else :
 				je_date = self.transaction_date
 			
-			if self.reference_name not in ["End Of Service Sheet ST","Vacation Encasement Sheet"]:
+			if self.reference_name not in ["End Of Service Sheet ST","Vacation Encashment Sheet ST"]:
 				create_payment_journal_entry_from_payment_procedure(self,company_default_payment_order_account,company_default_debit_account_mof,self.total_amount,je_date)
 
 			if self.reference_name == "Business Trip Sheet ST":
@@ -127,6 +127,6 @@ class PaymentProcedureST(Document):
 				create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_debit_account_mof,self.total_amount,je_date=self.transaction_date)
 				create_payment_journal_entry_from_payment_procedure(self,company_default_payment_order_account,company_default_central_bank_account,self.total_amount,je_date=today())
 			
-			elif self.reference_name == "Vacation Encasement Sheet":
+			elif self.reference_name == "Vacation Encashment Sheet ST":
 				create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_debit_account_mof,self.total_amount,je_date=self.transaction_date)
 				create_payment_journal_entry_from_payment_procedure(self,company_default_payment_order_account,company_default_central_bank_account,self.total_amount,je_date=today())

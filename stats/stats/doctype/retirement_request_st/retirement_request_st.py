@@ -86,7 +86,7 @@ class RetirementRequestST(Document):
 		considered_vacation_days = frappe.db.get_value("Contract Type ST", contract_type, "considered_vacation_days")
 		salary_assignment = get_latest_salary_structure_assignment(self.employee_no, self.retirement_date_gregorian)
 		total_monthly_salary = frappe.db.get_value("Salary Structure Assignment", salary_assignment, "base")
-		per_day_salary = total_monthly_salary / 360
+		per_day_salary_for_vacation = total_monthly_salary / 30
 		
 		if considered_vacation_days:
 			self.considered_vacation_days = considered_vacation_days
@@ -109,9 +109,9 @@ class RetirementRequestST(Document):
 				self.due_vacation_balance = total_considered_vacation_days
 
 				if self.considered_vacation_days < self.due_vacation_balance:
-					self.vacation_due_amount = per_day_salary * self.considered_vacation_days
+					self.vacation_due_amount = per_day_salary_for_vacation * self.considered_vacation_days
 				else:
-					self.vacation_due_amount = per_day_salary * self.due_vacation_balance
+					self.vacation_due_amount = per_day_salary_for_vacation * self.due_vacation_balance
 
 			else:
 				frappe.throw(_("Leave Allocation is not found for {0} employee for {1} date.").format(self.employee_no, self.retirement_date_gregorian))

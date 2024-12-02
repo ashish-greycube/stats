@@ -57,7 +57,7 @@ class PaymentRequestST(Document):
 			company_default_end_of_service_allocated_account = frappe.db.get_value("Company",company,"custom_default_end_of_service_allocated_account")
 			self.create_journal_entry_for_end_of_service_and_vacation_encasement(company_default_end_of_service_allocated_account)
 		
-		elif self.reference_name == "Vacation Encasement Sheet":
+		elif self.reference_name == "Vacation Encashment Sheet ST":
 			company_default_vacation_allocated_account = frappe.db.get_value("Company",company,"custom_default_vacation_allocated_account")
 			self.create_journal_entry_for_end_of_service_and_vacation_encasement(company_default_vacation_allocated_account)
 
@@ -176,7 +176,7 @@ class PaymentRequestST(Document):
 		if self.party_type == "Supplier":
 			pp_doc.party_name_supplier = self.party_name_supplier
 		
-		if self.reference_name in ["End Of Service Sheet ST","Vacation Encasement Sheet"]:
+		if self.reference_name in ["End Of Service Sheet ST","Vacation Encashment Sheet ST"]:
 			pp_doc.payment_type = "Direct"
 
 		if len(self.employees)>0:

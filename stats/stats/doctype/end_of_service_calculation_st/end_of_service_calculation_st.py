@@ -60,10 +60,10 @@ class EndofServiceCalculationST(Document):
 		total_no_of_working_days = date_diff(last_working_date, joining_date)
 		no_of_days_in_last_year_of_service = total_no_of_working_days % 360
 		no_of_full_years_in_service = total_no_of_working_days - no_of_days_in_last_year_of_service
-
+		years = no_of_full_years_in_service / 360
 
 		self.total_no_of_working_days = total_no_of_working_days
-		self.no_of_full_years_in_service = no_of_full_years_in_service
+		self.no_of_full_years_in_service = years
 		self.no_of_days_in_last_year_of_service = no_of_days_in_last_year_of_service
 
 		####### due amount calculation ########
@@ -125,7 +125,8 @@ class EndofServiceCalculationST(Document):
 		considered_vacation_days = frappe.db.get_value("Contract Type ST", contract_type, "considered_vacation_days")
 		salary_assignment = get_latest_salary_structure_assignment(self.employee, self.last_working_date)
 		total_monthly_salary = frappe.db.get_value("Salary Structure Assignment", salary_assignment, "base")
-		per_day_salary = total_monthly_salary / 360
+		# per_day_salary = total_monthly_salary / 360
+		per_day_salary_for_vacation = total_monthly_salary / 30
 		
 		if considered_vacation_days:
 			self.considered_vacation_days = considered_vacation_days
@@ -148,9 +149,9 @@ class EndofServiceCalculationST(Document):
 				self.vacation_balance = total_considered_vacation_days
 
 				if self.considered_vacation_days < self.vacation_balance:
-					self.vacation_due_amount = per_day_salary * self.considered_vacation_days
+					self.vacation_due_amount = per_day_salary_for_vacation * self.considered_vacation_days
 				else:
-					self.vacation_due_amount = per_day_salary * self.vacation_balance
+					self.vacation_due_amount = per_day_salary_for_vacation * self.vacation_balance
 
 			else:
 				frappe.throw(_("Leave Allocation is not found for {0} employee for {1} date.").format(self.employee, self.last_working_date))

@@ -10,7 +10,7 @@ frappe.ui.form.on("Retirement Request ST", {
         })
 	},
     refresh(frm) {
-        if(frm.doc.docstatus==0){
+        if(frm.doc.docstatus==1){
             frm.add_custom_button(__('Evacuation of Party'), () => create_evacuation_of_party(frm));
             frm.add_custom_button(__('Exit Interview'), () => create_exit_interview(frm));
         }

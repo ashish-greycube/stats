@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestVacationEncasementSheet(FrappeTestCase):
+class TestVacationEncashmentSheetST(FrappeTestCase):
 	pass
