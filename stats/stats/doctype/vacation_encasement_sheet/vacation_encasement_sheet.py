@@ -2,10 +2,35 @@
 # For license information, please see license.txt
 
 import frappe
+import erpnext
+from frappe.utils import today, get_link_to_form
+from frappe import _
 from frappe.model.document import Document
 
 
 class VacationEncasementSheet(Document):
+	
+	def on_submit(self):
+		self.create_payment_request_from_vacation_encasement_sheet()
+
+	def create_payment_request_from_vacation_encasement_sheet(self):
+		company = erpnext.get_default_company()
+		company_default_vacation_allocated_account = frappe.db.get_value("Company",company,"custom_default_vacation_allocated_account")
+		pr_doc = frappe.new_doc("Payment Request ST")
+		pr_doc.date = today()
+		pr_doc.reference_name = self.doctype
+		pr_doc.reference_no = self.name
+		pr_doc.budget_account = company_default_vacation_allocated_account
+		pr_doc.party_type = "Employee"
+		
+		if len(self.employee_details)>0:
+			for row in self.employee_details:
+				pr_row = pr_doc.append("employees",{})
+				pr_row.employee_no = row.employee_no
+				pr_row.amount = row.due_amount
+
+		pr_doc.save(ignore_permissions=True)
+		frappe.msgprint(_("Payment Request {0} is created").format(get_link_to_form("Payment Request ST", pr_doc.name)),alert=1)
 
 	@frappe.whitelist()
 	def get_employee_details_for_vacation_encasement(self):

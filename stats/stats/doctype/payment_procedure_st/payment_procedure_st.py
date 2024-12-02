@@ -29,6 +29,10 @@ class PaymentProcedureST(Document):
 	def on_submit(self):
 		if not self.payment_type:
 			frappe.throw(_("Please select payment type"))
+
+		if self.reference_name in ["End Of Service Sheet ST","Vacation Encasement Sheet"]:
+			if self.payment_type == "Indirect":
+				frappe.throw(_("You cannot select payment type Indirect"))
 		
 		total_employee_amount = 0
 		for row in self.employees:
@@ -45,7 +49,9 @@ class PaymentProcedureST(Document):
 				je_date = self.bank_enhancement_date
 			else :
 				je_date = self.transaction_date
-			create_payment_journal_entry_from_payment_procedure(self,company_default_payment_order_account,company_default_debit_account_mof,self.total_amount,je_date)
+			
+			if self.reference_name not in ["End Of Service Sheet ST","Vacation Encasement Sheet"]:
+				create_payment_journal_entry_from_payment_procedure(self,company_default_payment_order_account,company_default_debit_account_mof,self.total_amount,je_date)
 
 			if self.reference_name == "Business Trip Sheet ST":
 				company_business_trip_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_chargeable_account")
@@ -116,3 +122,11 @@ class PaymentProcedureST(Document):
 					if self.middle_bank_account:
 						create_payment_journal_entry_from_payment_procedure(self,self.middle_bank_account,company_default_payment_order_account,self.total_amount,je_date=self.bank_enhancement_date)
 						create_payment_journal_entry_from_payment_procedure(self,company_annual_reward_chargeable_account,self.middle_bank_account,self.total_amount,je_date=today())
+			
+			elif self.reference_name == "End Of Service Sheet ST":
+				create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_debit_account_mof,self.total_amount,je_date=self.transaction_date)
+				create_payment_journal_entry_from_payment_procedure(self,company_default_payment_order_account,company_default_central_bank_account,self.total_amount,je_date=today())
+			
+			elif self.reference_name == "Vacation Encasement Sheet":
+				create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_debit_account_mof,self.total_amount,je_date=self.transaction_date)
+				create_payment_journal_entry_from_payment_procedure(self,company_default_payment_order_account,company_default_central_bank_account,self.total_amount,je_date=today())

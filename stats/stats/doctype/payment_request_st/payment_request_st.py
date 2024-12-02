@@ -52,7 +52,16 @@ class PaymentRequestST(Document):
 			company_annual_reward_expense_account = frappe.db.get_value("Company",company,"custom_annual_reward_expense_account")
 			company_annual_reward_chargeable_account = frappe.db.get_value("Company",company,"custom_annual_reward_chargeable_account")
 			self.create_journal_entry_on_submit_of_payment_request(company_annual_reward_expense_account,company_annual_reward_chargeable_account)
-	
+		
+		elif self.reference_name == "End Of Service Sheet ST":
+			company_default_end_of_service_allocated_account = frappe.db.get_value("Company",company,"custom_default_end_of_service_allocated_account")
+			self.create_journal_entry_for_end_of_service_and_vacation_encasement(company_default_end_of_service_allocated_account)
+		
+		elif self.reference_name == "Vacation Encasement Sheet":
+			company_default_vacation_allocated_account = frappe.db.get_value("Company",company,"custom_default_vacation_allocated_account")
+			self.create_journal_entry_for_end_of_service_and_vacation_encasement(company_default_vacation_allocated_account)
+
+
 	def create_journal_entry_on_submit_of_payment_request(self,company_budget_expense_account,company_budget_chargeable_account):
 		je = frappe.new_doc("Journal Entry")
 		je.voucher_type = "Journal Entry"
@@ -166,6 +175,9 @@ class PaymentRequestST(Document):
 
 		if self.party_type == "Supplier":
 			pp_doc.party_name_supplier = self.party_name_supplier
+		
+		if self.reference_name in ["End Of Service Sheet ST","Vacation Encasement Sheet"]:
+			pp_doc.payment_type = "Direct"
 
 		if len(self.employees)>0:
 			for row in self.employees:
@@ -321,50 +333,29 @@ class PaymentRequestST(Document):
 		je_doc.submit()
 		frappe.msgprint(_("Journal Entry for Achievement Certificate is created from Payment Request {0}").format(get_link_to_form("Journal Entry",je_doc.name)),alert=1)
 
-	def create_journal_entry_for_end_of_service(self):
+	def create_journal_entry_for_end_of_service_and_vacation_encasement(self,allocated_account):
 		je = frappe.new_doc("Journal Entry")
 		je.voucher_type = "Journal Entry"
 		je.posting_date = self.transaction_date
 		je.custom_payment_request_reference = self.name
 		
-		accounts = []
-		employee_detais = frappe.db.sql("""
-				SELECT
-				main_department,
-				SUM(amount) as amount
-			FROM
-				`tabEmployee Details For Payment ST`
-			WHERE
-				parent = %s
-			GROUP By
-				main_department
-		""",self.name,as_dict=1,debug=1)
-		print(employee_detais,"employee_detais")
-
-		employee_total_amount = 0
 		company = erpnext.get_default_company()
-		if len(employee_detais)>0:
-			# company_business_trip_budget_expense_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_expense_account")
-			# company_business_trip_budget_chargeable_account = frappe.db.get_value("Company",company,"custom_business_trip_budget_chargeable_account")
-			company_default_cost_center = frappe.db.get_value("Company",company,"cost_center")
-			for detail_row in employee_detais:
-				employee_total_amount = employee_total_amount + detail_row.amount
-				department_cost_center = frappe.db.get_value("Department",detail_row.main_department,"custom_department_cost_center")
-				accounts_row = {
-					"account":company_budget_expense_account,
-					"cost_center":department_cost_center,
-					"department":detail_row.main_department,
-					"debit_in_account_currency":detail_row.amount,
-				}
-				accounts.append(accounts_row)
+		company_default_payment_order_account = frappe.db.get_value("Company",company,"custom_default_payment_order_account")
+		accounts = []
+		company_default_cost_center = frappe.db.get_value("Company",company,"cost_center")
+		accounts_row = {
+			"account":allocated_account,
+			"cost_center":company_default_cost_center,
+			"debit_in_account_currency":self.total_amount,
+		}
+		accounts.append(accounts_row)
 
-			accounts_row_2 = {
-					"account":company_budget_chargeable_account,
-					"cost_center":company_default_cost_center,
-					"department":detail_row.main_department,
-					"credit_in_account_currency":employee_total_amount,
-			}
-			accounts.append(accounts_row_2)
+		accounts_row_2 = {
+				"account":company_default_payment_order_account,
+				"cost_center":company_default_cost_center,
+				"credit_in_account_currency":self.total_amount,
+		}
+		accounts.append(accounts_row_2)
 		je.set("accounts",accounts)
 		je.run_method('set_missing_values')
 		je.save(ignore_permissions=True)
@@ -401,11 +392,11 @@ class PaymentRequestST(Document):
 		accounts_row = {
 					"account":company_default_debit_account_mof,
 					"cost_center":company_default_cost_center,
-					"debit_in_account_currency":employee_total_amount,
+					"debit_in_account_currency":self.total_amount,
 				}
 		jv_accounts.append(accounts_row)
 
-		if len(employee_detais)>0:
+		if len(employee_info)>0:
 			for row in employee_info:
 				department_cost_center = frappe.db.get_value("Department",row.main_department,"custom_department_cost_center")
 				accounts_row_2 = {
