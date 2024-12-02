@@ -18,11 +18,12 @@ class RetirementRequestST(Document):
 		self.calculate_total_due_amount()
 
 	def set_date_in_gregorian(self,date_hijri) :
+		# https://hijri-converter.readthedocs.io/en/stable/usage.html
 		date_hijri=cstr(date_hijri)
 		print('dob_hijri',date_hijri)
 		hijri_splits=date_hijri.split('-')
 		print('hijri_splits',hijri_splits)
-		g_date = Hijri(cint(hijri_splits[2]), cint(hijri_splits[1]), cint(hijri_splits[0])).to_gregorian().dmyformat(separator='/')
+		g_date = Hijri(cint(hijri_splits[2]),cint(hijri_splits[0]),cint(hijri_splits[1])).to_gregorian().dmyformat(separator='/')
 		return getdate(g_date)
 
 	
