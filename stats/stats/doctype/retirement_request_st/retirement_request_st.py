@@ -26,10 +26,11 @@ class RetirementRequestST(Document):
 		hijri_splits=date_hijri.split('-')
 		print('hijri_splits',hijri_splits)
 		g_date = Hijri(cint(hijri_splits[2]),cint(hijri_splits[1]),cint(hijri_splits[0])).to_gregorian()
-		print(g_date)
-		g_date_formatte=g_date.dmyformat(separator='/')
-		print(g_date_formatte)
-		return getdate(g_date_formatte)
+		print(g_date, "==g_date")
+		g_date_formatte=getdate(g_date.dmyformat(separator='/'))
+		# print(g_date_formatte, "==g_date_formatte", getdate(g_date_formatte), "===getdate(g_date_formatte)")
+		# print(getdate(g_date.strftime('%d-%m-%Y')), "======getdate(g_date).strftime('%d-%m-%Y')===", type(getdate(g_date.strftime('%d-%m-%Y'))))
+		return getdate(g_date_formatte.strftime('%d-%m-%Y'))
 
 	
 	def get_salary_details_and_due_amount_calculation(self):
