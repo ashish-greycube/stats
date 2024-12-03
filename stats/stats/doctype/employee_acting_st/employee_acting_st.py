@@ -22,4 +22,4 @@ class EmployeeActingST(Document):
 	def validate_status(self):
 		if self.request_status:
 			if self.request_status == None or self.request_status == "Pending":
-				frappe.throw(_("Please Approve or Reject overtime request before submit"))
+				frappe.throw(_("Please Approve or Reject before submit"))
