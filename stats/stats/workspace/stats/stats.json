@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"VfGWfoLahC\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a \u0627\u0644\u0639\u0645\u0644\u064a\u0627\u062a</b></span>\",\"col\":12}},{\"id\":\"n5YCviTnAo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Post Request ST\",\"col\":3}},{\"id\":\"ZpX5f-3lez\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stats Settings ST\",\"col\":3}},{\"id\":\"dhgDwVmNY9\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b></b></span>\",\"col\":12}},{\"id\":\"nCHmvYGFpW\",\"type\":\"card\",\"data\":{\"card_name\":\"Inetrnal Comunication\",\"col\":4}},{\"id\":\"-XAe6PYlKG\",\"type\":\"card\",\"data\":{\"card_name\":\"Talent Acquisition\",\"col\":4}},{\"id\":\"QsfaysMSZI\",\"type\":\"card\",\"data\":{\"card_name\":\"Scholarship Services Management\",\"col\":4}},{\"id\":\"heS8fHsRhA\",\"type\":\"card\",\"data\":{\"card_name\":\"Operation Services Management\",\"col\":4}},{\"id\":\"dRI6xTWmlp\",\"type\":\"card\",\"data\":{\"card_name\":\"Training Management\",\"col\":4}},{\"id\":\"gzXkZLg7RZ\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0631\u062d\u0644\u0627\u062a \u0627\u0644\u0639\u0645\u0644\",\"col\":4}},{\"id\":\"EmrITfhpiy\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0645\u0631\u0643\u0632 \u062a\u0645\u064a\u0632 \u0644\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629\",\"col\":4}},{\"id\":\"p9MELUoypD\",\"type\":\"card\",\"data\":{\"card_name\":\"\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u0645\u0648\u0627\u0647\u0628\",\"col\":4}},{\"id\":\"yFQNXIEnFK\",\"type\":\"card\",\"data\":{\"card_name\":\"\u062a\u0642\u064a\u064a\u0645 \u0627\u0644\u0627\u062f\u0627\u0621\",\"col\":4}},{\"id\":\"-kDkkpvAhr\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u062f\u0627\u0631\u0629 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0627\u0636\u0627\u0641\u064a \",\"col\":4}},{\"id\":\"04ptcqtLZw\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u062c\u0631\u0627\u0621\u0627\u062a \u0628\u062f\u0644 \u0627\u0644\u0627\u0646\u062a\u0642\u0627\u0644\",\"col\":4}},{\"id\":\"BILUB0M9X2\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u062f\u0627\u0631\u0629 \u0627\u0644\u0639\u0647\u062f \u0627\u0644\u0646\u0642\u062f\u064a\u0629\",\"col\":4}},{\"id\":\"Ye-Rb2Vv22\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643\u0627\u062a \u0627\u0644\u062f\u0648\u0644\u064a\u0629\",\"col\":4}},{\"id\":\"Wzj32D6OFW\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0627\u0633\u062a\u0642\u0627\u0644\u0629 \u0648\u0627\u0646\u0647\u0627\u0621 \u0627\u0644\u062e\u062f\u0645\u0627\u062a\",\"col\":4}},{\"id\":\"b-ffuVPrEW\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0634\u0631\u0627\u0621\",\"col\":4}},{\"id\":\"WMHe2HjVWr\",\"type\":\"card\",\"data\":{\"card_name\":\"Statistics Managment\",\"col\":4}}]",
+ "content": "[{\"id\":\"VfGWfoLahC\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a \u0627\u0644\u0639\u0645\u0644\u064a\u0627\u062a</b></span>\",\"col\":12}},{\"id\":\"n5YCviTnAo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Post Request ST\",\"col\":3}},{\"id\":\"ZpX5f-3lez\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stats Settings ST\",\"col\":3}},{\"id\":\"dhgDwVmNY9\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b></b></span>\",\"col\":12}},{\"id\":\"nCHmvYGFpW\",\"type\":\"card\",\"data\":{\"card_name\":\"Inetrnal Comunication\",\"col\":4}},{\"id\":\"-XAe6PYlKG\",\"type\":\"card\",\"data\":{\"card_name\":\"Talent Acquisition\",\"col\":4}},{\"id\":\"QsfaysMSZI\",\"type\":\"card\",\"data\":{\"card_name\":\"Scholarship Services Management\",\"col\":4}},{\"id\":\"heS8fHsRhA\",\"type\":\"card\",\"data\":{\"card_name\":\"Operation Services Management\",\"col\":4}},{\"id\":\"dRI6xTWmlp\",\"type\":\"card\",\"data\":{\"card_name\":\"Training Management\",\"col\":4}},{\"id\":\"gzXkZLg7RZ\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0631\u062d\u0644\u0627\u062a \u0627\u0644\u0639\u0645\u0644\",\"col\":4}},{\"id\":\"EmrITfhpiy\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0645\u0631\u0643\u0632 \u062a\u0645\u064a\u0632 \u0644\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629\",\"col\":4}},{\"id\":\"p9MELUoypD\",\"type\":\"card\",\"data\":{\"card_name\":\"\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u0645\u0648\u0627\u0647\u0628\",\"col\":4}},{\"id\":\"yFQNXIEnFK\",\"type\":\"card\",\"data\":{\"card_name\":\"\u062a\u0642\u064a\u064a\u0645 \u0627\u0644\u0627\u062f\u0627\u0621\",\"col\":4}},{\"id\":\"-kDkkpvAhr\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u062f\u0627\u0631\u0629 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0627\u0636\u0627\u0641\u064a \",\"col\":4}},{\"id\":\"04ptcqtLZw\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u062c\u0631\u0627\u0621\u0627\u062a \u0628\u062f\u0644 \u0627\u0644\u0627\u0646\u062a\u0642\u0627\u0644\",\"col\":4}},{\"id\":\"BILUB0M9X2\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u062f\u0627\u0631\u0629 \u0627\u0644\u0639\u0647\u062f \u0627\u0644\u0646\u0642\u062f\u064a\u0629\",\"col\":4}},{\"id\":\"Ye-Rb2Vv22\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643\u0627\u062a \u0627\u0644\u062f\u0648\u0644\u064a\u0629\",\"col\":4}},{\"id\":\"Wzj32D6OFW\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0627\u0633\u062a\u0642\u0627\u0644\u0629 \u0648\u0627\u0646\u0647\u0627\u0621 \u0627\u0644\u062e\u062f\u0645\u0627\u062a\",\"col\":4}},{\"id\":\"b-ffuVPrEW\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0634\u0631\u0627\u0621\",\"col\":4}},{\"id\":\"WMHe2HjVWr\",\"type\":\"card\",\"data\":{\"card_name\":\"Statistics Managment\",\"col\":4}},{\"id\":\"MyT65tSJjX\",\"type\":\"card\",\"data\":{\"card_name\":\"Attendance Settings\",\"col\":4}}]",
  "creation": "2024-08-06 15:54:16.748573",
  "custom_blocks": [],
  "docstatus": 0,
@@ -826,9 +826,78 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Attendance Settings",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Attendance Request ST",
+   "link_count": 0,
+   "link_to": "Attendance Request ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Employee Checkin",
+   "link_count": 0,
+   "link_to": "Employee Checkin",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Attendance",
+   "link_count": 0,
+   "link_to": "Attendance",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Attendance Reconciliation ST",
+   "link_count": 0,
+   "link_to": "Attendance Reconciliation ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Employee Attendance Checkup ST",
+   "link_count": 0,
+   "link_to": "Employee Attendance Checkup ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Employee Attendance",
+   "link_count": 0,
+   "link_to": "Employee Attendance",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-12-02 11:52:39.184446",
+ "modified": "2024-12-03 12:05:52.143914",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats",
