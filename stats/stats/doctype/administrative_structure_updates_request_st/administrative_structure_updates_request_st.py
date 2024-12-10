@@ -12,8 +12,8 @@ class InvalidDepartmentMergeError(frappe.ValidationError):
 
 class AdministrativeStructureUpdatesRequestST(Document):
 	
-	def validate(self):
-	# def on_submit(self):
+	# def validate(self):
+	def on_submit(self):
 		if self.request_type == "Create New Department":
 			if self.type =="Create New Main Department":
 				self.create_new_department(self.new_main_department_name,self.parent_department,self.main_department_manager)
