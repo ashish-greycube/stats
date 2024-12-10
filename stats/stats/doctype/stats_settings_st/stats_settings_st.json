@@ -56,7 +56,20 @@
   "column_break_zgfj",
   "reservation_cost",
   "section_break_ytbw",
-  "default_budget_account"
+  "default_budget_account",
+  "allowance_tab",
+  "first_season_apply_start_date",
+  "second_season_apply_start_date",
+  "third_season_apply_start_date",
+  "column_break_ooiz",
+  "first_season_apply_end_date",
+  "second_season_apply_end_date",
+  "third_season_apply_end_date",
+  "section_break_ipjd",
+  "minimum_age_for_education_allowance",
+  "column_break_ywio",
+  "maximum_age_for_education_allowance",
+  "check_against_grade_limit"
  ],
  "fields": [
   {
@@ -354,12 +367,91 @@
    "label": "Default Budget Account for Statistic Expense",
    "options": "Account",
    "reqd": 1
+  },
+  {
+   "fieldname": "allowance_tab",
+   "fieldtype": "Tab Break",
+   "label": "Allowance"
+  },
+  {
+   "description": "Year would be ignored, only consider date and month",
+   "fieldname": "first_season_apply_start_date",
+   "fieldtype": "Date",
+   "label": "First Season Apply Start Date",
+   "reqd": 1
+  },
+  {
+   "description": "Year would be ignored, only consider date and month",
+   "fieldname": "second_season_apply_start_date",
+   "fieldtype": "Date",
+   "label": "Second Season Apply Start Date",
+   "reqd": 1
+  },
+  {
+   "description": "Year would be ignored, only consider date and month",
+   "fieldname": "third_season_apply_start_date",
+   "fieldtype": "Date",
+   "label": "Third Season Apply Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ooiz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Year would be ignored, only consider date and month",
+   "fieldname": "first_season_apply_end_date",
+   "fieldtype": "Date",
+   "label": "First Season Apply End Date",
+   "reqd": 1
+  },
+  {
+   "description": "Year would be ignored, only consider date and month",
+   "fieldname": "second_season_apply_end_date",
+   "fieldtype": "Date",
+   "label": "Second Season Apply End Date",
+   "reqd": 1
+  },
+  {
+   "description": "Year would be ignored, only consider date and month",
+   "fieldname": "third_season_apply_end_date",
+   "fieldtype": "Date",
+   "label": "Third Season Apply End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_ipjd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "minimum_age_for_education_allowance",
+   "fieldtype": "Int",
+   "label": "Minimum Age for Education Allowance",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ywio",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "maximum_age_for_education_allowance",
+   "fieldtype": "Int",
+   "label": "Maximum Age for Education Allowance",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "check_against_grade_limit",
+   "fieldtype": "Check",
+   "label": "Check Against Grade Limit "
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-11-29 15:03:29.691706",
+ "modified": "2024-12-10 09:01:45.062492",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats Settings ST",

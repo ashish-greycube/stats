@@ -6,7 +6,10 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "employee_unit"
+  "employee_unit",
+  "task",
+  "stakeholders",
+  "main_responsibilities"
  ],
  "fields": [
   {
@@ -16,11 +19,26 @@
    "label": "Employee Unit",
    "reqd": 1,
    "unique": 1
+  },
+  {
+   "fieldname": "task",
+   "fieldtype": "Small Text",
+   "label": "Task"
+  },
+  {
+   "fieldname": "stakeholders",
+   "fieldtype": "Small Text",
+   "label": "Stakeholders "
+  },
+  {
+   "fieldname": "main_responsibilities",
+   "fieldtype": "Small Text",
+   "label": "Main Responsibilities"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-06 12:27:35.394518",
+ "modified": "2024-12-05 09:26:48.803170",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Unit ST",

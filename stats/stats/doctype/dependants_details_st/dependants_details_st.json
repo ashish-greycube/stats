@@ -8,6 +8,7 @@
  "field_order": [
   "name1",
   "relation",
+  "date_of_birth",
   "column_break_iuxc",
   "age",
   "id_number"
@@ -41,12 +42,18 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "ID number"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date of Birth"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-21 12:11:17.024167",
+ "modified": "2024-12-09 15:21:00.171397",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Dependants Details ST",

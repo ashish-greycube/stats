@@ -27,7 +27,7 @@ class AttendanceReconciliationST(Document):
 						frappe.throw(_("# Row {0}: You cannot select any reason for {1}.".format(row.idx,row.type)))
 
 				if row.type == "Present":
-					if (row.delay_in == 0 and row.early_out == 0) and row.reason != "":
+					if ((row.delay_in == 0 and row.early_out == 0) or (row.shortfall_in_working_minutes > 0)) and row.reason != "":
 						frappe.throw(_("# Row {0}: You cannot select any reason as there is no need of reconciliation".format(row.idx)))
 				
 				if row.type == "Absent":
@@ -41,7 +41,7 @@ class AttendanceReconciliationST(Document):
 							frappe.throw(_("#Row {0}: You cannot select any reason".format(row.idx)))
 
 				if row.reason == "Personal Permission":
-					if row.delay_in > 0 or row.early_out > 0:
+					if row.delay_in > 0 or row.early_out > 0 or row.shortfall_in_working_minutes < 0:
 						pass
 					else:
 						frappe.throw(_("# Row{0}: You cannot select reason <b>{1}</b>".format(row.idx,row.reason)))
@@ -54,7 +54,7 @@ class AttendanceReconciliationST(Document):
 
 				if row.reason == "Deduct From Permission Balance":
 					print("++++++++++++")
-					if row.delay_in > 0 or row.early_out > 0:
+					if (row.delay_in > 0 or row.early_out > 0) or row.shortfall_in_working_minutes < 0:
 						if row.balance_to_be_consumed_in_minutes >= row.shortfall_in_working_minutes:
 							pass
 						else:
@@ -198,7 +198,7 @@ class AttendanceReconciliationST(Document):
 								row["early_out"]=attendance.custom_actual_early_minutes
 								row["expected_working_minutes"]=attendance.custom_working_minutes_per_day
 								row["actual_working_minutes"]=attendance.custom_actual_working_minutes
-								row["shortfall_in_working_minutes"]=attendance.custom_working_minutes_per_day-attendance.custom_actual_working_minutes
+								row["shortfall_in_working_minutes"]=attendance.custom_actual_working_minutes-attendance.custom_working_minutes_per_day
 								row["attendance_reference"]=attendance.name
 
 						# if checkin-checkout not exists andabsent attendance is created
@@ -209,7 +209,7 @@ class AttendanceReconciliationST(Document):
 								row["early_out"]=attendance.custom_actual_early_minutes
 								row["expected_working_minutes"]=attendance.custom_working_minutes_per_day
 								row["actual_working_minutes"]=attendance.custom_actual_working_minutes
-								row["shortfall_in_working_minutes"]=attendance.custom_working_minutes_per_day-attendance.custom_actual_working_minutes
+								row["shortfall_in_working_minutes"]=attendance.custom_actual_working_minutes-attendance.custom_working_minutes_per_day
 								row["attendance_reference"]=attendance.name
 				else:
 					row["type"]="No Attendance"
