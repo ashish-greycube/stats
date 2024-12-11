@@ -14,7 +14,7 @@
   "sub_department",
   "section",
   "grade",
-  "limit",
+  "allowance_limit",
   "column_break_pvga",
   "educational_year",
   "season_type",
@@ -46,41 +46,40 @@
    "fetch_from": "employee_no.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
-   "label": "Employee Name"
+   "label": "Employee Name",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.department",
    "fieldname": "main_department",
    "fieldtype": "Link",
    "label": "Main Department",
-   "options": "Department"
+   "options": "Department",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.custom_sub_department",
    "fieldname": "sub_department",
    "fieldtype": "Link",
    "label": "Sub Department",
-   "options": "Department"
+   "options": "Department",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.custom_section",
    "fieldname": "section",
    "fieldtype": "Link",
    "label": "Section",
-   "options": "Section ST"
+   "options": "Section ST",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.grade",
    "fieldname": "grade",
    "fieldtype": "Link",
    "label": "Grade",
-   "options": "Employee Grade"
-  },
-  {
-   "fetch_from": "grade.custom_education_allowance_amount",
-   "fieldname": "limit",
-   "fieldtype": "Currency",
-   "label": "Limit"
+   "options": "Employee Grade",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_pvga",
@@ -138,12 +137,19 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "description": "Based on Grade",
+   "fieldname": "allowance_limit",
+   "fieldtype": "Int",
+   "label": "Allowance Limit",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-12-10 15:56:10.644898",
+ "modified": "2024-12-11 13:00:00.471170",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Education Allowance Request ST",

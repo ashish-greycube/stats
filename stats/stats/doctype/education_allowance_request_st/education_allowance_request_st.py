@@ -3,7 +3,7 @@
 
 import frappe
 from frappe import _
-from frappe.utils import month_diff, today, flt, getdate, add_to_date
+from frappe.utils import month_diff, today, flt, getdate, add_to_date, get_link_to_form
 from frappe.model.document import Document
 
 
@@ -12,7 +12,6 @@ class EducationAllowanceRequestST(Document):
 	def validate(self):
 		self.set_season_type_based_on_date()
 		self.validate_employee_not_in_test_period()
-		self.claculate_and_validate_child_and_age()
 		self.calculate_and_validate_approved_amount()
 		self.calculate_unpaid_amount()
 		self.validate_duplicate_record()
@@ -49,20 +48,6 @@ class EducationAllowanceRequestST(Document):
 		if test_period > getdate(self.creation_date): 
 				frappe.throw(_("Employee is in test period<br>Hence cannot apply for Education Allowance"))
 
-	def claculate_and_validate_child_and_age(self):
-		if len(self.education_allowance_request_details)>0:
-			if len(self.education_allowance_request_details)>3:
-				frappe.throw(_("Maximum 3 children are allowed for Education Allowance."))
-			for row in self.education_allowance_request_details:
-				if row.date_of_birth:
-					child_age = (month_diff(today(),row.date_of_birth))/12
-					print(child_age,"======",child_age/12)
-					row.age = child_age
-					min_allowed_age, max_allowed_age = frappe.db.get_value("Stats Settings ST",None,["minimum_age_for_education_allowance","maximum_age_for_education_allowance"])
-					print(min_allowed_age, max_allowed_age,"----")
-					if child_age < flt(min_allowed_age) or child_age > flt(max_allowed_age):
-						frappe.throw(_("#Row {0} :{1} is not eligible for Education Allowance".format(row.idx,row.child_name)))
-
 	def calculate_and_validate_approved_amount(self):
 		total_approved_amount = 0
 		check_against_grade_limit = frappe.db.get_single_value("Stats Settings ST","check_against_grade_limit")
@@ -70,9 +55,10 @@ class EducationAllowanceRequestST(Document):
 		if len(self.education_allowance_request_details)>0:
 			for row in self.education_allowance_request_details:
 				if check_against_grade_limit == 1:
-					limit_per_season = self.limit / 3
-					if row.approved_amount > limit_per_season:
-						frappe.throw(_("#Row {0} :Your approved amount cannot be greater than {1}".format(row.idx,flt(limit_per_season,2))))
+					if self.allowance_limit:
+						limit_per_season = self.allowance_limit / 3
+						if row.approved_amount > limit_per_season:
+							frappe.throw(_("#Row {0} :Your approved amount cannot be greater than {1}".format(row.idx,flt(limit_per_season,2))))
 				total_approved_amount = total_approved_amount + row.approved_amount
 		
 		self.approved_amount = total_approved_amount
@@ -106,13 +92,22 @@ class EducationAllowanceRequestST(Document):
 	def get_employee_dependants(self):
 		employee_family_details = []
 		employee_doc = frappe.get_doc("Employee", self.employee_no)
-		if len(employee_doc.custom_dependants)>0:
-			for row in employee_doc.custom_dependants:
-				employee_child = {}
-				if row.relation in ["Son","Daughter"]:
-					employee_child["name"]=row.name1
-					employee_child["relation"]=row.relation
-					employee_child["date_of_birth"]=row.date_of_birth
-					employee_family_details.append(employee_child)
+		education_allowance_amount = frappe.db.get_value("Employee Grade",employee_doc.grade,"custom_education_allowance_amount")
+		if education_allowance_amount == 0:
+			frappe.throw(_("Please set Education Allowance Amount in employee grade {0}".format(get_link_to_form("Employee Grade",employee_doc.grade))))
+		else :
+			if len(employee_doc.custom_dependants)>0:
+				for row in employee_doc.custom_dependants:
+					employee_child = {}
+					if row.relation in ["Son","Daughter"]:
+						child_age = (month_diff(today(),row.date_of_birth))/12
+						min_allowed_age, max_allowed_age = frappe.db.get_value("Stats Settings ST",None,["minimum_age_for_education_allowance","maximum_age_for_education_allowance"])
+						if child_age > flt(min_allowed_age) and child_age < flt(max_allowed_age):
+							employee_child["name"]=row.name1
+							employee_child["relation"]=row.relation
+							employee_child["date_of_birth"]=row.date_of_birth
+							employee_child["age"]=flt(child_age,0)
+							employee_child["approved_amount"]=education_allowance_amount / 3
+							employee_family_details.append(employee_child)
 		print(employee_family_details,"--------family details")
 		return employee_family_details

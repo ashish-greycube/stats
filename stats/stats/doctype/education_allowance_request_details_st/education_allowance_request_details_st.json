@@ -65,8 +65,7 @@
    "fieldname": "approved_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Approved Amount",
-   "reqd": 1
+   "label": "Approved Amount"
   },
   {
    "fieldname": "previous_unpaid",
@@ -90,7 +89,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-12-10 07:26:07.511201",
+ "modified": "2024-12-11 11:38:20.529751",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Education Allowance Request Details ST",
