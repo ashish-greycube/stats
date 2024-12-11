@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{educational_year_from}-{educational_year_to}",
+ "creation": "2024-12-10 09:56:53.779710",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "educational_year_from",
+  "column_break_wcje",
+  "educational_year_to"
+ ],
+ "fields": [
+  {
+   "fieldname": "educational_year_from",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Educational Year From",
+   "options": "Fiscal Year",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_wcje",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "educational_year_to",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Educational Year To",
+   "options": "Fiscal Year",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-12-10 09:58:57.252323",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Educational Year ST",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

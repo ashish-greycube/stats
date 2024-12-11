@@ -130,3 +130,13 @@ class PaymentProcedureST(Document):
 			elif self.reference_name == "Vacation Encashment Sheet ST":
 				create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_debit_account_mof,self.total_amount,je_date=self.transaction_date)
 				create_payment_journal_entry_from_payment_procedure(self,company_default_payment_order_account,company_default_central_bank_account,self.total_amount,je_date=today())
+			
+			elif self.reference_name == "Education Allowance Sheet ST":
+				company_education_allowance_chargeable_account_ = frappe.db.get_value("Company",company,"custom_education_allowance_chargeable_account_")
+				if self.payment_type == "Direct":
+					create_payment_journal_entry_from_payment_procedure(self,company_default_central_bank_account,company_default_payment_order_account,self.total_amount,je_date=self.transaction_date)
+					create_payment_journal_entry_from_payment_procedure(self,company_education_allowance_chargeable_account_,company_default_central_bank_account,self.total_amount,je_date=today())
+				elif self.payment_type == "Indirect":
+					if self.middle_bank_account:
+						create_payment_journal_entry_from_payment_procedure(self,self.middle_bank_account,company_default_payment_order_account,self.total_amount,je_date=self.bank_enhancement_date)
+						create_payment_journal_entry_from_payment_procedure(self,company_education_allowance_chargeable_account_,self.middle_bank_account,self.total_amount,je_date=today())

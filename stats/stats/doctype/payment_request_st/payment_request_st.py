@@ -60,6 +60,11 @@ class PaymentRequestST(Document):
 		elif self.reference_name == "Vacation Encashment Sheet ST":
 			company_default_vacation_allocated_account = frappe.db.get_value("Company",company,"custom_default_vacation_allocated_account")
 			self.create_journal_entry_for_end_of_service_and_vacation_encasement(company_default_vacation_allocated_account)
+		
+		elif self.reference_name == "Education Allowance Sheet ST":
+			company_education_allowance_expense_account = frappe.db.get_value("Company",company,"custom_education_allowance_expense_account")
+			company_education_allowance_chargeable_account_ = frappe.db.get_value("Company",company,"custom_education_allowance_chargeable_account_")
+			self.create_journal_entry_on_submit_of_payment_request(company_education_allowance_expense_account,company_education_allowance_chargeable_account_)
 
 
 	def create_journal_entry_on_submit_of_payment_request(self,company_budget_expense_account,company_budget_chargeable_account):

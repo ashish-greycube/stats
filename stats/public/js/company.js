@@ -159,5 +159,23 @@ frappe.ui.form.on("Company", {
                 }
             };
         })
+        frm.set_query("custom_education_allowance_expense_account", function (doc) {
+            return {
+                filters: {
+                    "account_type": ["in",["Expense Account", "Indirect Expense"]],
+                    "company": frm.doc.name,
+                    "is_group": 0
+                }
+            };
+        })
+        frm.set_query("custom_education_allowance_chargeable_account_", function (doc) {
+            return {
+                filters: {
+                   "account_type": "Chargeable",
+                   "company": frm.doc.name,
+                   "is_group": 0
+                }
+            };
+        })
     }
 })
