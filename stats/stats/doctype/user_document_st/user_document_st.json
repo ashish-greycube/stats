@@ -6,11 +6,10 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "title",
-  "category",
-  "file_url",
+  "preview_html",
   "preview_section",
-  "preview_html"
+  "title",
+  "file_url"
  ],
  "fields": [
   {
@@ -18,11 +17,6 @@
    "fieldtype": "Data",
    "label": "Title",
    "unique": 1
-  },
-  {
-   "fieldname": "category",
-   "fieldtype": "Data",
-   "label": "Category"
   },
   {
    "fieldname": "preview_html",
@@ -39,9 +33,10 @@
    "label": "Preview"
   }
  ],
+ "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-07 09:29:36.221811",
+ "modified": "2024-12-12 11:37:06.558012",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "User Document ST",
