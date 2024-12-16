@@ -7,7 +7,6 @@
  "engine": "InnoDB",
  "field_order": [
   "transaction_date",
-  "scholarship_type",
   "country",
   "amended_from",
   "column_break_jobh",
@@ -40,19 +39,10 @@
    "reqd": 1
   },
   {
-   "fieldname": "scholarship_type",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Scholarship Type",
-   "options": "\nInternal\nExternal",
-   "reqd": 1
-  },
-  {
    "fieldname": "country",
-   "fieldtype": "Link",
-   "in_list_view": 1,
+   "fieldtype": "Table MultiSelect",
    "label": "Country",
-   "options": "Country",
+   "options": "Multi Country ST",
    "reqd": 1
   },
   {
@@ -115,7 +105,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-18 10:13:39.906296",
+ "modified": "2024-12-16 10:22:33.246414",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Scholarship ST",

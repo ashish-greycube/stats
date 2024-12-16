@@ -14,7 +14,6 @@
   "section",
   "business_trip_type",
   "trip_direction",
-  "no_of_directions",
   "column_break_xuou",
   "creation_date",
   "status",
@@ -85,11 +84,6 @@
    "fieldname": "trip_direction",
    "fieldtype": "Data",
    "label": "Trip Direction"
-  },
-  {
-   "fieldname": "no_of_directions",
-   "fieldtype": "Data",
-   "label": "No of Directions"
   },
   {
    "fieldname": "column_break_xuou",
@@ -182,7 +176,7 @@
    "link_fieldname": "business_trip_reference"
   }
  ],
- "modified": "2024-09-11 12:09:29.916048",
+ "modified": "2024-12-12 15:10:10.467576",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Business Trip Request ST",

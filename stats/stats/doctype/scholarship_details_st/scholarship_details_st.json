@@ -8,7 +8,6 @@
  "field_order": [
   "specialisation_type",
   "qualification",
-  "max_no_of_applicants",
   "column_break_kqqk",
   "scholarship_period",
   "english_required",
@@ -30,13 +29,6 @@
    "in_list_view": 1,
    "label": "Qualification",
    "options": "Qualification ST",
-   "reqd": 1
-  },
-  {
-   "fieldname": "max_no_of_applicants",
-   "fieldtype": "Int",
-   "in_list_view": 1,
-   "label": "Max No of Applicants",
    "reqd": 1
   },
   {
@@ -75,7 +67,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-11-12 08:27:47.235523",
+ "modified": "2024-12-12 15:26:48.638592",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Scholarship Details ST",

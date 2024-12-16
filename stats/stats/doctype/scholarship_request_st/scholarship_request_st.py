@@ -10,7 +10,7 @@ from stats.hr_utils import check_if_holiday_between_applied_dates
 class ScholarshipRequestST(Document):
 	def validate(self):
 		self.validate_duplicate_entry_based_on_employee_scholarship_and_specialisation_type()
-		self.validate_maximum_applications()
+		# self.validate_maximum_applications()
 		# self.create_salary_structure_for_start_date_of_month()
 		# self.create_salary_structure_for_other_than_start_date_of_month()
 		# self.create_additional_salary_structure()
@@ -19,7 +19,7 @@ class ScholarshipRequestST(Document):
 		self.create_salary_structure_for_start_date_of_month()
 		self.create_salary_structure_for_other_than_start_date_of_month()
 		# self.create_additional_salary_structure()
-		self.create_future_attendance_for_scholarship_time()
+		# self.create_future_attendance_for_scholarship_time()
 
 	def validate_duplicate_entry_based_on_employee_scholarship_and_specialisation_type(self):
 		exists_scholarship = frappe.db.exists("Scholarship Request ST", {"employee_no": self.employee_no,"scholarship_no": self.scholarship_no,"specialisation_type": self.specialisation_type})
@@ -106,7 +106,7 @@ class ScholarshipRequestST(Document):
 			scholarship_doc = frappe.get_doc("Scholarship ST",{"scholarship_no":self.scholarship_no})
 			scholarship_details_list = frappe.db.get_all("Scholarship Details ST",
 												filters={"parent":scholarship_doc.name,"specialisation_type":self.specialisation_type},
-												fields=["qualification","scholarship_start_date","scholarship_end_date","english_required"])
+												fields=["qualification","english_required"])
 			return scholarship_details_list
 		
 	def create_salary_structure_for_start_date_of_month(self):

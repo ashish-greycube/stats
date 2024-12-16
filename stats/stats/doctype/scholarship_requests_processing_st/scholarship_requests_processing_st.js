@@ -35,18 +35,26 @@ frappe.ui.form.on("Scholarship Requests Processing ST", {
         });
     },
 
-    scholarship_no(frm) {
-        if (frm.doc.scholarship_no){
-            frappe.db.get_doc('Scholarship ST', null, { scholarship_no: frm.doc.scholarship_no })
-            .then(doc => {
-                frappe.db.get_value('Scholarship ST', doc.name, 'scholarship_type')
-                .then(r => {
-                    console.log(r.message.scholarship_type) // Open
-                    frm.set_value("scholarship_type",r.message.scholarship_type)
-                })
-                        })
-        }
-    },
+	refresh: function(frm) {
+		hide_all_fields_rows_for_rejected(frm)
+	},	
+
+	onload_post_render: function(frm) {
+		hide_all_fields_rows_for_rejected(frm)
+	},
+
+    // scholarship_no(frm) {
+    //     if (frm.doc.scholarship_no){
+    //         frappe.db.get_doc('Scholarship ST', null, { scholarship_no: frm.doc.scholarship_no })
+    //         .then(doc => {
+    //             frappe.db.get_value('Scholarship ST', doc.name, 'scholarship_type')
+    //             .then(r => {
+    //                 console.log(r.message.scholarship_type) // Open
+    //                 frm.set_value("scholarship_type",r.message.scholarship_type)
+    //             })
+    //                     })
+    //     }
+    // },
 
     fetch_scholarship_requests(frm) {
         if (frm.is_dirty() == true) {
@@ -75,3 +83,17 @@ frappe.ui.form.on("Scholarship Requests Processing ST", {
         });
     }
 });
+
+let hide_all_fields_rows_for_rejected = function(frm){
+    if (!frm.is_new()) {
+        console.log("in func")
+		let scholarship_request_details=frm.doc.scholarship_request_details
+		for (let index = 0; index < scholarship_request_details.length; index++) {
+			let action = scholarship_request_details[index].action;
+			if (action && action=="Rejected") {
+				console.log('hide')
+				$("[data-fieldname='scholarship_request_details']").find("[data-idx='"+scholarship_request_details[index].idx+"']").hide()
+			}			
+		}
+    }
+}

@@ -8,16 +8,17 @@
  "field_order": [
   "transaction_date",
   "scholarship_no",
-  "scholarship_type",
   "country",
   "fetch_scholarship_requests",
-  "amended_from",
+  "scholarship_start_date",
+  "scholarship_end_date",
   "column_break_agnc",
   "from_date",
   "to_date",
   "main_department",
   "sub_department",
   "specialisation_type",
+  "amended_from",
   "section_break_lxpu",
   "scholarship_request_details"
  ],
@@ -47,13 +48,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "scholarship_type",
-   "fieldtype": "Select",
-   "label": "Scholarship Type",
-   "options": "\nInternal\nExternal",
-   "read_only": 1
-  },
-  {
    "fieldname": "country",
    "fieldtype": "Link",
    "label": "Country",
@@ -61,12 +55,14 @@
    "read_only": 1
   },
   {
+   "description": "This date will check with transaction date of Scholarship request",
    "fieldname": "from_date",
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Request From Date"
   },
   {
+   "description": "This date will check with transaction date of Scholarship request",
    "fieldname": "to_date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -109,12 +105,26 @@
    "fieldname": "fetch_scholarship_requests",
    "fieldtype": "Button",
    "label": "Fetch Scholarship Requests"
+  },
+  {
+   "description": "Salary will be calculate based on this date",
+   "fieldname": "scholarship_start_date",
+   "fieldtype": "Date",
+   "label": "Scholarship Start Date",
+   "reqd": 1
+  },
+  {
+   "description": "Salary will be calculate based on this date",
+   "fieldname": "scholarship_end_date",
+   "fieldtype": "Date",
+   "label": "Scholarship End Date",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-18 15:52:46.977525",
+ "modified": "2024-12-16 13:54:45.749745",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Scholarship Requests Processing ST",

@@ -11,6 +11,7 @@
   "training_type",
   "training_start_date",
   "training_end_date",
+  "ignore_holidays_in_no_of_days",
   "no_of_days",
   "total_of_hours",
   "training_level",
@@ -30,6 +31,12 @@
   "employee_checkout_required",
   "training_status",
   "employee",
+  "training_place",
+  "targeted_group",
+  "main_department",
+  "sub_department",
+  "section_break_ogzg",
+  "training_special_employee_details",
   "section_break_duaf",
   "training_event_employee_details"
  ],
@@ -192,6 +199,55 @@
    "hidden": 1,
    "label": "Employee",
    "options": "Employee"
+  },
+  {
+   "default": "0",
+   "fieldname": "ignore_holidays_in_no_of_days",
+   "fieldtype": "Check",
+   "label": "Ignore Holidays In No of Days"
+  },
+  {
+   "fieldname": "training_place",
+   "fieldtype": "Select",
+   "label": "Training Place",
+   "options": "\nInside Stats\nOutside Stats"
+  },
+  {
+   "fieldname": "targeted_group",
+   "fieldtype": "Select",
+   "label": "Targeted Group",
+   "options": "\nMain Department\nSub Department\nSpecial Employee Group"
+  },
+  {
+   "depends_on": "eval:doc.targeted_group==\"Main Department\"",
+   "fieldname": "main_department",
+   "fieldtype": "Link",
+   "label": "Main Department",
+   "link_filters": "[[\"Department\",\"is_group\",\"=\",1]]",
+   "mandatory_depends_on": "eval:doc.targeted_group==\"Main Department\"",
+   "options": "Department"
+  },
+  {
+   "depends_on": "eval:doc.targeted_group==\"Sub Department\"",
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "link_filters": "[[\"Department\",\"is_group\",\"=\",0]]",
+   "mandatory_depends_on": "eval:doc.targeted_group==\"Sub Department\"",
+   "options": "Department"
+  },
+  {
+   "depends_on": "eval:doc.targeted_group == \"Special Employee Group\"",
+   "fieldname": "section_break_ogzg",
+   "fieldtype": "Section Break",
+   "mandatory_depends_on": "eval:doc.targeted_group == \"Special Employee Group\""
+  },
+  {
+   "fieldname": "training_special_employee_details",
+   "fieldtype": "Table",
+   "label": "Training Special Employee Details",
+   "mandatory_depends_on": "eval:doc.targeted_group == \"Special Employee Group\"",
+   "options": "Training Special Employee Details ST"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -202,7 +258,7 @@
    "link_fieldname": "training_event"
   }
  ],
- "modified": "2024-11-13 10:45:49.065254",
+ "modified": "2024-12-16 11:08:27.677843",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Training Event ST",

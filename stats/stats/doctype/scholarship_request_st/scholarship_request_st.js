@@ -36,8 +36,6 @@ frappe.ui.form.on("Scholarship Request ST", {
                 let scholarship_detail_list = r.message
                 if (scholarship_detail_list.length > 0) {
                     frm.set_value("qualification", scholarship_detail_list[0].qualification)
-                    frm.set_value("scholarship_start_date", scholarship_detail_list[0].scholarship_start_date)
-                    frm.set_value("scholarship_end_date", scholarship_detail_list[0].scholarship_end_date)
                     frm.set_value("english_required", scholarship_detail_list[0].english_required)
                 }
             })

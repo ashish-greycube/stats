@@ -6,6 +6,7 @@ from frappe import _
 from frappe.model.mapper import get_mapped_doc
 from frappe.utils import get_link_to_form
 from frappe.model.document import Document
+from erpnext.manufacturing.doctype.workstation.workstation import get_default_holiday_list
 
 
 class TrainingEventST(Document):
@@ -26,13 +27,26 @@ class TrainingEventST(Document):
 					create_training_evaluation(self.name,row.employee_no)
 					frappe.db.set_value("Training Event ST",self.name,"training_status","Finished")
 		
-
 	@frappe.whitelist()
 	def fetch_training_request(self):
 		approved_training_request_list = frappe.db.get_all("Training Request ST",
 													 filters = {"training_event":self.name,"docstatus":1,"status":"Accepted"},
 													 fields=["name"])
 		return approved_training_request_list
+
+	@frappe.whitelist()
+	def check_holiday_between_start_end_date(self):
+		print("---------------------")
+		default_holiday_list = get_default_holiday_list()
+		if default_holiday_list:
+			holidays = frappe.db.get_all("Holiday",
+								parent_doctype="Holiday List",
+								filters={"parent":default_holiday_list,"holiday_date":["between",[self.training_start_date,self.training_end_date]]},
+								fields=["name"])
+			if len(holidays)>0:
+				holiday_count = len(holidays)
+				return holiday_count
+		# print(default_holiday_list,"default holiday list------------------")
 
 def create_training_evaluation(training_event,employee):
 		training_evaluation_doc = frappe.new_doc("Training Evaluation ST")
