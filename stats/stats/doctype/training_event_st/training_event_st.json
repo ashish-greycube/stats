@@ -35,7 +35,7 @@
   "targeted_group",
   "main_department",
   "sub_department",
-  "section_break_ogzg",
+  "section_break_bdeb",
   "training_special_employee_details",
   "section_break_duaf",
   "training_event_employee_details"
@@ -62,6 +62,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Training Name",
+   "no_copy": 1,
    "reqd": 1
   },
   {
@@ -237,16 +238,15 @@
    "options": "Department"
   },
   {
-   "depends_on": "eval:doc.targeted_group == \"Special Employee Group\"",
-   "fieldname": "section_break_ogzg",
-   "fieldtype": "Section Break",
-   "mandatory_depends_on": "eval:doc.targeted_group == \"Special Employee Group\""
+   "fieldname": "section_break_bdeb",
+   "fieldtype": "Section Break"
   },
   {
+   "depends_on": "eval:doc.targeted_group==\"Special Employee Group\"",
    "fieldname": "training_special_employee_details",
    "fieldtype": "Table",
    "label": "Training Special Employee Details",
-   "mandatory_depends_on": "eval:doc.targeted_group == \"Special Employee Group\"",
+   "mandatory_depends_on": "eval:doc.targeted_group==\"Special Employee Group\"",
    "options": "Training Special Employee Details ST"
   }
  ],
@@ -258,7 +258,7 @@
    "link_fieldname": "training_event"
   }
  ],
- "modified": "2024-12-16 11:08:27.677843",
+ "modified": "2024-12-17 07:57:37.000348",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Training Event ST",

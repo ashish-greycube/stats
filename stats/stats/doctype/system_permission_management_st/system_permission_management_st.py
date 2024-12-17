@@ -9,15 +9,15 @@ from frappe.utils import get_link_to_form
 
 class SystemPermissionManagementST(Document):
 
-	def validate(self):
-		self.validate_designation()
-		self.validate_main_department_manager()
-		self.validate_sub_department_direct_manager()
+	# def validate(self):
+	# 	self.validate_designation()
+	# 	self.validate_main_department_manager()
+	# 	self.validate_sub_department_direct_manager()
 
-	def on_submit(self):
-		self.change_designation_in_employee_profileI()
-		self.change_main_department_manager()
-		self.change_sub_department_direct_manager()
+	# def on_submit(self):
+	# 	self.change_designation_in_employee_profileI()
+	# 	self.change_main_department_manager()
+	# 	self.change_sub_department_direct_manager()
 
 	def validate_designation(self):
 		if self.old_designation and self.new_designation:

@@ -41,8 +41,10 @@
   {
    "fieldname": "employee_no",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Employee No",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "fetch_from": "employee_no.employee_name",
@@ -58,9 +60,11 @@
    "label": "Date"
   },
   {
+   "depends_on": "eval:doc.employee_no",
    "fieldname": "training_event",
    "fieldtype": "Link",
    "label": "Training Event",
+   "mandatory_depends_on": "eval:doc.employee_no",
    "options": "Training Event ST"
   },
   {
@@ -183,7 +187,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-11 12:15:07.490705",
+ "modified": "2024-12-17 08:45:19.863503",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Training Request ST",

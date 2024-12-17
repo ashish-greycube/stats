@@ -70,3 +70,36 @@ class TrainingRequestST(Document):
 					pass
 
 			frappe.msgprint(_("Attendance from {0} to {1} is created.").format(self.training_start_date,self.training_end_date),alert=True)
+
+@frappe.whitelist()
+@frappe.validate_and_sanitize_search_inputs
+def get_training_events(doctype, txt, searchfield, start, page_len, filters):
+	employee_no = filters.get("employee_no")
+	employee_main_department, employee_sub_department = frappe.db.get_value("Employee",employee_no,["department","custom_sub_department"])
+	training_specialized_for_main_department = frappe.db.get_all("Training Event ST",
+															filters={"training_status":"Open","targeted_group":"Main Department","main_department":employee_main_department},
+															fields=["name"],as_list=1)
+	
+	training_specialized_for_sub_department = frappe.db.get_all("Training Event ST",
+															filters={"training_status":"Open","targeted_group":"Sub Department","sub_department":employee_sub_department},
+															fields=["name"],as_list=1)
+	
+	training_specialized_for_group_of_employee = frappe.db.get_all("Training Event ST",
+															filters={"training_status":"Open","targeted_group":"Special Employee Group"},
+															fields=["name"])
+	final_training_event_list_for_special_employee = ()
+	if len(training_specialized_for_group_of_employee)>0:
+		for event in training_specialized_for_group_of_employee:
+			training_event_doc = frappe.get_doc("Training Event ST",event.name)
+			if len(training_event_doc.training_special_employee_details)>0:
+				for row in training_event_doc.training_special_employee_details:
+					if row.employee_no == employee_no:
+						event_name = (event.get('name'),)
+						final_training_event_list_for_special_employee = final_training_event_list_for_special_employee + (event_name,)
+	
+	training_event_list_for_all = frappe.db.get_all("Training Event ST",
+												filters={"training_status":"Open","targeted_group":""},
+												fields=["name"],as_list=1)
+
+	all_training_event = final_training_event_list_for_special_employee + training_specialized_for_main_department + training_specialized_for_sub_department + training_event_list_for_all
+	return all_training_event
