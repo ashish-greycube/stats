@@ -15,9 +15,9 @@ class ScholarshipRequestST(Document):
 		# self.create_salary_structure_for_other_than_start_date_of_month()
 		# self.create_additional_salary_structure()
 
-	def on_update_after_submit(self):
-		self.create_salary_structure_for_start_date_of_month()
-		self.create_salary_structure_for_other_than_start_date_of_month()
+	# def on_update_after_submit(self):
+	# 	self.create_salary_structure_for_start_date_of_month()
+	# 	self.create_salary_structure_for_other_than_start_date_of_month()
 		# self.create_additional_salary_structure()
 		# self.create_future_attendance_for_scholarship_time()
 

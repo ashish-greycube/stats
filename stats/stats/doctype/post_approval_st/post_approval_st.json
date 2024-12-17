@@ -22,7 +22,8 @@
   "priority",
   "post_approval_type",
   "section_break_rjrp",
-  "post_details"
+  "post_details",
+  "comments"
  ],
  "fields": [
   {
@@ -128,12 +129,17 @@
    "fieldname": "request_date",
    "fieldtype": "Date",
    "label": "Request Date"
+  },
+  {
+   "fieldname": "comments",
+   "fieldtype": "Small Text",
+   "label": "Comments"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-08 15:32:05.902524",
+ "modified": "2024-12-17 07:50:37.822337",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Post Approval ST",

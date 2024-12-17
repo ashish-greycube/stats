@@ -244,6 +244,31 @@ class JobOfferST(Document):
 			else:
 				frappe.msgprint(_("Amoumt is not set"), alert=True)
 
+	@frappe.whitelist()
+	def fill_education_qualification_and_work_history(self):
+		ja = frappe.get_doc("Job Application ST", self.job_application_reference)
+
+		if len(ja.education) > 0 and len(self.education) < 1:
+			for row in ja.education:
+				educ = self.append("education", {})
+				educ.school_univ = row.school_univ
+				educ.qualification = row.qualification
+				educ.custom_scientific_specification = row.custom_scientific_specification
+				educ.level = row.level
+				educ.year_of_passing = row.year_of_passing
+				educ.class_per = row.class_per
+				educ.maj_opt_subj = row.maj_opt_subj
+
+		if len(ja.external_work_history) > 0 and len(self.external_work_history) < 1:
+			for work in ja.external_work_history:
+				history = self.append("external_work_history", {})
+				history.company_name = work.company_name
+				history.designation = work.designation
+				history.salary = work.salary
+				history.address = work.address
+				history.contact = work.contact
+				history.total_experience = work.total_experience
+
 @frappe.whitelist()
 def make_employee(source_name, target_doc=None):
 	doc = frappe.get_doc("Job Offer ST", source_name)
@@ -256,6 +281,7 @@ def make_employee(source_name, target_doc=None):
 		target.first_name = source.candidate_name
 		target.custom_employee_name_in_english = source.candidate_namein_english
 		target.custom_country = source.country
+		target.custom_there_is_a_security_survey = source.there_is_a_security_survey
 		target.custom_religion = source.religion
 		# target.custom_id__igama_no = source.id_igama_no
 		target.department = source.main_department
@@ -272,6 +298,7 @@ def make_employee(source_name, target_doc=None):
 		target.custom_street_name = source.street_name
 		target.custom_city = source.city
 		target.custom_additional_number = source.additional_number
+
 
 	doc = get_mapped_doc(
 		"Job Offer ST",

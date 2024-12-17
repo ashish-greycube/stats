@@ -24,15 +24,22 @@
   "candidate_name",
   "candidate_namein_english",
   "date_of_birth",
-  "id_igama_no",
+  "birth_place",
   "column_break_uncl",
   "gender",
-  "id_expiration_date",
-  "country",
-  "religion",
-  "column_break_emth",
   "phone_no",
   "email",
+  "country",
+  "column_break_emth",
+  "religion",
+  "marital_status",
+  "blood_group",
+  "section_break_cllu",
+  "id_expiration_date",
+  "id_igama_no",
+  "column_break_nklu",
+  "there_is_a_security_survey",
+  "health_insurance_status",
   "candidate_national_address_section",
   "building_number",
   "neighbourhood",
@@ -47,6 +54,10 @@
   "earning",
   "column_break_yybj",
   "deduction",
+  "section_break_hfaw",
+  "education",
+  "section_break_yzqu",
+  "external_work_history",
   "section_break_jhvw",
   "terms_and_condition"
  ],
@@ -167,11 +178,13 @@
    "options": "Phone"
   },
   {
+   "fetch_from": "job_application_reference.id_igama_no",
    "fieldname": "id_igama_no",
    "fieldtype": "Data",
    "label": "ID/ Igama No "
   },
   {
+   "fetch_from": "job_application_reference.date_of_birth",
    "fieldname": "date_of_birth",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -182,6 +195,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "fetch_from": "job_application_reference.id_expiration_date",
    "fieldname": "id_expiration_date",
    "fieldtype": "Date",
    "label": "ID Expiration Date"
@@ -238,12 +252,14 @@
    "options": "Section ST"
   },
   {
+   "fetch_from": "job_application_reference.gender",
    "fieldname": "gender",
    "fieldtype": "Link",
    "label": "Gender",
    "options": "Gender"
   },
   {
+   "fetch_from": "job_application_reference.religion",
    "fieldname": "religion",
    "fieldtype": "Select",
    "label": "Religion",
@@ -259,16 +275,19 @@
    "label": "Candidate National Address"
   },
   {
+   "fetch_from": "job_application_reference.building_number",
    "fieldname": "building_number",
    "fieldtype": "Data",
    "label": "Building number"
   },
   {
+   "fetch_from": "job_application_reference.neighbourhood",
    "fieldname": "neighbourhood",
    "fieldtype": "Data",
    "label": "Neighbourhood"
   },
   {
+   "fetch_from": "job_application_reference.postal_code",
    "fieldname": "postal_code",
    "fieldtype": "Data",
    "label": "Postal code"
@@ -278,16 +297,19 @@
    "fieldtype": "Column Break"
   },
   {
+   "fetch_from": "job_application_reference.street_name",
    "fieldname": "street_name",
    "fieldtype": "Data",
    "label": "Street name"
   },
   {
+   "fetch_from": "job_application_reference.city",
    "fieldname": "city",
    "fieldtype": "Data",
    "label": "City"
   },
   {
+   "fetch_from": "job_application_reference.additional_number",
    "fieldname": "additional_number",
    "fieldtype": "Data",
    "label": "Additional number",
@@ -299,6 +321,68 @@
    "fieldtype": "Link",
    "label": "Job No",
    "options": "Job No ST"
+  },
+  {
+   "fetch_from": "job_application_reference.birth_place",
+   "fieldname": "birth_place",
+   "fieldtype": "Data",
+   "label": "Birth Place"
+  },
+  {
+   "fetch_from": "job_application_reference.marital_status",
+   "fieldname": "marital_status",
+   "fieldtype": "Select",
+   "label": "Marital Status",
+   "options": "\nSingle\nMarried\nDivorced\nWidowed"
+  },
+  {
+   "fetch_from": "job_application_reference.blood_group",
+   "fieldname": "blood_group",
+   "fieldtype": "Select",
+   "label": "Blood Group",
+   "options": "\nA+\nA-\nB+\nB-\nAB+\nAB-\nO+\nO-"
+  },
+  {
+   "fieldname": "section_break_cllu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "health_insurance_status",
+   "fieldtype": "Select",
+   "label": "Health Insurance Status",
+   "options": "\nUnder Progress\nCompleted Insurance"
+  },
+  {
+   "fieldname": "there_is_a_security_survey",
+   "fieldtype": "Select",
+   "label": "There is a security survey",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "column_break_nklu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_hfaw",
+   "fieldtype": "Section Break",
+   "label": "Educational Qualification"
+  },
+  {
+   "fieldname": "education",
+   "fieldtype": "Table",
+   "label": "Education",
+   "options": "Employee Education"
+  },
+  {
+   "fieldname": "section_break_yzqu",
+   "fieldtype": "Section Break",
+   "label": "Previous Work Experience"
+  },
+  {
+   "fieldname": "external_work_history",
+   "fieldtype": "Table",
+   "label": "External Work History",
+   "options": "Employee External Work History"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -316,7 +400,7 @@
    "link_fieldname": "custom_job_offer_reference"
   }
  ],
- "modified": "2024-11-13 13:44:42.570939",
+ "modified": "2024-12-16 13:24:16.917225",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Offer ST",

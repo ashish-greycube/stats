@@ -3,11 +3,19 @@
 
 frappe.ui.form.on("Opening Job ST", {
 	setup(frm) {
+        frm.set_query("job_title", function (doc) {
+            console.log("hellooo")
+			return {
+				query: "stats.stats.doctype.opening_job_st.opening_job_st.get_job_no",
+			};
+		});
+
         frm.set_query("main_department", function (doc) {
 			return {
 				query: "stats.api.get_main_department",
 			};
 		});
+
 		frm.set_query("sub_department", function (doc){
             if (frm.doc.main_department) {
                 return {

@@ -18,14 +18,21 @@ def check_employee_in_scholarship(employee, from_date, to_date=None):
         to_date=from_date
 
     scholarship = frappe.qb.DocType('Scholarship Request ST')
+    scholarship_processing = frappe.qb.DocType('Scholarship Requests Processing ST')
+    scholarship_request = frappe.qb.DocType('Scholarship Request Details ST')
+    
     overlapping_scholarship = (
 	frappe.qb.from_(scholarship)
             .select(scholarship.name)
+            .inner_join(scholarship_request)
+			.on(scholarship.name == scholarship_request.scholarship_request_reference)
+			.inner_join(scholarship_processing)
+			.on(scholarship_request.parent == scholarship_processing.name)
             .where(
                 (scholarship.employee_no == employee)
                 & (scholarship.docstatus < 2)
-                & (to_date >= scholarship.scholarship_start_date)
-		        & (from_date <= scholarship.scholarship_end_date)
+                & (to_date >= scholarship_processing.scholarship_start_date)
+		        & (from_date <= scholarship_processing.scholarship_end_date)
                 & (scholarship.acceptance_status == "Accepted")
             )
         ).run(as_dict=True)

@@ -70,12 +70,12 @@
   {
    "fetch_from": "employee.current_address",
    "fieldname": "address",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "label": "Address"
   },
   {
    "fieldname": "content",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Content"
   },
   {
@@ -149,7 +149,7 @@
    "link_fieldname": "post_request_reference"
   }
  ],
- "modified": "2024-08-29 10:43:05.000591",
+ "modified": "2024-12-17 07:49:30.214835",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Post Request ST",

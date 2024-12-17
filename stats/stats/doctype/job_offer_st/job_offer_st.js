@@ -18,6 +18,10 @@ frappe.ui.form.on("Job Offer ST", {
 				};
 			}
 		})
+
+		if(frm.is_new() && frm.doc.job_application_reference){
+			fill_education_qualification_and_work_history(frm)
+		}
 	},
 	refresh: function (frm) {
 		if (frm.doc.status == 'Accepted') {
@@ -35,6 +39,10 @@ frappe.ui.form.on("Job Offer ST", {
 	job_application_reference: function(frm){
 		if(frm.is_new() && frm.doc.contract_type){
 			fill_salary_tables(frm)
+		}
+
+		if(frm.is_new() && frm.doc.job_application_reference){
+			fill_education_qualification_and_work_history(frm)
 		}
 	},
 	contract_type: function(frm) {
@@ -110,4 +118,8 @@ frappe.ui.form.on("Job Offer Details ST", {
 let fill_salary_tables = function(frm) {
 	frm.call("fill_salary_tables");
 	// frm.save()
+}
+
+let fill_education_qualification_and_work_history = function(frm){
+	frm.call("fill_education_qualification_and_work_history")
 }

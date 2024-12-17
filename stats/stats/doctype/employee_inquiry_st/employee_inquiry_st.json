@@ -107,6 +107,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "inquiry_type.assign_to_employee",
    "fieldname": "assign_to",
    "fieldtype": "Link",
    "label": "Assign To",
@@ -122,7 +123,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-15 15:49:40.491412",
+ "modified": "2024-12-16 13:54:24.028369",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Inquiry ST",

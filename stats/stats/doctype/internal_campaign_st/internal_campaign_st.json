@@ -22,6 +22,7 @@
   "column_break_x8g4",
   "workshop_department",
   "invitation_for_others",
+  "attachment",
   "campaign_goals_section",
   "campaign_goals",
   "employee_beneficiary_section",
@@ -173,11 +174,18 @@
    "fieldname": "branches",
    "fieldtype": "Check",
    "label": "Branches"
+  },
+  {
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Attachment",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-28 15:26:10.625889",
+ "modified": "2024-12-17 07:48:30.912462",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Internal Campaign ST",
