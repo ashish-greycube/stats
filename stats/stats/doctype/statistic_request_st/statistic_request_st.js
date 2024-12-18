@@ -28,4 +28,25 @@ frappe.ui.form.on("Statistic Request ST", {
             }
         })
     },
+
+    planned_start_date(frm) {
+        set_no_of_days(frm)
+	},
+    planned_end_date(frm){
+        set_no_of_days(frm)
+    },
+    no_of_days(frm){
+        if (frm.doc.no_of_days){
+            frm.set_value("contract_time",frm.doc.no_of_days + 3)
+        }
+    }
 });
+
+let set_no_of_days = function (frm) {
+    let start_date = frm.doc.planned_start_date
+    let end_date = frm.doc.planned_end_date
+    if (start_date && end_date) {
+        let no_of_day = frappe.datetime.get_day_diff(end_date, start_date)
+        frm.set_value("no_of_days", (no_of_day || 0)+1)
+    }
+}

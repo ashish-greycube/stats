@@ -6,50 +6,54 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "section_break_jvde",
+  "section_break_kcke",
   "creation_date",
+  "main_department",
+  "sub_department",
   "created_by",
   "statistic_name",
   "statistic_type",
   "approval_status",
+  "column_break_mmfp",
   "execution_status",
   "planned_start_date",
   "planned_end_date",
   "no_of_days",
+  "contract_time",
   "request_type",
-  "column_break_rjax",
-  "main_department",
-  "sub_department",
-  "number_of_researchers",
-  "number_of_inspectors",
+  "is_there_is_test_statistic",
+  "test_statistic_date",
+  "column_break_tdoz",
+  "case_status",
+  "no_of_sample",
+  "statistics_priority",
+  "statistics_method",
+  "issue_date",
+  "form_question_no",
+  "question_time_in_second",
+  "section_break_mqmm",
+  "no_of_visits",
+  "form_filling_duration",
+  "average_trip_duration",
+  "researcher_share",
+  "no_of_researchers_based_on_sample",
+  "reduce_rate",
+  "column_break_rhse",
+  "no_of_researchers",
+  "no_of_inspectors",
   "no_of_support_team",
-  "no_of_workers",
   "no_of_supervisor",
   "total_no_team",
-  "workers_cost",
+  "employee_cost",
+  "column_break_nvnp",
   "estimated_cost",
-  "total_estimated_cost",
   "reservation_value",
   "final_cost",
   "actual_cost",
-  "column_break_piws",
-  "statistics_method",
-  "quality_department",
-  "data_collection_department",
-  "statistics_priority",
-  "no_of_sample",
-  "no_of_devices",
-  "no_of_visits",
-  "statistics_period",
   "number_of_reserve_workers",
-  "section_break_kcke",
   "amended_from"
  ],
  "fields": [
-  {
-   "fieldname": "section_break_jvde",
-   "fieldtype": "Section Break"
-  },
   {
    "fieldname": "amended_from",
    "fieldtype": "Link",
@@ -70,18 +74,16 @@
   },
   {
    "fieldname": "statistic_name",
-   "fieldtype": "Data",
-   "label": "Statistic Name"
+   "fieldtype": "Link",
+   "label": "Statistic Name",
+   "link_filters": "[[\"Statistic Name ST\",\"docstatus\",\"=\",\"1\"]]",
+   "options": "Statistic Name ST"
   },
   {
    "fieldname": "statistic_type",
    "fieldtype": "Link",
    "label": "Statistic Type",
    "options": "Statistic Type ST"
-  },
-  {
-   "fieldname": "column_break_rjax",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "created_by",
@@ -134,7 +136,8 @@
   },
   {
    "fieldname": "section_break_kcke",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Department Request Information"
   },
   {
    "fieldname": "main_department",
@@ -153,31 +156,11 @@
    "reqd": 1
   },
   {
-   "allow_on_submit": 1,
-   "fieldname": "number_of_researchers",
-   "fieldtype": "Int",
-   "label": "Number of Researchers"
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "number_of_inspectors",
-   "fieldtype": "Int",
-   "label": "Number of Inspectors"
-  },
-  {
-   "allow_on_submit": 1,
    "fieldname": "no_of_support_team",
    "fieldtype": "Int",
    "label": "No of Support Team"
   },
   {
-   "allow_on_submit": 1,
-   "fieldname": "no_of_workers",
-   "fieldtype": "Int",
-   "label": "No of Workers"
-  },
-  {
-   "allow_on_submit": 1,
    "fieldname": "no_of_supervisor",
    "fieldtype": "Int",
    "label": "No of Supervisor"
@@ -188,21 +171,9 @@
    "label": "Total No Team"
   },
   {
-   "fieldname": "workers_cost",
-   "fieldtype": "Currency",
-   "label": "Workers Cost",
-   "precision": "2"
-  },
-  {
    "fieldname": "estimated_cost",
    "fieldtype": "Currency",
    "label": "Estimated Cost",
-   "precision": "2"
-  },
-  {
-   "fieldname": "total_estimated_cost",
-   "fieldtype": "Currency",
-   "label": "Total Estimated Cost",
    "precision": "2"
   },
   {
@@ -225,27 +196,11 @@
    "precision": "2"
   },
   {
-   "fieldname": "column_break_piws",
-   "fieldtype": "Column Break"
-  },
-  {
    "allow_on_submit": 1,
    "fieldname": "statistics_method",
    "fieldtype": "Select",
    "label": "Statistics Method",
    "options": "\nBy Phone\nBy Field\nBy Record\nBy Mail"
-  },
-  {
-   "fieldname": "quality_department",
-   "fieldtype": "Link",
-   "label": "Quality Department",
-   "options": "Department"
-  },
-  {
-   "fieldname": "data_collection_department",
-   "fieldtype": "Link",
-   "label": "Data Collection Department",
-   "options": "Department"
   },
   {
    "default": "Normal",
@@ -260,33 +215,131 @@
    "label": "No of Sample"
   },
   {
-   "fieldname": "no_of_devices",
-   "fieldtype": "Int",
-   "label": "No of Devices"
-  },
-  {
    "fieldname": "no_of_visits",
    "fieldtype": "Int",
    "label": "No of Visits"
-  },
-  {
-   "default": "Once",
-   "fieldname": "statistics_period",
-   "fieldtype": "Select",
-   "label": "Statistics Period",
-   "options": "Once\nMonthly\nQuarterly\nSemi-Annual\nYearly"
   },
   {
    "fieldname": "number_of_reserve_workers",
    "fieldtype": "Float",
    "label": "Number of reserve workers",
    "precision": "3"
+  },
+  {
+   "fieldname": "column_break_tdoz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_mqmm",
+   "fieldtype": "Section Break",
+   "label": "Statistic Information"
+  },
+  {
+   "fieldname": "column_break_nvnp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contract_time",
+   "fieldtype": "Int",
+   "label": "Contract Time"
+  },
+  {
+   "fieldname": "is_there_is_test_statistic",
+   "fieldtype": "Select",
+   "label": "Is There is Test Statistic",
+   "options": "\nYes\nNo"
+  },
+  {
+   "depends_on": "eval:doc.is_there_is_test_statistic==\"Yes\"",
+   "fieldname": "test_statistic_date",
+   "fieldtype": "Date",
+   "label": "Test Statistic Date",
+   "mandatory_depends_on": "eval:doc.is_there_is_test_statistic==\"Yes\""
+  },
+  {
+   "fieldname": "case_status",
+   "fieldtype": "Link",
+   "label": "Case Status",
+   "options": "Case Status ST"
+  },
+  {
+   "fieldname": "issue_date",
+   "fieldtype": "Date",
+   "label": "Issue Date"
+  },
+  {
+   "fieldname": "form_question_no",
+   "fieldtype": "Int",
+   "label": "Form Question No",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "description": "In Seconds",
+   "fieldname": "question_time_in_second",
+   "fieldtype": "Int",
+   "label": "Question time in Second",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "form_filling_duration",
+   "fieldtype": "Float",
+   "label": "Form Filling Duration",
+   "precision": "2"
+  },
+  {
+   "fetch_from": "case_status.average_trip_duration",
+   "fieldname": "average_trip_duration",
+   "fieldtype": "Float",
+   "label": "Average Trip Duration",
+   "precision": "2"
+  },
+  {
+   "fieldname": "researcher_share",
+   "fieldtype": "Float",
+   "label": "Researcher Share",
+   "precision": "2"
+  },
+  {
+   "fieldname": "no_of_researchers_based_on_sample",
+   "fieldtype": "Float",
+   "label": "No of Researchers Based on Sample"
+  },
+  {
+   "fieldname": "reduce_rate",
+   "fieldtype": "Int",
+   "label": "Reduce Rate"
+  },
+  {
+   "fieldname": "no_of_researchers",
+   "fieldtype": "Int",
+   "label": "No of Researchers"
+  },
+  {
+   "fieldname": "column_break_mmfp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_rhse",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "no_of_inspectors",
+   "fieldtype": "Int",
+   "label": "No of Inspectors"
+  },
+  {
+   "fieldname": "employee_cost",
+   "fieldtype": "Currency",
+   "label": "Employee Cost",
+   "precision": "2"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-12-02 09:26:49.831281",
+ "modified": "2024-12-18 08:10:20.841348",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Request ST",
