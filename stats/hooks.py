@@ -162,7 +162,8 @@ doc_events = {
         "after_insert":"stats.api.set_last_sync_of_checkin_on_save_of_employee_checkin"
     },
     "Payroll Entry": {
-        "before_submit": "stats.salary.create_additonal_salary_for_deduction"
+        "before_submit": ["stats.salary.create_additonal_salary_for_deduction",
+                          "stats.salary.create_addtional_salary_for_new_joinee"]
     },
     "Material Request": {
         "validate":"stats.api.validate_request_classification"

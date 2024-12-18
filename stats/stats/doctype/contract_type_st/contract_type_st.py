@@ -9,7 +9,7 @@ from frappe.model.document import Document
 class ContractTypeST(Document):
 	def validate(self):
 		self.set_in_mins()
-		self.validate_salary_structure_percentage()
+		# self.validate_salary_structure_percentage()
 		self.validate_considered_vacation_days()
 
 	def set_in_mins(self):

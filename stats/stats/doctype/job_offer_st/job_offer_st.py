@@ -224,6 +224,7 @@ class JobOfferST(Document):
 					formula=ear.formula
 					if formula  and formula.find(field_name_of_total_monthly_salary)==-1:
 						ear.amount = frappe.safe_eval(formula, None,salary_abbreviation_dict)
+						salary_abbreviation_dict[ear.abbr]=ear.amount
 						
 						print(ear.amount, '--ear.amount')
 						if ear.amount == 0 or ear.amount == None:
@@ -234,6 +235,7 @@ class JobOfferST(Document):
 					formula=ded.formula
 					if formula  and formula.find(field_name_of_total_monthly_salary)==-1:
 						ded.amount = frappe.safe_eval(formula, None,salary_abbreviation_dict)
+						salary_abbreviation_dict[ded.abbr]=ded.amount
 
 						print(ded.amount, '--ded.amount')
 						if ded.amount == 0 or ded.amount == None:

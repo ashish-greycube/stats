@@ -39,12 +39,18 @@
   "section_break_etcm",
   "default_evaluation_template_for_test_period",
   "salary_component_tab",
+  "payroll_section",
+  "consider_incomplete_monthly_mins",
+  "every_month_payroll_date",
   "earnings_section",
   "basic_salary_component",
+  "column_break_oplc",
+  "default_new_hire_earning_component",
   "deductions_section",
   "lwpabsent_deduction_component",
   "penalty_deduction_component",
   "resignation_deduction_component",
+  "default_new_hire_due_component",
   "column_break_pejt",
   "incomplete_monthly_mins_deduction_component",
   "absent_deduction_component",
@@ -446,12 +452,50 @@
    "fieldname": "check_against_grade_limit",
    "fieldtype": "Check",
    "label": "Check Against Grade Limit "
+  },
+  {
+   "default": "0",
+   "fieldname": "consider_incomplete_monthly_mins",
+   "fieldtype": "Check",
+   "label": "Consider Incomplete Monthly Mins?"
+  },
+  {
+   "fieldname": "payroll_section",
+   "fieldtype": "Section Break",
+   "label": "Payroll"
+  },
+  {
+   "fieldname": "every_month_payroll_date",
+   "fieldtype": "Select",
+   "label": "Every Month Payroll Date",
+   "options": "\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30",
+   "reqd": 1
+  },
+  {
+   "fieldname": "default_new_hire_earning_component",
+   "fieldtype": "Link",
+   "label": "Default New Hire Earning Component",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Earning\"]]",
+   "options": "Salary Component",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_oplc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_new_hire_due_component",
+   "fieldtype": "Link",
+   "label": "Default New Hire Due Component",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
+   "options": "Salary Component",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-12-10 09:01:45.062492",
+ "modified": "2024-12-18 10:30:50.009783",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats Settings ST",

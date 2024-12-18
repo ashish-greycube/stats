@@ -6,12 +6,14 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "instrcution",
   "section_break_6iaq",
   "employee_no",
   "creation_date",
   "employee_name",
   "main_department",
   "sub_department",
+  "contract_type",
   "section",
   "amended_from",
   "column_break_dpbo",
@@ -109,12 +111,25 @@
    "fieldname": "creation_date",
    "fieldtype": "Date",
    "label": "Creation Date"
+  },
+  {
+   "fetch_from": "employee_no.custom_contract_type",
+   "fieldname": "contract_type",
+   "fieldtype": "Link",
+   "label": "Contract Type",
+   "options": "Contract Type ST"
+  },
+  {
+   "fieldname": "instrcution",
+   "fieldtype": "HTML",
+   "label": "Instrcution",
+   "options": "<ol>\n<li>Salary Freezing Start Date <b>before</b> Payroll Date (Define In Stats Settings) :  New Freezing Salary Assignment  Starts From Freezing Start Date's  Month.</li>\n<li>Salary Freezing Start Date <b>After</b> Payroll Date (Define In Stats Settings) : New Freezing Salary Assignment  Starts From Freezing Start Date's  Next Month.</li>\n<li>Salary Freezing End Date <b>Before</b> Payroll Date (Define In Stats Settings) :  Regular Salary Starts From Freezing End Date's  Month.</li>\n<li>Salary Freezing End Date <b>After</b> Payroll Date (Define In Stats Settings) : Regular Salary Starts From Freezing End Date's  Next Month.</li>\n</ol>"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-14 13:38:45.693341",
+ "modified": "2024-12-18 13:28:25.733801",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Salary Freezing ST",

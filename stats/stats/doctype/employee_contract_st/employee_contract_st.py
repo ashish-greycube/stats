@@ -40,7 +40,7 @@ class EmployeeContractST(Document):
 			salary_structure.custom_employee_no = self.employee_no
 			salary_structure.custom_contract_start_date = self.contract_start_date
 
-			if len(self.earning):
+			if len(self.earning) > 0:
 				for ear in self.earning:
 					earning = salary_structure.append("earnings", {})
 					earning.salary_component = ear.earning
@@ -49,7 +49,7 @@ class EmployeeContractST(Document):
 					earning.is_tax_applicable = 0
 					earning.depends_on_payment_days = 0
 			
-			if len(self.deduction):
+			if len(self.deduction) > 0:
 				for ded in self.deduction:
 					deduction = salary_structure.append("deductions", {})
 					deduction.salary_component = ded.deduction
