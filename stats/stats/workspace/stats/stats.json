@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"VfGWfoLahC\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a \u0627\u0644\u0639\u0645\u0644\u064a\u0627\u062a</b></span>\",\"col\":12}},{\"id\":\"n5YCviTnAo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Post Request ST\",\"col\":3}},{\"id\":\"ZpX5f-3lez\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stats Settings ST\",\"col\":3}},{\"id\":\"dhgDwVmNY9\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b></b></span>\",\"col\":12}},{\"id\":\"nCHmvYGFpW\",\"type\":\"card\",\"data\":{\"card_name\":\"Inetrnal Comunication\",\"col\":4}},{\"id\":\"-XAe6PYlKG\",\"type\":\"card\",\"data\":{\"card_name\":\"Talent Acquisition\",\"col\":4}},{\"id\":\"QsfaysMSZI\",\"type\":\"card\",\"data\":{\"card_name\":\"Scholarship Services Management\",\"col\":4}},{\"id\":\"heS8fHsRhA\",\"type\":\"card\",\"data\":{\"card_name\":\"Operation Services Management\",\"col\":4}},{\"id\":\"dRI6xTWmlp\",\"type\":\"card\",\"data\":{\"card_name\":\"Training Management\",\"col\":4}},{\"id\":\"EmrITfhpiy\",\"type\":\"card\",\"data\":{\"card_name\":\"Man Power Planning ST\",\"col\":4}},{\"id\":\"04ptcqtLZw\",\"type\":\"card\",\"data\":{\"card_name\":\"Employee Reallocation ST\",\"col\":4}},{\"id\":\"Wzj32D6OFW\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0627\u0633\u062a\u0642\u0627\u0644\u0629 \u0648 \u0627\u0646\u0647\u0627\u0621 \u0627\u0644\u062e\u062f\u0645\u0627\u062a\",\"col\":4}},{\"id\":\"b-ffuVPrEW\",\"type\":\"card\",\"data\":{\"card_name\":\"Purchase\",\"col\":4}},{\"id\":\"WMHe2HjVWr\",\"type\":\"card\",\"data\":{\"card_name\":\"Statistics Managment\",\"col\":4}},{\"id\":\"MyT65tSJjX\",\"type\":\"card\",\"data\":{\"card_name\":\"Attendance Settings\",\"col\":4}}]",
+ "content": "[{\"id\":\"VfGWfoLahC\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a \u0627\u0644\u0639\u0645\u0644\u064a\u0627\u062a</b></span>\",\"col\":12}},{\"id\":\"n5YCviTnAo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Post Request ST\",\"col\":3}},{\"id\":\"ZpX5f-3lez\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stats Settings ST\",\"col\":3}},{\"id\":\"dhgDwVmNY9\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b></b></span>\",\"col\":12}},{\"id\":\"nCHmvYGFpW\",\"type\":\"card\",\"data\":{\"card_name\":\"Inetrnal Comunication\",\"col\":4}},{\"id\":\"-XAe6PYlKG\",\"type\":\"card\",\"data\":{\"card_name\":\"Talent Acquisition\",\"col\":4}},{\"id\":\"QsfaysMSZI\",\"type\":\"card\",\"data\":{\"card_name\":\"Scholarship Services Management\",\"col\":4}},{\"id\":\"heS8fHsRhA\",\"type\":\"card\",\"data\":{\"card_name\":\"Operation Services Management\",\"col\":4}},{\"id\":\"dRI6xTWmlp\",\"type\":\"card\",\"data\":{\"card_name\":\"Training Management\",\"col\":4}},{\"id\":\"EmrITfhpiy\",\"type\":\"card\",\"data\":{\"card_name\":\"Man Power Planning ST\",\"col\":4}},{\"id\":\"04ptcqtLZw\",\"type\":\"card\",\"data\":{\"card_name\":\"Employee Reallocation ST\",\"col\":4}},{\"id\":\"Wzj32D6OFW\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0627\u0633\u062a\u0642\u0627\u0644\u0629 \u0648 \u0627\u0646\u0647\u0627\u0621 \u0627\u0644\u062e\u062f\u0645\u0627\u062a\",\"col\":4}},{\"id\":\"b-ffuVPrEW\",\"type\":\"card\",\"data\":{\"card_name\":\"Purchase\",\"col\":4}},{\"id\":\"WMHe2HjVWr\",\"type\":\"card\",\"data\":{\"card_name\":\"Statistics Managment\",\"col\":4}},{\"id\":\"MyT65tSJjX\",\"type\":\"card\",\"data\":{\"card_name\":\"Attendance Settings\",\"col\":4}},{\"id\":\"kRjTa1MMLY\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0628\u062f\u0644 \u0627\u0644\u062a\u0639\u0644\u064a\u0645\",\"col\":4}}]",
  "creation": "2024-08-06 15:54:16.748573",
  "custom_blocks": [],
  "docstatus": 0,
@@ -527,75 +527,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Man Power Planning ST",
-   "link_count": 6,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Man Power Planning ST",
-   "link_count": 0,
-   "link_to": "Man Power Planning ST",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Man Power Plan Change Request ST",
-   "link_count": 0,
-   "link_to": "Man Power Plan Change Request ST",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "System Permission Management ST",
-   "link_count": 0,
-   "link_to": "System Permission Management ST",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Administrative structure Change Request",
-   "link_count": 0,
-   "link_to": "General Structure Change Request ST",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Employee Inquiry ST",
-   "link_count": 0,
-   "link_to": "Employee Inquiry ST",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Administrative Structure Updates Request ST",
-   "link_count": 0,
-   "link_to": "Administrative Structure Updates Request ST",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "\u0627\u0644\u0627\u0633\u062a\u0642\u0627\u0644\u0629 \u0648 \u0627\u0646\u0647\u0627\u0621 \u0627\u0644\u062e\u062f\u0645\u0627\u062a",
    "link_count": 7,
    "link_type": "DocType",
@@ -672,10 +603,118 @@
    "onboard": 0,
    "report_ref_doctype": "Employee",
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Man Power Planning ST",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Man Power Planning ST",
+   "link_count": 0,
+   "link_to": "Man Power Planning ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Man Power Plan Change Request ST",
+   "link_count": 0,
+   "link_to": "Man Power Plan Change Request ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "System Permission Management ST",
+   "link_count": 0,
+   "link_to": "System Permission Management ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Administrative structure Change Request",
+   "link_count": 0,
+   "link_to": "General Structure Change Request ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Employee Inquiry ST",
+   "link_count": 0,
+   "link_to": "Employee Inquiry ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Orgnisation Structure Update",
+   "link_count": 0,
+   "link_to": "Administrative Structure Updates Request ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0628\u062f\u0644 \u0627\u0644\u062a\u0639\u0644\u064a\u0645",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Education Allowance Request ST",
+   "link_count": 0,
+   "link_to": "Education Allowance Request ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Education Allowance Sheet ST",
+   "link_count": 0,
+   "link_to": "Education Allowance Sheet ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Educational Year ST",
+   "link_count": 0,
+   "link_to": "Educational Year ST",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-12-11 12:35:14.251030",
- "modified_by": "rahem@abdelrahem.com",
+ "modified": "2024-12-15 14:22:11.643483",
+ "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats",
  "number_cards": [],

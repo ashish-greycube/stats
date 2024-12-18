@@ -10,7 +10,7 @@
  "icon": "expenses",
  "idx": 0,
  "indicator_color": "green",
- "is_hidden": 1,
+ "is_hidden": 0,
  "label": "Budget plan",
  "links": [
   {
@@ -161,8 +161,8 @@
    "type": "Link"
   }
  ],
- "modified": "2024-12-01 14:06:43.485696",
- "modified_by": "myahia@comtech.sa",
+ "modified": "2024-12-15 12:30:26.985774",
+ "modified_by": "Administrator",
  "module": "Stats",
  "name": "Budget plan",
  "number_cards": [],

@@ -99,6 +99,7 @@
    "default": "Accept",
    "fieldname": "action",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Action",
    "options": "\nAccept\nReject"
   },
@@ -112,7 +113,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-18 11:21:35.955939",
+ "modified": "2024-12-13 13:28:06.940979",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Attendance Request ST",
