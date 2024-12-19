@@ -219,6 +219,7 @@
   },
   {
    "default": "0",
+   "fetch_from": "statistic_name.no_of_sample",
    "fieldname": "no_of_sample",
    "fieldtype": "Int",
    "label": "No of Sample"
@@ -359,7 +360,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-12-19 12:26:49.628639",
+ "modified": "2024-12-19 14:46:31.524286",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Request ST",

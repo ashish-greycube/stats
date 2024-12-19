@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "statistic_name",
+  "no_of_sample",
   "description",
   "amended_from"
  ],
@@ -31,14 +32,20 @@
   },
   {
    "fieldname": "description",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Description"
+  },
+  {
+   "fieldname": "no_of_sample",
+   "fieldtype": "Int",
+   "label": "No of Sample",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-12-18 07:17:39.219942",
+ "modified": "2024-12-19 14:46:06.018245",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Name ST",
