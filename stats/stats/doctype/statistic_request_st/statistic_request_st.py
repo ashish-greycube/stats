@@ -30,11 +30,13 @@ class StatisticRequestST(Document):
 			pass
 
 		self.form_filling_duration = (self.question_time_in_second / 60) * self.form_question_no
+		print(self.contract_time,type(self.contract_time),"self.contract_time")
+		if self.contract_time > 0 and self.no_of_visits:
+			self.researcher_share = ((((self.question_time_in_second * 60) + (self.average_trip_duration or 0))
+								/ (self.average_trip_duration or 0 + self.form_filling_duration)) * (self.contract_time or 0)) / self.no_of_visits
 
-		self.researcher_share = ((((self.question_time_in_second * 60) + self.average_trip_duration)
-							/ (self.average_trip_duration + self.form_filling_duration)) * self.contract_time) / self.no_of_visits
-
-		self.no_of_researchers_based_on_sample = self.no_of_sample / self.researcher_share
+		if self.researcher_share>0:
+			self.no_of_researchers_based_on_sample = self.no_of_sample / self.researcher_share
 
 		self.no_of_researchers = self.no_of_researchers_based_on_sample * (self.reduce_rate - 1)
 

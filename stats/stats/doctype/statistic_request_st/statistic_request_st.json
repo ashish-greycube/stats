@@ -122,6 +122,7 @@
   },
   {
    "allow_on_submit": 1,
+   "default": "0",
    "fieldname": "no_of_days",
    "fieldtype": "Int",
    "label": "No of Days"
@@ -156,33 +157,39 @@
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "no_of_support_team",
    "fieldtype": "Int",
    "label": "No of Support Team"
   },
   {
+   "default": "0",
    "fieldname": "no_of_supervisor",
    "fieldtype": "Int",
    "label": "No of Supervisor"
   },
   {
+   "default": "0",
    "fieldname": "total_no_team",
    "fieldtype": "Int",
    "label": "Total No Team"
   },
   {
+   "default": "0",
    "fieldname": "estimated_cost",
    "fieldtype": "Currency",
    "label": "Estimated Cost",
    "precision": "2"
   },
   {
+   "default": "0",
    "fieldname": "reservation_value",
    "fieldtype": "Currency",
    "label": "Reservation Value",
    "precision": "2"
   },
   {
+   "default": "0",
    "fieldname": "final_cost",
    "fieldtype": "Currency",
    "label": "Final Cost",
@@ -190,6 +197,7 @@
   },
   {
    "allow_on_submit": 1,
+   "default": "0",
    "fieldname": "actual_cost",
    "fieldtype": "Currency",
    "label": "Actual Cost",
@@ -210,16 +218,19 @@
    "options": "Normal\nEmergency\nMedium"
   },
   {
+   "default": "0",
    "fieldname": "no_of_sample",
    "fieldtype": "Int",
    "label": "No of Sample"
   },
   {
+   "default": "0",
    "fieldname": "no_of_visits",
    "fieldtype": "Int",
    "label": "No of Visits"
   },
   {
+   "default": "0",
    "fieldname": "number_of_reserve_workers",
    "fieldtype": "Float",
    "label": "Number of reserve workers",
@@ -239,6 +250,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "0",
    "fieldname": "contract_time",
    "fieldtype": "Int",
    "label": "Contract Time"
@@ -283,12 +295,14 @@
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "form_filling_duration",
    "fieldtype": "Float",
    "label": "Form Filling Duration",
    "precision": "2"
   },
   {
+   "default": "0",
    "fetch_from": "case_status.average_trip_duration",
    "fieldname": "average_trip_duration",
    "fieldtype": "Float",
@@ -296,22 +310,26 @@
    "precision": "2"
   },
   {
+   "default": "0",
    "fieldname": "researcher_share",
    "fieldtype": "Float",
    "label": "Researcher Share",
    "precision": "2"
   },
   {
+   "default": "0",
    "fieldname": "no_of_researchers_based_on_sample",
    "fieldtype": "Float",
    "label": "No of Researchers Based on Sample"
   },
   {
+   "default": "0",
    "fieldname": "reduce_rate",
    "fieldtype": "Int",
    "label": "Reduce Rate"
   },
   {
+   "default": "0",
    "fieldname": "no_of_researchers",
    "fieldtype": "Int",
    "label": "No of Researchers"
@@ -325,11 +343,13 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "0",
    "fieldname": "no_of_inspectors",
    "fieldtype": "Int",
    "label": "No of Inspectors"
   },
   {
+   "default": "0",
    "fieldname": "employee_cost",
    "fieldtype": "Currency",
    "label": "Employee Cost",
@@ -339,7 +359,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-12-18 08:10:20.841348",
+ "modified": "2024-12-19 12:26:49.628639",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Request ST",
