@@ -2,6 +2,24 @@
 
 Customization for stats
 
+### hijri date setup steps
+
+active virtual env : go to bench folder and do
+```
+$source env/bin/activate
+```
+
+install package: 
+```
+pip install hijridate
+```
+
+deactivate virtual env: go to bench folder and do
+
+```
+$deactivate
+```
+
 #### License
 
 mit
