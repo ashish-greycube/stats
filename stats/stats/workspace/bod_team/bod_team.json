@@ -1,0 +1,91 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"trUbaLEZBL\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">BOD Team</span>\",\"col\":12}},{\"id\":\"1SRTuoxv2F\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Accepted Job Applicants\",\"col\":4}},{\"id\":\"fWmJ54dcxP\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"5zc64JrpTg\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Man Power Planning ST\",\"col\":3}},{\"id\":\"mDE9_dcjFK\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Man Power Plan Change Request ST\",\"col\":3}},{\"id\":\"jfqm-DtVju\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Administrative Structure Updates Request ST\",\"col\":3}},{\"id\":\"VOWqNBsST_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Administrative structure Change Request\",\"col\":3}},{\"id\":\"ro69NgV4BF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Inquiry ST\",\"col\":3}},{\"id\":\"Sda_QRbNGp\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Exit Interview ST\",\"col\":3}},{\"id\":\"EzfwcLTdBx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"System Permission Management ST\",\"col\":3}}]",
+ "creation": "2024-12-22 11:23:14.757088",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "sort-ascending",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "BOD Team",
+ "links": [],
+ "modified": "2024-12-23 07:35:11.028620",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "BOD Team",
+ "number_cards": [
+  {
+   "label": "Accepted Job Applicants",
+   "number_card_name": "Accepted Job Applicants"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 2.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Man Power Planning ST",
+   "link_to": "Man Power Planning ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Man Power Plan Change Request ST",
+   "link_to": "Man Power Plan Change Request ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Administrative Structure Updates Request ST",
+   "link_to": "Administrative Structure Updates Request ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Administrative structure Change Request",
+   "link_to": "General Structure Change Request ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Employee Inquiry ST",
+   "link_to": "Employee Inquiry ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Exit Interview ST",
+   "link_to": "Exit Interview ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "System Permission Management ST",
+   "link_to": "System Permission Management ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "BOD Team"
+}
