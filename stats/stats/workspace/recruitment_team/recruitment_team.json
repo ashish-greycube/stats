@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"cLp7Cn5Mi1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Recruitment Team</span>\",\"col\":12}},{\"id\":\"plJG8lu7DS\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Job Openings\",\"col\":4}},{\"id\":\"2HluuQn-V8\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"TFt8FJ5OAl\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Opening Job ST\",\"col\":3}},{\"id\":\"V1B2reh9Eq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Job Application ST\",\"col\":3}},{\"id\":\"JeGiut8luh\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Job Offer ST\",\"col\":3}},{\"id\":\"YNFi44TsMI\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Contract ST\",\"col\":3}},{\"id\":\"K_F6_1AlDn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Onboarding ST\",\"col\":3}}]",
+ "content": "[{\"id\":\"cLp7Cn5Mi1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Recruitment Team</span>\",\"col\":12}},{\"id\":\"plJG8lu7DS\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Job Openings\",\"col\":4}},{\"id\":\"2HluuQn-V8\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"TFt8FJ5OAl\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Opening Job ST\",\"col\":3}},{\"id\":\"V1B2reh9Eq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Job Application ST\",\"col\":3}},{\"id\":\"JeGiut8luh\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Job Offer ST\",\"col\":3}},{\"id\":\"YNFi44TsMI\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Contract ST\",\"col\":3}},{\"id\":\"K_F6_1AlDn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Onboarding ST\",\"col\":3}},{\"id\":\"vy_d1KeBZN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Talent WorkFlow\",\"col\":3}}]",
  "creation": "2024-12-22 11:22:28.856562",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "Recruitment Team",
  "links": [],
- "modified": "2024-12-24 06:53:09.005232",
+ "modified": "2024-12-24 09:24:41.955392",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Recruitment Team",
@@ -37,6 +37,13 @@
    "link_to": "Employee Onboarding ST",
    "stats_filter": "[]",
    "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Talent WorkFlow",
+   "type": "URL",
+   "url": "https://stats15.greycube.in/app/user-document-st/Talent%20Acquisition"
   },
   {
    "color": "Grey",
