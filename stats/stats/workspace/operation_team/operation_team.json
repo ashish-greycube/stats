@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"1dVfdsVMLt\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Operation Team</span>\",\"col\":12}},{\"id\":\"w_mO0WkivQ\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Employees\",\"col\":4}},{\"id\":\"njGQb0O7ty\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"DyDYPnSg0E\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"9ebqpje4aU\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Loan Reimbursement ST\",\"col\":3}},{\"id\":\"RCsaSpLc_4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Salary Freezing ST\",\"col\":3}},{\"id\":\"l492g2397b\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Contract ST\",\"col\":3}}]",
+ "content": "[{\"id\":\"1dVfdsVMLt\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Operation Team</span>\",\"col\":12}},{\"id\":\"w_mO0WkivQ\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Employees\",\"col\":4}},{\"id\":\"njGQb0O7ty\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"DyDYPnSg0E\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"9ebqpje4aU\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Loan Reimbursement ST\",\"col\":3}},{\"id\":\"RCsaSpLc_4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Salary Freezing ST\",\"col\":3}},{\"id\":\"l492g2397b\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Contract ST\",\"col\":3}},{\"id\":\"vHLdzgFtrH\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Overtime Request ST\",\"col\":3}},{\"id\":\"2q3nimA4ZM\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Overtime Sheet ST\",\"col\":3}},{\"id\":\"Adf8em_dhb\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Attendance Request ST\",\"col\":3}},{\"id\":\"90ezfPQXap\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Attendance Request\",\"col\":3}},{\"id\":\"aDGCw7x69z\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Checkin\",\"col\":3}},{\"id\":\"nCB3BmTvLt\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Shift Assignment\",\"col\":3}},{\"id\":\"jqJSCdn73t\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Penalty ST\",\"col\":3}},{\"id\":\"7Ys6sQ4XZ0\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Additional Salary\",\"col\":3}}]",
  "creation": "2024-12-22 11:24:03.409312",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "Operation Team",
  "links": [],
- "modified": "2024-12-23 07:35:03.149437",
+ "modified": "2024-12-24 06:52:49.683181",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Operation Team",
@@ -33,6 +33,22 @@
   {
    "color": "Grey",
    "doc_view": "List",
+   "label": "Attendance Request ST",
+   "link_to": "Attendance Request ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Additional Salary",
+   "link_to": "Additional Salary",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
    "label": "Employee",
    "link_to": "Employee",
    "stats_filter": "[]",
@@ -41,8 +57,56 @@
   {
    "color": "Grey",
    "doc_view": "List",
+   "label": "Overtime Request ST",
+   "link_to": "Overtime Request ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Employee Checkin",
+   "link_to": "Employee Checkin",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Employee Penalty ST",
+   "link_to": "Employee Penalty ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
    "label": "Loan Reimbursement ST",
    "link_to": "Loan Reimbursement ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Shift Assignment",
+   "link_to": "Shift Assignment",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Overtime Sheet ST",
+   "link_to": "Overtime Sheet ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Attendance Request",
+   "link_to": "Attendance Request",
    "stats_filter": "[]",
    "type": "DocType"
   },
