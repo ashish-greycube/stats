@@ -18,9 +18,7 @@
   "current_number_of_researchers",
   "current_number_of_inspectors",
   "current_no_of_support_team",
-  "current_no_of_workers",
   "current_no_of_supervisor",
-  "current_no_of_days",
   "current_statistics_method",
   "current_planned_start_date",
   "current_planned_end_date",
@@ -28,9 +26,7 @@
   "new_number_of_researchers",
   "new_number_of_inspectors",
   "new_no_of_support_team",
-  "new_no_of_workers",
   "new_no_of_supervisor",
-  "new_no_of_days",
   "new_statistics_method",
   "new_planned_start_date",
   "new_planned_end_date"
@@ -88,13 +84,13 @@
    "fieldtype": "Section Break"
   },
   {
-   "fetch_from": "statistic_request_reference.number_of_researchers",
+   "fetch_from": "statistic_request_reference.no_of_researchers",
    "fieldname": "current_number_of_researchers",
    "fieldtype": "Int",
    "label": "Current Number of Researchers"
   },
   {
-   "fetch_from": "statistic_request_reference.number_of_inspectors",
+   "fetch_from": "statistic_request_reference.no_of_inspectors",
    "fieldname": "current_number_of_inspectors",
    "fieldtype": "Int",
    "label": "Current Number of Inspectors"
@@ -125,17 +121,6 @@
    "label": "New No of Support Team"
   },
   {
-   "fetch_from": "statistic_request_reference.no_of_workers",
-   "fieldname": "current_no_of_workers",
-   "fieldtype": "Int",
-   "label": "Current No of Workers"
-  },
-  {
-   "fieldname": "new_no_of_workers",
-   "fieldtype": "Int",
-   "label": "New No of Workers"
-  },
-  {
    "fetch_from": "statistic_request_reference.no_of_supervisor",
    "fieldname": "current_no_of_supervisor",
    "fieldtype": "Int",
@@ -145,17 +130,6 @@
    "fieldname": "new_no_of_supervisor",
    "fieldtype": "Int",
    "label": "New No of Supervisor"
-  },
-  {
-   "fetch_from": "statistic_request_reference.no_of_days",
-   "fieldname": "current_no_of_days",
-   "fieldtype": "Int",
-   "label": "Current No of Days"
-  },
-  {
-   "fieldname": "new_no_of_days",
-   "fieldtype": "Int",
-   "label": "New No of Days"
   },
   {
    "fetch_from": "statistic_request_reference.statistics_method",
@@ -196,7 +170,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-12-02 08:47:52.116644",
+ "modified": "2024-12-24 07:13:00.006637",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Change Request ST",

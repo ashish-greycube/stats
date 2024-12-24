@@ -13,22 +13,22 @@ class StatisticChangeRequestST(Document):
 	def set_new_values_in_statistic_request(self):
 		doc = frappe.get_doc("Statistic Request ST", self.statistic_request_reference)
 		if self.new_number_of_researchers and self.new_number_of_researchers != 0:
-			doc.number_of_researchers = self.new_number_of_researchers
+			doc.no_of_researchers = self.new_number_of_researchers
 		
 		if self.new_number_of_inspectors and self.new_number_of_inspectors != 0:
-			doc.number_of_inspectors = self.new_number_of_inspectors
+			doc.no_of_inspectors = self.new_number_of_inspectors
 		
 		if self.new_no_of_support_team and self.new_no_of_support_team != 0:
 			doc.no_of_support_team = self.new_no_of_support_team
 
-		if self.new_no_of_workers and self.new_no_of_workers != 0:
-			doc.no_of_workers = self.new_no_of_workers
+		# if self.new_no_of_workers and self.new_no_of_workers != 0:
+		# 	doc.no_of_workers = self.new_no_of_workers
 
 		if self.new_no_of_supervisor and self.new_no_of_supervisor != 0:
 			doc.no_of_supervisor = self.new_no_of_supervisor
 
-		if self.new_no_of_days and self.new_no_of_days != 0:	
-			doc.no_of_days = self.new_no_of_days
+		# if self.new_no_of_days and self.new_no_of_days != 0:	
+		# 	doc.no_of_days = self.new_no_of_days
 
 		if self.new_statistics_method and self.new_statistics_method != '':
 			doc.statistics_method = self.new_statistics_method

@@ -157,12 +157,14 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "default": "0",
    "fieldname": "no_of_support_team",
    "fieldtype": "Int",
    "label": "No of Support Team"
   },
   {
+   "allow_on_submit": 1,
    "default": "0",
    "fieldname": "no_of_supervisor",
    "fieldtype": "Int",
@@ -330,6 +332,7 @@
    "label": "Reduce Rate"
   },
   {
+   "allow_on_submit": 1,
    "default": "0",
    "fieldname": "no_of_researchers",
    "fieldtype": "Int",
@@ -344,6 +347,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "default": "0",
    "fieldname": "no_of_inspectors",
    "fieldtype": "Int",
@@ -360,7 +364,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-12-19 14:46:31.524286",
+ "modified": "2024-12-24 07:17:31.118794",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Request ST",

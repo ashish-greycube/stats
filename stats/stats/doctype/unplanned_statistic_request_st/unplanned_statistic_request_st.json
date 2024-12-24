@@ -53,8 +53,9 @@
   },
   {
    "fieldname": "statistic_name",
-   "fieldtype": "Data",
-   "label": "Statistic Name"
+   "fieldtype": "Link",
+   "label": "Statistic Name",
+   "options": "Statistic Name ST"
   },
   {
    "fieldname": "statistic_type",
@@ -169,7 +170,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-29 15:26:04.448823",
+ "modified": "2024-12-24 07:01:43.558341",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Unplanned Statistic Request ST",
