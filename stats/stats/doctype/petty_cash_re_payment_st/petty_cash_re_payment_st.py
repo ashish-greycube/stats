@@ -41,12 +41,13 @@ class PettyCashRePaymentST(Document):
 
 		if len(self.pc_repayment_account_details)>0:
 			for row in self.pc_repayment_account_details:
-				accounts_row_2 = {
-						"account":row.account_name,
-						"cost_center":department_cost_center,
-						"credit_in_account_currency":row.unpaid_amount
-				}
-				accounts.append(accounts_row_2)
+				if row.unpaid_amount > 0:
+					accounts_row_2 = {
+							"account":row.account_name,
+							"cost_center":department_cost_center,
+							"credit_in_account_currency":row.unpaid_amount
+					}
+					accounts.append(accounts_row_2)
 
 		je.set("accounts",accounts)
 		je.run_method('set_missing_values')
