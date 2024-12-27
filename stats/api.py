@@ -633,3 +633,28 @@ def fetch_values_from_material_request(self, method):
 				if len(purchase_committee)>0:
 					self.custom_purchasing_committee_ref = purchase_committee[0].name
 				break
+
+@frappe.whitelist()
+def make_leave_application_change_request(source_name, target_doc=None):
+	doc = frappe.get_doc("Leave Application", source_name)
+
+	def set_missing_values(source, target):
+		target.leave_application_reference = source.name
+		target.employee_no = source.employee
+		target.employee_name = source.employee_name
+
+	doc = get_mapped_doc(
+		"Leave Application",
+		source_name,
+		{
+			"Leave Application": {
+				"doctype": "Leave Change Request ST",
+				"field_map": {
+					"leave_application_reference": "name",
+				},
+			}
+		},
+		target_doc,
+		set_missing_values,
+	)
+	return doc

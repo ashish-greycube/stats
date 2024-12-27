@@ -96,7 +96,6 @@
   "percentage_10",
   "section_break_xwyk",
   "sub_department_10",
-  "section_break_gcej",
   "amended_from"
  ],
  "fields": [
@@ -586,39 +585,25 @@
    "options": "Statistic Sub Department Processing Details ST"
   },
   {
-   "fieldname": "section_break_gcej",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Final Statistic Processing ST",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Final Statistic Processing ST",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
    "fieldname": "available_budget",
    "fieldtype": "Currency",
    "label": "Available Budget"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Final Statistic Processing ST",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-12-24 10:26:44.880850",
+ "modified": "2024-12-24 10:55:44.244273",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Final Statistic Processing ST",
