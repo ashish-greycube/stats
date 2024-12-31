@@ -24,8 +24,8 @@
   "section_break_oeli",
   "candidate_name",
   "candidate_namein_english",
-  "hijri_birth_date",
   "date_of_birth",
+  "hijri_birth_date",
   "birth_place",
   "column_break_iyou",
   "gender",
@@ -196,7 +196,8 @@
   {
    "fieldname": "date_of_birth",
    "fieldtype": "Date",
-   "label": "Date of Birth"
+   "label": "Date of Birth",
+   "reqd": 1
   },
   {
    "fieldname": "birth_place",
@@ -352,7 +353,7 @@
    "fieldname": "hijri_birth_date",
    "fieldtype": "Data",
    "label": "Hijri Birth Date",
-   "reqd": 1
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -362,7 +363,7 @@
    "link_fieldname": "job_application_reference"
   }
  ],
- "modified": "2024-12-31 15:10:40.074052",
+ "modified": "2024-12-31 15:41:57.280977",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Application ST",

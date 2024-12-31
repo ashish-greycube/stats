@@ -4,11 +4,28 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import cstr, cint
+from frappe.utils import cstr, cint,getdate
+from hijridate import Hijri, Gregorian
 
 class JobApplicationST(Document):
 	def validate(self):
 		self.validate_national_id_no()
+		self.hijri_birth_date=self.set_date_in_hijri(self.date_of_birth)
+
+	def set_date_in_hijri(self,date_of_birth) :
+		# https://hijri-converter.readthedocs.io/en/stable/usage.html
+		# https://datehijri.com/en/
+		gregorian_splits=date_of_birth.split('-')
+		year_split=cint(gregorian_splits[0])
+		month_split=cint(gregorian_splits[1])
+		day_split=cint(gregorian_splits[2])
+		dob_hijri= Gregorian(year_split,month_split,day_split).to_hijri()
+		dobj_hijri_iso=dob_hijri.isoformat()
+		dobj_hijri_tuple=dob_hijri.datetuple()
+		readable_hijri= dob_hijri.month_name()+" "+cstr(dobj_hijri_tuple[2])+","+cstr(dobj_hijri_tuple[0])+" "+dob_hijri.notation()
+		return dobj_hijri_iso+" "+readable_hijri
+
+
 
 	def validate_national_id_no(self):
 		if self.id_igama_no:
