@@ -24,6 +24,7 @@
   "section_break_oeli",
   "candidate_name",
   "candidate_namein_english",
+  "hijri_birth_date",
   "date_of_birth",
   "birth_place",
   "column_break_iyou",
@@ -76,7 +77,8 @@
   {
    "fieldname": "candidate_name",
    "fieldtype": "Data",
-   "label": "Candidate Name"
+   "label": "Candidate Name",
+   "reqd": 1
   },
   {
    "fieldname": "candidate_namein_english",
@@ -344,6 +346,13 @@
    "fieldtype": "Data",
    "label": "Iqama/National ID No",
    "unique": 1
+  },
+  {
+   "description": "ex: 29-3-1403 i.e. (Hijri Day)-(Hijri Month)-(Hijri Year)",
+   "fieldname": "hijri_birth_date",
+   "fieldtype": "Data",
+   "label": "Hijri Birth Date",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -353,7 +362,7 @@
    "link_fieldname": "job_application_reference"
   }
  ],
- "modified": "2024-12-16 12:20:23.546412",
+ "modified": "2024-12-31 15:10:40.074052",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Application ST",
