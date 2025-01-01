@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Talent Development Team\"}}]",
+ "content": "[{\"id\":\"I73KU5uAQW\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u0645\u0648\u0627\u0647\u0628</span>\",\"col\":12}},{\"id\":\"pq4NodFkXl\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Trainings (This Month)\",\"col\":3}},{\"id\":\"sUpHWKdVZF\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"3FvP5kog2k\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"\u0628\u0631\u0646\u0627\u0645\u062c \u062a\u062f\u0631\u064a\u0628\u064a\",\"col\":3}},{\"id\":\"cUI8_GxlSQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Announcement ST\",\"col\":3}},{\"id\":\"ROFV_NLpLn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Request ST\",\"col\":3}},{\"id\":\"n8Ns6fSkCi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Needs Analysis ST\",\"col\":3}},{\"id\":\"4aqSHqGEQF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Evaluation ST\",\"col\":3}}]",
  "creation": "2024-12-22 11:25:51.473939",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,17 +13,63 @@
  "is_hidden": 0,
  "label": "Talent Development Team",
  "links": [],
- "modified": "2024-12-24 06:52:55.929411",
+ "modified": "2025-01-01 09:06:16.584548",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Talent Development Team",
- "number_cards": [],
+ "number_cards": [
+  {
+   "label": "Trainings (This Month)",
+   "number_card_name": "Trainings (This Month)"
+  }
+ ],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,
  "quick_lists": [],
  "roles": [],
- "sequence_id": 3.0,
- "shortcuts": [],
+ "sequence_id": 11.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Training Announcement ST",
+   "link_to": "Training Announcement ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Training Request ST",
+   "link_to": "Training Request ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "\u0628\u0631\u0646\u0627\u0645\u062c \u062a\u062f\u0631\u064a\u0628\u064a",
+   "link_to": "Training Event ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Training Needs Analysis ST",
+   "link_to": "Training Needs Analysis ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Training Evaluation ST",
+   "link_to": "Training Evaluation ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
  "title": "Talent Development Team"
 }
