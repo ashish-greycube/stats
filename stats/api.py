@@ -3,10 +3,11 @@ from frappe import _
 from frappe.utils import (add_to_date,get_datetime,today,
 						  getdate,nowdate,format_duration,cint,
 						  get_link_to_form,flt,add_years,time_diff_in_hours,
-						  now,rounded,flt,get_time,time_diff_in_seconds)
+						  now,rounded,flt,get_time,time_diff_in_seconds, cstr)
 from dateutil import relativedelta
 from frappe.model.mapper import get_mapped_doc
 import erpnext
+from hijridate import Hijri, Gregorian
 
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
@@ -98,6 +99,20 @@ def set_employee_in_man_power_planning_for_job_no(self, method):
 			man_power_planing.save(ignore_permissions=True)
 			frappe.msgprint(_("set Employee {0} in Job No {1}").format(self.name, self.custom_job_no), alert=True)
 
+def convert_gregorian_dob_in_hijri_dob(self, method):
+	gregorian_splits=(self.date_of_birth).split('-')
+	year_split=cint(gregorian_splits[0])
+	month_split=cint(gregorian_splits[1])
+	day_split=cint(gregorian_splits[2])
+	dob_hijri= Gregorian(year_split,month_split,day_split).to_hijri()
+	dobj_hijri_iso=dob_hijri.isoformat()
+	dobj_hijri_tuple=dob_hijri.datetuple()
+	readable_hijri= dob_hijri.month_name()+" "+cstr(dobj_hijri_tuple[2])+","+cstr(dobj_hijri_tuple[0])+" "+dob_hijri.notation()
+	hijri_date = dobj_hijri_iso+" "+readable_hijri
+	final_hijri_date = (hijri_date[:140]) if len(hijri_date) > 140 else hijri_date
+	self.custom_hijri_birth_date = final_hijri_date
+	# return final_hijri_date
+ 
 @frappe.whitelist()
 def set_years_of_experience_at_start_of_every_month():
 	employees=frappe.db.get_list('Employee', filters={'status': ['=', 'Active']})

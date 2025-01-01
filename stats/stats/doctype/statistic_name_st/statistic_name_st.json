@@ -7,7 +7,13 @@
  "engine": "InnoDB",
  "field_order": [
   "statistic_name",
+  "statistic_name_in_english",
+  "statistic_code",
+  "column_break_slft",
   "no_of_sample",
+  "sub_department",
+  "statistic_periodic",
+  "section_break_abel",
   "description",
   "amended_from"
  ],
@@ -40,12 +46,43 @@
    "fieldtype": "Int",
    "label": "No of Sample",
    "reqd": 1
+  },
+  {
+   "fieldname": "statistic_name_in_english",
+   "fieldtype": "Data",
+   "label": "Statistic Name In English"
+  },
+  {
+   "fieldname": "column_break_slft",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_abel",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "statistic_code",
+   "fieldtype": "Data",
+   "label": "Statistic Code"
+  },
+  {
+   "fieldname": "sub_department",
+   "fieldtype": "Link",
+   "label": "Sub Department",
+   "link_filters": "[[\"Department\",\"is_group\",\"=\",0]]",
+   "options": "Department"
+  },
+  {
+   "fieldname": "statistic_periodic",
+   "fieldtype": "Select",
+   "label": "Statistic Periodic",
+   "options": "\nYearly\nQuarterly\nMonthly"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-12-19 14:46:06.018245",
+ "modified": "2025-01-01 09:32:39.268886",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Name ST",

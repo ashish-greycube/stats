@@ -9,9 +9,9 @@
   "section_break_kcke",
   "creation_date",
   "main_department",
+  "statistic_name",
   "sub_department",
   "created_by",
-  "statistic_name",
   "statistic_type",
   "approval_status",
   "column_break_mmfp",
@@ -28,6 +28,8 @@
   "no_of_sample",
   "statistics_priority",
   "statistics_method",
+  "statistic_code",
+  "statistic_periodic",
   "issue_date",
   "form_question_no",
   "question_time_in_second",
@@ -149,6 +151,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "statistic_name.sub_department",
    "fieldname": "sub_department",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -359,12 +362,24 @@
    "fieldtype": "Currency",
    "label": "Employee Cost",
    "precision": "2"
+  },
+  {
+   "fetch_from": "statistic_name.statistic_code",
+   "fieldname": "statistic_code",
+   "fieldtype": "Data",
+   "label": "Statistic Code"
+  },
+  {
+   "fieldname": "statistic_periodic",
+   "fieldtype": "Select",
+   "label": "Statistic Periodic",
+   "options": "\nYearly\nQuarterly\nMonthly"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-12-24 07:17:31.118794",
+ "modified": "2025-01-01 09:35:08.486591",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Statistic Request ST",
