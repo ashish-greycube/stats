@@ -6,15 +6,16 @@ from frappe import _
 from frappe.model.document import Document
 from stats.salary import get_latest_salary_structure_assignment
 from hijridate import Hijri, Gregorian
-from frappe.utils import cstr, getdate, cint, date_diff
+from frappe.utils import cstr, getdate, cint, date_diff, nowdate
 from hrms.hr.doctype.leave_application.leave_application import get_leave_details
 
 class RetirementRequestST(Document):
 	def validate(self):
 		print('self.birth_date_hijri',self.birth_date_hijri)
 		
-		self.birth_date_gregorian=self.set_date_in_gregorian(self.birth_date_hijri)
+		# self.birth_date_gregorian=self.set_date_in_gregorian(self.birth_date_hijri)
 		self.retirement_date_gregorian=self.set_date_in_gregorian(self.retirement_date_hijri)
+		self.validate_retirement_date()
 		self.get_salary_details_and_due_amount_calculation()
 		self.calculate_vacation_due_amount()
 		self.calculate_total_due_amount()
@@ -31,6 +32,10 @@ class RetirementRequestST(Document):
 		# print(g_date_formatte, "==g_date_formatte", getdate(g_date_formatte), "===getdate(g_date_formatte)")
 		# print(getdate(g_date.strftime('%d-%m-%Y')), "======getdate(g_date).strftime('%d-%m-%Y')===", type(getdate(g_date.strftime('%d-%m-%Y'))))
 		return getdate(g_date_formatte.strftime('%d-%m-%Y'))
+	
+	def validate_retirement_date(self):
+		if getdate(self.birth_date_gregorian) >= getdate(self.retirement_date_gregorian):
+			frappe.throw(_("Employee's Retirement Date Cann't be before Birth Date."))
 
 	
 	def get_salary_details_and_due_amount_calculation(self):
@@ -101,7 +106,7 @@ class RetirementRequestST(Document):
 			leave_types = frappe.db.sql_list("select name from `tabLeave Type` where custom_allow_encasement_end_of_service = 1 order by name asc")
 
 			# available_leave = get_leave_details(self.employee, "2024-11-26")
-			available_leave = get_leave_details(self.employee_no, self.retirement_date_gregorian)
+			available_leave = get_leave_details(self.employee_no, getdate(nowdate()))
 			if len(available_leave["leave_allocation"]) > 0:
 				total_considered_vacation_days = 0
 				for leave_type in leave_types:
@@ -121,7 +126,7 @@ class RetirementRequestST(Document):
 					self.vacation_due_amount = per_day_salary_for_vacation * self.due_vacation_balance
 
 			else:
-				frappe.throw(_("Leave Allocation is not found for {0} employee for {1} date.").format(self.employee_no, self.retirement_date_gregorian))
+				frappe.throw(_("Leave Allocation is not found for {0} employee for {1} date.").format(self.employee_no, getdate(nowdate())))
 
 	def calculate_total_due_amount(self):
 		self.new_retirement_due_amount = (self.retirement_due_amount - (self.social_dev_bank_deduction or 0)

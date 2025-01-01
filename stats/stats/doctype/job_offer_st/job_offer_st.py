@@ -287,6 +287,7 @@ def make_employee(source_name, target_doc=None):
 		target.custom_religion = source.religion
 		# target.custom_id__igama_no = source.id_igama_no
 		target.department = source.main_department
+		target.custom_hijri_birth_date = source.hijri_birth_date
 		target.custom_section = source.section
 		target.custom_sub_department = source.sub_department
 		target.custom_contract_type = source.contract_type

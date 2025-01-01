@@ -349,7 +349,6 @@
    "unique": 1
   },
   {
-   "description": "ex: 29-3-1403 i.e. (Hijri Day)-(Hijri Month)-(Hijri Year)",
    "fieldname": "hijri_birth_date",
    "fieldtype": "Data",
    "label": "Hijri Birth Date",
@@ -363,7 +362,7 @@
    "link_fieldname": "job_application_reference"
   }
  ],
- "modified": "2024-12-31 15:41:57.280977",
+ "modified": "2025-01-01 06:47:24.804936",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Application ST",

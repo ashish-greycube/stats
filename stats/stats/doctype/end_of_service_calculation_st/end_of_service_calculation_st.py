@@ -5,7 +5,7 @@ import frappe
 import erpnext
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import add_to_date, date_diff, get_link_to_form
+from frappe.utils import add_to_date, date_diff, get_link_to_form, getdate, nowdate
 from stats.salary import get_latest_salary_structure_assignment
 from hrms.hr.doctype.leave_application.leave_application import get_leave_details
 
@@ -134,7 +134,7 @@ class EndofServiceCalculationST(Document):
 			leave_types = frappe.db.sql_list("select name from `tabLeave Type` where custom_allow_encasement_end_of_service = 1 order by name asc")
 
 			# available_leave = get_leave_details(self.employee, "2024-11-26")
-			available_leave = get_leave_details(self.employee, self.last_working_date)
+			available_leave = get_leave_details(self.employee, getdate(nowdate()))
 			if len(available_leave["leave_allocation"]) > 0:
 				total_considered_vacation_days = 0
 				for leave_type in leave_types:
@@ -154,5 +154,5 @@ class EndofServiceCalculationST(Document):
 					self.vacation_due_amount = per_day_salary_for_vacation * self.vacation_balance
 
 			else:
-				frappe.throw(_("Leave Allocation is not found for {0} employee for {1} date.").format(self.employee, self.last_working_date))
+				frappe.throw(_("Leave Allocation is not found for {0} employee for {1} date.").format(self.employee, getdate(nowdate())))
 

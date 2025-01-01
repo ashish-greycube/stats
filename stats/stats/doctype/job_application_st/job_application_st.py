@@ -23,7 +23,9 @@ class JobApplicationST(Document):
 		dobj_hijri_iso=dob_hijri.isoformat()
 		dobj_hijri_tuple=dob_hijri.datetuple()
 		readable_hijri= dob_hijri.month_name()+" "+cstr(dobj_hijri_tuple[2])+","+cstr(dobj_hijri_tuple[0])+" "+dob_hijri.notation()
-		return dobj_hijri_iso+" "+readable_hijri
+		hijri_date = dobj_hijri_iso+" "+readable_hijri
+		final_hijri_date = (hijri_date[:140]) if len(hijri_date) > 140 else hijri_date
+		return final_hijri_date
 
 
 
