@@ -89,15 +89,13 @@
    "fieldname": "previous_year_evaluation",
    "fieldtype": "Table MultiSelect",
    "label": "Previous Year Evaluation",
-   "options": "Multi Evaluation Alternatives Previous Year  ST",
-   "reqd": 1
+   "options": "Multi Evaluation Alternatives Previous Year  ST"
   },
   {
    "fieldname": "current_year_evaluation",
    "fieldtype": "Table MultiSelect",
    "label": "Current Year Evaluation",
-   "options": "Multi Evaluation Alternatives Current Year  ST",
-   "reqd": 1
+   "options": "Multi Evaluation Alternatives Current Year  ST"
   },
   {
    "default": "Yearly",
@@ -120,7 +118,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-28 09:34:40.178336",
+ "modified": "2025-01-01 10:55:37.281343",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Alternatives ST",

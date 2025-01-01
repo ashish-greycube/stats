@@ -41,16 +41,18 @@ class EmployeeAlternativesST(Document):
 			if len(employee_eveluation_list)>0:
 				for evaluation in employee_eveluation_list:
 					if (evaluation.evaluation_from).year == previous_year and (evaluation.evaluation_to).year == previous_year:
-						if evaluation.evaluation_classification in [ele.evaluation_classification for ele in self.previous_year_evaluation]:
-							previous_evaluation = True
-							emp_details["previous_year_evaluation"] = evaluation.evaluation_classification
+						if len(self.previous_year_evaluation)>0:
+							if evaluation.evaluation_classification in [ele.evaluation_classification for ele in self.previous_year_evaluation]:
+								previous_evaluation = True
+								emp_details["previous_year_evaluation"] = evaluation.evaluation_classification
 							
 					elif (evaluation.evaluation_from).year == current_year and (evaluation.evaluation_to).year == current_year:
-						if evaluation.evaluation_classification in [ele.evaluation_classification for ele in self.current_year_evaluation]:
-							current_evaluation = True
-							emp_details["current_year_evaluation"] = evaluation.evaluation_classification
-			if previous_evaluation == True and current_evaluation == True:
-				emp_details["employee_no"]=emp
-				final_employee_list.append(emp_details)
+						if len(self.current_year_evaluation)>0:
+							if evaluation.evaluation_classification in [ele.evaluation_classification for ele in self.current_year_evaluation]:
+								current_evaluation = True
+								emp_details["current_year_evaluation"] = evaluation.evaluation_classification
+			# if previous_evaluation == True and current_evaluation == True:
+			emp_details["employee_no"]=emp
+			final_employee_list.append(emp_details)
 			print(final_employee_list,"======")
 		return final_employee_list
