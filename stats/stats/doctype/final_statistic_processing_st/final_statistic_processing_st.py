@@ -3,12 +3,14 @@
 
 import frappe
 from frappe.model.document import Document
-from frappe.utils import cstr, get_link_to_form
+from frappe.utils import cstr, get_link_to_form, getdate
 from frappe import _
+from stats.budget import get_budget_account_details_without_cost_center
 
 class FinalStatisticProcessingST(Document):
 	def validate(self):
 		self.calculate_total_cost_department_vise()
+		self.get_available_budget()
 
 	def on_submit(self):
 		self.set_approval_status_in_statistic_request()
@@ -37,6 +39,13 @@ class FinalStatisticProcessingST(Document):
 			percentage_value=((self.get(child_talbe_total_cost_name)  or 0)* 100) / total_request_cost
 			self.set(child_table_percentage_name,percentage_value)		
 
+	def get_available_budget(self):
+		default_budget_account_for_statistic_expense = frappe.db.get_single_value("Stats Settings ST","default_budget_account")
+		fiscal_year = getdate(self.to_date).year
+		account_details = get_budget_account_details_without_cost_center(default_budget_account_for_statistic_expense,fiscal_year)
+
+		if account_details:
+			self.available_budget = account_details.available
 	
 	def set_approval_status_in_statistic_request(self):
 		for idx in range(self.no_of_department or 0):

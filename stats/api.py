@@ -626,7 +626,7 @@ def create_purchase_comittee(source_name, target_doc=None):
 
 def validate_request_classification(self, method):
 	if self.custom_initial_cost:
-		if self.custom_request_classification == "General Competition":
+		if self.custom_request_classification in ["General Competition","Two Level Competition"]:
 			if self.custom_initial_cost <= 100000:
 				frappe.throw(_("Your initial cost is less then 100000. <br>Hence You cannot select Request classification as <b>{0}</b>".format(self.custom_request_classification)))
 		else :

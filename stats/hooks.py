@@ -34,7 +34,8 @@ doctype_js = {"ToDo" : "public/js/todo.js",
               "Designation":"public/js/designation.js",
               "Payroll Entry": "public/js/payroll_entry.js",
               "Material Request":"public/js/material_request.js",
-              "Leave Application":"public/js/leave_application.js"
+              "Leave Application":"public/js/leave_application.js",
+              "Purchase Order":"public/js/purchase_order.js"
               }
 
 # include js in doctype views

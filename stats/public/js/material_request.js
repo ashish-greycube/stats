@@ -1,6 +1,6 @@
 frappe.ui.form.on("Material Request", {
     refresh(frm){
-        if(frm.doc.docstatus==1 && frm.doc.custom_request_classification=='General Competition'){
+        if(frm.doc.docstatus==1 && (frm.doc.custom_request_classification=='General Competition' || frm.doc.custom_request_classification=='Two Level Competition')){
             frm.add_custom_button(
 				__("Create Purchase Comittee"),
 				function () {
@@ -10,12 +10,13 @@ frappe.ui.form.on("Material Request", {
 					});
 				});
         }
-        if(frm.doc.docstatus==1 && frm.doc.custom_request_classification=='General Competition' && (frm.doc.custom_purchasing_committee_status!='Finished')){
+        if(frm.doc.docstatus==1 && (frm.doc.custom_request_classification=='General Competition' || frm.doc.custom_request_classification=='Two Level Competition') && (frm.doc.custom_purchasing_committee_status!='Finished')){
             frm.remove_custom_button('Purchase Order', 'Create');
         }        
     },
 
     onload(frm) {
+        if (frm.is_new()){
         frappe.db.get_value('Employee', { user_id: frappe.session.user }, ['employee_name', 'department', 'custom_sub_department'])
             .then(r => {
                 let values = r.message;
@@ -23,10 +24,11 @@ frappe.ui.form.on("Material Request", {
                 frm.set_value('custom_main_department', values.department)
                 frm.set_value('custom_sub_department', values.custom_sub_department)
             })
+        }
     },
 
     custom_request_classification(frm){
-        if (frm.doc.custom_request_classification == "General Competition"){
+        if (frm.doc.custom_request_classification == "General Competition" || frm.doc.custom_request_classification=='Two Level Competition'){
             frm.set_value("custom_purchasing_committee_status","Pending")
         }
     },
