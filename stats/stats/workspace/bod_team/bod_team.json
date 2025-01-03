@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"trUbaLEZBL\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">BOD Team</span>\",\"col\":12}},{\"id\":\"1SRTuoxv2F\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Accepted Job Applicants\",\"col\":4}},{\"id\":\"fWmJ54dcxP\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"5zc64JrpTg\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Man Power Planning ST\",\"col\":3}},{\"id\":\"mDE9_dcjFK\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Man Power Plan Change Request ST\",\"col\":3}},{\"id\":\"jfqm-DtVju\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Administrative Structure Updates Request ST\",\"col\":3}},{\"id\":\"VOWqNBsST_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Administrative structure Change Request\",\"col\":3}},{\"id\":\"ro69NgV4BF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Inquiry ST\",\"col\":3}},{\"id\":\"Sda_QRbNGp\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Exit Interview ST\",\"col\":3}},{\"id\":\"EzfwcLTdBx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"System Permission Management ST\",\"col\":3}}]",
+ "content": "[{\"id\":\"trUbaLEZBL\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">\u0645\u0631\u0643\u0632 \u0627\u0644\u062a\u0645\u064a\u0632</span>\",\"col\":12}},{\"id\":\"1SRTuoxv2F\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Accepted Job Applicants\",\"col\":4}},{\"id\":\"fWmJ54dcxP\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"5zc64JrpTg\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Man Power Planning ST\",\"col\":3}},{\"id\":\"mDE9_dcjFK\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Man Power Plan Change Request ST\",\"col\":3}},{\"id\":\"jfqm-DtVju\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"\u0637\u0644\u0628 \u062a\u062d\u062f\u064a\u062b \u0627\u0644\u0647\u064a\u0643\u0644 \u0627\u0644\u062a\u0646\u0638\u064a\u0645\u064a\",\"col\":3}},{\"id\":\"VOWqNBsST_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Administrative structure Change Request\",\"col\":3}},{\"id\":\"ro69NgV4BF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Inquiry ST\",\"col\":3}},{\"id\":\"Sda_QRbNGp\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Exit Interview ST\",\"col\":3}},{\"id\":\"EzfwcLTdBx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"System Permission Management ST\",\"col\":3}}]",
  "creation": "2024-12-22 11:23:14.757088",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "BOD Team",
  "links": [],
- "modified": "2024-12-24 06:53:01.918057",
+ "modified": "2025-01-02 11:48:04.805002",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "BOD Team",
@@ -28,8 +28,16 @@
  "public": 1,
  "quick_lists": [],
  "roles": [],
- "sequence_id": 2.0,
+ "sequence_id": 9.0,
  "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "\u0637\u0644\u0628 \u062a\u062d\u062f\u064a\u062b \u0627\u0644\u0647\u064a\u0643\u0644 \u0627\u0644\u062a\u0646\u0638\u064a\u0645\u064a",
+   "link_to": "Administrative Structure Updates Request ST",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
   {
    "color": "Grey",
    "doc_view": "List",
@@ -43,14 +51,6 @@
    "doc_view": "List",
    "label": "Man Power Plan Change Request ST",
    "link_to": "Man Power Plan Change Request ST",
-   "stats_filter": "[]",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Administrative Structure Updates Request ST",
-   "link_to": "Administrative Structure Updates Request ST",
    "stats_filter": "[]",
    "type": "DocType"
   },
