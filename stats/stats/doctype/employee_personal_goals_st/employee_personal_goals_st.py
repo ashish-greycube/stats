@@ -15,6 +15,8 @@ class EmployeePersonalGoalsST(Document):
 		self.validate_duplicate_entry_of_employee_based_on_fiscal_year()
 		set_degree_based_on_weight(self.personal_goals)
 		validate_weight(self.personal_goals)
+		set_degree_based_on_weight(self.job_goals)
+		validate_weight(self.job_goals)
 
 	def validate_length(self):
 		if len(self.personal_goals)>4:

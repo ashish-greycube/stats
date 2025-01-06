@@ -175,7 +175,8 @@ doc_events = {
         "validate":"stats.api.fetch_values_from_material_request"
     },
     "Employee Grade": {
-        "validate":"stats.salary.validate_salary_amount_in_grade"
+        "validate":["stats.salary.validate_salary_amount_in_grade",
+                    "stats.api.validate_evaluation_weight"]
     }
 }
 
@@ -209,7 +210,7 @@ scheduler_events = {
         ]
 	},
     "daily": [
-        "stats.api.create_employee_evaluation_yearly_and_half_yearly",
+        # "stats.api.create_employee_evaluation_yearly_and_half_yearly",
         "stats.api.create_employee_evaluation_based_on_employee_contract"
     ]
 }

@@ -20,7 +20,9 @@
   "branch",
   "section",
   "section_break_xerq",
-  "personal_goals"
+  "personal_goals",
+  "section_break_ucjc",
+  "job_goals"
  ],
  "fields": [
   {
@@ -123,12 +125,22 @@
    "fieldtype": "Table",
    "label": "Personal Goals",
    "options": "Personal Goals Details ST"
+  },
+  {
+   "fieldname": "section_break_ucjc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "job_goals",
+   "fieldtype": "Table",
+   "label": "Job Goals",
+   "options": "Job Goals Details ST"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-25 11:13:24.731245",
+ "modified": "2025-01-03 14:36:57.202720",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Personal Goals ST",

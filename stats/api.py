@@ -13,7 +13,7 @@ from hijridate import Hijri, Gregorian
 @frappe.validate_and_sanitize_search_inputs
 def get_main_department(doctype, txt, searchfield, start, page_len, filters):
 		
-		department_list = frappe.get_all("Department", filters={"is_group":0}, fields=["distinct parent_department"], as_list=1)
+		department_list = frappe.get_all("Department", filters={"is_group":0, "parent_department": ("like", f"{txt}%")}, fields=["distinct parent_department"], as_list=1)
 		unique = tuple(set(department_list))
 		# print(unique, '----------ab')
 		return unique
@@ -269,8 +269,9 @@ def get_base_amount_from_salary_structure_assignment(employee):
 		return base
 
 def validate_weight_and_set_degree_based_on_weight(self, method):
-	set_degree_based_on_weight(self.custom_management_skills)
-	validate_weight(self.custom_management_skills)
+	validate_weight(self.custom_basic_competencies)
+	validate_weight(self.custom_technical_competencies)
+	validate_weight(self.custom_leadership)
 
 def set_degree_based_on_weight(details):
 	if len(details)>0:
@@ -394,7 +395,7 @@ def create_employee_evaluation_based_on_employee_contract():
 											filters={"docstatus":1},
 											or_filters={"test_period_end_date":today,"end_of_new_test_period":today},
 											fields=["name"])
-	default_template_for_test_period = frappe.db.get_single_value("Stats Settings ST","default_evaluation_template_for_test_period")
+	# default_template_for_test_period = frappe.db.get_single_value("Stats Settings ST","default_evaluation_template_for_test_period")
 	if len(employee_contract_list)>0:
 		for contract in employee_contract_list:
 			print(contract,"--")
@@ -414,52 +415,33 @@ def create_employee_evaluation_based_on_employee_contract():
 					employee_evaluation_doc.evaluation_from = employee_contract_doc.contract_start_date
 					employee_evaluation_doc.evaluation_to = employee_contract_doc.test_period_end_date
 				
-				employee_grade = frappe.db.get_value("Employee",employee_contract_doc.employee_no,"grade")
 				employee_designation = frappe.db.get_value("Employee",employee_contract_doc.employee_no,"designation")
-				employee_personal_goal = frappe.db.get_all("Employee Personal Goals ST",
-											filters={"employee_no":employee_contract_doc.employee_no,"docstatus":1},
-											fields=["name"])
-				if len(employee_personal_goal)>0:
-					employee_personal_goal_doc = frappe.get_doc("Employee Personal Goals ST",employee_personal_goal[0].name)
-					if len(employee_personal_goal_doc.personal_goals)>0:
-						for row in employee_personal_goal_doc.personal_goals:
-							personal_goal = employee_evaluation_doc.append("employee_personal_goals",{})
-							personal_goal.goals = row.goals
-							personal_goal.weight = row.weight
-							personal_goal.target_degree = row.target_degree
-
-				if employee_grade:
-					evaluation_template = frappe.db.get_all("Employee Evaluation Template ST",
-												filters={"grade":employee_grade},
-												fields=["name"])
-					if len(evaluation_template)>0:
-						evaluation_template_doc = frappe.get_doc("Employee Evaluation Template ST",evaluation_template[0].name)
-						if len(evaluation_template_doc.job_goals)>0:
-							for row in evaluation_template_doc.job_goals:
-								job_goal = employee_evaluation_doc.append("employee_job_goals",{})
-								job_goal.goals = row.goals
-								job_goal.weight = row.weight
-								job_goal.uom = row.uom
-								job_goal.target_degree = row.target_degree
-				if default_template_for_test_period:
-					evaluation_template_doc = frappe.get_doc("Employee Evaluation Template ST",default_template_for_test_period)
-					if len(evaluation_template_doc.job_goals)>0:
-						for row in evaluation_template_doc.job_goals:
-							job_goal = employee_evaluation_doc.append("employee_job_goals",{})
-							job_goal.goals = row.goals
-							job_goal.weight = row.weight
-							job_goal.uom = row.uom
-							job_goal.target_degree = row.target_degree
 
 				if employee_designation:
 					designation_doc = frappe.get_doc("Designation",employee_designation)
-					if len(designation_doc.custom_management_skills)>0:
-						for row in designation_doc.custom_management_skills:
-							management_skill = employee_evaluation_doc.append("employee_management_skills",{})
-							management_skill.skill = row.skill
-							management_skill.skill_description = row.skill_description
-							management_skill.weight = row.weight
-							management_skill.target_degree = row.target_degree
+					if len(designation_doc.custom_basic_competencies)>0:
+						for row in designation_doc.custom_basic_competencies:
+							basic_skill = employee_evaluation_doc.append("basic_competencies",{})
+							basic_skill.competencies_name = row.competencies_name
+							basic_skill.description = row.description
+							basic_skill.weight = row.weight
+							basic_skill.degree_out_of_5 = row.degree_out_of_5
+					
+					if len(designation_doc.custom_technical_competencies)>0:
+						for row in designation_doc.custom_technical_competencies:
+							technical_skill = employee_evaluation_doc.append("technical_competencies",{})
+							technical_skill.competencies_name = row.competencies_name
+							technical_skill.description = row.description
+							technical_skill.weight = row.weight
+							technical_skill.degree_out_of_5 = row.degree_out_of_5
+
+					if len(designation_doc.custom_leadership)>0:
+						for row in designation_doc.custom_leadership:
+							leadership_skill = employee_evaluation_doc.append("leadership",{})
+							leadership_skill.competencies_name = row.competencies_name
+							leadership_skill.description = row.description
+							leadership_skill.weight = row.weight
+							leadership_skill.degree_out_of_5 = row.degree_out_of_5
 
 				employee_evaluation_doc.save(ignore_permissions=True)
 				employee_evaluation_doc.add_comment("Comment",text="Created by system on {0}".format(nowdate()))
@@ -674,3 +656,8 @@ def make_leave_application_change_request(source_name, target_doc=None):
 		set_missing_values,
 	)
 	return doc
+
+def validate_evaluation_weight(self, method):
+	weight_total = self.custom_employee_personal_goal_weight + self.custom_employee_job_goal_weight + self.custom_competencies_weight
+	if weight_total != 100:
+		frappe.throw(_("Weight total must be 100"))

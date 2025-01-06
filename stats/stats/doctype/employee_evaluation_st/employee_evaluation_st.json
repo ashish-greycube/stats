@@ -26,11 +26,13 @@
   "section_break_kpbm",
   "employee_job_goals",
   "section_break_dqic",
-  "employee_management_skills",
+  "basic_competencies",
+  "technical_competencies",
+  "leadership",
   "evaluation_summary_section",
   "personal_goals",
   "job_goals",
-  "management_skills",
+  "competencies",
   "column_break_cywl",
   "final_evaluation",
   "evaluation_classification",
@@ -126,6 +128,7 @@
    "mandatory_depends_on": "eval:doc.evaluation_type == \"Test Period\""
   },
   {
+   "depends_on": "eval:doc.evaluation_type != \"Test Period\"",
    "fieldname": "employee_personal_goals_section",
    "fieldtype": "Section Break"
   },
@@ -136,6 +139,7 @@
    "options": "Employee Personal Goals Details ST"
   },
   {
+   "depends_on": "eval:doc.evaluation_type != \"Test Period\"",
    "fieldname": "section_break_kpbm",
    "fieldtype": "Section Break"
   },
@@ -147,13 +151,8 @@
   },
   {
    "fieldname": "section_break_dqic",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "employee_management_skills",
-   "fieldtype": "Table",
-   "label": "Employee Management Skills",
-   "options": "Employee Management Skills Details ST"
+   "fieldtype": "Section Break",
+   "label": "Competencies"
   },
   {
    "fieldname": "evaluation_summary_section",
@@ -171,13 +170,6 @@
    "fieldname": "job_goals",
    "fieldtype": "Float",
    "label": "Job Goals",
-   "precision": "2",
-   "read_only": 1
-  },
-  {
-   "fieldname": "management_skills",
-   "fieldtype": "Float",
-   "label": "Management Skills",
    "precision": "2",
    "read_only": 1
   },
@@ -220,12 +212,37 @@
    "fieldtype": "Data",
    "label": "Employee Contract Reference",
    "read_only": 1
+  },
+  {
+   "fieldname": "basic_competencies",
+   "fieldtype": "Table",
+   "label": "Basic Competencies",
+   "options": "Employee Competencies Details ST"
+  },
+  {
+   "fieldname": "technical_competencies",
+   "fieldtype": "Table",
+   "label": "Technical Competencies",
+   "options": "Employee Competencies Details ST"
+  },
+  {
+   "fieldname": "leadership",
+   "fieldtype": "Table",
+   "label": "Leadership",
+   "options": "Employee Competencies Details ST"
+  },
+  {
+   "fieldname": "competencies",
+   "fieldtype": "Float",
+   "label": "Competencies",
+   "precision": "2",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-26 11:11:25.438917",
+ "modified": "2025-01-03 15:31:03.893904",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Evaluation ST",

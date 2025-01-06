@@ -17,6 +17,16 @@ frappe.ui.form.on("Personal Goals Details ST", {
     }
 })
 
+frappe.ui.form.on("Job Goals Details ST", {
+    weight(frm, cdt, cdn) {
+        set_degree_based_on_weight(frm, cdt, cdn)
+    },
+
+    target_degree(frm, cdt, cdn) {
+        set_degree_based_on_weight(frm, cdt, cdn)
+    }
+})
+
 let set_degree_based_on_weight = function(frm,cdt,cdn){
     let row = locals[cdt][cdn]
     if (row.weight && row.target_degree){

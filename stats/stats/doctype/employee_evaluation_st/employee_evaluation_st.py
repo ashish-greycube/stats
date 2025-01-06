@@ -13,13 +13,15 @@ class EmployeeEvaluationST(Document):
 	def validate(self):
 		calculate_actual_degree_based_on_weight(self.employee_personal_goals)
 		calculate_actual_degree_based_on_weight(self.employee_job_goals)
-		calculate_actual_degree_based_on_weight(self.employee_management_skills)
+		calculate_actual_degree_based_on_weight(self.basic_competencies)
+		calculate_actual_degree_based_on_weight(self.technical_competencies)
+		calculate_actual_degree_based_on_weight(self.leadership)
 		self.calculate_evaluation_summary()
 
 	def calculate_evaluation_summary(self):
 		total_degree_of_personal_goals = 0
 		total_degree_of_job_goals = 0
-		total_degree_of_management_skills = 0
+		total_degree_of_competencies = 0
 
 		if len(self.employee_personal_goals)>0:
 			for row in self.employee_personal_goals:
@@ -29,25 +31,40 @@ class EmployeeEvaluationST(Document):
 			for goal in self.employee_job_goals:
 				if goal.actual_degree_based_on_weight:
 					total_degree_of_job_goals = total_degree_of_job_goals + goal.actual_degree_based_on_weight
-		if len(self.employee_management_skills)>0:
-			for skill in self.employee_management_skills:
-				if skill.actual_degree_based_on_weight:
-					total_degree_of_management_skills = total_degree_of_management_skills + skill.actual_degree_based_on_weight
+		if len(self.basic_competencies)>0:
+			for basic in self.basic_competencies:
+				if basic.actual_degree_based_on_weight:
+					total_degree_of_competencies = total_degree_of_competencies + basic.actual_degree_based_on_weight
+		if len(self.technical_competencies)>0:
+			for technical in self.technical_competencies:
+				if technical.actual_degree_based_on_weight:
+					total_degree_of_competencies = total_degree_of_competencies + technical.actual_degree_based_on_weight
+		if len(self.leadership)>0:
+			for leadership in self.leadership:
+				if leadership.actual_degree_based_on_weight:
+					total_degree_of_competencies = total_degree_of_competencies + leadership.actual_degree_based_on_weight
 
 		self.personal_goals = total_degree_of_personal_goals
 		self.job_goals = total_degree_of_job_goals
-		self.management_skills = total_degree_of_management_skills
+		self.competencies = total_degree_of_competencies
 		
 		stats_settings_doc = frappe.get_doc("Stats Settings ST")
 		final_evaluation = 0
-		if len(self.employee_management_skills)>0:
-			final_evaluation = ((total_degree_of_personal_goals * stats_settings_doc.management_employee_personal_goals / 100) + 
-					   (total_degree_of_job_goals * stats_settings_doc.management_job_goals / 100) + 
-					   (total_degree_of_management_skills * stats_settings_doc.management_skills / 100))
+
+		if self.evaluation_type != "Test Period":
+			personal_goal_weight, job_goal_weight, competencies_weight = frappe.db.get_value("Employee Grade",
+																					self.grade,["custom_employee_personal_goal_weight",
+																								"custom_employee_job_goal_weight",
+																								"custom_competencies_weight"])
+			if personal_goal_weight <= 0 or job_goal_weight <= 0 or competencies_weight <= 0:
+				frappe.throw(_("Please set weights in Grade {0}".format(get_link_to_form("Employee Grade",self.grade))))
+			else :
+				final_evaluation = ((total_degree_of_personal_goals * personal_goal_weight / 100) + 
+						(total_degree_of_job_goals * job_goal_weight / 100) + 
+						(total_degree_of_competencies * competencies_weight / 100))
 		
-		else :
-			final_evaluation = ((total_degree_of_personal_goals * stats_settings_doc.normal_employee_personal_goals / 100) + 
-					   (total_degree_of_job_goals * stats_settings_doc.normal_job_goals / 100))
+		elif self.evaluation_type == "Test Period":
+			final_evaluation = (total_degree_of_competencies / 3)
 			
 		self.final_evaluation = final_evaluation
 		if final_evaluation > 0:
@@ -85,19 +102,14 @@ class EmployeeEvaluationST(Document):
 			if len(employee_personal_goal)>0:
 				employee_personal_goal_doc = frappe.get_doc("Employee Personal Goals ST",employee_personal_goal[0].name)
 				employee_personal_goal_details = employee_personal_goal_doc.personal_goals
+				employee_job_goal_details = employee_personal_goal_doc.job_goals
 
-		evaluation_template_details = None
-		if self.grade:
-			evaluation_template = frappe.db.get_all("Employee Evaluation Template ST",
-										   filters={"grade":self.grade},
-										   fields=["name"])
-			if len(evaluation_template)>0:
-				evaluation_template_doc = frappe.get_doc("Employee Evaluation Template ST",evaluation_template[0].name)
-				evaluation_template_details = evaluation_template_doc.job_goals
-				print(evaluation_template_details,"------------")
 		if self.designation:
 			designation_doc = frappe.get_doc("Designation",self.designation)
-			management_skills = designation_doc.custom_management_skills
+			basic_competencies = designation_doc.custom_basic_competencies
+			technical_competencies = designation_doc.custom_technical_competencies
+			leadership = designation_doc.custom_leadership
+
 			
-		return employee_personal_goal_details, evaluation_template_details, management_skills
+		return employee_personal_goal_details, employee_job_goal_details, basic_competencies, technical_competencies, leadership
 			

@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-12-24 11:02:02.399050",
+ "creation": "2025-01-03 14:54:22.292540",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -11,52 +11,70 @@
   "weight",
   "column_break_sywo",
   "degree_out_of_5",
-  "degree_based_on_weight"
+  "actual_degree",
+  "actual_degree_based_on_weight"
  ],
  "fields": [
   {
+   "columns": 2,
    "fieldname": "competencies_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Competencies Name"
+   "label": "Competencies Name",
+   "read_only": 1
   },
   {
+   "columns": 2,
    "fieldname": "description",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Description"
+   "label": "Description",
+   "read_only": 1
   },
   {
+   "columns": 2,
    "fieldname": "weight",
    "fieldtype": "Percent",
    "in_list_view": 1,
-   "label": "Weight"
-  },
-  {
-   "fieldname": "degree_based_on_weight",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Degree Based on Weight",
-   "precision": "2"
-  },
-  {
-   "fieldname": "degree_out_of_5",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Degree Out of 5"
+   "label": "Weight",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_sywo",
    "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "fieldname": "degree_out_of_5",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Degree Out of 5",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "actual_degree_based_on_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Actual Degree Based on Weight",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "actual_degree",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Actual Degree"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-01-03 14:50:23.031792",
+ "modified": "2025-01-03 14:58:12.281950",
  "modified_by": "Administrator",
  "module": "Stats",
- "name": "Competencies Details ST",
+ "name": "Employee Competencies Details ST",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",
