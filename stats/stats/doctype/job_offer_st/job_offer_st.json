@@ -51,6 +51,10 @@
   "additional_number",
   "offer_details_section",
   "offer_details",
+  "salary_structure_details_section",
+  "basic_salary_amount",
+  "earnings_details",
+  "deduction_details",
   "salary_details_section",
   "earning",
   "column_break_yybj",
@@ -225,6 +229,7 @@
   {
    "fieldname": "salary_details_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Salary Details"
   },
   {
@@ -390,6 +395,29 @@
    "fieldname": "hijri_birth_date",
    "fieldtype": "Data",
    "label": "Hijri Birth Date"
+  },
+  {
+   "fieldname": "basic_salary_amount",
+   "fieldtype": "Currency",
+   "label": "Basic Salary Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "salary_structure_details_section",
+   "fieldtype": "Section Break",
+   "label": "Salary Structure Details"
+  },
+  {
+   "fieldname": "earnings_details",
+   "fieldtype": "Table",
+   "label": "Earnings Details",
+   "options": "Grade Earnings Amount Details ST"
+  },
+  {
+   "fieldname": "deduction_details",
+   "fieldtype": "Table",
+   "label": "Deduction Details",
+   "options": "Grade Deductions Amount Details ST"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -407,7 +435,7 @@
    "link_fieldname": "custom_job_offer_reference"
   }
  ],
- "modified": "2024-12-31 15:12:11.665830",
+ "modified": "2025-01-03 15:17:45.577423",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Job Offer ST",

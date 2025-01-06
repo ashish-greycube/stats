@@ -25,15 +25,19 @@
   "column_break_bfsv",
   "test_period_end_date",
   "end_of_new_test_period",
-  "total_monthly_salary",
   "employee_details_section",
   "employee_no",
   "column_break_rqzr",
   "employee_name",
+  "salary_structure_details_section",
+  "total_monthly_salary",
+  "earnings_details",
+  "deduction_details",
   "salary_details_section",
   "earning",
   "column_break_eegg",
   "deduction",
+  "section_break_sequ",
   "amended_from"
  ],
  "fields": [
@@ -138,6 +142,7 @@
   {
    "fieldname": "salary_details_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Salary Details"
   },
   {
@@ -218,12 +223,35 @@
    "fieldtype": "Date",
    "label": "Test Period End Date",
    "read_only": 1
+  },
+  {
+   "fieldname": "salary_structure_details_section",
+   "fieldtype": "Section Break",
+   "label": "Salary Structure Details"
+  },
+  {
+   "fieldname": "earnings_details",
+   "fieldtype": "Table",
+   "label": "Earnings Details",
+   "options": "Grade Earnings Amount Details ST",
+   "read_only": 1
+  },
+  {
+   "fieldname": "deduction_details",
+   "fieldtype": "Table",
+   "label": "Deduction Details",
+   "options": "Grade Deductions Amount Details ST",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_sequ",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-25 13:50:28.906620",
+ "modified": "2025-01-06 10:16:44.505282",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Contract ST",

@@ -11,7 +11,7 @@ class ManPowerPlanningST(Document):
 	def validate(self):
 		self.set_job_no_in_employee()
 		self.change_position_status_in_job_details()
-		self.set_budget_details()
+		# self.set_budget_details()
 
 	def set_job_no_in_employee(self):
 		if len(self.job_details) > 0:

@@ -9,7 +9,7 @@ from frappe import _
 class ManPowerPlanChangeRequestST(Document):
 	def validate(self):
 		self.validate_job_no()
-		self.set_finance_imapct()
+		# self.set_finance_imapct()
 
 	def on_submit(self):
 		self.change_pervious_job_details()
@@ -43,7 +43,9 @@ class ManPowerPlanChangeRequestST(Document):
 			frappe.db.set_value('MP Jobs Details ST',self.job_no, 'main_job_department', self.main_department_cp)
 			frappe.db.set_value('MP Jobs Details ST',self.job_no, 'sub_job_department', self.sub_department_cp)
 			frappe.db.set_value('MP Jobs Details ST',self.job_no, 'grade', self.grade_cp)
-			frappe.db.set_value('MP Jobs Details ST',self.job_no, 'salary', self.salary_cp)
+			# frappe.db.set_value('MP Jobs Details ST',self.job_no, 'salary', self.salary_cp)
+			frappe.db.set_value('MP Jobs Details ST',self.job_no, 'section', self.section_cp)
+			frappe.db.set_value('MP Jobs Details ST',self.job_no, 'employee_unit', self.employee_unit_cp)
 
 			frappe.msgprint(_("Update Job No. {0} Details in Man Power Planning {1}").format(self.job_no, self.man_power_planning_reference), alert=1)
 			
@@ -61,7 +63,10 @@ class ManPowerPlanChangeRequestST(Document):
 			row.main_job_department = self.main_department_nj
 			row.sub_department = self.sub_department_nj
 			row.grade = self.grade_np
-			row.salary = self.salary_nj
+			row.section = self.section_nj
+			row.employee_unit = self.employee_unit_nj
+
+			# row.salary = self.salary_nj
 
 			man_power.save(ignore_permissions=True)
 

@@ -22,8 +22,12 @@ frappe.ui.form.on("Employee Contract ST", {
     },
 
 	job_offer_reference: function (frm) {
-		frm.set_value("earning", "");
-        frm.set_value("deduction", "");
+		// frm.set_value("earning", "");
+        // frm.set_value("deduction", "");
+
+		frm.set_value("earnings_details", "");
+		frm.set_value("deduction_details", "");
+
 		if (frm.doc.job_offer_reference) {
 			frappe.call({
 				method: "stats.stats.doctype.employee_contract_st.employee_contract_st.get_salary_details",
@@ -32,17 +36,20 @@ frappe.ui.form.on("Employee Contract ST", {
 					parenttype: "Job Offer ST",
 				},
 				callback: function (r) {
+					console.log(r.message, "===r.message")
 					if (r.message[0]) {
 						r.message[0].forEach((e) => {
-							frm.add_child("earning", e);
+							// frm.add_child("earning", e);
+							frm.add_child("earnings_details", e);
 						});
-						refresh_field("earning");
+						refresh_field("earnings_details");
 					}
                     if (r.message[1]) {
 						r.message[1].forEach((d) => {
-							frm.add_child("deduction", d);
+							// frm.add_child("deduction", d);
+							frm.add_child("deduction_details", d);
 						});
-						refresh_field("deduction");
+						refresh_field("deduction_details");
 					}
 				},
 			});

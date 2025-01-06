@@ -12,13 +12,25 @@ class JobOfferST(Document):
 	# 	self.calculate_salary_earnings_and_deduction()
 
 	def validate(self):
+		self.validate_basic_salary_amount()
 		# self.fetch_salary_tables_from_contract_type()
-		self.validate_offer_term_details()
-		self.validate_duplicate_entry_for_offer_term_with_monthly_salary_component()
-		self.validate_value_in_offer_details()
+		# self.validate_offer_term_details()
+		# self.validate_duplicate_entry_for_offer_term_with_monthly_salary_component()
+		# self.validate_value_in_offer_details()
 		# self.calculate_salary_earnings_and_deduction()
-		self.validate_total_monthly_salary_earnings_and_deductions()
+		# self.validate_total_monthly_salary_earnings_and_deductions()
 
+	def validate_basic_salary_amount(self):
+		if self.basic_salary_amount < 1:
+			frappe.throw("Basic Salary Component is Mandatory field.")
+
+		grade_doc = frappe.get_doc("Employee Grade", self.grade)
+
+		if self.basic_salary_amount > grade_doc.custom_max_basic_amount:
+			frappe.throw(_("Basic Salary Amount Cann't be More Than {0} Grade Maximum Basic Amount.").format(grade_doc.custom_max_basic_amount))
+		
+		if self.basic_salary_amount < grade_doc.custom_minimum_basic_amount:
+			frappe.throw(_("Basic Salary Amount Cann't be Less Than {0} Grade Manimum Basic Amount.").format(grade_doc.custom_minimum_basic_amount))
 
 	def validate_offer_term_details(self):
 		offer_term_in_offer_details_list = []
@@ -153,6 +165,82 @@ class JobOfferST(Document):
 			salary = frappe.db.get_value('MP Jobs Details ST', self.job_title , 'salary')
 		print(salary, '----salary')
 		return salary
+	
+	@frappe.whitelist()
+	def get_salary_details_from_grade(self):
+
+		print("get_salary_details_from_grade")
+
+		if not self.grade:
+			frappe.throw(_("Please Select Grade First."))
+
+		self.earnings_details = []
+		self.deduction_details = []
+
+		if self.basic_salary_amount:
+			grade_doc = frappe.get_doc("Employee Grade", self.grade)
+
+			if self.basic_salary_amount > grade_doc.custom_max_basic_amount:
+				frappe.throw(_("Basic Salary Amount Cann't be More Than {0} Grade Maximum Basic Amount.").format(grade_doc.custom_max_basic_amount))
+			
+			if self.basic_salary_amount < grade_doc.custom_minimum_basic_amount:
+				frappe.throw(_("Basic Salary Amount Cann't be Less Than {0} Grade Manimum Basic Amount.").format(grade_doc.custom_minimum_basic_amount))
+
+			basic = self.append("earnings_details", {})
+			basic.earning = grade_doc.custom_basic_salary_component
+			basic.amount = self.basic_salary_amount
+			basic.maximum_amount = grade_doc.custom_max_basic_amount or 0
+			basic.minimum_amount = grade_doc.custom_minimum_basic_amount or 0
+			
+			if len(grade_doc.custom_earnings) > 0:
+				for ear in grade_doc.custom_earnings:
+					earn = self.append("earnings_details", {})
+					earn.earning = ear.earning
+					earn.percentage = ear.percentage
+					earn.maximum_amount = ear.maximum_amount or 0
+					earn.minimum_amount = ear.minimum_amount or 0
+
+					amount = (self.basic_salary_amount * ear.percentage) / 100
+
+					if ear.maximum_amount and ear.maximum_amount < amount:
+						earn.amount = ear.maximum_amount
+						
+					elif ear.minimum_amount and ear.minimum_amount > amount:
+						earn.amount = ear.minimum_amount
+						
+					else:
+						earn.amount = amount
+
+			if len(grade_doc.custom_other_earnings) > 0:
+				for other in grade_doc.custom_other_earnings:
+					ot = self.append("earnings_details", {})
+					ot.earning = other.earning
+					ot.method = other.method
+
+					if other.method == "Amount":
+						ot.amount = other.amount
+
+					if other.method == "Percentage":
+						ot.percentage = other.percentage
+						ot.maximum_amount = other.maximum_amount or 0
+						ot.minimum_amount = other.minimum_amount or 0
+						amount = (self.basic_salary_amount * other.percentage) / 100
+
+						if other.maximum_amount and other.maximum_amount < amount:
+							ot.amount = other.maximum_amount
+							
+						elif other.minimum_amount and other.minimum_amount > amount:
+							ot.amount = other.minimum_amount
+							
+						else:
+							ot.amount = amount
+
+			if len(grade_doc.custom_deduction) > 0:
+				for ded in grade_doc.custom_deduction:
+					dedu = self.append("deduction_details", {})
+					dedu.deduction = ded.deduction
+					dedu.percentage = ded.percentage
+					dedu.amount = (self.basic_salary_amount * dedu.percentage) / 100
 
 	@frappe.whitelist()
 	def fill_salary_tables(self):

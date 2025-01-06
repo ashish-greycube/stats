@@ -140,6 +140,7 @@ doc_events = {
 	},
     "Employee": {
         "validate":["stats.api.calculate_years_of_experience",
+                     "stats.api.convert_gregorian_dob_in_hijri_dob",
                     "stats.api.set_employee_in_man_power_planning_for_job_no",
                     "stats.salary.create_resignation_addition_salary_for_employee"]
 	},
@@ -172,7 +173,10 @@ doc_events = {
     },
     "Purchase Order": {
         "validate":"stats.api.fetch_values_from_material_request"
-    } 
+    },
+    "Employee Grade": {
+        "validate":"stats.salary.validate_salary_amount_in_grade"
+    }
 }
 
 # doc_events = {

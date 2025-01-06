@@ -100,7 +100,8 @@ def set_employee_in_man_power_planning_for_job_no(self, method):
 			frappe.msgprint(_("set Employee {0} in Job No {1}").format(self.name, self.custom_job_no), alert=True)
 
 def convert_gregorian_dob_in_hijri_dob(self, method):
-	gregorian_splits=(self.date_of_birth).split('-')
+	print(self.date_of_birth, "-----self.date_of_birth", type(self.date_of_birth), '==type')
+	gregorian_splits=cstr(self.date_of_birth).split('-')
 	year_split=cint(gregorian_splits[0])
 	month_split=cint(gregorian_splits[1])
 	day_split=cint(gregorian_splits[2])

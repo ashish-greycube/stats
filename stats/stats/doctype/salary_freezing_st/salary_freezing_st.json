@@ -13,6 +13,7 @@
   "employee_name",
   "main_department",
   "sub_department",
+  "grade",
   "contract_type",
   "section",
   "amended_from",
@@ -124,12 +125,19 @@
    "fieldtype": "HTML",
    "label": "Instrcution",
    "options": "<ol>\n<li>Salary Freezing Start Date <b>before</b> Payroll Date (Define In Stats Settings) :  New Freezing Salary Assignment  Starts From Freezing Start Date's  Month.</li>\n<li>Salary Freezing Start Date <b>After</b> Payroll Date (Define In Stats Settings) : New Freezing Salary Assignment  Starts From Freezing Start Date's  Next Month.</li>\n<li>Salary Freezing End Date <b>Before</b> Payroll Date (Define In Stats Settings) :  Regular Salary Starts From Freezing End Date's  Month.</li>\n<li>Salary Freezing End Date <b>After</b> Payroll Date (Define In Stats Settings) : Regular Salary Starts From Freezing End Date's  Next Month.</li>\n</ol>"
+  },
+  {
+   "fetch_from": "employee_no.grade",
+   "fieldname": "grade",
+   "fieldtype": "Link",
+   "label": "Grade",
+   "options": "Employee Grade"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-12-18 13:28:25.733801",
+ "modified": "2025-01-06 10:54:01.034222",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Salary Freezing ST",

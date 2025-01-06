@@ -25,9 +25,14 @@ class SalaryFreezingST(Document):
 
 
 	def create_salary_structure_and_assignments(self):
+		if not self.grade:
+			frappe.throw(_("Grade is Mandatory Field."))
+
 		payroll_date = frappe.db.get_single_value('Stats Settings ST', 'every_month_payroll_date')
-		basic_salary_component = frappe.db.get_single_value('Stats Settings ST', 'basic_salary_component')
+		# basic_salary_component = frappe.db.get_single_value('Stats Settings ST', 'basic_salary_component')
 		contract_type = frappe.db.get_value("Contract Type ST", self.contract_type, 'contract')
+
+		basic_salary_component = frappe.db.get_value("Employee Grade", self.grade, 'custom_basic_salary_component')
 
 		if payroll_date == None:
 			frappe.throw(_("Please Set Every Month Payroll Date In Stats Settings."))

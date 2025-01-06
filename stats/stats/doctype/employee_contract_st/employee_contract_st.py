@@ -11,14 +11,15 @@ from stats.api import get_monthly_salary_from_job_offer
 class EmployeeContractST(Document):
 	def validate(self):
 		self.validate_trial_period()
+		self.set_total_monthly_salary()
 
 	def on_submit(self):
 		self.create_salary_structure()
 
 	def validate_trial_period(self):	
-		if self.job_offer_reference:
-			monthly_salary = get_monthly_salary_from_job_offer(self.job_offer_reference)
-			self.total_monthly_salary = monthly_salary
+		# if self.job_offer_reference:
+		# 	monthly_salary = get_monthly_salary_from_job_offer(self.job_offer_reference)
+		# 	self.total_monthly_salary = monthly_salary
 		if self.contract_start_date:
 			self.test_period_end_date = add_to_date(self.contract_start_date, months=3)
 			self.contract_end_date = add_years(self.contract_start_date, 1)
@@ -26,6 +27,14 @@ class EmployeeContractST(Document):
 				self.end_of_new_test_period = add_to_date(self.test_period_end_date, months=3)
 			else:
 				self.end_of_new_test_period = None
+
+	def set_total_monthly_salary(self):
+		total_monthly_salary = 0
+		if len(self.earnings_details) > 0:
+			for ear in self.earnings_details:
+				total_monthly_salary = total_monthly_salary + ear.amount
+
+		self.total_monthly_salary = total_monthly_salary
 
 	def on_update_after_submit(self):
 		if self.test_period_renewed == "Yes":
@@ -40,8 +49,10 @@ class EmployeeContractST(Document):
 			salary_structure.custom_employee_no = self.employee_no
 			salary_structure.custom_contract_start_date = self.contract_start_date
 
-			if len(self.earning) > 0:
-				for ear in self.earning:
+			# if len(self.earning) > 0:
+			# 	for ear in self.earning:
+			if len(self.earnings_details) > 0:
+				for ear in self.earnings_details:
 					earning = salary_structure.append("earnings", {})
 					earning.salary_component = ear.earning
 					earning.amount = ear.amount
@@ -49,8 +60,10 @@ class EmployeeContractST(Document):
 					earning.is_tax_applicable = 0
 					earning.depends_on_payment_days = 0
 			
-			if len(self.deduction) > 0:
-				for ded in self.deduction:
+			# if len(self.deduction) > 0:
+			# 	for ded in self.deduction:
+			if len(self.deduction_details) > 0:
+				for ded in self.deduction_details:
 					deduction = salary_structure.append("deductions", {})
 					deduction.salary_component = ded.deduction
 					deduction.amount = ded.amount
@@ -69,27 +82,52 @@ class EmployeeContractST(Document):
 def get_salary_details(parent, parenttype):
 
 	earning = frappe.get_all(
-		"Earning Amount ST",
+		"Grade Earnings Amount Details ST",
 		fields=[
 			"earning",
-			"abbr",
-			"formula",
-			"amount"
+			"percentage",
+			"amount",
+			"maximum_amount",
+			"minimum_amount",
+			"method"
 		],
 		filters={"parent": parent, "parenttype": parenttype},
 		order_by="idx",
 	)
 
 	deduction = frappe.get_all(
-		"Deduction Amount ST",
+		"Grade Deductions Amount Details ST",
 		fields=[
 			"deduction",
-			"abbr",
-			"formula",
+			"percentage",
 			"amount"
 		],
 		filters={"parent": parent, "parenttype": parenttype},
 		order_by="idx",
 	)
+
+	# earning = frappe.get_all(
+	# 	"Earning Amount ST",
+	# 	fields=[
+	# 		"earning",
+	# 		"abbr",
+	# 		"formula",
+	# 		"amount"
+	# 	],
+	# 	filters={"parent": parent, "parenttype": parenttype},
+	# 	order_by="idx",
+	# )
+
+	# deduction = frappe.get_all(
+	# 	"Deduction Amount ST",
+	# 	fields=[
+	# 		"deduction",
+	# 		"abbr",
+	# 		"formula",
+	# 		"amount"
+	# 	],
+	# 	filters={"parent": parent, "parenttype": parenttype},
+	# 	order_by="idx",
+	# )
 
 	return earning, deduction

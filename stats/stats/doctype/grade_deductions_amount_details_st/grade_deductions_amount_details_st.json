@@ -1,0 +1,50 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-03 15:11:56.322815",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "deduction",
+  "percentage",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "deduction",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Deduction",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
+   "options": "Salary Component",
+   "reqd": 1
+  },
+  {
+   "fieldname": "percentage",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Percentage"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount",
+   "non_negative": 1,
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-01-03 15:12:19.691434",
+ "modified_by": "Administrator",
+ "module": "Stats",
+ "name": "Grade Deductions Amount Details ST",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

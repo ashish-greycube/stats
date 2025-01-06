@@ -116,10 +116,13 @@ class ScholarshipRequestsProcessingST(Document):
 							new_ss.name = row.employee_no + "/" + self.name
 							new_ss.custom_contract_start_date = self.scholarship_start_date
 
-							basic_salary_component = frappe.db.get_single_value('Stats Settings ST', 'basic_salary_component')
+							grade = frappe.db.get_value('Employee', row.employee_no, 'grade')
+							if grade == None:
+								frappe.throw(_("Set Grade in employee profile."))
+							
+							basic_salary_component =frappe.db.get_value("Employee Grade", grade, 'custom_basic_salary_component')
 
-							if basic_salary_component == None:
-								frappe.throw(_("Set Basic Salary Component in Stats Settings"))
+							# basic_salary_component = frappe.db.get_single_value('Stats Settings ST', 'basic_salary_component')
 
 							basic_ear = 0
 							for row in prev_ss.earnings:
@@ -182,10 +185,16 @@ class ScholarshipRequestsProcessingST(Document):
 								additional_salary.salary_component =  ear.salary_component
 								additional_salary.overwrite_salary_structure_amount = 1
 
-								basic_salary_component = frappe.db.get_single_value('Stats Settings ST', 'basic_salary_component')
+								# basic_salary_component = frappe.db.get_single_value('Stats Settings ST', 'basic_salary_component')
 
-								if basic_salary_component == None:
-									frappe.throw(_("Set Basic Salary Component in Stats Settings"))
+								# if basic_salary_component == None:
+								# 	frappe.throw(_("Set Basic Salary Component in Stats Settings"))
+
+								grade = frappe.db.get_value('Employee', scholarship.employee_no, 'grade')
+								if grade == None:
+									frappe.throw(_("Set Grade in employee profile."))
+							
+								basic_salary_component =frappe.db.get_value("Employee Grade", grade, 'custom_basic_salary_component')
 
 								before_scholarship_days = (getdate(self.scholarship_start_date).day - 1)
 								if ear.salary_component == basic_salary_component:
@@ -208,7 +217,13 @@ class ScholarshipRequestsProcessingST(Document):
 							new_ss.name = scholarship.employee_no + "/" + self.name
 							new_ss.custom_contract_start_date = get_first_day(next_month_date)
 
-							basic_salary_component = frappe.db.get_single_value('Stats Settings ST', 'basic_salary_component')
+							# basic_salary_component = frappe.db.get_single_value('Stats Settings ST', 'basic_salary_component')
+
+							grade = frappe.db.get_value('Employee', scholarship.employee_no, 'grade')
+							if grade == None:
+								frappe.throw(_("Set Grade in employee profile."))
+						
+							basic_salary_component =frappe.db.get_value("Employee Grade", grade, 'custom_basic_salary_component')
 
 							basic_ear = 0
 							for row in prev_ss.earnings:
@@ -238,9 +253,15 @@ class ScholarshipRequestsProcessingST(Document):
 								additional_salary.salary_component =  ear.salary_component
 								additional_salary.overwrite_salary_structure_amount = 1
 
-								basic_salary_component = frappe.db.get_single_value('Stats Settings ST', 'basic_salary_component')
-								if basic_salary_component == None:
-									frappe.throw(_("Set Basic Salary Component in Stats Settings"))
+								# basic_salary_component = frappe.db.get_single_value('Stats Settings ST', 'basic_salary_component')
+								# if basic_salary_component == None:
+								# 	frappe.throw(_("Set Basic Salary Component in Stats Settings"))
+
+								grade = frappe.db.get_value('Employee', scholarship.employee_no, 'grade')
+								if grade == None:
+									frappe.throw(_("Set Grade in employee profile."))
+							
+								basic_salary_component =frappe.db.get_value("Employee Grade", grade, 'custom_basic_salary_component')
 
 								after_scholarship_days = (30 - getdate(self.scholarship_end_date).day)
 								if ear.salary_component == basic_salary_component:

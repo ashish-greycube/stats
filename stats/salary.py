@@ -32,17 +32,17 @@ def calculate_lwp_dedution(payroll_entry):
 	for emp in payroll_entry.employees:
 		total_lwp = get_non_working_days(emp.employee,previous_month_start_date, previous_month_last_date)
 		print(total_lwp, '--total_lwp')
-	
+
 		emp_dedution_details = {}
-		
+
 		if total_lwp > 0:
-			salary_assignment = frappe.db.get_all("Salary Structure Assignment", 
-								  fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee}, 
+			salary_assignment = frappe.db.get_all("Salary Structure Assignment",
+								  fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee},
 								  order_by = "from_date desc", limit=1)
 			print(salary_assignment[0].name, '--salary_assignment')
 			if len(salary_assignment) > 0:
 				ss = frappe.get_doc("Salary Structure", salary_assignment[0].salary_structure)
-				
+
 				total_lwp_deduction = 0
 				for ear in ss.earnings:
 					deduction_component = frappe.db.get_value("Salary Component", ear.salary_component, 'custom_consider_for_deduction_calculation')
@@ -56,12 +56,12 @@ def calculate_lwp_dedution(payroll_entry):
 
 				emp_dedution_list.append(emp_dedution_details)
 
-		else:	
+		else:
 			emp_dedution_details['employee'] = emp.employee
 			emp_dedution_details['lwp_deduction'] = 0
 
 			emp_dedution_list.append(emp_dedution_details)
-				
+
 	return emp_dedution_list
 
 ########### Absent Deduction ###########
@@ -90,17 +90,17 @@ def calculate_absent_dedution(payroll_entry):
 	for emp in payroll_entry.employees:
 		total_absent = get_absent_days(emp.employee, previous_month_start_date, previous_month_last_date)
 		print(total_absent, '--total_absent')
-	
+
 		emp_dedution_details = {}
-		
+
 		if total_absent > 0:
-			salary_assignment = frappe.db.get_all("Salary Structure Assignment", 
-								  fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee}, 
+			salary_assignment = frappe.db.get_all("Salary Structure Assignment",
+								  fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee},
 								  order_by = "from_date desc", limit=1)
 			print(salary_assignment[0].name, '--salary_assignment')
 			if len(salary_assignment) > 0:
 				ss = frappe.get_doc("Salary Structure", salary_assignment[0].salary_structure)
-				
+
 				total_absent_deduction = 0
 				for ear in ss.earnings:
 					deduction_component = frappe.db.get_value("Salary Component", ear.salary_component, 'custom_consider_for_deduction_calculation')
@@ -114,12 +114,12 @@ def calculate_absent_dedution(payroll_entry):
 
 				emp_dedution_list.append(emp_dedution_details)
 
-		else:	
+		else:
 			emp_dedution_details['employee'] = emp.employee
 			emp_dedution_details['absent_deduction'] = 0
 
 			emp_dedution_list.append(emp_dedution_details)
-				
+
 	return emp_dedution_list
 
 ########### Incomplete Monthly Mins Deduction ###########
@@ -136,7 +136,7 @@ def calculate_incomplete_monthly_mins_deduction(payroll_entry):
 	emp_monthly_incomplete_mins_list = []
 
 	if consider_incomplete_monthly_mins == 1:
-		
+
 		for emp in payroll_entry.employees:
 
 			total_incomplete_monthly_mins = calculate_incomplete_total_monthly_minutes(emp.employee, previous_month_start_date, previous_month_last_date)
@@ -150,10 +150,10 @@ def calculate_incomplete_monthly_mins_deduction(payroll_entry):
 			print(total_mins_per_month, "======total_mins_per_month")
 			if total_incomplete_monthly_mins < total_mins_per_month:
 
-				salary_assignment = frappe.db.get_all("Salary Structure Assignment", 
-									fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee}, 
+				salary_assignment = frappe.db.get_all("Salary Structure Assignment",
+									fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee},
 									order_by = "from_date desc", limit=1)
-				
+
 				if len(salary_assignment) > 0:
 					ss = frappe.get_doc("Salary Structure", salary_assignment[0].salary_structure)
 					total_incomplete_mins_deduction = 0
@@ -174,7 +174,7 @@ def calculate_incomplete_monthly_mins_deduction(payroll_entry):
 				emp_incomplete_mins_details['incomplete_mins_deduction'] = 0
 
 				emp_monthly_incomplete_mins_list.append(emp_incomplete_mins_details)
-		
+
 	return emp_monthly_incomplete_mins_list
 
 
@@ -222,7 +222,7 @@ def create_additonal_salary_for_deduction(self, method):
 			additional_salary.add_comment('Comment', 'This Additonal Salary is created on {0} for Incomplete Monthly Mins Deduction'.format(nowdate()))
 			frappe.msgprint(_("Additional Salary {0} Created for Employee {1}.").format(additional_salary.name, emp.employee), alert=1)
 			additional_salary.submit()
-			
+
 
 ########### Employee Resignation Additional Salary ###########
 
@@ -231,15 +231,15 @@ def create_resignation_addition_salary_for_employee(self, method):
 
 	print(relieving_date_changed, '----------relieving_date_changed')
 	if relieving_date_changed and self.relieving_date != None:
-		salary_assignment = frappe.db.get_all("Salary Structure Assignment", 
-								  fields=["name", "salary_structure"], filters={"from_date": ["<=", nowdate()], "employee":self.name}, 
+		salary_assignment = frappe.db.get_all("Salary Structure Assignment",
+								  fields=["name", "salary_structure"], filters={"from_date": ["<=", nowdate()], "employee":self.name},
 								  order_by = "from_date desc", limit=1)
-		
+
 		if len(salary_assignment) > 0:
 			print(salary_assignment[0].name, '--salary_assignment')
 
 			ss = frappe.get_doc("Salary Structure", salary_assignment[0].salary_structure)
-		
+
 			total_deduction = 0
 			for ear in ss.earnings:
 				deduction_component = frappe.db.get_value("Salary Component", ear.salary_component, 'custom_consider_for_deduction_calculation')
@@ -247,7 +247,7 @@ def create_resignation_addition_salary_for_employee(self, method):
 					per_day_salary = (ear.amount)/30
 					days_after_resignation = 30 - getdate(self.relieving_date).day
 					total_deduction = (total_deduction) + (per_day_salary * days_after_resignation)
-				
+
 
 			if total_deduction > 0:
 				resignation_deduction_component = frappe.db.get_single_value('Stats Settings ST', 'resignation_deduction_component')
@@ -269,7 +269,7 @@ def create_resignation_addition_salary_for_employee(self, method):
 					additional_salary.add_comment('Comment', 'This Additonal Salary is created on {0} for Resignation Deduction'.format(nowdate()))
 					frappe.msgprint(_("Additional Salary {0} Created for Employee {1}.").format(additional_salary.name, self.name), alert=1)
 					additional_salary.submit()
-		
+
 		else:
 			frappe.throw(_("No Salary Structure Assignment Found For {0} Employee").format(self.name))
 
@@ -296,7 +296,7 @@ def create_addtional_salary_for_new_joinee(self, method):
 			if getdate(joining_date).day < cint(getdate(payroll_date).day):
 				if getdate(self.start_date).year == getdate(joining_date).year and getdate(self.start_date).month == getdate(joining_date).month:
 					no_of_non_working_days = getdate(joining_date).day - 1
-					
+
 					if no_of_non_working_days > 0:
 						total_deduction = per_day_salary * no_of_non_working_days
 
@@ -312,7 +312,7 @@ def create_addtional_salary_for_new_joinee(self, method):
 						additional_salary.submit()
 				else:
 					pass
-			
+
 			elif getdate(joining_date).day >= cint(getdate(payroll_date).day):
 				if getdate(last_month_payroll_date).year == getdate(joining_date).year and getdate(last_month_payroll_date).month == getdate(joining_date).month:
 					no_of_working_days = 30 - getdate(joining_date).day
@@ -329,13 +329,43 @@ def create_addtional_salary_for_new_joinee(self, method):
 					frappe.msgprint(_("Additional Salary {0} Created for Employee {1}.").format(additional_salary.name, self.name), alert=1)
 					additional_salary.submit()
 				else:
-					pass					
+					pass
 
 def get_latest_salary_structure_assignment(employee, from_date):
-	salary_assignment = frappe.db.get_all("Salary Structure Assignment", 
-								  fields=["name", "salary_structure", "base"], filters={"from_date": ["<=", from_date], "employee":employee}, 
+	salary_assignment = frappe.db.get_all("Salary Structure Assignment",
+								  fields=["name", "salary_structure", "base"], filters={"from_date": ["<=", from_date], "employee":employee},
 								  order_by = "from_date desc", limit=1)
 	if len(salary_assignment) > 0:
 		return salary_assignment[0].name
 	else:
 		frappe.throw(_("For {0} date No Salary Structure Assignment Found for {1} Employee").format(from_date, employee))
+
+def validate_salary_amount_in_grade(self, method):
+	### basic salary amount
+	if (self.custom_minimum_basic_amount > self.custom_mid_basic_amount) or (self.custom_minimum_basic_amount > self.custom_max_basic_amount):
+		frappe.throw(_("Minimum Basic Amount should be less than mid & max basic amount."))
+
+	elif (self.custom_max_basic_amount < self.custom_minimum_basic_amount) or (self.custom_max_basic_amount < self.custom_mid_basic_amount):
+		frappe.throw(_("Maximum Basic Amount should be more than mid & max basic amount."))
+
+	elif (self.custom_mid_basic_amount > self.custom_max_basic_amount) or (self.custom_minimum_basic_amount > self.custom_mid_basic_amount):
+		frappe.throw(_("Mid Basic Amount should be more than minimum & less than max basic amount."))
+
+	### earning tables
+	basic_salary_component = self.custom_basic_salary_component
+	if len(self.custom_earnings) > 0:
+		for ear in self.custom_earnings:
+			if ear.earning == basic_salary_component:
+				frappe.throw(_("In Earnings Details Row {0}: You cann't select Basic Salary Component Multiple Time").format(ear.idx))
+			elif ear.maximum_amount < ear.minimum_amount:
+				frappe.throw(_("In Earnings Details Row {0}: Maximum Amount Cann't Be Less than Minimum Amount").format(ear.idx))
+			else:
+				continue
+
+	if len(self.custom_other_earnings) > 0:
+		for ear in self.custom_other_earnings:
+			if ear.earning == basic_salary_component:
+				frappe.throw(_("In Other Earnings Details Row {0}: You cann't select Basic Salary Component Multiple Time").format(ear.idx))
+			if ear.method == 'Percentage':
+				if ear.maximum_amount and ear.minimum_amount and ear.maximum_amount < ear.minimum_amount:
+					frappe.throw(_("In Other Earnings Details Row {0}:Maximum Amount Cann't Be Less than Minimum Amount").format(ear.idx))

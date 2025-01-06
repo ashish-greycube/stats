@@ -37,18 +37,22 @@ frappe.ui.form.on("Job Offer ST", {
 		}
 	},
 	job_application_reference: function(frm){
-		if(frm.is_new() && frm.doc.contract_type){
-			fill_salary_tables(frm)
-		}
+		// if(frm.is_new() && frm.doc.contract_type){
+		// 	fill_salary_tables(frm)
+		// }
 
 		if(frm.is_new() && frm.doc.job_application_reference){
 			fill_education_qualification_and_work_history(frm)
 		}
 	},
+
+	basic_salary_amount: function(frm){
+		frm.call("get_salary_details_from_grade");
+	},
 	contract_type: function(frm) {
-		if(frm.is_new()){
-			fill_salary_tables(frm)
-		}
+		// if(frm.is_new()){
+		// 	fill_salary_tables(frm)
+		// }
 		// if (frm.is_new()) {
 		// 	frm.set_value("earning", "");
 		// 	frm.set_value("deduction", "");
@@ -80,40 +84,40 @@ frappe.ui.form.on("Job Offer ST", {
 	}
 });
 
-frappe.ui.form.on("Job Offer Details ST", {
-	offer_term: function (frm, cdt, cdn) {
-		let row = locals[cdt][cdn]
-		frappe.db.get_value('Offer Term', row.offer_term, 'custom_is_monthly_salary_component')
-		.then(r => {
-			if(r.message.custom_is_monthly_salary_component == 1){
-				frm.call({
-					doc: frm.doc,
-					method: "get_salary_amount_from_man_power_planning",
-					freeze: true,
-					callback: (r) => {
-						if (r.message) {
-							console.log(r.message,'--------msg')
-							frappe.model.set_value(cdt, cdn, 'value', r.message)
-						}
-					}
-				})
-			}
-		})
-	},
-	value: function (frm, cdt, cdn) {
-		let row = locals[cdt][cdn]
-		if (row.offer_term) {
-			frappe.db.get_value('Offer Term', row.offer_term, 'custom_is_monthly_salary_component')
-				.then(r => {
-					if(r.message.custom_is_monthly_salary_component == 1){
-						if(frm.is_new() && frm.doc.contract_type){
-							fill_salary_tables(frm)
-						}
-					} 
-				})
-		}
-	}
-})
+// frappe.ui.form.on("Job Offer Details ST", {
+// 	offer_term: function (frm, cdt, cdn) {
+// 		let row = locals[cdt][cdn]
+// 		frappe.db.get_value('Offer Term', row.offer_term, 'custom_is_monthly_salary_component')
+// 		.then(r => {
+// 			if(r.message.custom_is_monthly_salary_component == 1){
+// 				frm.call({
+// 					doc: frm.doc,
+// 					method: "get_salary_amount_from_man_power_planning",
+// 					freeze: true,
+// 					callback: (r) => {
+// 						if (r.message) {
+// 							console.log(r.message,'--------msg')
+// 							frappe.model.set_value(cdt, cdn, 'value', r.message)
+// 						}
+// 					}
+// 				})
+// 			}
+// 		})
+// 	},
+// 	value: function (frm, cdt, cdn) {
+// 		let row = locals[cdt][cdn]
+// 		if (row.offer_term) {
+// 			frappe.db.get_value('Offer Term', row.offer_term, 'custom_is_monthly_salary_component')
+// 				.then(r => {
+// 					if(r.message.custom_is_monthly_salary_component == 1){
+// 						if(frm.is_new() && frm.doc.contract_type){
+// 							fill_salary_tables(frm)
+// 						}
+// 					} 
+// 				})
+// 		}
+// 	}
+// })
 
 let fill_salary_tables = function(frm) {
 	frm.call("fill_salary_tables");

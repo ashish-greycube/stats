@@ -43,9 +43,8 @@
   "consider_incomplete_monthly_mins",
   "every_month_payroll_date",
   "earnings_section",
-  "basic_salary_component",
-  "column_break_oplc",
   "default_new_hire_earning_component",
+  "column_break_oplc",
   "deductions_section",
   "lwpabsent_deduction_component",
   "penalty_deduction_component",
@@ -261,14 +260,6 @@
    "fieldname": "salary_component_tab",
    "fieldtype": "Tab Break",
    "label": "Salary Component"
-  },
-  {
-   "fieldname": "basic_salary_component",
-   "fieldtype": "Link",
-   "label": "Basic Salary Component",
-   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Earning\"]]",
-   "options": "Salary Component",
-   "reqd": 1
   },
   {
    "fieldname": "earnings_section",
@@ -495,7 +486,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-12-19 06:47:04.241840",
+ "modified": "2025-01-06 12:28:35.382005",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats Settings ST",

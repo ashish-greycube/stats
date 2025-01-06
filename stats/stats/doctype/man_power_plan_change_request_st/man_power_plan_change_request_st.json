@@ -22,12 +22,16 @@
   "pre_sub_department",
   "grade",
   "salary",
+  "section",
+  "employee_unit",
   "column_break_momr",
   "designation_cp",
   "main_department_cp",
   "sub_department_cp",
   "grade_cp",
   "salary_cp",
+  "section_cp",
+  "employee_unit_cp",
   "new_job_details_section",
   "designation_nj",
   "main_department_nj",
@@ -36,6 +40,8 @@
   "sub_department_nj",
   "column_break_aipy",
   "salary_nj",
+  "section_nj",
+  "employee_unit_nj",
   "finance_impact_section",
   "original_budget_amount",
   "column_break_opie",
@@ -125,6 +131,7 @@
   {
    "fieldname": "salary",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "Salary",
    "read_only": 1
   },
@@ -136,6 +143,7 @@
   {
    "fieldname": "finance_impact_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Finance Impact"
   },
   {
@@ -179,6 +187,7 @@
   {
    "fieldname": "salary_cp",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "Salary"
   },
   {
@@ -222,6 +231,7 @@
   {
    "fieldname": "salary_nj",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "Salary"
   },
   {
@@ -263,12 +273,48 @@
    "fieldname": "new_budgeted_amount",
    "fieldtype": "Currency",
    "label": "New Budgeted Amount"
+  },
+  {
+   "fieldname": "section",
+   "fieldtype": "Link",
+   "label": "Section",
+   "options": "Section ST"
+  },
+  {
+   "fieldname": "section_cp",
+   "fieldtype": "Link",
+   "label": "Section",
+   "options": "Section ST"
+  },
+  {
+   "fieldname": "employee_unit",
+   "fieldtype": "Link",
+   "label": "Employee Unit",
+   "options": "Employee Unit ST"
+  },
+  {
+   "fieldname": "employee_unit_cp",
+   "fieldtype": "Link",
+   "label": "Employee Unit",
+   "options": "Employee Unit ST"
+  },
+  {
+   "fieldname": "section_nj",
+   "fieldtype": "Link",
+   "label": "Section",
+   "options": "Section ST"
+  },
+  {
+   "fieldname": "employee_unit_nj",
+   "fieldtype": "Link",
+   "label": "Employee Unit",
+   "options": "Employee Unit ST"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-25 11:04:03.333725",
+ "modified": "2025-01-06 14:28:48.293086",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Man Power Plan Change Request ST",
