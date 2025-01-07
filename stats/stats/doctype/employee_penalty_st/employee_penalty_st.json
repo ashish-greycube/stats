@@ -123,6 +123,7 @@
   },
   {
    "default": "Today",
+   "description": "For penalty date of current month if it is before payroll processing date then component is generated in current month else in next month",
    "fieldname": "penalty_date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -133,7 +134,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-13 10:36:23.595340",
+ "modified": "2025-01-07 12:41:50.496847",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Employee Penalty ST",
