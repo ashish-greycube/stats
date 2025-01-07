@@ -4,12 +4,13 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import getdate, nowdate, add_to_date
+from frappe.utils import getdate, nowdate, add_to_date, cint
 from stats.salary import get_latest_salary_structure_assignment
 
 class EmployeeResignationST(Document):
 	def validate(self):
 		self.validate_resignation_date()
+		# self.set_relieving_date_in_employee()
 
 	def on_submit(self):
 		self.set_relieving_date_in_employee()
@@ -17,14 +18,26 @@ class EmployeeResignationST(Document):
 	def validate_resignation_date(self):
 		if self.last_working_days:
 			today_month = getdate(nowdate()).month
+			today_year = getdate(nowdate()).year
 			resignation_month = getdate(self.last_working_days).month
+			resignation_year = getdate(self.last_working_days).year
 
-			if today_month == resignation_month:
+			if (today_month == resignation_month) and (today_year == resignation_year):
+
+				payroll_date = frappe.db.get_single_value('Stats Settings ST', 'every_month_payroll_date')
+
+				if payroll_date == None:
+					frappe.throw(_("Please Set Every Month Payroll Date In Stats Settings."))
 				# today_date = nowdate().day
 				last_working_days = getdate(self.last_working_days).day
 
-				if last_working_days >= 11:
+				if last_working_days < cint(payroll_date):
+					print("start before payroll")
+				elif last_working_days >= cint(payroll_date):
+					print("start after payroll")
 					frappe.throw(_("For this Month, Payroll is generated so you cann't apply for resignation"))
+				else:
+					pass					
 
 			# Last Working day should not be less than notic period
 			notice_period_days = frappe.db.get_value("Employee", self.employee_no, 'notice_number_of_days')

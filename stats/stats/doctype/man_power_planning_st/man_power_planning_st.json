@@ -14,7 +14,6 @@
   "supplier",
   "contact_name",
   "phone_no",
-  "main_department",
   "section_break_zsts",
   "job_details",
   "section_break_rgiz",
@@ -64,13 +63,6 @@
    "fieldtype": "Data",
    "label": "Phone No",
    "options": "Phone"
-  },
-  {
-   "fieldname": "main_department",
-   "fieldtype": "Link",
-   "label": "Main Department",
-   "options": "Department",
-   "reqd": 1
   },
   {
    "fieldname": "column_break_pjxo",
@@ -137,7 +129,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-06 14:24:04.600774",
+ "modified": "2025-01-07 09:07:41.622446",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Man Power Planning ST",

@@ -227,12 +227,14 @@ def create_additonal_salary_for_deduction(self, method):
 ########### Employee Resignation Additional Salary ###########
 
 def create_resignation_addition_salary_for_employee(self, method):
+	print('---create_resignation_addition_salary_for_employee---')
 	relieving_date_changed = self.has_value_changed("relieving_date")
 
 	print(relieving_date_changed, '----------relieving_date_changed')
 	if relieving_date_changed and self.relieving_date != None:
+
 		salary_assignment = frappe.db.get_all("Salary Structure Assignment",
-								  fields=["name", "salary_structure"], filters={"from_date": ["<=", nowdate()], "employee":self.name},
+								  fields=["name", "salary_structure"], filters={"from_date": ["<=", nowdate()], "employee":self.name, "docstatus":1},
 								  order_by = "from_date desc", limit=1)
 
 		if len(salary_assignment) > 0:
@@ -255,8 +257,6 @@ def create_resignation_addition_salary_for_employee(self, method):
 				if not resignation_deduction_component:
 					frappe.throw(_("Please Set Resignation Deduction in Stats Settings Doctype"))
 				else:
-					next_month_date = add_to_date(self.relieving_date, months=1)
-
 					additional_salary = frappe.new_doc("Additional Salary")
 					additional_salary.employee = self.name
 					# additional_salary.payroll_date =  get_first_day(next_month_date)
@@ -269,6 +269,9 @@ def create_resignation_addition_salary_for_employee(self, method):
 					additional_salary.add_comment('Comment', 'This Additonal Salary is created on {0} for Resignation Deduction'.format(nowdate()))
 					frappe.msgprint(_("Additional Salary {0} Created for Employee {1}.").format(additional_salary.name, self.name), alert=1)
 					additional_salary.submit()
+
+			else:
+				frappe.msgprint(_("Additional Salary is not Created for Employee {0}, becasue No Salary Earning Component Considers for Deduction.").format(self.name), alert=1)
 
 		else:
 			frappe.throw(_("No Salary Structure Assignment Found For {0} Employee").format(self.name))
