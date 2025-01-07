@@ -30,6 +30,22 @@ frappe.ui.form.on("Bulk Employee Evaluation ST", {
         }
     },
 
+    refresh(frm) {
+        let reference_found = false
+        let bulk_evaluation_details = frm.doc.bulk_evaluation_details
+        if (bulk_evaluation_details.length >0) {
+            for (row of frm.doc.bulk_evaluation_details) {
+                if (row.evaluation_reference) {
+                    reference_found = true
+                    break
+                }
+            }
+        }
+        if (reference_found == true) {
+            frm.set_df_property('create_evaluation', 'hidden', 1);
+        }
+    },
+
     evaluation_type(frm) {
         let previous_year_start_date = frappe.datetime.add_months(frappe.datetime.year_start(),-12)
         let previous_year_end_date = frappe.datetime.add_days(frappe.datetime.year_start(),-1)
@@ -104,6 +120,8 @@ frappe.ui.form.on("Bulk Employee Evaluation ST", {
                     evaluation_list.forEach((evaluation) => {
                         if (ele.employee_no == evaluation.employee_no) {
                             frappe.model.set_value(ele.doctype, ele.name, "evaluation_reference", evaluation.evaluation_reference)
+                            frappe.model.set_value(ele.doctype, ele.name, "workflow_status", evaluation.evaluation_workflow_state)
+
                         }
                     })
                 })

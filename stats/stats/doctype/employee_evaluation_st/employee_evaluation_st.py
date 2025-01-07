@@ -18,9 +18,21 @@ class EmployeeEvaluationST(Document):
 		calculate_actual_degree_based_on_weight(self.leadership)
 		self.calculate_evaluation_summary()
 
+	def on_update(self):
+		if self.workflow_state:
+			exists_in_bulk_evaluation = frappe.db.get_all("Bulk Evaluation Details ST",
+												 parent_doctype = "Bulk Employee Evaluation ST",
+												 filters={"evaluation_reference":self.name},
+												 fields=["name","parent"])
+			if len(exists_in_bulk_evaluation)>0:
+				frappe.db.set_value("Bulk Evaluation Details ST",exists_in_bulk_evaluation[0].name,"workflow_status",self.workflow_state)
+				
 	def calculate_evaluation_summary(self):
 		total_degree_of_personal_goals = 0
 		total_degree_of_job_goals = 0
+		total_degree_of_basic_competencies = 0
+		total_degree_of_technical_competencies = 0
+		total_degree_of_leadership = 0
 		total_degree_of_competencies = 0
 
 		if len(self.employee_personal_goals)>0:
@@ -34,18 +46,25 @@ class EmployeeEvaluationST(Document):
 		if len(self.basic_competencies)>0:
 			for basic in self.basic_competencies:
 				if basic.actual_degree_based_on_weight:
-					total_degree_of_competencies = total_degree_of_competencies + basic.actual_degree_based_on_weight
+					total_degree_of_basic_competencies = total_degree_of_basic_competencies + basic.actual_degree_based_on_weight
+		total_degree_of_basic_competencies = total_degree_of_basic_competencies / 3
+
 		if len(self.technical_competencies)>0:
 			for technical in self.technical_competencies:
 				if technical.actual_degree_based_on_weight:
-					total_degree_of_competencies = total_degree_of_competencies + technical.actual_degree_based_on_weight
+					total_degree_of_technical_competencies = total_degree_of_technical_competencies + technical.actual_degree_based_on_weight
+		total_degree_of_technical_competencies = total_degree_of_technical_competencies /3
+
 		if len(self.leadership)>0:
 			for leadership in self.leadership:
 				if leadership.actual_degree_based_on_weight:
-					total_degree_of_competencies = total_degree_of_competencies + leadership.actual_degree_based_on_weight
-
+					total_degree_of_leadership = total_degree_of_leadership + leadership.actual_degree_based_on_weight
+		total_degree_of_leadership = total_degree_of_leadership / 3
 		self.personal_goals = total_degree_of_personal_goals
 		self.job_goals = total_degree_of_job_goals
+
+		total_degree_of_competencies = (total_degree_of_basic_competencies + total_degree_of_technical_competencies + total_degree_of_leadership) 
+
 		self.competencies = total_degree_of_competencies
 		
 		stats_settings_doc = frappe.get_doc("Stats Settings ST")

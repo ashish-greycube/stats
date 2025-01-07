@@ -95,6 +95,7 @@
    "bold": 1,
    "fieldname": "normal_employee_evaluation_percentage_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Normal Employee Evaluation Percentage"
   },
   {
@@ -104,19 +105,18 @@
   {
    "fieldname": "normal_employee_personal_goals",
    "fieldtype": "Percent",
-   "label": "Employee Personal Goals %",
-   "reqd": 1
+   "label": "Employee Personal Goals %"
   },
   {
    "fieldname": "normal_job_goals",
    "fieldtype": "Percent",
-   "label": "Job Goals %",
-   "reqd": 1
+   "label": "Job Goals %"
   },
   {
    "bold": 1,
    "fieldname": "management_team_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Management Team"
   },
   {
@@ -130,20 +130,17 @@
   {
    "fieldname": "management_skills",
    "fieldtype": "Percent",
-   "label": "Management Skills %",
-   "reqd": 1
+   "label": "Management Skills %"
   },
   {
    "fieldname": "management_employee_personal_goals",
    "fieldtype": "Percent",
-   "label": "Employee Personal Goals %",
-   "reqd": 1
+   "label": "Employee Personal Goals %"
   },
   {
    "fieldname": "management_job_goals",
    "fieldtype": "Percent",
-   "label": "Job Goals %",
-   "reqd": 1
+   "label": "Job Goals %"
   },
   {
    "fieldname": "column_break_yxct",
@@ -165,6 +162,7 @@
    "bold": 1,
    "fieldname": "annual_evaluation_default_dates_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "<b>Annual Evaluation Default Dates</b>"
   },
   {
@@ -174,25 +172,23 @@
   {
    "fieldname": "annual_creation_date",
    "fieldtype": "Date",
-   "label": "Next Creation date",
-   "reqd": 1
+   "label": "Next Creation date"
   },
   {
    "fieldname": "annual_evaluation_from",
    "fieldtype": "Date",
-   "label": "Next Evaluation From",
-   "reqd": 1
+   "label": "Next Evaluation From"
   },
   {
    "fieldname": "annual_evaluation_to",
    "fieldtype": "Date",
-   "label": "Next Evaluation To",
-   "reqd": 1
+   "label": "Next Evaluation To"
   },
   {
    "bold": 1,
    "fieldname": "half_yearly_evaluation_default_dates_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "<b>Half-Yearly Evaluation Default Dates</b>"
   },
   {
@@ -202,20 +198,17 @@
   {
    "fieldname": "half_yearly_creation_date",
    "fieldtype": "Date",
-   "label": "Next Creation date",
-   "reqd": 1
+   "label": "Next Creation date"
   },
   {
    "fieldname": "half_yearly_evaluation_from",
    "fieldtype": "Date",
-   "label": "Next Evaluation From",
-   "reqd": 1
+   "label": "Next Evaluation From"
   },
   {
    "fieldname": "half_yearly_evaluation_to",
    "fieldtype": "Date",
-   "label": "Next Evaluation To",
-   "reqd": 1
+   "label": "Next Evaluation To"
   },
   {
    "fieldname": "column_break_hpgl",
@@ -233,12 +226,12 @@
    "fieldname": "default_evaluation_template_for_test_period",
    "fieldtype": "Link",
    "label": "Default Evaluation Template For Test Period",
-   "options": "Employee Evaluation Template ST",
-   "reqd": 1
+   "options": "Employee Evaluation Template ST"
   },
   {
    "fieldname": "section_break_etcm",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "percentage_for_overtime",
@@ -486,7 +479,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-01-06 12:28:35.382005",
+ "modified": "2025-01-07 11:44:43.286318",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Stats Settings ST",

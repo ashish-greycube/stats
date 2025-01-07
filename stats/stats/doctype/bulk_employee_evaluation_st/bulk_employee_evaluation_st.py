@@ -97,6 +97,9 @@ class BulkEmployeeEvaluationST(Document):
 				employee_evaluation_doc.add_comment("Comment",text="Created due to Bulk Employee Evaluation {0}".format(get_link_to_form("Bulk Employee Evaluation ST",self.name)))
 				evaluation_dict["employee_no"] = employee.employee_no
 				evaluation_dict["evaluation_reference"] = employee_evaluation_doc.name
+				check_exists_active_workflow = frappe.db.exists("Workflow",{"is_active":1,"document_type":"Employee Evaluation ST"})
+				if check_exists_active_workflow:
+					evaluation_dict["evaluation_workflow_state"] = employee_evaluation_doc.workflow_state
 				evaluation_list.append(evaluation_dict)
 		
 		return evaluation_list
