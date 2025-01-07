@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"I73KU5uAQW\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u0645\u0648\u0627\u0647\u0628</span>\",\"col\":12}},{\"id\":\"pq4NodFkXl\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Trainings (This Month)\",\"col\":3}},{\"id\":\"sUpHWKdVZF\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"3FvP5kog2k\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Event ST\",\"col\":3}},{\"id\":\"cUI8_GxlSQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Announcement ST\",\"col\":3}},{\"id\":\"ROFV_NLpLn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Request ST\",\"col\":3}},{\"id\":\"n8Ns6fSkCi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Needs Analysis ST\",\"col\":3}},{\"id\":\"4aqSHqGEQF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Evaluation ST\",\"col\":3}},{\"id\":\"wwkg-nuPna\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Important Role ST\",\"col\":3}},{\"id\":\"3Ai6aWdD5u\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Alternatives ST\",\"col\":3}},{\"id\":\"BcfOpS2LYE\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"High Performance Employee ST\",\"col\":3}},{\"id\":\"NirtdbIX8H\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Acting ST\",\"col\":3}},{\"id\":\"ThXTWrYETT\",\"type\":\"card\",\"data\":{\"card_name\":\"ScholarShip\",\"col\":4}},{\"id\":\"__AivRLY-c\",\"type\":\"card\",\"data\":{\"card_name\":\"Employee Evaluation\",\"col\":4}}]",
+ "content": "[{\"id\":\"I73KU5uAQW\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u0645\u0648\u0627\u0647\u0628</span>\",\"col\":12}},{\"id\":\"pq4NodFkXl\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Trainings (This Month)\",\"col\":3}},{\"id\":\"sUpHWKdVZF\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"3FvP5kog2k\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Event ST\",\"col\":3}},{\"id\":\"cUI8_GxlSQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Announcement ST\",\"col\":3}},{\"id\":\"ROFV_NLpLn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Request ST\",\"col\":3}},{\"id\":\"n8Ns6fSkCi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Needs Analysis ST\",\"col\":3}},{\"id\":\"4aqSHqGEQF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Training Evaluation ST\",\"col\":3}},{\"id\":\"wwkg-nuPna\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Important Role ST\",\"col\":3}},{\"id\":\"3Ai6aWdD5u\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Alternatives ST\",\"col\":3}},{\"id\":\"BcfOpS2LYE\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"High Performance Employee ST\",\"col\":3}},{\"id\":\"NirtdbIX8H\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Acting ST\",\"col\":3}},{\"id\":\"ThXTWrYETT\",\"type\":\"card\",\"data\":{\"card_name\":\"ScholarShip\",\"col\":4}},{\"id\":\"__AivRLY-c\",\"type\":\"card\",\"data\":{\"card_name\":\"\u062a\u0642\u064a\u064a\u0645 \u0627\u0644\u0645\u0648\u0638\u0641\u064a\u0646\",\"col\":4}}]",
  "creation": "2024-12-22 11:25:51.473939",
  "custom_blocks": [],
  "docstatus": 0,
@@ -55,7 +55,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Employee Evaluation",
+   "label": "\u062a\u0642\u064a\u064a\u0645 \u0627\u0644\u0645\u0648\u0638\u0641\u064a\u0646",
    "link_count": 4,
    "link_type": "DocType",
    "onboard": 0,
@@ -64,9 +64,9 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Employee Evaluation ST",
+   "label": "Bulk Employee Evaluation ST",
    "link_count": 0,
-   "link_to": "Employee Evaluation ST",
+   "link_to": "Bulk Employee Evaluation ST",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -74,9 +74,9 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Evaluation Classification ST",
+   "label": "Employee Evaluation ST",
    "link_count": 0,
-   "link_to": "Evaluation Classification ST",
+   "link_to": "Employee Evaluation ST",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -94,7 +94,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Employee Personal Goals ST",
+   "label": "\u062e\u0637\u0629 \u0627\u0644\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u0641\u0631\u062f\u064a\u0629",
    "link_count": 0,
    "link_to": "Employee Personal Goals ST",
    "link_type": "DocType",
@@ -102,7 +102,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-01-07 07:14:07.656370",
+ "modified": "2025-01-07 12:44:14.648902",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Talent Development Team",
