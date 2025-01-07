@@ -85,6 +85,7 @@ def get_salary_details(parent, parenttype):
 		"Grade Earnings Amount Details ST",
 		fields=[
 			"earning",
+			"abbr",
 			"percentage",
 			"amount",
 			"maximum_amount",
@@ -99,7 +100,8 @@ def get_salary_details(parent, parenttype):
 		"Grade Deductions Amount Details ST",
 		fields=[
 			"deduction",
-			"percentage",
+			"abbr",
+			"formula",
 			"amount"
 		],
 		filters={"parent": parent, "parenttype": parenttype},

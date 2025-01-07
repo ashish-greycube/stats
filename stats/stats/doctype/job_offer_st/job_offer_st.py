@@ -176,6 +176,7 @@ class JobOfferST(Document):
 
 		self.earnings_details = []
 		self.deduction_details = []
+		salary_abbreviation_dict = {}
 
 		if self.basic_salary_amount:
 			grade_doc = frappe.get_doc("Employee Grade", self.grade)
@@ -191,11 +192,14 @@ class JobOfferST(Document):
 			basic.amount = self.basic_salary_amount
 			basic.maximum_amount = grade_doc.custom_max_basic_amount or 0
 			basic.minimum_amount = grade_doc.custom_minimum_basic_amount or 0
+			basic.abbr = grade_doc.custom_basic_component_abbr
+			salary_abbreviation_dict[basic.abbr]=basic.amount
 			
 			if len(grade_doc.custom_earnings) > 0:
 				for ear in grade_doc.custom_earnings:
 					earn = self.append("earnings_details", {})
 					earn.earning = ear.earning
+					earn.abbr = ear.abbr
 					earn.percentage = ear.percentage
 					earn.maximum_amount = ear.maximum_amount or 0
 					earn.minimum_amount = ear.minimum_amount or 0
@@ -210,11 +214,14 @@ class JobOfferST(Document):
 						
 					else:
 						earn.amount = amount
+					
+					salary_abbreviation_dict[earn.abbr]=earn.amount
 
 			if len(grade_doc.custom_other_earnings) > 0:
 				for other in grade_doc.custom_other_earnings:
 					ot = self.append("earnings_details", {})
 					ot.earning = other.earning
+					ot.abbr = other.abbr
 					ot.method = other.method
 
 					if other.method == "Amount":
@@ -234,13 +241,20 @@ class JobOfferST(Document):
 							
 						else:
 							ot.amount = amount
+					
+					salary_abbreviation_dict[ot.abbr]=ot.amount
 
+			print(salary_abbreviation_dict, '-----salary_abbreviation_dict')
 			if len(grade_doc.custom_deduction) > 0:
 				for ded in grade_doc.custom_deduction:
 					dedu = self.append("deduction_details", {})
 					dedu.deduction = ded.deduction
-					dedu.percentage = ded.percentage
-					dedu.amount = (self.basic_salary_amount * dedu.percentage) / 100
+					dedu.formula = ded.formula
+					# dedu.percentage = ded.percentage
+					# dedu.amount = (self.basic_salary_amount * dedu.percentage) / 100
+					formula=dedu.formula
+					print(formula, "-----formula")
+					dedu.amount = frappe.safe_eval(formula, None,salary_abbreviation_dict)
 
 	@frappe.whitelist()
 	def fill_salary_tables(self):
