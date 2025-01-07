@@ -105,8 +105,7 @@ class EmployeePenaltyST(Document):
 			# print(additional_salary.amount, '========== additional_salary.amount ===============')
 			additional_salary.overwrite_salary_structure_amount = 0
 
-			if (today_month == penalty_month) and (today_year == penalty_year):
-				
+			if (today_month == penalty_month) and (today_year == penalty_year):	
 				payroll_date = frappe.db.get_single_value('Stats Settings ST', 'every_month_payroll_date')
 				if payroll_date == None:
 					frappe.throw(_("Please Set Every Month Payroll Date In Stats Settings."))
@@ -116,9 +115,14 @@ class EmployeePenaltyST(Document):
 					next_month_date = add_to_date(self.penalty_date, months=1)
 					print("start after payroll")
 					additional_salary.payroll_date = get_first_day(next_month_date)
+				else:
+					print("start before payroll")
+					additional_salary.payroll_date = getdate(self.penalty_date)
 
 			else:
-				additional_salary.payroll_date = self.penalty_date
+				additional_salary.payroll_date = getdate(self.penalty_date)
+
+			print(additional_salary.payroll_date, '===additional_salary.payroll_date')
 
 			additional_salary.save(ignore_permissions = True)
 			frappe.msgprint(_("Additional Salary {0} created." .format(get_link_to_form('Additional Salary', additional_salary.name))), alert=True)

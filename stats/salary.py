@@ -39,7 +39,7 @@ def calculate_lwp_dedution(payroll_entry):
 			salary_assignment = frappe.db.get_all("Salary Structure Assignment",
 								  fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee, "docstatus":1},
 								  order_by = "from_date desc", limit=1)
-			print(salary_assignment[0].name, '--salary_assignment')
+			# print(salary_assignment[0].name, '--salary_assignment')
 			if len(salary_assignment) > 0:
 				ss = frappe.get_doc("Salary Structure", salary_assignment[0].salary_structure)
 
@@ -97,7 +97,7 @@ def calculate_absent_dedution(payroll_entry):
 			salary_assignment = frappe.db.get_all("Salary Structure Assignment",
 								  fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee, "docstatus":1},
 								  order_by = "from_date desc", limit=1)
-			print(salary_assignment[0].name, '--salary_assignment')
+			# print(salary_assignment[0].name, '--salary_assignment')
 			if len(salary_assignment) > 0:
 				ss = frappe.get_doc("Salary Structure", salary_assignment[0].salary_structure)
 
