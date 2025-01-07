@@ -98,7 +98,7 @@ def check_available_amount_for_budget(budget_account,cost_center):
 
 
 def get_latest_total_monthly_salary_of_employee(employee):
-    employee_monthly_salary = frappe.db.get_all("Salary Structure Assignment", filters={"employee":employee, "from_date": ["<=", today()]}, 
+    employee_monthly_salary = frappe.db.get_all("Salary Structure Assignment", filters={"employee":employee, "from_date": ["<=", today()], "docstatus":1}, 
                                                 fields=["base"],
                                                 order_by= "from_date desc",
                                                 limit=1)

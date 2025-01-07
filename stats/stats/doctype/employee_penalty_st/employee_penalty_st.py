@@ -4,7 +4,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import nowdate, get_link_to_form, flt, get_first_day, add_to_date
+from frappe.utils import nowdate, get_link_to_form, flt, get_first_day, add_to_date, getdate, cint
 from stats.api import get_base_amount_from_salary_structure_assignment
 
 class EmployeePenaltyST(Document):
@@ -89,16 +89,37 @@ class EmployeePenaltyST(Document):
 		if self.deduction > 0:
 			base = get_base_amount_from_salary_structure_assignment(self.employee)
 			penalty_deduction_component = frappe.db.get_single_value('Stats Settings ST', 'penalty_deduction_component')
-			next_month_date = add_to_date(self.penalty_date, months=1)
+			
+			today_month = getdate(nowdate()).month
+			today_year = getdate(nowdate()).year
+			penalty_month = getdate(self.penalty_date).month
+			penalty_year = getdate(self.penalty_date).year
+
 			additional_salary = frappe.new_doc("Additional Salary")
 			additional_salary.employee = self.employee
-			additional_salary.payroll_date = get_first_day(next_month_date)
+			# additional_salary.payroll_date = get_first_day(next_month_date)
 			additional_salary.salary_component = penalty_deduction_component
 			per_day_salary = (base/30)
 			additional_salary.amount = per_day_salary * (self.deduction / 100)
 			# print(self.deduction, '----self.deduction', base, '======base')
 			# print(additional_salary.amount, '========== additional_salary.amount ===============')
 			additional_salary.overwrite_salary_structure_amount = 0
+
+			if (today_month == penalty_month) and (today_year == penalty_year):
+				
+				payroll_date = frappe.db.get_single_value('Stats Settings ST', 'every_month_payroll_date')
+				if payroll_date == None:
+					frappe.throw(_("Please Set Every Month Payroll Date In Stats Settings."))
+
+				penalty_day = getdate(self.penalty_date).day
+				if penalty_day >= cint(payroll_date):
+					next_month_date = add_to_date(self.penalty_date, months=1)
+					print("start after payroll")
+					additional_salary.payroll_date = get_first_day(next_month_date)
+
+			else:
+				additional_salary.payroll_date = self.penalty_date
+
 			additional_salary.save(ignore_permissions = True)
 			frappe.msgprint(_("Additional Salary {0} created." .format(get_link_to_form('Additional Salary', additional_salary.name))), alert=True)
 			additional_salary.add_comment('Comment', 'This Additonal Salary is created on {0} for Penalty Deduction'.format(nowdate()))

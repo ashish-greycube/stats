@@ -37,7 +37,7 @@ def calculate_lwp_dedution(payroll_entry):
 
 		if total_lwp > 0:
 			salary_assignment = frappe.db.get_all("Salary Structure Assignment",
-								  fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee},
+								  fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee, "docstatus":1},
 								  order_by = "from_date desc", limit=1)
 			print(salary_assignment[0].name, '--salary_assignment')
 			if len(salary_assignment) > 0:
@@ -95,7 +95,7 @@ def calculate_absent_dedution(payroll_entry):
 
 		if total_absent > 0:
 			salary_assignment = frappe.db.get_all("Salary Structure Assignment",
-								  fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee},
+								  fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee, "docstatus":1},
 								  order_by = "from_date desc", limit=1)
 			print(salary_assignment[0].name, '--salary_assignment')
 			if len(salary_assignment) > 0:
@@ -151,7 +151,7 @@ def calculate_incomplete_monthly_mins_deduction(payroll_entry):
 			if total_incomplete_monthly_mins < total_mins_per_month:
 
 				salary_assignment = frappe.db.get_all("Salary Structure Assignment",
-									fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee},
+									fields=["name", "salary_structure"], filters={"from_date": ["<=", payroll_entry.start_date], "employee":emp.employee, "docstatus":1},
 									order_by = "from_date desc", limit=1)
 
 				if len(salary_assignment) > 0:
@@ -290,11 +290,11 @@ def create_addtional_salary_for_new_joinee(self, method):
 		last_month_payroll_date = add_to_date(self.start_date, months=-1)
 
 		for emp in self.employees:
-			salary_assignment = get_latest_salary_structure_assignment(emp.employee, self.start_date)
+			joining_date = frappe.get_value("Employee", emp.employee, 'date_of_joining')
+			salary_assignment = get_latest_salary_structure_assignment(emp.employee, getdate(joining_date))
 			print(salary_assignment, "======salary_assignment====")
 			total_monthly_salary = frappe.db.get_value("Salary Structure Assignment", salary_assignment, "base")
 			per_day_salary = total_monthly_salary/30
-			joining_date = frappe.get_value("Employee", emp.employee, 'date_of_joining')
 
 			if getdate(joining_date).day < cint(getdate(payroll_date).day):
 				if getdate(self.start_date).year == getdate(joining_date).year and getdate(self.start_date).month == getdate(joining_date).month:
@@ -305,7 +305,7 @@ def create_addtional_salary_for_new_joinee(self, method):
 
 						additional_salary = frappe.new_doc("Additional Salary")
 						additional_salary.employee = emp.employee
-						additional_salary.payroll_date = self.start_date
+						additional_salary.payroll_date = getdate(joining_date)
 						additional_salary.salary_component =  due_component
 						additional_salary.overwrite_salary_structure_amount = 0
 						additional_salary.amount = total_deduction
@@ -336,7 +336,7 @@ def create_addtional_salary_for_new_joinee(self, method):
 
 def get_latest_salary_structure_assignment(employee, from_date):
 	salary_assignment = frappe.db.get_all("Salary Structure Assignment",
-								  fields=["name", "salary_structure", "base"], filters={"from_date": ["<=", from_date], "employee":employee},
+								  fields=["name", "salary_structure", "base"], filters={"from_date": ["<=", from_date], "employee":employee, "docstatus":1},
 								  order_by = "from_date desc", limit=1)
 	if len(salary_assignment) > 0:
 		return salary_assignment[0].name
