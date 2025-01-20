@@ -17,13 +17,11 @@
  "fields": [
   {
    "fieldname": "training_request_reference",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Training Request Reference",
-   "options": "Training Request ST"
+   "label": "Training Request Reference"
   },
   {
-   "fetch_from": "training_request_reference.employee_no",
    "fieldname": "employee_no",
    "fieldtype": "Link",
    "label": "Employee No",
@@ -31,7 +29,7 @@
    "read_only": 1
   },
   {
-   "fetch_from": "training_request_reference.employee_name",
+   "fetch_from": "employee_no.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -72,7 +70,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-04 08:19:44.618775",
+ "modified": "2025-01-20 08:02:48.144362",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Training Event Employee Details ST",

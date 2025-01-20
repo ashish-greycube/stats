@@ -35,6 +35,19 @@ let set_no_of_days = function (frm) {
     let end_date = frm.doc.training_end_date
     if (start_date && end_date) {
         let no_of_day = frappe.datetime.get_day_diff(end_date, start_date)
+        if (frm.doc.ignore_holidays_in_no_of_days == 1){
+            console.log("------------")
+            frm.call("check_holiday_between_start_end_date").then(
+                r => {
+                    console.log(r.message)
+                    holiday_count = r.message
+                    frm.set_value("no_of_days", (no_of_day-holiday_count || 0)+1)
+                }
+            )
+        }
+        else{
+            frm.set_value("no_of_days", (no_of_day || 0)+1)
+        }
         frm.set_value("no_of_days", (no_of_day || 0)+1)
     }
 }
@@ -52,6 +65,7 @@ let fetch_training_request = function(frm){
             available_training_request_list.forEach((ele) => {
                 var d = frm.add_child("training_event_employee_details");
                 frappe.model.set_value(d.doctype, d.name, "training_request_reference", ele.name)
+                frappe.model.set_value(d.doctype, d.name, "employee_no", ele.employee_no)
             })
             frm.refresh_field('training_event_employee_details')
             frm.save()

@@ -223,7 +223,7 @@ def create_salary_component(name,abbreviation,type):
 	salary_component_doc.save(ignore_permissions=True)
 
 def check_monthly_salary_component_offer_term(self,method):
-    if self.custom_is_monthly_salary_component == 1:
+    if self.get("custom_is_monthly_salary_component") == 1:
         offer_term_list = frappe.db.get_all("Offer Term",
                                       filters={"custom_is_monthly_salary_component":1, "name": ["!=", self.name]},
                                       fields=["name"])

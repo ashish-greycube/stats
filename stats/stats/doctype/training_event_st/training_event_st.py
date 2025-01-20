@@ -54,13 +54,58 @@ class TrainingEventST(Document):
 					frappe.msgprint(_("Status of {0} is changed to {1}").format(get_link_to_form("Training Request ST", row.training_request_reference),"Finished"),alert=1)
 					create_training_evaluation(self.name,row.employee_no)
 					frappe.db.set_value("Training Event ST",self.name,"training_status","Finished")
+
+	# def on_cancel(self):
+	# 	print("on_cancel")
+	# 	if len(self.training_event_employee_details)>0:
+	# 		for row in self.training_event_employee_details:
+	# 			training_request_doc = frappe.get_doc("Training Request ST",row.training_request_reference)
+	# 			training_request_doc.cancel()
+	# 			frappe.msgprint(_("Training Request {0} is cancelled").format(get_link_to_form("Training Request ST", row.training_request_reference)),alert=1)
+	
+	def on_trash(self):
+		print("on_trash")
+		if len(self.training_event_employee_details)>0:
+			for row in self.training_event_employee_details:
+				training_request_doc = frappe.get_doc("Training Request ST",row.training_request_reference)
+				exists_needs_analysis = frappe.db.get_all("Training Needs Analysis Employee Details ST",
+											  filters = {"training_request_reference":training_request_doc.name},
+											  fields = ["parent"])
+				if len(exists_needs_analysis)>0:
+					needs_analysis_doc = frappe.get_doc("Training Needs Analysis ST",exists_needs_analysis[0].parent)
+					needs_analysis_doc.delete()
+					frappe.msgprint(_("Training Needs Analysis {0} is deleted").format(exists_needs_analysis[0].parent),alert=1)
+				training_request_doc.delete()
+
+				training_eveluation = frappe.db.get_all("Training Evaluation ST",
+											  filters = {"training_event":self.name,"employee_no":row.employee_no},
+											  fields = ["name"])
+				if len(training_eveluation)>0:
+					training_eveluation_doc = frappe.get_doc("Training Evaluation ST",training_eveluation[0].name)
+					training_eveluation_doc.delete()
+				
+				frappe.msgprint(_("Training Request {0} is deleted").format(row.training_request_reference),alert=1)
 		
 	@frappe.whitelist()
 	def fetch_training_request(self):
 		approved_training_request_list = frappe.db.get_all("Training Request ST",
 													 filters = {"training_event":self.name,"docstatus":1,"status":"Accepted"},
-													 fields=["name"])
+													 fields=["name","employee_no"])
 		return approved_training_request_list
+	
+	@frappe.whitelist()
+	def check_holiday_between_start_end_date(self):
+		print("---------------------")
+		default_holiday_list = get_default_holiday_list()
+		print(default_holiday_list,"default_holiday_list")
+		if default_holiday_list:
+			holidays = frappe.db.get_all("Holiday",
+								parent_doctype="Holiday List",
+								filters={"parent":default_holiday_list,"holiday_date":["between",[self.training_start_date,self.training_end_date]]},
+								fields=["name"])
+			if len(holidays)>0:
+				holiday_count = len(holidays)
+				return holiday_count
 
 def create_training_evaluation(training_event,employee):
 		training_evaluation_doc = frappe.new_doc("Training Evaluation ST")
