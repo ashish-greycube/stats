@@ -4,6 +4,8 @@ app_publisher = "GreyCube Technologies"
 app_description = "Customization for stats"
 app_email = "admin@greycube.in"
 app_license = "mit"
+required_apps = ["frappe/hrms"]
+
 # required_apps = []
 
 # Includes in <head>
