@@ -94,7 +94,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u062e\u0637\u0629 \u0627\u0644\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u0641\u0631\u062f\u064a\u0629",
+   "label": "Employee Personal Goals ST",
    "link_count": 0,
    "link_to": "Employee Personal Goals ST",
    "link_type": "DocType",
@@ -102,7 +102,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-01-07 12:44:14.648902",
+ "modified": "2025-01-08 13:15:06.989095",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Talent Development Team",
