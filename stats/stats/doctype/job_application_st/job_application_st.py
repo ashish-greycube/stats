@@ -10,7 +10,9 @@ from hijridate import Hijri, Gregorian
 class JobApplicationST(Document):
 	def validate(self):
 		self.validate_national_id_no()
-		self.hijri_birth_date=self.set_date_in_hijri(self.date_of_birth)
+		enable_hijri_date = frappe.db.get_single_value('Stats Settings ST', 'enable_hijri_date')
+		if enable_hijri_date == 1:
+			self.hijri_birth_date=self.set_date_in_hijri(self.date_of_birth)
 
 	def set_date_in_hijri(self,date_of_birth) :
 		# https://hijri-converter.readthedocs.io/en/stable/usage.html
