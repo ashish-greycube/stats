@@ -12,7 +12,9 @@
   "todo",
   "status",
   "date_of_completion",
-  "company_email_creation_task"
+  "company_email_creation_task",
+  "direct_manager",
+  "direct_manager_full_name"
  ],
  "fields": [
   {
@@ -67,6 +69,7 @@
   },
   {
    "columns": 1,
+   "fetch_from": "user.full_name",
    "fieldname": "full_name",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -81,12 +84,24 @@
    "in_list_view": 1,
    "label": "Company Email Creation Task",
    "read_only": 1
+  },
+  {
+   "fieldname": "direct_manager",
+   "fieldtype": "Link",
+   "label": "Direct Manager",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "direct_manager.employee",
+   "fieldname": "direct_manager_full_name",
+   "fieldtype": "Data",
+   "label": "Direct Manager Full Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-20 15:24:16.271262",
+ "modified": "2025-02-05 11:52:07.999123",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Onboarding Procedures ST",

@@ -21,6 +21,10 @@ class EmployeeOnboardingST(Document):
 				todo.custom_phone_no = self.phone_no
 				todo.reference_type = self.doctype
 				todo.reference_name = self.name
+				todo.allocated_to = op.user
+				todo.custom_allocated_to_full_name = op.full_name
+				todo.custom_direct_manager = op.direct_manager
+				todo.custom_direct_manager_full_name = op.direct_manager_full_name
 
 				if op.company_email_creation_task == 1:
 					todo.custom_create_company_email_for_employee = 1
@@ -40,7 +44,9 @@ def get_onboarding_details(parent, parenttype):
 			"activity_name",
 			"user",
 			"full_name",
-			"company_email_creation_task"
+			"company_email_creation_task",
+			"direct_manager",
+			"direct_manager_full_name"
 		],
 		filters={"parent": parent, "parenttype": parenttype},
 		order_by="idx",

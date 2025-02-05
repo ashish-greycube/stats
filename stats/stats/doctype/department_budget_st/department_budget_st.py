@@ -13,6 +13,7 @@ from frappe.utils import flt
 
 class DepartmentBudgetST(Document):
 	def validate(self):
+		self.calculate_total_requested_amount()
 		self.calculate_net_balance()
 		self.validate_duplicate_account()
 		self.validate_duplicate_department_budget_entry()
@@ -29,6 +30,15 @@ class DepartmentBudgetST(Document):
 		self.initial_budget_updates()
 		# self.create_budget()
 		print('on_update_after_submit===', self.name)
+
+	def calculate_total_requested_amount(self):
+		total_amount = 0
+		if len(self.account_table)>0:
+			for row in self.account_table:
+				total_amount = total_amount + row.requested_amount
+
+		self.total_requested_amount = total_amount
+
 
 	def calculate_net_balance(self):
 		if len(self.account_table)>0:

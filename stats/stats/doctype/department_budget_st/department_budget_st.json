@@ -10,6 +10,7 @@
   "transaction_date",
   "fiscal_year",
   "amended_from",
+  "total_requested_amount",
   "column_break_hnfw",
   "requested_by",
   "main_department",
@@ -95,12 +96,19 @@
    "fieldtype": "Table",
    "label": "Budget Update",
    "options": "Department Budget Update Details ST"
+  },
+  {
+   "fieldname": "total_requested_amount",
+   "fieldtype": "Currency",
+   "label": "Total Requested Amount",
+   "non_negative": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-04 13:28:22.655917",
+ "modified": "2025-02-05 12:21:35.559952",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Department Budget ST",
