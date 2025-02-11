@@ -32,6 +32,9 @@ frappe.ui.form.on("Accumulative Budget ST", {
                             var d = frm.add_child("account_details");
                             frappe.model.set_value(d.doctype, d.name, "budget_expense_account", e.budget_expense_account)
                             frappe.model.set_value(d.doctype, d.name, "total_requested_amount", e.total_requested_amount)
+                            frappe.model.set_value(d.doctype, d.name, "budget_type", e.budget_type)
+                            frappe.model.set_value(d.doctype, d.name, "economic_number", e.economic_number)
+                            frappe.model.set_value(d.doctype, d.name, "classifications", e.classifications)
                         });
                         refresh_field("account_details");
                         frm.save()

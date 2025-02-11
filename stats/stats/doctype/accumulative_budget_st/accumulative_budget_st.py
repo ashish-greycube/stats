@@ -60,7 +60,7 @@ class AccumulativeBudgetST(Document):
 
 	@frappe.whitelist()
 	def get_department_budget_requests(self):
-		fetch_accumulative_budget_request = frappe.db.sql("""SELECT	ad.budget_expense_account, sum(ad.requested_amount) as total_requested_amount
+		fetch_accumulative_budget_request = frappe.db.sql("""SELECT	ad.budget_expense_account, sum(ad.requested_amount) as total_requested_amount, ad.budget_type, ad.economic_number, ad.classifications
 													FROM `tabAccounts Details ST` AS ad 
 													inner join `tabDepartment Budget ST` AS db on db.name = ad.parent 
 													where db.fiscal_year = %s and db.docstatus = 1 

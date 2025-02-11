@@ -9,9 +9,15 @@
   "budget_expense_account",
   "requested_amount",
   "approved_amount",
+  "budget_type",
+  "column_break_nmyc",
   "previous_balance",
   "net_balance",
-  "available_balance"
+  "available_balance",
+  "section_break_xqxf",
+  "economic_number",
+  "column_break_emto",
+  "classifications"
  ],
  "fields": [
   {
@@ -59,12 +65,44 @@
    "label": "Account Name",
    "options": "Account",
    "reqd": 1
+  },
+  {
+   "fetch_from": "budget_expense_account.custom_economic_number",
+   "fieldname": "economic_number",
+   "fieldtype": "Data",
+   "label": "Economic Number"
+  },
+  {
+   "fetch_from": "budget_expense_account.custom_classifications",
+   "fieldname": "classifications",
+   "fieldtype": "Link",
+   "label": "Classifications",
+   "options": "Classifications ST"
+  },
+  {
+   "fieldname": "column_break_nmyc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_xqxf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_emto",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Requested",
+   "fieldname": "budget_type",
+   "fieldtype": "Select",
+   "label": "Budget Type",
+   "options": "Requested\nNot Requested"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-03 15:41:24.398114",
+ "modified": "2025-02-10 15:13:26.453262",
  "modified_by": "Administrator",
  "module": "Stats",
  "name": "Accounts Details ST",
