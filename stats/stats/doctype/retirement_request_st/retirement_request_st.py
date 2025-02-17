@@ -13,7 +13,7 @@ class RetirementRequestST(Document):
 	def validate(self):
 		print('self.birth_date_hijri',self.birth_date_hijri)
 		
-		self.retirement_date_gregorian=self.set_date_in_gregorian(self.retirement_date_hijri)
+		# self.retirement_date_gregorian=self.set_date_in_gregorian(self.retirement_date_hijri)
 		self.validate_retirement_date()
 		self.get_salary_details_and_due_amount_calculation()
 		self.calculate_vacation_due_amount()
